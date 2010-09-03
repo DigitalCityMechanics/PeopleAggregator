@@ -123,6 +123,10 @@ if (isset($success) && ($success == true)) { //
 				$activities_extra['info'] = ($login_name.' uploaded a audio in group id ='.$_REQUEST['group_id']);
 				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_AUDIO . "/view=groups_media&gid=".$_REQUEST['group_id'];
 			break;
+			case 'YouTube':
+				$activity = 'group_video_upload';//for rivers of people
+				$activities_extra['info'] = ($login_name.' uploaded a video in group id ='.$_REQUEST['group_id']);
+				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_VIDEO . "/view=groups_media&gid=".$_REQUEST['group_id'];
 			default:
 				break;
 		}
@@ -161,6 +165,19 @@ if (isset($success) && ($success == true)) { //
 				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_AUDIOS . "/uid=" . PA::$login_uid  . $album;
 			break;
 			case 'Videos':
+				$album_id = (!empty($upload['album_id'])) ? $upload['album_id']: $_POST['album_video'];
+				$album = "&album_id=".$album_id;
+				$msg_id = $moderation_msg ? 1005 : 2003;
+				//for rivers of people
+				$activity = 'user_video_upload';//for rivers of people
+				$activity_extra['info'] = ($login_name.' uploaded a video in album id =                                     '.$upload['album_id']);
+				$activity_extra['content_id'] = $upload[4];
+				$extra = serialize($activity_extra);
+				$object = $upload['album_id'];
+				Activities::save(PA::$login_uid, $activity, $object, $extra);
+				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_VIDEOS . "/uid=" . PA::$login_uid  . $album;
+			break;
+			case 'YouTube':
 				$album_id = (!empty($upload['album_id'])) ? $upload['album_id']: $_POST['album_video'];
 				$album = "&album_id=".$album_id;
 				$msg_id = $moderation_msg ? 1005 : 2003;

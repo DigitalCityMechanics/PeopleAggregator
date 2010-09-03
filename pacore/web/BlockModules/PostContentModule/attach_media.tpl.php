@@ -16,6 +16,7 @@
   <ul>
   <li><a href="#" onclick="return show_upload('Images');"><?=__('Image')?></a></li>
   <li><a href="#" onclick="return show_upload('Videos');"><?=__('Video')?></a></li>
+  <li><a href="#" onclick="return show_upload('YouTube');"><?=__('YouTube')?></a></li>
   </ul>
   </div>
   <div id="attach_media" style="display:none;"></div>
@@ -81,7 +82,9 @@ function show_upload(typeStr) {
 			<? } ?>
 			},
 			function(data) {
-				modal_show('Attach '+typeStr, data);
+				var modal_height = (typeStr == 'YouTube') ? 600 : 300;
+				var modal_width = (typeStr == 'YouTube') ? 500 : 500;
+				modal_show('Attach '+typeStr, data, modal_height, modal_width);
 				$('#modal_window form').submit(function() { 
 					$(this).ajaxSubmit(options); 
 					return false; 

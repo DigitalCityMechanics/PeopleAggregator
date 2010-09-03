@@ -225,3 +225,26 @@ div#user_info li textarea.copyme {
 #modal_window ul.prettyprint li {
   list-style: none;
 }
+
+#modal_window #preview {
+	background-color: #F2F2F2;
+	height: 385px;
+	text-align: center;
+	width: 480px;
+}
+
+#modal_window #preview p {
+	padding-top: 180px;
+}
+
+#modal_window .long {
+	width: 470px;
+}
+
+#modal_window .youtube {
+	margin: 0 auto;
+}
+
+#modal_window .youtube .field label {
+	display: block;
+}
