@@ -716,10 +716,11 @@ AND parent_type <> ? ORDER BY created DESC $limit";
 
    */
   public function get_link_hosts() {
-    // global var $path_prefix has been removed - please, use PA::$path static variable
-    if(!$content = @file_get_contents(PA::$project_dir. "/api/Comment/two-level-tlds.txt")) {
-        $content = file_get_contents(PA::$core_dir. "/api/Comment/two-level-tlds.txt");
-    }
+	$file = getShadowedPath('api/Comment/two-level-tlds.txt');
+	$content = '';
+    if($file) {
+		$content = file_get_contents($file);
+	}
     $two_level_tlds = array_flip(explode("\n", $content));
 
     $hosts = array();

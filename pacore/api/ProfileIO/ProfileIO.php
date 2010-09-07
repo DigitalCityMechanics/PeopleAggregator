@@ -22,19 +22,16 @@ class Normalizer extends XSLTProcessor
   function __construct($inputFormat) {
     Logger::log("Enter: creating new Normalizer class");
     // no need to call parent::__construct
-    
-    $xslfile = null;
-    if(file_exists(PA::$project_dir."/api/ProfileIO/xsl/".$inputFormat.".xsl")) {
-      $xslfile = PA::$project_dir."/api/ProfileIO/xsl/".$inputFormat.".xsl";
-    } else if(file_exists(PA::$core_dir."/api/ProfileIO/xsl/".$inputFormat.".xsl")) {
-      $xslfile = PA::$core_dir."/api/ProfileIO/xsl/".$inputFormat.".xsl";
-    }
+
+    $filename = 'api/ProfileIO/xsl/'.$inputFormat.'.xsl';
+	$xslfile = getShadowedPath($filename);
+
     if($xslfile) {
       $stylesheet = DOMDocument::load($xslfile);
       $this->importStylesheet($stylesheet);
     } else {
       throw new PAException(FILE_NOT_FOUND, 
-        "couldn't read tranformation stylesheet: $xslfile");
+        "couldn't read transformation stylesheet: $filename");
     }
     Logger::log("Exit: creating new Normalizer class");
   }
