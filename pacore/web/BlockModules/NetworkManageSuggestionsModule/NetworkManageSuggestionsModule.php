@@ -37,7 +37,11 @@ class NetworkManageSuggestionsModule extends Module {
   function __construct() {
     parent::__construct();
     $this->main_block_id = "mod_network_content_result";
-    $this->title = __('Manage Suggestions');
+    $title = 'Manage Suggestions';
+    if(!Suggestion::content_type_exists()) {
+      $title .= ' (not installed)';
+    }
+    $this->title = __($title);
   }
   // This function will return contents waiting for being moderated.
   private function get_links() {
