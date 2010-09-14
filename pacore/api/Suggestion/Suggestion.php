@@ -44,6 +44,9 @@ class Suggestion extends BlogPost {
 		// global var $path_prefix has been removed - please, use PA::$path static variable
 		$errors = array();
 
+		// @todo: change this to where new PA options should be initated
+		self::create_content_type();
+
 		// ensure integers here
 		$cid = (int)$cid;
 		$uid = (int)$uid;
@@ -114,7 +117,7 @@ class Suggestion extends BlogPost {
 			"errors" => $errors,
 		);
 	}
-/*
+
 	public static function content_type_exists()
 	{
 		$sql = "SELECT type_id FROM {content_types} WHERE name LIKE ?";
@@ -127,16 +130,21 @@ class Suggestion extends BlogPost {
 	}
 
 	public static function create_content_type() {
-		$sql = 'SELECT MAX(type_id) FROM {content_types}';
-		$res = Dal::query($sql, array());
-		if($res->numRows()) {
-			$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
-			$maxID = intval($row['type_id']);
+		if(!self::content_type_exists())
+		{
+/*			$sql = 'SELECT MAX(type_id) FROM {content_types}';
+			$res = Dal::query($sql, array());
+			if($res->numRows()) {
+				$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+				$maxID = intval($row['type_id']);
+				}
+*/
+			$sql = "INSERT INTO {content_types} (type_id, name, description) VALUES (?, ?, ?)";
+//			Dal::query($sql, array($maxID++, self::TYPE_NAME, self::TYPE_DESCRIPTION));
+			Dal::query($sql, array(self::TYPE_ID, self::TYPE_NAME, self::TYPE_DESCRIPTION));
 		}
-		$sql = "INSERT INTO {content_types} (type_id, name, description) VALUES (?, ?, ?)";
-		Dal::query($sql, array($maxID++, self::TYPE_NAME, self::TYPE_DESCRIPTION));
 	}
-
+/*
 	public static function get_content_type_id() {
 		$sql = "SELECT type_id FROM {content_types} WHERE name LIKE ?";
 		$res = Dal::query($sql, array(self::TYPE_NAME));
