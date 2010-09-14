@@ -59,7 +59,8 @@ class ModerationQueue {
 		Logger::log("Enter: ModerationQueue::approve_suggestion() | Args: \$suggestion_id = $suggestion_id");
 		$sql = 'DELETE FROM {moderation_queue} WHERE item_id = ? and type = ?';
 		Dal::query($sql, array($suggestion_id, self::TYPE_SUGGESTION));
-		Content::update_content_status($suggestion_id, ACTIVE);
+//		Content::update_content_status($suggestion_id, ACTIVE);
+		Content::delete_by_id($suggestion_id);
 		Logger::log("Exit: ModerationQueue::approve_suggestion()");
 	}
 
