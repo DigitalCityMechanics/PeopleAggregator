@@ -230,7 +230,8 @@ INSERT INTO `content_types` VALUES ('3', 'Event', '');
 INSERT INTO `content_types` VALUES ('4', 'Image', '');
 INSERT INTO `content_types` VALUES ('5', 'Audio', '');
 INSERT INTO `content_types` VALUES ('6', 'Video', '');
-INSERT INTO `content_types` VALUES (7, 'SBMicroContent', 'SBMicroContent');
+INSERT INTO `content_types` VALUES (7, 'SBMicroContent', 'SBMicroContent'),
+INSERT INTO `content_types` VALUES (13, 'Suggestion', 'A queued message from users to admins');
 
 -- --------------------------------------------------------
 

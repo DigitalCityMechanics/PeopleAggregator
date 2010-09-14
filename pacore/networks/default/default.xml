@@ -1425,6 +1425,18 @@ Enjoy!<br/>
         <recipient_email_address>%recipient.email_address%</recipient_email_address>
       </configurable_variables>
     </welcome_message>
+    <suggestion_received>
+      <category>outgoing_email</category>
+      <template>default_email_container.tpl</template>
+      <subject><![CDATA[Thanks for your Suggestion at %network.name%]]></subject>
+      <message><![CDATA[<p>%requester.display_name% is reviewing your suggestion for %network.name% network!<br /><br /><a href="%requester.profile_url%">%requester.image%</a><br />
+Thanks for sending your suggestion.  We can only create a site as good as our users so thank you for your active participation.
+Thanks, <br />
+%requester.display_name%
+</p>]]></message>
+      <description>Thanks for your Suggestion</description>
+      <configurable_variables></configurable_variables>
+    </suggestion_received>
   </email_messages>
   <roles_tasks>
     <item>
