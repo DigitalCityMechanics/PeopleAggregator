@@ -1564,6 +1564,37 @@ class Network {
      return;
    }
    /**
+    * approve suggestion if network content moderation is set
+    * @access public
+    * @param int id of content
+    * @param string type ie user/content
+    */
+   public static function approve_suggestion ($suggestion_id) {
+     Logger::log("Enter : Network::approve_suggestion() | Args: \$suggestion_id = $suggestion_id");
+
+     // nab the author ID for the suggestion
+     $sql = 'SELECT author_id FROM {contents} WHERE content_id = ?';
+     $data = array($suggestion_id);
+     $res = Dal::query($sql, $data);
+     if ($res->numRows()) {
+       $row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+       $author_id = intval($row['author_id']);
+     }
+
+     // and email them
+     $suggestion_user = new User();
+     $suggestion_user->load($author_id);
+     $check = PAMail::send('suggestion_received', $suggestion_user, PA::$login_user, array());
+     if ($check == FALSE) {
+       Logger::log("Throwing exception MAIL_FUNCTION_FAILED | Mail was not sent to suggester ", LOGGER_ERROR);
+       throw new PAException(MAIL_FUNCTION_FAILED, "Mail was not sent to suggester");
+     }
+
+     ModerationQueue::approve_suggestion($suggestion_id);
+     Logger::log("Exit : Network::approve_suggestion()");
+     return;
+   }
+   /**
     * disapprove content/user in moderated queue
     * @access public
     * @param int id of user/content
@@ -1575,6 +1606,37 @@ class Network {
      Logger::log("Exit : Network::disapprove_content()");
      return;
    }
+  /**
+    * disapprove content/user in moderated queue
+    * @access public
+    * @param int id of user/content
+    * @param string type ie user/content
+    */
+   public static function disapprove_suggestion ($suggestion_id) {
+     Logger::log("Enter : Network::disapprove_suggestion() | Args: \$suggestion_id = $suggestion_id");
+
+	// nab the author ID for the suggestion
+     $sql = 'SELECT author_id FROM {contents} WHERE content_id = ?';
+     $data = array($suggestion_id);
+     $res = Dal::query($sql, $data);
+     if ($res->numRows()) {
+       $row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+       $author_id = intval($row['author_id']);
+     }
+
+     // and email them
+     $suggestion_user = new User();
+     $suggestion_user->load($author_id);
+     $check = PAMail::send('suggestion_received', $suggestion_user, PA::$login_user, array());
+     if ($check == FALSE) {
+       Logger::log("Throwing exception MAIL_FUNCTION_FAILED | Mail was not sent to suggester ", LOGGER_ERROR);
+       throw new PAException(MAIL_FUNCTION_FAILED, "Mail was not sent to suggester");
+     }
+
+    ModerationQueue::disapprove_suggestion($suggestion_id);
+    Logger::log("Exit : Network::disapprove_suggestion()");
+    return;
+  }
  /**
   * check for content in moderation queue.
   * @access private

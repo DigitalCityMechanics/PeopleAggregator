@@ -84,6 +84,12 @@ class db_update_page
                                 );
        }
 
+		require_once('api/Suggestion/Suggestion.php');
+		$this->qup(
+			'2010-09-14, by: Jonathan Knapp - adding Suggestion content_type',
+			'INSERT INTO {content_types} (type_id, name, description) VALUES ('.Suggestion::TYPE_ID.', "'.Suggestion::TYPE_NAME.'", "'.Suggestion::TYPE_DESCRIPTION.'")'
+		);
+
         $this->run_xml_updates();
         run_net_extra();
     }//__endof__ do_updates
