@@ -30,6 +30,7 @@ class SelectPollModule extends Module {
   public $options;
   public $topic;
   public $current_poll;
+  public $group_id;
 
   public function __construct() {
     parent::__construct();
@@ -39,21 +40,26 @@ class SelectPollModule extends Module {
   }
 
   public function initializeModule($request_method, $request_data) {
-    if (empty(PA::$login_uid)) return 'skip';
+	  if (empty(PA::$login_uid)) return 'skip';
     if (!empty($request_data['type'])) { 
       $this->mode = htmlspecialchars($request_data['type']);
-    }
+	}
     if (!empty($request_data['action']) && $request_data['action'] == "delete") {
       $obj = new poll();
       $p_id = $request_data['id'];
       $c_id = $request_data['cid'];
       $obj->delete_poll($p_id, $c_id);
       $this->message = __('Poll has been deleted successfully.');
-      $this->redirect2 = PA::$url."/".FILE_DYNAMIC;
-      $this->queryString = '?page_id='.PAGE_POLL.'&type=select';
-      $this->isError = FALSE;
+	  $this->queryString = '?page_id='.PAGE_POLL.'&type=select';
+        if ($request_data['gid'] != 0) {
+			$this->redirect2 = PA::$url."/group_poll.php?gid=".((int)$request_data['gid'])."&type=select";
+			$this->queryString .= "&gid=".((int)$request_data['gid']);	
+	}else{
+	      $this->redirect2 = PA::$url."/".FILE_DYNAMIC;
+	}
+      $this->isError = FALSE;	
       $this->setWebPageMessage();
-    }
+	}
   }
 
   public function handleSelectPollModuleSubmit($request_method, $request_data) {
@@ -72,13 +78,17 @@ class SelectPollModule extends Module {
 
   public function handlePOST($request_data) {
     if (!empty($request_data['submit'])) {
-      $obj = new Poll();
+		$obj = new Poll();
       $obj->poll_id = $request_data['poll'];
       $obj->prev_changed = $request_data['prev_poll_changed'];
       $obj->prev_poll_id = $request_data['prev_poll_id'];
       $obj->save_current();
-      $this->message = __('Poll has been saved successfully.');
-      $this->redirect2 = NULL;
+	  $this->message = __('Poll has been saved successfully.');
+	  if ($request_data['gid'] != 0) {
+		  $this->redirect2 = PA::$url."/group_poll.php?gid=".((int)$request_data['gid'])."&type=select"; 
+	  } else {
+		  $this->redirect2 = NULL;
+	  }
       $this->queryString = NULL;
       $this->isError = FALSE;
       $this->setWebPageMessage();
@@ -97,13 +107,21 @@ class SelectPollModule extends Module {
       $obj->type = POLL;
       $obj->title = $poll_topic;
       $obj->body = $option;
-      $obj->parent_collection_id = -1;
-      $obj->user_id = PA::$login_uid;
+      $obj->parent_collection_id = 0;
+	  $obj->user_id = PA::$login_uid;
+		$obj->group_id = 0;
+		if ($request_data['gid'] != NULL) {
+			$obj->group_id = (int)$request_data['gid'];
+		}
       $obj->options = $option;
       $obj->is_active = INACTIVE;
       $obj->save_poll();
-      $this->message = __('Poll has been created successfully.');
-      $this->redirect2 = PA::$url.PA_ROUTE_CONFIG_POLL."?type=select"; //PA_ROUTE_HOME_PAGE; // <-- wtf was this going to the homepage??
+	  $this->message = __('Poll has been created successfully.');
+	  if ($obj->group_id != 0) {
+		  $this->redirect2 = PA::$url."/group_poll.php?gid=".$obj->group_id."&type=select"; 
+  		} else {
+		  $this->redirect2 = PA::$url.PA_ROUTE_CONFIG_POLL."?type=select";
+	  }
       $this->queryString = NULL;
       $this->isError = FALSE;
       $this->setWebPageMessage();
@@ -112,7 +130,7 @@ class SelectPollModule extends Module {
 
   public function render() {
     $obj = new Poll();
-    $topic = $obj->load_poll();
+    $topic = $obj->load_poll(0,$_GET['gid']);
     foreach($topic as $t) {
       if(is_object($t)) {
         $this->poll_id[] = $t->poll_id;
@@ -121,7 +139,7 @@ class SelectPollModule extends Module {
       } 
     }
     $this->topic = $topic;
-    $this->current_poll = $obj->load_current();
+    $this->current_poll = $obj->load_current($_GET['gid']);
     $this->inner_HTML = $this->generate_inner_html();
     $content = parent::render();
     return $content;
