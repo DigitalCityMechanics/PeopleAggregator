@@ -29,23 +29,12 @@ class Suggestion extends BlogPost {
 	 */
 	public function __construct() {
 		parent::__construct();
-/*
-		if (!self::content_type_exists()) {
-			self::create_content_type();
-		}
-		$this->type = self::get_content_type_id();
-*/
-		// @todo: use better method for assigning ID if it will not always have the same identifier
 		$this->type = self::TYPE_ID;
 	}
 
 	public static function save_suggestion ($cid, $uid, $title, $body, $track, $tags, $ccid = 0, $is_active = 1, $display_on = 0, $is_default_content = FALSE) {
-//		return BlogPost::save_blogpost($cid, $uid, $title, $body, $track, $tags, $ccid, $is_active, $display_on, $is_default_content);
 		// global var $path_prefix has been removed - please, use PA::$path static variable
 		$errors = array();
-
-		// @todo: change this to where new PA options should be initated
-		self::create_content_type();
 
 		// ensure integers here
 		$cid = (int)$cid;
@@ -128,32 +117,5 @@ class Suggestion extends BlogPost {
 		}
 		return false;
 	}
-
-	public static function create_content_type() {
-		if(!self::content_type_exists())
-		{
-/*			$sql = 'SELECT MAX(type_id) FROM {content_types}';
-			$res = Dal::query($sql, array());
-			if($res->numRows()) {
-				$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
-				$maxID = intval($row['type_id']);
-				}
-*/
-			$sql = "INSERT INTO {content_types} (type_id, name, description) VALUES (?, ?, ?)";
-//			Dal::query($sql, array($maxID++, self::TYPE_NAME, self::TYPE_DESCRIPTION));
-			Dal::query($sql, array(self::TYPE_ID, self::TYPE_NAME, self::TYPE_DESCRIPTION));
-		}
-	}
-/*
-	public static function get_content_type_id() {
-		$sql = "SELECT type_id FROM {content_types} WHERE name LIKE ?";
-		$res = Dal::query($sql, array(self::TYPE_NAME));
-		if($res->numRows()) {
-			$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
-			return $row['type_id'];
-		}
-		return 0;
-	}
-*/
 }
 ?>
