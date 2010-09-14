@@ -54,7 +54,7 @@ class XmlConfig extends DOMDocument
     {
     }
 
-    public function load($filename)
+    public function load($filename, $options = 0)
     {
         if (file_exists($filename))
         {
@@ -511,7 +511,7 @@ class XmlConfig extends DOMDocument
     public function __sleep()
     {
         $this->xml = $this->saveXML();
-        return(array_keys(get_object_vars(&$this ) ) );
+        return(array_keys(get_object_vars($this ) ) );
     }
 
     public function __wakeup()
