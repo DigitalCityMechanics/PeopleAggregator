@@ -37,6 +37,10 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
   $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
     ? $_POST['blog_type'] : 'BlogPost';
 
+  $pattern = '/^http\:\/\//';
+  $redirect = (isset($_POST) && isset($_POST['redirect']) && preg_match($pattern, $_POST['redirect']))
+    ? $_POST['redirect'] : '';
+
   $data_array['blog_type'] = trim($type);
   $data_array["description"] = trim($_POST["description"]);
   $data_array["tags"] = trim($_POST["tags"]);
@@ -159,6 +163,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
       }
 
       $location = PA::$url . PA_ROUTE_CONTENT . "/cid=$cid".$error_msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
       header("location:$location");exit;
     }//.. end of edit
 
@@ -238,6 +243,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
       // it means user is coming from group's page then redirect it to group
       //load group to see if group is if it is moderated
       $location = PA::$url . PA_ROUTE_GROUP . "/gid=".$_REQUEST['ccid'].$msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
       header("location:$location");exit;
     } else {
       //just redirect it to permalink page
@@ -247,7 +253,9 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
         $error_msg = "&msg_id=7027";
       }
       // header("location:".PA::$url . PA_ROUTE_CONTENT . "/cid=".$permalink_cid.$error_msg);exit;
-      header("location:".PA::$url .PA_ROUTE_USER_PRIVATE."?cid=".$permalink_cid.$error_msg);exit;
+      $location = PA::$url .PA_ROUTE_USER_PRIVATE."?cid=".$permalink_cid.$error_msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
+      header("location:$location");exit;
     }
   }
    else {//..end of !$error
