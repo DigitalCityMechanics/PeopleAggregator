@@ -109,8 +109,8 @@ class Poll extends Content {
         try {
           $this->created = time();
           $this->changed = $this->created;
-          $sql = "INSERT INTO {polls} (content_id, title, user_id, options, created,                changed, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)";
-          $data = array($this->content_id, $this->title,                                              $this->user_id, $this->options, $this->created,                               $this->changed,$this->is_active);
+          $sql = "INSERT INTO {polls} (content_id, title, user_id, group_id, options, created,                changed, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		  $data = array($this->content_id, $this->title, $this->user_id, $this->group_id, $this->options, $this->created,                               $this->changed,$this->is_active);
           $res = Dal::query($sql, $data);
         } catch (Exception $e) {
             Logger::log("Exception occurred inside Poll::save_poll(); rolling back",                    LOGGER_INFO);
@@ -159,8 +159,8 @@ class Poll extends Content {
   * Loads current poll topic
   *@access public
   */
-  public function load_current() {
-    $sql = "SELECT * FROM {polls} WHERE is_active = 1 ORDER BY changed DESC LIMIT 0,1";
+  public function load_current($group_id=0) {
+    $sql = "SELECT * FROM {polls} WHERE is_active = 1 and group_id='".$group_id."' ORDER BY changed DESC LIMIT 0,1";
     $res = Dal::query($sql);
     $data = array();
     if ($res->numRows()) {
@@ -175,8 +175,8 @@ class Poll extends Content {
   *loads previous poll topic
   *@access public
   */
-  public function load_prev_polls() {
-    $sql = "SELECT * FROM {polls} WHERE is_active = 1 ORDER BY changed DESC LIMIT 1,18446744073709551615"; // this excludes the first result, but gives all others
+  public function load_prev_polls($group_id = 0) {
+    $sql = "SELECT * FROM {polls} WHERE is_active = 1 and group_id='".$group_id."' ORDER BY changed DESC LIMIT 1,18446744073709551615"; // this excludes the first result, but gives all others
     
     $res = Dal::query($sql);
     $data = array();
@@ -192,11 +192,11 @@ class Poll extends Content {
   * Loads poll for database
   * @access public
   */
-  public function load_poll($poll_id = 0) {
-    Logger::log("Enter: Poll::load_poll()");
+  public function load_poll($poll_id = 0, $group_id = 0) {
+	  Logger::log("Enter: Poll::load_poll()");
     $data = array();
     if ($poll_id == 0) {
-      $sql = "SELECT * FROM {polls} WHERE is_active <> 0 ORDER BY changed DESC";
+      $sql = "SELECT * FROM {polls} WHERE is_active and group_id='".$group_id."' <> 0 ORDER BY changed DESC";
       $res = Dal::query($sql);
       if ($res->numRows()) {
 				while($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {

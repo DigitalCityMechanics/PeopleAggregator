@@ -597,8 +597,7 @@ INSERT INTO `content_types` (`type_id`, `name`, `description`) VALUES
 (6, 'Video', ''),
 (7, 'SBMicroContent', 'SBMicroContent'),
 (8, 'Question', 'Question'),
-(12, 'TekVideo', 'TekVideo'),
-(13, 'Suggestion', 'A queued message from users to admins');
+(12, 'TekVideo', 'TekVideo');
 
 -- --------------------------------------------------------
 
