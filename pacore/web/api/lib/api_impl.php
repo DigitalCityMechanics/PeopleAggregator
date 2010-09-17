@@ -29,6 +29,7 @@ require_once "api/Image/Image.php";
 require_once "api/Audio/Audio.php";
 require_once "api/Video/Video.php";
 require_once "api/BlogPost/BlogPost.php";
+require_once "api/Login/PA_Login.class.php";
 require_once "web/api/lib/project_api_impl.php";
 
 // one day we'll move everything inside the API class ...
@@ -219,7 +220,7 @@ function peopleaggregator_login($args)
 
     $user = api_load_user($login, $pwd);
 
-    $lifetime = 86400;
+    $lifetime = 900; // 15 minute authToken
     $token = $user->get_auth_token($lifetime);
 
     return array(
@@ -227,6 +228,31 @@ function peopleaggregator_login($args)
 	'authToken' => $token,
 	'tokenLifetime' => $lifetime,
 	);
+}
+
+
+function peopleaggregator_logout($args)
+{   
+	session_start();     
+    $token = $args['authToken'];
+	$user = User::from_auth_token($token);
+	
+	if($user){
+	    PA::$login_uid = $user->user_id;
+		// destroy the login cookie
+		PA_Login::log_out();
+	}
+	
+	// invalidate the cache for user profile
+	$file = PA::$theme_url . "/user_profile.tpl?uid=".PA::$login_uid;
+	CachedTemplate::invalidate_cache($file);
+	
+	
+	// kill the session
+	$_SESSION = array();
+	session_destroy();
+	session_start();    
+    return array('success' => TRUE);
 }
 
 function peopleaggregator_checkToken($args)
