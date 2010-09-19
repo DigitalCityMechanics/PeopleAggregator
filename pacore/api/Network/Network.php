@@ -1500,7 +1500,7 @@ class Network {
   *  Function : get_user_network_info()
   *  Purpose  : retriving all the networks either public or private
   */
-  public function get_user_network_info( $sql_param=array() ,$params=NULL) {
+  public static function get_user_network_info( $sql_param=array() ,$params=NULL) {
     Logger::log("[ Enter: function Network::get_user_network_info] \n");
     $sql = "SELECT N.*,NU.user_type FROM {networks} AS N, {networks_users} AS NU WHERE NU.network_id = N.network_id ";
     if (count($sql_param)) {

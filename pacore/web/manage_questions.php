@@ -70,7 +70,7 @@ if(!$error) {
   if (@$_GET['action'] == 'delete') {
     $question = new Question();
     if(!empty($_GET['content_id'])) {
-      $question->delete($_GET['content_id']);
+      Question::delete_by_id($_GET['content_id']);
       $message = __('Question has been deleted successfully');
     }
   }
