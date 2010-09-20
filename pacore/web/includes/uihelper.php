@@ -1212,14 +1212,7 @@ function is_custom_header_allowed($uid) {
 * function to get the detail of the skin by reading its config file.
 */
 function skin_details($skin_name) {
-  $config_file = '/web/'.PA::$theme_rel.'/skins/'.$skin_name.'/config.xml';
-  if(file_exists(PA::$project_dir . $config_file)) {
-    $config_file = PA::$project_dir . $config_file;
-  } else if(file_exists(PA::$core_dir . $config_file)) {
-    $config_file = PA::$core_dir . $config_file;
-  } else {
-    $config_file = null;
-  }
+  $config_file = getShadowedPath('web/'.PA::$theme_rel.'/skins/'.$skin_name.'/config.xml');
   $skin_info = array();
   if ($config_file) {
     $xml_doc = new DomDocument();
