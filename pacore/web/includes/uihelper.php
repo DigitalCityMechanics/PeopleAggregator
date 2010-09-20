@@ -1546,7 +1546,7 @@ function rating($rating_type, $type_id, $scale=5) {
   $user_rating = 0;
   if (!empty(PA::$login_uid)) {
     $params = array('rating_type'=>$rating_type, 'user_id'=>PA::$login_uid, 'type_id'=>$type_id);
-    $user_rating_details = PA_Rating::get($params);
+    $user_rating_details = PA_Rating::get(null, $params);
     // FIXME: this might not be set
     $user_rating = @$user_rating_details[0]->rating;
   }

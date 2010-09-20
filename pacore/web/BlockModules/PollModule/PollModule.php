@@ -31,10 +31,11 @@ class PollModule extends Module {
     $this->title = __('Survey');
   }
   function render() {
+	$gid = (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : null;
     $this->flag = 0 ;
     $obj = new Poll();
-    $current = $obj->load_current($_GET['gid']);
-    $prev_poll = $obj->load_prev_polls($_GET['gid']);
+    $current = $obj->load_current($gid);
+    $prev_poll = $obj->load_prev_polls($gid);
     $this->cnt_prev = count($prev_poll);
     if ($current) {
       $user_vate = $obj->load_vote($current[0]->poll_id, PA::$login_uid);

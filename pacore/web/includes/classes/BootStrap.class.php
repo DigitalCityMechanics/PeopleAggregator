@@ -713,7 +713,7 @@ class BootStrap {
         }
       }
             
-	  if($user){
+	  if(isset($user) && $user){
 	  	// if the user variable is set
         if($user->user_id) {
           $login_name = $this->CurrUser['name'];
