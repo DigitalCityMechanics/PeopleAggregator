@@ -110,9 +110,12 @@ class Rating {
     }
     $sql = 'SHOW COLUMNS FROM {rating}';
     $res = Dal::query($sql);
+    $valid_rating_types = array();
     while($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
-      if(ereg(('enum'), $row->Type)) {
-        eval(ereg_replace('enum', '$valid_rating_types = array', $row->Type).';');
+      if(stristr($row->Type, 'enum') !== false) {
+        $pattern = "/'(.*?)'/";
+		preg_match_all( $pattern , $row->Type, $matches );
+		$valid_rating_types = $matches[1];
       }
     }
     if (!in_array($rating_type, $valid_rating_types)) {
