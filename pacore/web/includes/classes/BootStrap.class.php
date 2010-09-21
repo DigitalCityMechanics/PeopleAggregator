@@ -635,7 +635,7 @@ class BootStrap {
 			// redirect back to the referring URL because the token could not be authenticated
 			// send the error message back as well
 			//TODO: figure out what to do when the auth token cant be validated
-			$referer = "/login";
+			$referer = "/login.php?error=1";
 			if(isset($_SERVER['HTTP_REFERER'])){
 				$referer = $_SERVER['HTTP_REFERER'];	
 			}

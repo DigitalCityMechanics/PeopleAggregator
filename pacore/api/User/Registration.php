@@ -42,7 +42,17 @@ class User_Registration {
     $this->errors = array();
     $this->states    = array_values(PA::getStatesList());
     $this->countries = array_values(PA::getCountryList());
+    $this->api_call = false;
   }
+  
+  
+  /**
+   * Set to true if this is a call from the PeopleAggregator API and
+   * not the normal registration process
+   * 
+   * @var boolean
+   */
+  public $api_call;
 
   /* $params = array of user registration parameters
   * $network_info = a network object, if the user is to be joined to a default network, or NULL.
@@ -60,6 +70,9 @@ class User_Registration {
      
 
     $this->newuser = new User();
+
+    // set API call variable 
+    $this->newuser->api_call = $this->api_call;
     // filter input parameters (this is the same as filter_all_post())
     $params = Validation::get_input_filter(FALSE)->process($params);
 
@@ -112,6 +125,7 @@ class User_Registration {
         if(empty($params[$key])) {
           $this->msg .= "\n".$value." is mandatory";
           $this->error = TRUE;
+          header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
         }
       }
 
@@ -149,6 +163,10 @@ class User_Registration {
         $error_login = TRUE;
         $this->error = TRUE;
       }
+      
+      if($this->error == TRUE){
+      	header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
+      }
     }
 
     // if error occur than no need to check these errors
@@ -158,6 +176,7 @@ class User_Registration {
         $this->array_of_errors['error_email'] = $email_invalid;
         $this->error = TRUE;
         $this->msg .= __('E-mail address is not valid.');
+        header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
       }
 
       // Calculating Allowed Domains
@@ -190,6 +209,7 @@ class User_Registration {
         $this->array_of_errors['error_email'] = $email_invalid;
         $this->error = TRUE;
         $this->msg .= __('The domain of your E-mail address is not in the list of allowed domains.');
+        header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
       }
 
 
@@ -199,16 +219,25 @@ class User_Registration {
         $this->error = TRUE;
       }
 
-      if (strlen($password) > PA::$password_max_length) {
-        $this->msg .= sprintf(__("\nThe password must be less than %d characters."), PA::$password_max_length);
-        $error_password_l = TRUE;
-        $this->error = TRUE;
+      if($this->api_call == true){      	
+      	// dont check maximum password length if this is an API call
+      	// this is so that the API call can accept an encrypted password
+      }else{
+      	  // this is not an API request, so check password length normally
+	      if (strlen($password) > PA::$password_max_length) {
+	        $this->msg .= sprintf(__("\nThe password must be less than %d characters."), PA::$password_max_length);
+	        $error_password_l = TRUE;
+	        $this->error = TRUE;
+	        
+        	header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
+	      }
       }
-
       if (strlen($password) < PA::$password_min_length) {
         $this->msg .= sprintf(__("\nThe password must be longer than %d characters."), PA::$password_min_length);
         $error_password_g = TRUE;
         $this->error = TRUE;
+        
+        header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_PRECONDITION_FAILED));
       }
     }
 
@@ -217,9 +246,13 @@ class User_Registration {
         $this->msg = "Login name $login_name is already taken";
         $error_login = TRUE;
         $this->error = TRUE;
+        
+        header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_CONFLICT));
+        
       } elseif (User::user_existed($login_name)) {
         $this->msg = "Login name $login_name has been used in the past; it belongs to a deleted user.";
         $error_login = $this->error = TRUE;
+        header(HttpStatusCodes::httpHeaderFor(HttpStatusCodes::HTTP_CONFLICT));
       }
       $this->array_of_errors = array("error_login"=>@$error_login, "error_first_name"=>@$error_first_name, "error_email"=>@$error_email, "error_password_conf"=>@$error_password_conf, "error_password_l"=>@$error_password_l, "error_password_g"=>@$error_password_g);
     }

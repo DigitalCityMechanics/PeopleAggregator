@@ -25,6 +25,19 @@ class PAException extends Exception {
     parent::__construct($exceptionMessage, (int)$exceptionCode);
     $this->code = $exceptionCode;
     $this->message = $exceptionMessage;
+
+    try{
+	    // Gets the matching HTTP Status code for the exception code
+	    list($code_string, $httpStatusCode) = pa_get_error_name($this->code);
+	    if(isset($httpStatusCode)){
+		    // set http header error code
+	    	header(HttpStatusCodes::httpHeaderFor($httpStatusCode));
+	    }	    
+    }catch(Exception $ex){
+    	// ignore this exception. No need to throw it since the HttpStatusCode is
+    	// not important enough to throw over the real exception    	
+    }
+    
   }
 }
 ?>
