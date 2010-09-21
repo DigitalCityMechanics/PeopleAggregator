@@ -190,7 +190,7 @@ function api_load_user($login, $password) {
     	// The user's password did not match after encryption
 		throw new PAException(USER_INVALID_PASSWORD, "Incorrect password for user $login");
     }
-    if(!$this->user_id){
+    if(!$user->user_id){
     	header('HTTP/1.1 500 Internal Server Error');   	
     }
     
