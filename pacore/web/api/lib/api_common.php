@@ -65,6 +65,7 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
     $t = gettype($v);
     $expected_type = array_key_exists($desc['type'], $type_map) ? $type_map[$desc['type']] : $desc['type'];
     if ($t != $expected_type) {
+    	header('HTTP/1.1 412 Precondition Failed');
         api_error("Validation error ($context): expected type $expected_type at position '$path', got $t", 'validation_incorrect_type');
     }
 
@@ -84,6 +85,7 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
                 }
                 $dflt = @$k_desc['default'];
                 if ($dflt === NULL) {
+                	header('HTTP/1.1 412 Precondition Failed');
                     api_error("Validation error ($context, $path): key $k_name is required", 'validation_missing_key');
                 }
                 $v[$k_name] = $dflt;
@@ -95,6 +97,7 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
             foreach ($v as $k_name => $k_value) {
                 if (!array_key_exists($k_name, $content)
                     && strpos($k_name, "__") !== 0) {
+                    header('HTTP/1.1 412 Precondition Failed');
                     api_error("Validation error ($context, $path): key $k_name is not allowed", 'validation_extra_key');
                 }
             }
@@ -107,27 +110,36 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
         break;
     case 'enum':
         if (!in_array($v, $desc['values']))
+        	header('HTTP/1.1 412 Precondition Failed');
             api_error("Validation error ($context, $path): '$v' is not a valid enumeration value at position '$path'");
         break;
     case 'int':
+    	$mi = null;
+    	$mx = null;
         $mi = @$desc['min'];
-        if ($mi !== NULL && $v < $mi)
+        if (isset($mi) && $v < $mi){
+            header('HTTP/1.1 412 Precondition Failed');
             api_error("Validation error ($context, $path): value at $path ($v) must be >= $mi", 'validation_out_of_range');
+        }
         $mx = @$desc['max'];
-        if ($mx !== NULL && $v > $mx)
+        if (isset($mx) && $v > $mx){        
+            header('HTTP/1.1 412 Precondition Failed');
             api_error("Validation error ($context, $path): value at $path ($v) must be <= $mx", 'validation_out_of_range');
+        }
         break;
     case 'string':
         // convert char encoding
         $v = api_force_utf8($v, $src_encoding);
         break;
     case 'date':
-	if (!($v instanceof IXR_Date))
+	if (!($v instanceof IXR_Date))        
+        header('HTTP/1.1 412 Precondition Failed');
 	    api_error("Validation error ($context, $path): '$v' must be an IXR_Date object");
 	$v = $v->year.'-'.$v->month.'-'.$v->day;
 	break;
     case 'datetime':
-	if (!($v instanceof IXR_Date))
+	if (!($v instanceof IXR_Date))        
+        header('HTTP/1.1 412 Precondition Failed');
 	    api_error("Validation error ($context, $path): '$v' must be an IXR_Date object");
 	$v = $v->getIso();
 	break;
@@ -141,6 +153,7 @@ function api_get_function_descriptor($funcname)
     // find the function descriptor
     $func_desc = @$api_desc['methods'][$funcname];
     if (!$func_desc) {
+        header('HTTP/1.1 404 Not Found');
         api_error("Call to nonexistent function '$funcname'.");
     }
 
@@ -153,6 +166,7 @@ function api_get_function_descriptor($funcname)
     // now figure out the function name in PHP
     $php_func = str_replace(".", "_", $funcname);
     if (!function_exists($php_func)) {
+        header('HTTP/1.1 501 Not Implemented');
         api_error("System error: Function '$php_func' should exist, but has not been implemented.");
     }
 

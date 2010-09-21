@@ -23,8 +23,7 @@ function json_encode_string($s) {
     return $s;
 }
 
-function api_error($msg, $code='system_error')
-{
+function api_error($msg, $code='system_error'){	
     $json = new Services_JSON();
     echo $json->encode(array(
         'success' => FALSE,
@@ -34,7 +33,7 @@ function api_error($msg, $code='system_error')
     exit;
 }
 
-header("Content-Type: application/x-javascript; charset=UTF-8");
+header("Content-Type: application/javascript; charset=UTF-8");
 
 list($ret, $func_desc) = handle_rest_call();
 
