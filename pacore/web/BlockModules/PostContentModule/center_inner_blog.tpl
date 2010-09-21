@@ -28,6 +28,10 @@ install_tinymce('full');
 		<option<?php echo ($blog_type == 'Suggestion') ? ' selected="selected"' : ''; ?> value="Suggestion">Suggestion</option>
 	</select>
   </div>
+  <div class="field" >
+    <label for="redirect"><b> <?= __("Redirect") ?>:</b></label>
+    <input type="text" name="redirect" class="text long" id="redirect" style="width:647px;" value="<?=urldecode(stripslashes($redirect))?>"/>
+  </div>
   <div class="field">
     <textarea name="description" id="description" class="long" cols="89" rows="30"><?php echo htmlspecialchars($body) ?></textarea>
   </div>

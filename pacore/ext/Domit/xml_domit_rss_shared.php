@@ -71,7 +71,7 @@ class xml_domit_rss_base {
   * Retrieves the underlying DOMIT node
   * @return Object The underlying DOMIT node
   */
-  function getNode() {
+  function &getNode() {
       return $this->node;
   } //getNode
 
@@ -205,7 +205,7 @@ class xml_domit_rss_collection extends xml_domit_rss_elementindexer {
   * Gets a text representation of the collection (applies the toString method to each member and concatenates)
   * @return string The element text
   */
-  function getElementText() {
+  function getElementText($elementName) {
     $total = $this->getElementCount();
       $result = '';
 
@@ -842,7 +842,7 @@ class xml_domit_rss_simpleelement extends xml_domit_rss_elementindexer {
   * Gets the text of the element
   * @return string The element text
   */
-  function getElementText() {
+  function getElementText($elementName) {
       $element =& $this->node;
       $result = '';
       $total = $element->childCount;
