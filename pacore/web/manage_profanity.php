@@ -23,24 +23,24 @@ $authorization_required = TRUE;
 
 if(!empty($_POST)) {
   $error = false;
-  if(!$handle = fopen(PA::$project_dir . "/config/profanity_words.txt", 'w+')) {
-    if(!$handle = fopen(PA::$core_dir . "/config/profanity_words.txt", 'w+')) {
-      $msg = 5040;
-      $error = TRUE;
-    }  
-  }
-  
-  if (fwrite($handle, $_POST['file_text']) === FALSE) {
-    $msg = 5041;
+  $file = getShadowedPath('config/profanity_words.txt');
+  if(!$file || !$handle = fopen($file, 'w+')) {
+    $msg = 5040;
     $error = TRUE;
   }
-  else {
-    //'Profanity word list has been successfully updated.'
-    $error = false;
-    $msg = 5043;                                                  
-//  PA::$config->profanity = explode("\r\n", $_POST['file_text']);
+  if($handle) {
+	if (fwrite($handle, $_POST['file_text']) === FALSE) {
+		$msg = 5041;
+		$error = TRUE;
+	}
+	else {
+    	//'Profanity word list has been successfully updated.'
+    	$error = false;
+    	$msg = 5043;                                                  
+//  	PA::$config->profanity = explode("\r\n", $_POST['file_text']);
+  	}
+  	fclose($handle);
   }
-  fclose($handle);
 }
 
 

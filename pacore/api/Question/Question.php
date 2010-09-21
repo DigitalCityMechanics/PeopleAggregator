@@ -120,12 +120,12 @@ class Question extends Content {
    * calls Content::delete() to soft delete a content
    * soft delete
    */
-  public function delete ($question_id) {
-    Logger::log("Enter: Question::delete");    
+  public static function delete_by_id ($question_id) {
+    Logger::log("Enter: Question::delete_by_id | Arg: \$question_id = $question_id");    
     $sql = 'DELETE FROM {contents} WHERE content_id = ? AND type = ?';
     $data = array($question_id, QUESTION);
     $res = Dal::query($sql, $data);
-    Logger::log("Exit: Question::delete");
+    Logger::log("Exit: Question::delete_by_id");
     return;
   }
 

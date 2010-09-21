@@ -40,12 +40,10 @@ require_once "web/includes/network.inc.php";
 $error = FALSE;
 if(!empty($_POST)) {
   
-//  if(!$handle = fopen("web/includes/domain_names.txt", 'w+')) {  changed by Z.Hron: "/web/includes" is not writable directory
-  if(!$handle = fopen(PA::$project_dir . "/config/domain_names.txt", 'w+')) {
-    if(!$handle = fopen(PA::$core_dir . "/config/domain_names.txt", 'w+')) {
-      $msg = 5040;
-      $error = TRUE;
-    }  
+  $file = getShadowedPath('config/domain_names.txt');
+  if(!$file || !$handle = fopen($file, 'w+')) {
+    $msg = 5040;
+    $error = TRUE;
   }
   
   if (fwrite($handle, $_POST['file_text']) === FALSE) {

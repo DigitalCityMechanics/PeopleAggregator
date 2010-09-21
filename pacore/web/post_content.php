@@ -376,7 +376,7 @@ function get_target_name ($target_id) {
 function route_to_outputthis ($title, $body) {
   global $outputthis_username, $outputthis_password, $error_message;
 
-  $external_targets = $_POST['route_targets_external']; /* Selected external targets array */
+  $external_targets = (isset($_POST) && isset($_POST['route_targets_external'])) ? $_POST['route_targets_external'] : array(); /* Selected external targets array */
   //p($external_targets);
   if (count($external_targets)) { /* User has selected something from external targets */
     if( in_array(ROUTE_TO_NONE, $external_targets) ) {

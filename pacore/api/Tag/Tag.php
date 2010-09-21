@@ -828,7 +828,7 @@ class Tag {
   * @return integer $font_size
   */
 
-  private function get_font_size($max, $occurence) {
+  private static function get_font_size($max, $occurence) {
     $default_size = DEFAULT_TAG_SOUP_SIZE;
     if ($max == 0) {
       $size = $default_size;

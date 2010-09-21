@@ -81,6 +81,7 @@ class PostContentModule extends Module {
     // some or most of the following can be empty so we use the @
     $inner_html_blog->set('blog_title', str_replace('"','&quot;',@$this->blog_title));
     $inner_html_blog->set('blog_type', @$this->blog_type);
+    $inner_html_blog->set('redirect', urlencode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : ''));
     $inner_html_blog->set('body', @$this->body);
     $inner_html_blog->set('trackback', @$this->trackback);
     $inner_html_blog->set('tag_entry', @$this->tag_entry);
