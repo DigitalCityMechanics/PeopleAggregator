@@ -32,6 +32,7 @@ require_once "api/BlogPost/BlogPost.php";
 require_once "api/Login/PA_Login.class.php";
 require_once "web/api/lib/project_api_impl.php";
 
+
 // one day we'll move everything inside the API class ...
 class API {
     public static $album_type_from_id = array(
@@ -56,9 +57,14 @@ function api_err($code, $msg) {
 	);
 }
 
-function api_err_from_exception($e) {
-    $code_string = pa_get_error_name($e->code);
+function api_err_from_exception($e) {	
+    list($code_string, $httpStatusCode) = pa_get_error_name($e->code);
     $ret = api_err($code_string, $e->message);
+
+    if(isset($httpStatusCode)){
+	    // set http header error code
+    	header(HttpStatusCodes::httpHeaderFor($httpStatusCode));
+    }
     return $ret;
 }
 
@@ -174,9 +180,20 @@ function api_split_search_query($q)
 function api_load_user($login, $password) {
     $user = new User();
     $user->load($login);
-    if ($user->password != md5($password)) {
-	throw new PAException(USER_INVALID_PASSWORD, "Incorrect password for user $login");
+    
+    if ($user->password == $password) {
+    	// The user's password was sent to the api already encrypted and the password matches    	
+    	return $user;
     }
+    
+    if ($user->password != md5($password)) {
+    	// The user's password did not match after encryption
+		throw new PAException(USER_INVALID_PASSWORD, "Incorrect password for user $login");
+    }
+    if(!$this->user_id){
+    	header('HTTP/1.1 500 Internal Server Error');   	
+    }
+    
     return $user;
 }
 
@@ -490,18 +507,26 @@ function peopleaggregator_newUser($args)
 {
     // check admin password
     global $admin_password;
-    if (!$admin_password)
-	throw new PAException(OPERATION_NOT_PERMITTED, "newUser API method may not be called without an admin password defined in local_config.php");
-    if ($admin_password != $args['adminPassword'])
-	throw new PAException(USER_INVALID_PASSWORD, "adminPassword incorrect");
-
+    if (!$admin_password){
+    	header('HTTP/1.1 412 Precondition Failed');
+		throw new PAException(OPERATION_NOT_PERMITTED, "newUser API method may not be called without an admin password defined in local_config.php");
+	}else if(!isset($args['adminPassword']) || !$args['adminPassword']){
+    	header('HTTP/1.1 412 Precondition Failed');
+		throw new PAException(OPERATION_NOT_PERMITTED, "newUser API method may not be called without an admin password");		
+    }else if ($admin_password != $args['adminPassword']){
+    	header('HTTP/1.1 401 Unauthorized');
+		throw new PAException(USER_INVALID_PASSWORD, "adminPassword incorrect");
+    }
     // fetch network info
     $home_network = Network::get_network_by_address($args['homeNetwork']);
-    if (!$home_network)
-	throw new PAException(INVALID_ID, "Network ".$args['homeNetwork']." not found");
+    if (!$home_network){
+		//TODO: read this from AppConfig.xml
+    	$home_network = "default";
+    }
 
     // register the user
     $reg = new User_Registration();
+    $reg->api_call = true;    // api_call indicates that this is a PeopleAggregator API request
     if (!$reg->register(
 	    array(
 		'login_name' => $args['login'],
@@ -511,6 +536,7 @@ function peopleaggregator_newUser($args)
 		'password' => $args['password'],
 		'confirm_password' => $args['password'],
 		), $home_network)) {
+	//	header('HTTP/1.1 500 Internal Server Error');
 	return array(
 	    'success' => FALSE,
 	    'msg' => $reg->msg,

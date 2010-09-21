@@ -163,11 +163,20 @@ class User {
   public $forgot_password_id;
 
   /**
+   * Set to true if this is a call from the PeopleAggregator API and
+   * not the normal registration process
+   * 
+   * @var boolean
+   */
+  public $api_call;
+  
+  /**
   * The default constructor for User class.
   */
   public function __construct() {
     $this->is_new = TRUE;
     $this->is_active = 1;
+    $this->api_call = false;
   }
 
   // Cache of user names used by User::url_from_id
@@ -573,7 +582,10 @@ class User {
         }  
 
         $this->user_id = Dal::next_id("User");
-        $this->password = md5($this->password);
+        if($this->api_call != true){
+        	// only encrypt the password if this is not an API call 
+        	$this->password = md5($this->password);
+        }
         if(!isset($this->created)) {
           $this->created = time();
         }
