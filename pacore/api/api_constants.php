@@ -72,6 +72,7 @@ define_once("VIDEO_ALBUM", 3);
   define_once("QUESTION", 8);
   define_once("POLL", 11);
   define_once("TEK_VIDEO", 12);
+  define_once("SUGGESTION", 13);
 
 //--------------------------------------------------
 //--------------------------------------------------

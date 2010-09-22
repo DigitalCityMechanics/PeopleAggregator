@@ -69,6 +69,17 @@ class UploadMediaModule extends Module {
       case 'Images':
 	      $alb_type = IMAGE_ALBUM;
       break;
+	  case 'YouTube' :
+        $gid = NULL;
+          if(!empty($_GET['gid'])) {
+            $gid = $_GET['gid'];
+          }
+          if (empty($this->mode)) {
+            $TekMedia = new TekMedia();
+            $form_key =  $TekMedia->generate_form($gid);
+          }
+	        $alb_type = VIDEO_ALBUM;
+      break;
     }
     $all_albums = Album::load_all($user_id, $alb_type);
     $default_name = PA::$config->default_album_titles[$alb_type];
@@ -100,6 +111,9 @@ class UploadMediaModule extends Module {
 
     if (@$this->view == 'ajax') {
     	switch ($this->mode) {
+			case 'YouTube':
+				$t = 'youtube';
+			break;
     		case 'Videos':
     			$t = 'video';
     		break;
