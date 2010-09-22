@@ -292,6 +292,24 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 'homeNetwork'=>array('default'=>'default',
 'type'=>'string')),
 'type'=>'post'),
+
+'peopleaggregator.deleteUser'=>array(
+	'argstyle'=>'named',
+	'return'=>array(
+		'content'=>array('msg'=>array('type'=>'string'),
+		'success'=>array('type'=>'boolean')),
+		'type'=>'hash',
+		'allow_extra_keys'=>0
+	),
+	'args'=>array(
+		'adminPassword'=>array('type'=>'string'),
+		'login'=>array('type'=>'string'),
+		'password'=>array('type'=>'string'),
+	),
+	'type'=>'post'
+),
+
+
 'peopleaggregator.echoPost'=>array('argstyle'=>'named',
 'return'=>array('content'=>array('echoText'=>array('type'=>'string'),
 'success'=>array('type'=>'boolean')),
