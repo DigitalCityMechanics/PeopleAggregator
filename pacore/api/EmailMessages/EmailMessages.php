@@ -258,7 +258,7 @@ class EmailMessages {
   }
 
   //This function will be used to populate select box with available email types  for the admin screen
-  public function get_email_list() {
+  public static function get_email_list() {
     Logger::log("Enter: function EmailMessages::get_email_list");
     $email_list = self::get_all_messages(true);
     Logger::log("Exit: function EmailMessages::get_email_list");

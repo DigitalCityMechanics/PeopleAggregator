@@ -408,8 +408,9 @@ function uihelper_generate_center_content($cid, $permalink=0, $show=0) {
       $middle_content->set('show', $show);
     }
     $return_content = '';
-    if(!in_array($content->type, $content_tpl))
-    $return_content = $middle_content->fetch_cache(CURRENT_THEME_FSPATH.'/'.$content->type.".tpl");
+    if(!in_array($content->type, $content_tpl) && getShadowedPath(CURRENT_THEME_FSPATH.'/'.$content->type.".tpl")) {
+	  $return_content = $middle_content->fetch_cache(getShadowedPath(CURRENT_THEME_FSPATH.'/'.$content->type.".tpl"));
+    }
   } else {//this will load the file with cache id
     //it means there is already file which is cached
     $return_content = $middle_content->fetch_cache();
@@ -584,31 +585,35 @@ function uihelper_generate_center_content_permalink($cid, $show=0) {
   } else {
     $comment_form = $abuse_form = NULL;
   }
-  $middle_content = new Template(CURRENT_THEME_FSPATH."/$type.tpl");
-  $middle_content->set_object('contents', $content);
-  $middle_content->set('editable', $editable);
-  $middle_content->set('picture_name', $content_user->picture); //  to set picture name for diplaying in contets
-  $middle_content->set('user_id', $content_user->user_id);
-  $middle_content->set('user_name', $content_user->first_name.' '.$content_user->last_name);
-  $middle_content->set('current_theme_path', PA::$theme_url);
-  $middle_content->set('back_page', $back_page);
-  $middle_content->set('comments', $comments_list);
-  $middle_content->set('comment_form', $comment_form);
-  $middle_content->set('abuse_form', $abuse_form);
-  $middle_content->set('media_gallery_content', $media_gallery_content);
+  if(getShadowedPath(CURRENT_THEME_FSPATH."/$type.tpl"))
+  {
+    $middle_content = new Template(getShadowedPath(CURRENT_THEME_FSPATH."/$type.tpl"));
+    $middle_content->set_object('contents', $content);
+    $middle_content->set('editable', $editable);
+    $middle_content->set('picture_name', $content_user->picture); //  to set picture name for diplaying in contets
+    $middle_content->set('user_id', $content_user->user_id);
+    $middle_content->set('user_name', $content_user->first_name.' '.$content_user->last_name);
+    $middle_content->set('current_theme_path', PA::$theme_url);
+    $middle_content->set('back_page', $back_page);
+    $middle_content->set('comments', $comments_list);
+    $middle_content->set('comment_form', $comment_form);
+    $middle_content->set('abuse_form', $abuse_form);
+    $middle_content->set('media_gallery_content', $media_gallery_content);
 
-  if ($show == 1) {
-    $middle_content->set('show', $show);
+    if ($show == 1) {
+      $middle_content->set('show', $show);
+    }
+
+    $middle_content->set('permalink', $perma_link);
+    $middle_content->set('edit_link', $edit_link);
+    $middle_content->set('approval_link', $approval_link);
+    $middle_content->set('denial_link', $denial_link);
+    $middle_content->set('delete_link', $delete_link);
+    $middle_content->set('user_link', $user_link);
+    $return_content = $middle_content->fetch();
+  } else {
+    $return_content = '<p>Content does not have a display template.</p><p>Create a '.$type.'.tpl file to display this content type.</p>';
   }
-
-  $middle_content->set('permalink', $perma_link);
-  $middle_content->set('edit_link', $edit_link);
-  $middle_content->set('approval_link', $approval_link);
-  $middle_content->set('denial_link', $denial_link);
-  $middle_content->set('delete_link', $delete_link);
-  $middle_content->set('user_link', $user_link);
-
-  $return_content = $middle_content->fetch();
   return $return_content;
 }
 
@@ -1207,14 +1212,7 @@ function is_custom_header_allowed($uid) {
 * function to get the detail of the skin by reading its config file.
 */
 function skin_details($skin_name) {
-  $config_file = '/web/'.PA::$theme_rel.'/skins/'.$skin_name.'/config.xml';
-  if(file_exists(PA::$project_dir . $config_file)) {
-    $config_file = PA::$project_dir . $config_file;
-  } else if(file_exists(PA::$core_dir . $config_file)) {
-    $config_file = PA::$core_dir . $config_file;
-  } else {
-    $config_file = null;
-  }
+  $config_file = getShadowedPath('web/'.PA::$theme_rel.'/skins/'.$skin_name.'/config.xml');
   $skin_info = array();
   if ($config_file) {
     $xml_doc = new DomDocument();
@@ -1548,7 +1546,7 @@ function rating($rating_type, $type_id, $scale=5) {
   $user_rating = 0;
   if (!empty(PA::$login_uid)) {
     $params = array('rating_type'=>$rating_type, 'user_id'=>PA::$login_uid, 'type_id'=>$type_id);
-    $user_rating_details = PA_Rating::get($params);
+    $user_rating_details = PA_Rating::get(null, $params);
     // FIXME: this might not be set
     $user_rating = @$user_rating_details[0]->rating;
   }

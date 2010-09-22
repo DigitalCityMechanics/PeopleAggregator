@@ -597,7 +597,8 @@ INSERT INTO `content_types` (`type_id`, `name`, `description`) VALUES
 (6, 'Video', ''),
 (7, 'SBMicroContent', 'SBMicroContent'),
 (8, 'Question', 'Question'),
-(12, 'TekVideo', 'TekVideo');
+(12, 'TekVideo', 'TekVideo'),
+(13, 'Suggestion', 'A queued message from users to admins');
 
 -- --------------------------------------------------------
 
@@ -2093,6 +2094,7 @@ CREATE TABLE IF NOT EXISTS `polls` (
 `content_id` int(11) NOT NULL default '0',
 `title` varchar(255) NOT NULL default '',
 `user_id` int(11) NOT NULL default '0',
+`group_id` int(11) NOT NULL default '0',
 `options` longtext,
 `created` int(11) NOT NULL default '0',
 `changed` int(11) NOT NULL default '0',

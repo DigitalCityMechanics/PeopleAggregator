@@ -18,6 +18,7 @@ include_once("web/includes/page.php");
 
 require_once "api/Cache/Cache.php";
 require_once "api/Album/Album.php";
+require_once "api/Suggestion/Suggestion.php";
 // require_once "web/includes/functions/auto_email_notify.php";
 require_once "api/Messaging/MessageDispatcher.class.php";
 require_once "api/Permissions/PermissionsHandler.class.php";
@@ -82,6 +83,9 @@ function route2groups() {
   $tags = array_unique($tags);
   $net_owner = new User();
   $net_owner->load((int)PA::$network_info->owner_id);
+  $valid_post_types = array('BlogPost', 'Suggestion');
+  $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
+    ? $_POST['blog_type'] : 'BlogPost';
 
   //find tag entry
   $terms = array();
@@ -108,7 +112,17 @@ function route2groups() {
         if($_group->access_type == ACCESS_PRIVATE) {
           $login_required_str = '&login_required=true';
         }
-        $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+
+        switch($type) {
+          case 'Suggestion':
+            $res = Suggetion::save_suggestion(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+            break;
+
+          case 'BlogPost':
+          default:
+            $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+            break;
+        }
         $permalink_cid = $res['cid'];
 
 
@@ -147,7 +161,17 @@ function route2groups() {
         if($_group->access_type == ACCESS_PRIVATE) {
           $login_required_str = '&login_required=true';
         }
-        $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+
+		switch($type) {
+          case 'Suggestion':
+            $res = Suggestion::save_suggestion(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+            break;
+
+          case 'BlogPost':
+          default:
+            $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+            break;
+        }
         $permalink_cid = $res['cid'];
 
         $content_obj = Content::load_content((int)$permalink_cid);
@@ -352,7 +376,7 @@ function get_target_name ($target_id) {
 function route_to_outputthis ($title, $body) {
   global $outputthis_username, $outputthis_password, $error_message;
 
-  $external_targets = $_POST['route_targets_external']; /* Selected external targets array */
+  $external_targets = (isset($_POST) && isset($_POST['route_targets_external'])) ? $_POST['route_targets_external'] : array(); /* Selected external targets array */
   //p($external_targets);
   if (count($external_targets)) { /* User has selected something from external targets */
     if( in_array(ROUTE_TO_NONE, $external_targets) ) {

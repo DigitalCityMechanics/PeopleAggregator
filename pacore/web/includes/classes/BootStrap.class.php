@@ -516,7 +516,7 @@ class BootStrap {
     // load profanity words list from file - merge with list from XML
     $profanity_file = getShadowedPath(PA::$config_path .'/profanity_words.txt');
     if($profanity_file) {
-      $prof_arr = explode("\r\n", file_get_contents(PA::$project_dir . "/config/profanity_words.txt"));
+      $prof_arr = explode("\r\n", file_get_contents($profanity_file));
       $prof_arr = array_merge((array)PA::$config->profanity, (array)$prof_arr);
       PA::$config->profanity = array_unique($prof_arr);
     }
@@ -526,8 +526,10 @@ class BootStrap {
 
     $languages_list = array();
     $languages_list['english'] = 'english';
-    $language_dirs  = array(PA::$core_dir . DIRECTORY_SEPARATOR . PA_LANGUAGES_DIR,
-                            PA::$project_dir . DIRECTORY_SEPARATOR . PA_LANGUAGES_DIR );
+    $language_dirs  = array(PA::$core_dir . DIRECTORY_SEPARATOR . PA_LANGUAGES_DIR);
+    if (file_exists(PA::$project_dir . DIRECTORY_SEPARATOR . PA_LANGUAGES_DIR)) {
+	  $language_dirs[] = PA::$project_dir . DIRECTORY_SEPARATOR . PA_LANGUAGES_DIR;
+    }
 
     foreach($language_dirs as $lang_path) {
       foreach(new RecursiveDirectoryIterator($lang_path, RecursiveDirectoryIterator::KEY_AS_PATHNAME) as $_path => $info) {
@@ -612,6 +614,46 @@ class BootStrap {
     }
   }
 
+
+  /**
+   * Returns a user using the given authToken if the token is valid and has not 
+   * expired. Throws a PAException if the token is not valid. 
+   * @param $token
+   * @return User object
+   */
+   private function getUserFromAuthToken($authToken){
+   	$user = null;
+	if ($authToken != false){
+			
+		// TODO: decrypt $authToken	
+		// TODO: check referer IP address
+		try{			
+			// get username and password from authToken
+			$user = User::from_auth_token($authToken);
+		}
+		catch(PAException $ex){
+			// redirect back to the referring URL because the token could not be authenticated
+			// send the error message back as well
+			//TODO: figure out what to do when the auth token cant be validated
+			$referer = "/login.php?error=1";
+			if(isset($_SERVER['HTTP_REFERER'])){
+				$referer = $_SERVER['HTTP_REFERER'];	
+			}
+			
+			$message = null;
+			if(isset($ex) && isset($ex->message)){
+				$message = $ex->message;			
+			}
+			// TODO: standardise the paerror get variable and put in 
+			//	AppConfig.xml as a new option
+			$referer = $referer . "?paerror=" . $message;
+			header("Location: $referer");
+			throw $ex;	
+		}
+	}
+	return $user;
+   }
+   
   public function getCurrentUser() {
     global $page_uid, $page_user, $login_uid, $login_name, $login_user;
     require_once "api/User/User.php";
@@ -622,7 +664,39 @@ class BootStrap {
       $login_uid = NULL;
       $login_name = NULL;
       $login_user = NULL;
+      
       $this->CurrUser = (isset($_SESSION['user'])) ? $_SESSION['user'] : null;
+      
+      // Check if an authToken variable in GET and use it if available
+      $authToken = (isset($_GET['authToken'])) ? $_GET['authToken'] : null;
+      if($authToken){      	      
+        try {
+          $user = new User();
+          $user = $this->getUserFromAuthToken($authToken);
+          if($user->user_id){			
+          	// User is valid so log_in the user
+          	// 	Since we know that AuthToken was passed into the URL, we can assume this
+          	// 	user was redirected here from a partner web site. We need to log in the user
+          	// 	as if they logged in through the normal PeopleAggregator login form: 
+          	// (ie. set all session variables just as if dologin.php was called).
+			$referer = "external site";
+			if(isset($_SERVER['HTTP_REFERER'])){
+				$referer = $_SERVER['HTTP_REFERER'];		
+			}
+			
+			$pal = new PA_Login();
+		    $pal->log_in($user->user_id, false, $referer);
+          }                             
+        } catch (Exception $e) {
+          if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED))) {
+            throw $e;
+          }
+          // The currently logged-in user has been deleted; invalidate the session.
+          session_destroy();
+          session_start();
+          $login_uid = PA::$login_uid = $login_name = $login_user = PA::$login_user = NULL;
+        }      	
+      }
 
       if($this->CurrUser) {
         try {
@@ -637,7 +711,10 @@ class BootStrap {
           session_start();
           $login_uid = PA::$login_uid = $login_name = $login_user = PA::$login_user = NULL;
         }
-
+      }
+            
+	  if(isset($user) && $user){
+	  	// if the user variable is set
         if($user->user_id) {
           $login_name = $this->CurrUser['name'];
           PA::$login_user = $login_user = $user;
@@ -648,7 +725,7 @@ class BootStrap {
           PA::$login_user->update_user_time_spent();
           User::track_status(PA::$login_uid);
         }
-      }
+	  }
 
       // If a user is specified on the query string as an ID (uid=123) or
       // login name (login=phil), validate the id/name and load the user
@@ -686,14 +763,12 @@ class BootStrap {
     $agent = $ua;
     $products = array();
 
-    $pattern  = "([^/[:space:]]*)" . "(/([^[:space:]]*))?"
-              . "([[:space:]]*\[[a-zA-Z][a-zA-Z]\])?" . "[[:space:]]*"
-              . "(\\((([^()]|(\\([^()]*\\)))*)\\))?" . "[[:space:]]*";
+	$pattern = '/([^\/]*)\/([0-9\.]*)\s*(\(([^\)]*)\))?\s*/';
 
     while( strlen($agent) > 0 ) {
-      if ($l = ereg($pattern, $agent, $a)) {
-          array_push($products, array($a[1], $a[3], $a[6])); // product, version, comment
-          $agent = substr($agent, $l);
+      if (preg_match($pattern, $agent, $a)) {
+          array_push($products, array($a[1], $a[2], isset($a[4]) ? $a[4] : '')); // product, version, comment
+          $agent = substr($agent, strlen($a[0]));
       } else {
           $agent = "";
       }

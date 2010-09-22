@@ -84,6 +84,17 @@ class db_update_page
                                 );
        }
 
+		require_once('api/Suggestion/Suggestion.php');
+		$this->qup(
+			'2010-09-14, by: Jonathan Knapp - adding Suggestion content_type',
+			'INSERT INTO {content_types} (type_id, name, description) VALUES ('.Suggestion::TYPE_ID.', "'.Suggestion::TYPE_NAME.'", "'.Suggestion::TYPE_DESCRIPTION.'")'
+		);
+
+		$this->qup(
+			'2010-09-17, by Jonathan Knapp - altering poll table for use with groups',
+			"ALTER TABLE {polls} ADD COLUMN `group_id` INT(11) NOT NULL DEFAULT '0'  AFTER `user_id`;"
+		);
+
         $this->run_xml_updates();
         run_net_extra();
     }//__endof__ do_updates

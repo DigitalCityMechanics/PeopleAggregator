@@ -18,7 +18,6 @@
  *             because rewritting rule in .htacces file forwarding
  *             all those requests here!
  **/
-
 include dirname(__FILE__) . "/../project_config.php";
 include dirname(__FILE__) . "/../autoload.inc.php";
 require_once dirname(__FILE__) . "/../pacore/web/includes/classes/PA.class.php";
@@ -33,6 +32,11 @@ require_once dirname(__FILE__) . "/../pacore/api/Profiler/PAProfiler.class.php";
    PA::$profiler->startTimer('PADispatcher');
  }
  $dispatcher = new PADispatcher($auto_load_list);
+
+// User.php must be included after a new PADispatcher object is created
+// otherwise the installation of PA breaks
+require_once dirname(__FILE__) . "/../pacore/api/User/User.php";
+ 
  $script = $dispatcher->dispatch();
  if(PA::$profiler) PA::$profiler->stopTimer('PADispatcher');
  if(PA::$profiler) PA::$profiler->startTimer('Main Script' , $script);

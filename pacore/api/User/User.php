@@ -163,11 +163,20 @@ class User {
   public $forgot_password_id;
 
   /**
+   * Set to true if this is a call from the PeopleAggregator API and
+   * not the normal registration process
+   * 
+   * @var boolean
+   */
+  public $api_call;
+  
+  /**
   * The default constructor for User class.
   */
   public function __construct() {
     $this->is_new = TRUE;
     $this->is_active = 1;
+    $this->api_call = false;
   }
 
   // Cache of user names used by User::url_from_id
@@ -433,7 +442,9 @@ class User {
   }
 
   /**
+   * 
    * Generate an authentication token with the given lifetime (seconds).
+   * @param $lifetime
    */
   public function get_auth_token($lifetime) {
     // FIXME: generate a more opaque token - this method probably isn't secure
@@ -441,6 +452,12 @@ class User {
     return User::build_auth_token($this->login_name, $this->password, $expires);
   }
 
+  /**
+   * Returns a user using the given authToken if the token is valid and has not 
+   * expired. Throws a PAException if the token is not valid. 
+   * @param $token
+   * @return User object
+   */
   public static function from_auth_token($token) {
     if (!preg_match("/^(.*?):(\d+):([0-9a-f]+)$/", $token, $m)) {
       throw new PAException(USER_TOKEN_INVALID, "This token is invalid - bad format");
@@ -565,7 +582,10 @@ class User {
         }  
 
         $this->user_id = Dal::next_id("User");
-        $this->password = md5($this->password);
+        if($this->api_call != true){
+        	// only encrypt the password if this is not an API call 
+        	$this->password = md5($this->password);
+        }
         if(!isset($this->created)) {
           $this->created = time();
         }

@@ -15,6 +15,7 @@
 //variable for Blog save should be according to criteria specified
 
 require_once "api/BlogPost/BlogPost.php";
+require_once "api/Suggestion/Suggestion.php";
 require_once "web/includes/functions/auto_email_notify.php";
 require_once "api/Activities/Activities.php";
 require_once "api/api_constants.php";
@@ -32,6 +33,15 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
   $data_array["blog_title"] = trim($_POST["blog_title"]);
 
   filter_all_post($_POST);
+  $valid_post_types = array('BlogPost', 'Suggestion');
+  $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
+    ? $_POST['blog_type'] : 'BlogPost';
+
+  $pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+  $redirect = (isset($_POST) && isset($_POST['redirect']) && preg_match($pattern, $_POST['redirect']))
+    ? $_POST['redirect'] : '';
+
+  $data_array['blog_type'] = trim($type);
   $data_array["description"] = trim($_POST["description"]);
   $data_array["tags"] = trim($_POST["tags"]);
   $error = FALSE;
@@ -83,7 +93,17 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
         $is_active = $content[0]['is_active'];
       }
 
-      $r = BlogPost::save_blogpost($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
+      switch($type) {
+        case 'Suggestion':
+          $r = Suggestion::save_suggestion($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
+          break;
+
+        case 'BlogPost':
+        default:
+          $r = BlogPost::save_blogpost($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
+          break;
+      }
+
       if($r['cid'] == $cid) {
         $login_required_str = null;
         $content_author_image = uihelper_resize_mk_user_img($user->picture, 80, 80,'alt="'.$user->first_name.'" align="left" style="padding: 0px 12px 12px 0px;"');
@@ -143,6 +163,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
       }
 
       $location = PA::$url . PA_ROUTE_CONTENT . "/cid=$cid".$error_msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
       header("location:$location");exit;
     }//.. end of edit
 
@@ -153,13 +174,23 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
     } else {
       $display_on_homepage = NO_DISPLAY_ON_HOMEPAGE;//This will not show up on homepage - flag has opposite values
     }
-		 
-		if (!empty(PA::$config->simple['omit_routing'])) {
-			$ccid = (!empty($_REQUEST['ccid'])) ? $_REQUEST['ccid'] : -1;
+
+	$ccid = -1;
+	if (!empty(PA::$config->simple['omit_routing'])) {
+		$ccid = (!empty($_REQUEST['ccid'])) ? $_REQUEST['ccid'] : -1;
+	}
+
+	switch($type) {
+		case 'Suggestion':
+			$post_saved = Suggestion::save_suggestion(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
+	    	break;
+
+		case 'BlogPost':
+		default:
 			$post_saved = BlogPost::save_blogpost(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
-		} else {
-			$post_saved = BlogPost::save_blogpost(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, -1, 1, $display_on_homepage);
-		}
+		    break;
+	}
+
     $permalink_cid = $post_saved['cid'];
     if (PA::is_moderated_content() && PA::$network_info->owner_id != $user->user_id) {
       Network::moderate_network_content(-1, $permalink_cid);// -1 for contents; not a part of any collection
@@ -212,6 +243,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
       // it means user is coming from group's page then redirect it to group
       //load group to see if group is if it is moderated
       $location = PA::$url . PA_ROUTE_GROUP . "/gid=".$_REQUEST['ccid'].$msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
       header("location:$location");exit;
     } else {
       //just redirect it to permalink page
@@ -221,7 +253,9 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
         $error_msg = "&msg_id=7027";
       }
       // header("location:".PA::$url . PA_ROUTE_CONTENT . "/cid=".$permalink_cid.$error_msg);exit;
-      header("location:".PA::$url .PA_ROUTE_USER_PRIVATE."?cid=".$permalink_cid.$error_msg);exit;
+      $location = PA::$url .PA_ROUTE_USER_PRIVATE."?cid=".$permalink_cid.$error_msg;
+      $location = (isset($redirect) && $redirect != '') ? $redirect : $location;
+      header("location:$location");exit;
     }
   }
    else {//..end of !$error

@@ -231,9 +231,11 @@ class TekVideo extends Content {
       This function get all the video for a network
       if we pass cat_id for that than it return all the video for that category
    */
-   public function load($cid=NULL) {
+   public function load($cid) {
      Logger::log("Enter: TekVideo::load()");
-     
+     if(!isset($cid)){
+     	$cid = NULL;     	
+     }
      $sql = 'SELECT * FROM {media_videos} WHERE content_id = ?';
      $res = Dal::query($sql, $cid);
      $result_array = array();

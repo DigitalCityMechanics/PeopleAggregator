@@ -19,6 +19,7 @@
 include_once dirname(__FILE__)."/../../config.inc";
 require_once "api/api_constants.php";
 require_once "api/DB/Dal/Dal.php";
+require_once "api/ModerationQueue/ModerationQueue.php";
 require_once "api/PAException/PAException.php";
 require_once "api/Logger/Logger.php";
 require_once "api/Tag/Tag.php";
@@ -1499,7 +1500,7 @@ class Network {
   *  Function : get_user_network_info()
   *  Purpose  : retriving all the networks either public or private
   */
-  public function get_user_network_info( $sql_param=array() ,$params=NULL) {
+  public static function get_user_network_info( $sql_param=array() ,$params=NULL) {
     Logger::log("[ Enter: function Network::get_user_network_info] \n");
     $sql = "SELECT N.*,NU.user_type FROM {networks} AS N, {networks_users} AS NU WHERE NU.network_id = N.network_id ";
     if (count($sql_param)) {
@@ -1545,10 +1546,8 @@ class Network {
    * collection_id = -1 as default for independent content
    */
    public static function moderate_network_content ($collection_id = -1, $content_id) {
-
      Logger::log("Enter: Network::moderate_network_content() | Args: \$content_id = $content_id");
-     $res = Dal::query("INSERT INTO {moderation_queue} (collection_id, item_id, type) VALUES (?, ?, ?)", array($collection_id, $content_id, "content"));
-     Content::update_content_status($content_id, MODERATION_WAITING);
+     ModerationQueue::moderate_content($content_id, $collection_id);
      Logger::log("Exit: Network::moderate_network_content()");
      return;
    }
@@ -1560,9 +1559,39 @@ class Network {
     */
    public static function approve_content ($content_id, $type = 'content') {
      Logger::log("Enter : Network::approve_content() | Args: \$item_id = $content_id, \$type = $type");
-     Content::update_content_status($content_id, ACTIVE);
-     $res = Dal::query("DELETE FROM {moderation_queue} WHERE item_id = ? and type= ?", array($content_id, $type));
+     ModerationQueue::approve_content($content_id, $type);
      Logger::log("Exit : Network::approve_content()");
+     return;
+   }
+   /**
+    * approve suggestion if network content moderation is set
+    * @access public
+    * @param int id of content
+    * @param string type ie user/content
+    */
+   public static function approve_suggestion ($suggestion_id) {
+     Logger::log("Enter : Network::approve_suggestion() | Args: \$suggestion_id = $suggestion_id");
+
+     // nab the author ID for the suggestion
+     $sql = 'SELECT author_id FROM {contents} WHERE content_id = ?';
+     $data = array($suggestion_id);
+     $res = Dal::query($sql, $data);
+     if ($res->numRows()) {
+       $row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+       $author_id = intval($row['author_id']);
+     }
+
+     // and email them
+     $suggestion_user = new User();
+     $suggestion_user->load($author_id);
+     $check = PAMail::send('suggestion_received', $suggestion_user, PA::$login_user, array());
+     if ($check == FALSE) {
+       Logger::log("Throwing exception MAIL_FUNCTION_FAILED | Mail was not sent to suggester ", LOGGER_ERROR);
+       throw new PAException(MAIL_FUNCTION_FAILED, "Mail was not sent to suggester");
+     }
+
+     ModerationQueue::approve_suggestion($suggestion_id);
+     Logger::log("Exit : Network::approve_suggestion()");
      return;
    }
    /**
@@ -1571,14 +1600,44 @@ class Network {
     * @param int id of user/content
     * @param string type ie user/content
     */
-   public function disapprove_content ($content_id, $type = 'content') {
+   public static function disapprove_content ($content_id, $type = 'content') {
      Logger::log("Enter : Network::disapprove_content() | Args: \$item_id = $content_id, \$type = $type");
-     $res = Dal::query("DELETE FROM {moderation_queue} WHERE item_id = ? and type= ?", array($content_id, $type));
-     Content::delete_by_id($content_id);
+     ModerationQueue::disapprove_content($content_id, $type);
      Logger::log("Exit : Network::disapprove_content()");
      return;
    }
-    /**
+  /**
+    * disapprove content/user in moderated queue
+    * @access public
+    * @param int id of user/content
+    * @param string type ie user/content
+    */
+   public static function disapprove_suggestion ($suggestion_id) {
+     Logger::log("Enter : Network::disapprove_suggestion() | Args: \$suggestion_id = $suggestion_id");
+
+	// nab the author ID for the suggestion
+     $sql = 'SELECT author_id FROM {contents} WHERE content_id = ?';
+     $data = array($suggestion_id);
+     $res = Dal::query($sql, $data);
+     if ($res->numRows()) {
+       $row = $res->fetchRow(DB_FETCHMODE_ASSOC);
+       $author_id = intval($row['author_id']);
+     }
+
+     // and email them
+     $suggestion_user = new User();
+     $suggestion_user->load($author_id);
+     $check = PAMail::send('suggestion_received', $suggestion_user, PA::$login_user, array());
+     if ($check == FALSE) {
+       Logger::log("Throwing exception MAIL_FUNCTION_FAILED | Mail was not sent to suggester ", LOGGER_ERROR);
+       throw new PAException(MAIL_FUNCTION_FAILED, "Mail was not sent to suggester");
+     }
+
+    ModerationQueue::disapprove_suggestion($suggestion_id);
+    Logger::log("Exit : Network::disapprove_suggestion()");
+    return;
+  }
+ /**
   * check for content in moderation queue.
   * @access private
   * @param int $content_id, $collection_id
@@ -1586,18 +1645,11 @@ class Network {
   * which indicates that content is not part of any collection
   * @param string type ie user/content
   */
-
   public static function item_exists_in_moderation($content_id, $collection_id, $type = 'content') {
      Logger::log("Enter: Network::item_exists_in_moderation() | Args: \$item_id = $content_id, \$type = $type");
-     $res = Dal::query("SELECT * FROM {moderation_queue} WHERE collection_id = ? AND item_id = ? AND type = ?", array($collection_id, $content_id, $type));
-     if ($res->numRows()) {
-       Logger::log("Exit: Network::item_exists_in_moderation() | Return: TRUE");
-       return TRUE;
-     }
-     else {
-       Logger::log("Exit: Network::item_exists_in_moderation() | Return: FALSE");
-       return FALSE;
-     }
+     $return_val = ModerationQueue::content_exists($content_id, $collection_id);
+     Logger::log("Exit: Network::item_exists_in_moderation() | Return: ".($return_val ? 'TRUE' : 'FALSE'));
+     return $return_val;
   }
 
 }

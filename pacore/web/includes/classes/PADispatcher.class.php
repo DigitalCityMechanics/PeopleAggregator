@@ -51,7 +51,7 @@
    public static $request_type;
 
    public function __construct($auto_load_list = array()) {
-     $this->PCRE_MATCH_STRING = "!^([^?=]*)/(([^/?=]+)\.(asf|avi|css|csv|docx|doc|exe|cab|jar|gif|htc|html|htm|jpeg|jpg|json|js|mov|mp3|mpeg|mpg|pdf|php|png|pptx|ppt|rar|swf|txt|wav|wma|wmv|xml|xspf|zip))(.*)$!i";
+     $this->PCRE_MATCH_STRING = "!^([^?=]*)/(([^/?=]+)\.(asf|avi|css|csv|docx|doc|exe|cab|jar|gif|htc|html|htm|ico|jpeg|jpg|json|js|mov|mp3|mpeg|mpg|pdf|php|png|pptx|ppt|rar|swf|txt|wav|wma|wmv|xml|xspf|zip))(.*)$!i";
      $this->core_dir = PA_PROJECT_CORE_DIR;
      $this->project_dir = PA_PROJECT_PROJECT_DIR;
      $this->routes = array();
@@ -65,9 +65,15 @@
      $this->loadRedirectRules();
      self::$request_type = null;
    }
-
-   public function dispatch() {
-     $res_script = null;
+   
+   
+   /**
+    * Determines the request type (php, or file) and dispatches control to the appropriate
+    * classes and functions 
+    */
+   public function dispatch() {   	 
+     $res_script = null;        
+     
      list($file_type, $file_path, $success) = $this->parseRequestURL();
      if($success) {
        switch($file_type) {
@@ -82,7 +88,7 @@
            } else {
              $this->route_query_str = $this->org_query_str;
            }
-           $res_script = $this->bootApp($file_path);
+           $res_script = $this->bootApp($file_path);           
          break;
          default:
            self::$request_type = 'file';
@@ -189,10 +195,10 @@
      $matches = null;
      $match_url = $_SERVER['REQUEST_URI'];
 
-     $this->applyRoutingRules($this->routes, $match_url, &$matches);
+     $this->applyRoutingRules($this->routes, $match_url, $matches);
      if(empty($matches)) {
        $match_url = $_SERVER['REDIRECT_URL'];
-       $this->applyRoutingRules($this->routes, $match_url, &$matches);
+       $this->applyRoutingRules($this->routes, $match_url, $matches);
      }
 
      if(!empty($matches)) {
@@ -320,7 +326,7 @@
              $new_url = $_route;
            }
            if(($res !== false) && (isset($new_url))) {
-             $this->applyRoutingRules($routes, $new_url, &$matches);
+             $this->applyRoutingRules($routes, $new_url, $matches);
            }
            break;
          }
