@@ -156,14 +156,7 @@ div.participation div.below {
       <? } ?>
       </table>
     </div>
-    <?  } */ ?>      
-    <?php if(PA::$login_uid && (PA::$login_uid <> PA::$page_uid)) : ?>
-    <div class="inplace_edit_testimonial" id="new_testimonial" style="padding: 12px">
-      <?=__('Click here to submit a Testimonial') ?>
-      <input type="hidden" name="submit_url" id="submit_url" value="/user/<?= PA::$page_uid ?>" />
-    </div>
-    <?php endif; ?>
-  <?php /* if( $page_links ) {?>
+    <?  } */ /* if( $page_links ) {?>
    <div class="prev_next">
      <?php if ($page_first) { echo $page_first; }?>
      <?php echo $page_links?>
