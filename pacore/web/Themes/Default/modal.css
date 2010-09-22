@@ -245,6 +245,10 @@ div#user_info li textarea.copyme {
 	margin: 0 auto;
 }
 
+#modal_window .youtube .field {
+	padding: 5px 0;
+}
+
 #modal_window .youtube .field label {
 	display: block;
 }

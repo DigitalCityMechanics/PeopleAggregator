@@ -57,6 +57,40 @@ if (!empty($_POST)) {
       $extention = '_video';
       $caption = $_POST['caption_video'];
       break;
+
+	case 'youtube':
+		$content = '';
+		$gallery_link = '';
+		$title = (isset($_POST) && isset($_POST['video_title'])) ? $_POST['video_title'] : '';
+
+		// @todo: look into the Zend YouTube class to use with a PHP service instaed
+		$link = (isset($_POST) && isset($_POST['video_url'])) ? $_POST['video_url'] : '';
+		if(preg_match('/http\:\/\/www\.youtube\.com/', $link))
+		{
+			$url = 'http://www.youtube.com/v/';
+			if(preg_match('/http\:\/\/www\.youtube\.com\/v\//', $link))
+			{
+				// http://www.youtube.com/v/xxxxxxxxxxx
+				$url .= substr($link, 25);
+			}
+			elseif(preg_match('/http\:\/\/www\.youtube\.com\/watch\?v\=/', $link))
+			{
+				// http://www.youtube.com/watch?v=xxxxxxxxx
+				$url .= substr($link, 31);
+			}
+			$content .= '<p>'.$title.'</p>'."\n";
+			$content .= '<object width="480" height="385"><param name="movie" value="' . $url . '?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="' . $url . '?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>';
+		}
+		else
+		{
+			$content .= '<p>No Preview Available</p>';
+		}
+?>
+	<p><?=$content?></p>
+	<textarea name="attach_media_html" id="attach_media_html"><?=$content?></textarea>
+<?php
+		exit();
+		break;
   }
   // count number of parameter enter by the user
   $cnt = count($caption);
