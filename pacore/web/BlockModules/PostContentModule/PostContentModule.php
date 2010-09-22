@@ -81,7 +81,12 @@ class PostContentModule extends Module {
     // some or most of the following can be empty so we use the @
     $inner_html_blog->set('blog_title', str_replace('"','&quot;',@$this->blog_title));
     $inner_html_blog->set('blog_type', @$this->blog_type);
-    $inner_html_blog->set('redirect', urlencode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : ''));
+
+	$redirect = urldecode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : '');
+	$pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+	$redirect = (preg_match($pattern, $redirect)) ? $redirect : '';
+
+    $inner_html_blog->set('redirect', urlencode($redirect));
     $inner_html_blog->set('body', @$this->body);
     $inner_html_blog->set('trackback', @$this->trackback);
     $inner_html_blog->set('tag_entry', @$this->tag_entry);
