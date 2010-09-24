@@ -82,6 +82,7 @@ function uihelper_upload_gallery($uid, $_POST, $_FILES, $type, $k=0) {
   $uploaded = False;
   $title = NULL;
   $album_id = NULL;
+  $msg = NULL;
   $user = new User();
   $media_count_no = $k;
 
@@ -122,7 +123,7 @@ function uihelper_upload_gallery($uid, $_POST, $_FILES, $type, $k=0) {
     $image_type = "$file_type";
     $value= $file_name_dynamic_type;
     $file = $myUploadobj->upload_file(PA::$upload_path, $value, true, true, $image_type);
-    $msg = NULL;
+
     if( $file == false) {
       $msg = $myUploadobj->error;
       $error = TRUE;

@@ -57,6 +57,40 @@ if (!empty($_POST)) {
       $extention = '_video';
       $caption = $_POST['caption_video'];
       break;
+
+	case 'youtube':
+		$content = '';
+		$gallery_link = '';
+		$title = (isset($_POST) && isset($_POST['video_title'])) ? $_POST['video_title'] : '';
+
+		// @todo: look into the Zend YouTube class to use with a PHP service instaed
+		$link = (isset($_POST) && isset($_POST['video_url'])) ? $_POST['video_url'] : '';
+		if(preg_match('/http\:\/\/www\.youtube\.com/', $link))
+		{
+			$url = 'http://www.youtube.com/v/';
+			if(preg_match('/http\:\/\/www\.youtube\.com\/v\//', $link))
+			{
+				// http://www.youtube.com/v/xxxxxxxxxxx
+				$url .= substr($link, 25);
+			}
+			elseif(preg_match('/http\:\/\/www\.youtube\.com\/watch\?v\=/', $link))
+			{
+				// http://www.youtube.com/watch?v=xxxxxxxxx
+				$url .= substr($link, 31);
+			}
+			$content .= '<p>'.$title.'</p>'."\n";
+			$content .= '<object width="480" height="385"><param name="movie" value="' . $url . '?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="' . $url . '?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>';
+		}
+		else
+		{
+			$content .= '<p>No Preview Available</p>';
+		}
+?>
+	<p><?=$content?></p>
+	<textarea name="attach_media_html" id="attach_media_html"><?=$content?></textarea>
+<?php
+		exit();
+		break;
   }
   // count number of parameter enter by the user
   $cnt = count($caption);
@@ -123,6 +157,10 @@ if (isset($success) && ($success == true)) { //
 				$activities_extra['info'] = ($login_name.' uploaded a audio in group id ='.$_REQUEST['group_id']);
 				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_AUDIO . "/view=groups_media&gid=".$_REQUEST['group_id'];
 			break;
+			case 'YouTube':
+				$activity = 'group_video_upload';//for rivers of people
+				$activities_extra['info'] = ($login_name.' uploaded a video in group id ='.$_REQUEST['group_id']);
+				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_VIDEO . "/view=groups_media&gid=".$_REQUEST['group_id'];
 			default:
 				break;
 		}
@@ -161,6 +199,19 @@ if (isset($success) && ($success == true)) { //
 				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_AUDIOS . "/uid=" . PA::$login_uid  . $album;
 			break;
 			case 'Videos':
+				$album_id = (!empty($upload['album_id'])) ? $upload['album_id']: $_POST['album_video'];
+				$album = "&album_id=".$album_id;
+				$msg_id = $moderation_msg ? 1005 : 2003;
+				//for rivers of people
+				$activity = 'user_video_upload';//for rivers of people
+				$activity_extra['info'] = ($login_name.' uploaded a video in album id =                                     '.$upload['album_id']);
+				$activity_extra['content_id'] = $upload[4];
+				$extra = serialize($activity_extra);
+				$object = $upload['album_id'];
+				Activities::save(PA::$login_uid, $activity, $object, $extra);
+				$gallery_link = PA::$url . PA_ROUTE_MEDIA_GALLEY_VIDEOS . "/uid=" . PA::$login_uid  . $album;
+			break;
+			case 'YouTube':
 				$album_id = (!empty($upload['album_id'])) ? $upload['album_id']: $_POST['album_video'];
 				$album = "&album_id=".$album_id;
 				$msg_id = $moderation_msg ? 1005 : 2003;
