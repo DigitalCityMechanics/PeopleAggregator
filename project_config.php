@@ -65,7 +65,6 @@ error_reporting(E_ALL | E_STRICT);
 define('PA_CORE_NAME', 'pacore');
 define('PA_PROJECT_NAME', 'paproject');
 define('DEFAULT_INSTALL_SCRIPT', 'web/install/install.php');
-define('ZEND_FRAMEWORK', 'lib/Zend');
 
 define('PA_PROJECT_ROOT_DIR', realpath(dirname(__FILE__)));
 define('PA_PROJECT_CORE_DIR', realpath(PA_PROJECT_ROOT_DIR . DIRECTORY_SEPARATOR . PA_CORE_NAME));
@@ -76,7 +75,6 @@ ini_set('include_path',
 	PA_PROJECT_PROJECT_DIR
 	. PATH_SEPARATOR . PA_PROJECT_CORE_DIR
 	. PATH_SEPARATOR . PA_PROJECT_CORE_DIR . DIRECTORY_SEPARATOR . 'ext'
-	. PATH_SEPARATOR . ZEND_FRAMEWORK
 	. PATH_SEPARATOR . ini_get('include_path')
 	);
 
