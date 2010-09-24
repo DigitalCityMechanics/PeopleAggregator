@@ -47,19 +47,12 @@
 		// @todo: look into the Zend YouTube class to use with a PHP service instaed
 		if($("#video_url").val().match(/http\:\/\/www\.youtube\.com/))
 		{
-			var url = 'http://www.youtube.com/v/';
-			if($(this).val().match(/http\:\/\/www\.youtube\.com\/v\//))
-			{
-				// http://www.youtube.com/v/xxxxxxxxxxx
-				url += $(this).val().substring(25);
-			}
-			else if($(this).val().match(/http\:\/\/www\.youtube\.com\/watch\?v\=/))
-			{
-				// http://www.youtube.com/watch?v=xxxxxxxxx
-				url += $(this).val().substring(31);
-			}
-			$('#preview').html('<object width="480" height="385"><param name="movie" value="' + url + '?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="' + url + '?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>');
-			$('#preview').css('display', 'block');
+			$.get('ajax/youtube_helper.php', { url: $("#video_url").val() },
+				function(data) {
+					$('#preview').html(data);
+					$('#preview').css('display', 'block');
+				}
+			);
 		}
 		else
 		{

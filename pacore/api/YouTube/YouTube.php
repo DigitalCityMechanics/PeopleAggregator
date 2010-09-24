@@ -68,9 +68,6 @@ class YouTube extends Zend_Gdata_YouTube {
 				$videoUrl = $youtube->findFlashUrl($entry);
 
 				if ($videoUrl !== null) {
-					if ($videoTitle !== null && $videoTitle !== '') {
-						$html .= '<p class="video-title">'.$videoTitle.'</p>'."\n";
-					}
 					$html .= '<object width="425" height="350">';
 					$html .= "\t".'<param name="movie" value="'.$videoUrl.'"></param>'."\n";
 					$html .= "\t".'<param name="allowFullScreen" value="true"></param>'."\n";
@@ -78,6 +75,9 @@ class YouTube extends Zend_Gdata_YouTube {
 					$html .= "\t".'<embed src="'.$videoUrl.'" type="application/x-shockwave-flash"'."\n";
 					$html .= "\t\t".'allowscriptaccess="always" allowfullscreen="true" width=425" height="350"></embed>'."\n";
 					$html .= '</object>'."\n";
+					if ($videoTitle !== null && $videoTitle !== '') {
+						$html .= '<p class="video-title">'.$videoTitle.'</p>'."\n";
+					}
 				}
 			}			
 		}

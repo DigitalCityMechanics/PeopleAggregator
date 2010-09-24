@@ -252,3 +252,8 @@ div#user_info li textarea.copyme {
 #modal_window .youtube .field label {
 	display: block;
 }
+
+#modal_window .youtube #preview p.video-title {
+	font-style: italic;
+	padding: 5px 0;
+}
