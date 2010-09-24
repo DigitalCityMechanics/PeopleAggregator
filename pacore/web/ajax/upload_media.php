@@ -65,9 +65,11 @@ if (!empty($_POST)) {
 		$title = (isset($_POST) && isset($_POST['video_title'])) ? $_POST['video_title'] : '';
 		$link = (isset($_POST) && isset($_POST['video_url'])) ? $_POST['video_url'] : '';
 		$embedHTML = YouTube::getEmbedHTML($link);
-		if($embedHTML != '')
+		if ($embedHTML != '')
 		{
-			$content .= '<p>'.$title.'</p>'."\n";
+			if ($title != '') {
+				$content .= '<p>'.$title.'</p>'."\n";
+			}
 			$content .= $embedHTML;
 		}
 		else
