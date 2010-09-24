@@ -9,40 +9,6 @@
 * @copyright Copyright (c) 2010 Broadband Mechanics
 * @package PeopleAggregator
 */
-	require_once('Zend/Gdata/YouTube.php');
-
-	/**
-	 * Finds the URL for the flash representation of the specified video
-	 *
-	 * @param  Zend_Gdata_YouTube_VideoEntry $entry The video entry
-	 * @return string|null The URL or null, if the URL is not found
-	 */
-	function findFlashUrl($entry)
-	{
-	    foreach ($entry->mediaGroup->content as $content) {
-	        if ($content->type === 'application/x-shockwave-flash') {
-	            return $content->url;
-	        }
-	    }
-	    return null;
-	}
-
-	$youtube = new Zend_Gdata_YouTube();
-	$videoId = 'KHLrEF9tHjw';
-	$entry = $youtube->getVideoEntry($videoId);
-    $videoTitle = $entry->mediaGroup->title;
-    $videoUrl = findFlashUrl($entry);
-
-	print <<<END
-	<p><b>$videoTitle</b></p>
-	<object width="425" height="350">
-		<param name="movie" value="${videoUrl}"></param>
-		<param name="allowFullScreen" value="true"></param>
-		<param name="allowscriptaccess" value="always"></param>
-		<embed src="${videoUrl}" type="application/x-shockwave-flash"
-			allowscriptaccess="always" allowfullscreen="true" width=425" height="350"></embed>
-	</object>
-END;
 ?>
 <div id="image_gallery_upload">
 	<form enctype="multipart/form-data" action="<?= PA::$url?>/groupmedia_post.php?type=YouTube<?php
