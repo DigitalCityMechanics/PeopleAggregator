@@ -79,7 +79,7 @@ class YouTube extends Zend_Gdata_YouTube {
 						$html .= '<p class="video-title">'.$videoTitle.'</p>'."\n";
 					}
 				}
-			}			
+			}
 		}
 
 		Logger::log("Exit: YouTube::getEmbedHTML");
