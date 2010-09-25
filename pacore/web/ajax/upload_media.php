@@ -18,6 +18,7 @@ require_once "api/Album/Album.php";
 require_once "api/Image/Image.php";
 require_once "api/Video/Video.php";
 require_once "api/Audio/Audio.php";
+require_once "api/YouTube/YouTube.php";
 require_once "web/includes/functions/auto_email_notify.php";
 require_once "api/Activities/Activities.php";
 require_once "api/api_constants.php";
@@ -62,24 +63,14 @@ if (!empty($_POST)) {
 		$content = '';
 		$gallery_link = '';
 		$title = (isset($_POST) && isset($_POST['video_title'])) ? $_POST['video_title'] : '';
-
-		// @todo: look into the Zend YouTube class to use with a PHP service instaed
 		$link = (isset($_POST) && isset($_POST['video_url'])) ? $_POST['video_url'] : '';
-		if(preg_match('/http\:\/\/www\.youtube\.com/', $link))
+		$embedHTML = YouTube::getEmbedHTML($link);
+		if ($embedHTML != '')
 		{
-			$url = 'http://www.youtube.com/v/';
-			if(preg_match('/http\:\/\/www\.youtube\.com\/v\//', $link))
-			{
-				// http://www.youtube.com/v/xxxxxxxxxxx
-				$url .= substr($link, 25);
+			if ($title != '') {
+				$content .= '<p>'.$title.'</p>'."\n";
 			}
-			elseif(preg_match('/http\:\/\/www\.youtube\.com\/watch\?v\=/', $link))
-			{
-				// http://www.youtube.com/watch?v=xxxxxxxxx
-				$url .= substr($link, 31);
-			}
-			$content .= '<p>'.$title.'</p>'."\n";
-			$content .= '<object width="480" height="385"><param name="movie" value="' . $url . '?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="' . $url . '?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>';
+			$content .= $embedHTML;
 		}
 		else
 		{
