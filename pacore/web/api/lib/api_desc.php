@@ -304,7 +304,6 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 	'args'=>array(
 		'adminPassword'=>array('type'=>'string'),
 		'login'=>array('type'=>'string'),
-		'password'=>array('type'=>'string'),
 	),
 	'type'=>'post'
 ),

@@ -557,6 +557,7 @@ function peopleaggregator_newUser($args)
 function peopleaggregator_deleteUser($args)
 {
 	$errorMessage = null;
+	$userid = null;
 	// check admin password, throw exception if it is not set
 	global $admin_password;
 	if (!$admin_password){
@@ -571,13 +572,15 @@ function peopleaggregator_deleteUser($args)
 	}
 
 	$login = $args['login'];
-	$pwd = $args['password'];
-
-	$user = new User();
-	$user = api_load_user($login, $pwd);
-
-	// Soft delete user
-	$user->delete($user->user_id, false);
+	$userid = User::user_exist($login);
+	
+	if($userid){
+		$user = new User();
+		// hard delete user
+		$user->delete($userid, true);		
+	}else{
+		throw new PAException(USER_NOT_FOUND, "User $login was not found");	
+	}
 
 	return array(
 		'success' => TRUE,
