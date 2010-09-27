@@ -109,18 +109,21 @@ class UserContributionsModule extends Module {
   
   function render() {
     global $login_uid, $page_uid;
-
-    $comment = new Comment();
-
-    $comment->parent_type = TYPE_USER;
-    $comment->parent_id = $page_uid;
-
-    $this->Paging["count"] = $comment->get_multiples_comment(TRUE);
-    $result = $comment->get_multiples_comment(FALSE,$this->Paging["show"],$this->Paging["page"]);
-
-    $this->links = $this->manage_links($result);
-    $this->inner_HTML = $this->generate_inner_html ();
-    $content = parent::render();
+	$content = null;
+	
+	if(isset($page_uid)){
+	    $comment = new Comment();
+	
+	    $comment->parent_type = TYPE_USER;
+	    $comment->parent_id = $page_uid;
+	
+	    $this->Paging["count"] = $comment->get_multiples_comment(TRUE);
+	    $result = $comment->get_multiples_comment(FALSE,$this->Paging["show"],$this->Paging["page"]);
+	
+	    $this->links = $this->manage_links($result);
+	    $this->inner_HTML = $this->generate_inner_html ();
+	    $content = parent::render();
+	}
     return $content;
   }
 
