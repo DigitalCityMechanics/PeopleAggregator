@@ -275,7 +275,7 @@ class User_Registration {
       try {
         $save_error = FALSE;
         $extra = unserialize($network_info->extra);
-        if ($mother_extra['email_validation'] == NET_NO) { // if email validation not required
+        if ($mother_extra['email_validation'] == NET_NO || $this->api_call == true) { // if email validation not required
           $this->newuser->is_active = ACTIVE;
         } else {
           $this->newuser->is_active = UNVERIFIED;
@@ -327,10 +327,9 @@ class User_Registration {
         );
         //}
         $this->newuser->save_user_profile($data_array, GENERAL);
-        if ($mother_extra['email_validation'] == NET_NO) { //if email validation is not required
+        if ($mother_extra['email_validation'] == NET_NO  || $this->api_call == true) { //if email validation is not required
           // creating message basic folders
           Message::create_basic_folders($this->newuser->user_id);
-
           // adding default relation
           if ( $this->newuser->user_id != SUPER_USER_ID ) {
             User_Registration::add_default_relation($this->newuser->user_id, $network_info);
@@ -346,8 +345,22 @@ class User_Registration {
           User_Registration::add_default_header ($this->newuser->user_id);
           // Making user member of a network if he is registering to PA from a network
           if(!empty($network_info) && ($network_info->type != PRIVATE_NETWORK_TYPE)) {
-            Network::join($network_info->network_id, $this->newuser->user_id);
-            PANotify::send("network_join", $network_info, $this->newuser, array());
+          	$user_type = null;
+          	$register_by_admin = false;
+          	if($this->api_call == true){
+          		// since this is an API call, default this member as a 
+          		// NETWORK_MEMBER since they already registered
+          		$user_type = NETWORK_MEMBER;
+          		
+          		// since this is an API call, act like it is registration by admin
+          		$register_by_admin = true;
+          	}
+            Network::join($network_info->network_id, $this->newuser->user_id, $user_type, $register_by_admin);
+            
+            if($this->api_call == false){
+            	// only send notification of network if this is NOT an API call
+            	PANotify::send("network_join", $network_info, $this->newuser, array());
+            }
           }
 
         }

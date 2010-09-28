@@ -519,6 +519,7 @@ function peopleaggregator_newUser($args)
 	}
 	// fetch network info
 	$home_network = Network::get_network_by_address($args['homeNetwork']);
+	
 	if (!$home_network){
 		//TODO: read this from AppConfig.xml
 		$home_network = "default";
@@ -549,7 +550,8 @@ function peopleaggregator_newUser($args)
 	return array(
 	'success' => TRUE,
 	'msg' => "Created a user: id=$user->user_id; login=$user->login_name; firstName=$user->first_name; lastName=$user->last_name; email=$user->email; password=$user->password; joined to network id $home_network->network_id name $home_network->address",
-	'id' => 'user:'.$user->user_id,
+	'id' => $user->user_id,
+	'network_id' => (int)$home_network->network_id
 	);
 }
 
