@@ -41,7 +41,7 @@ class NetworkModerateContentModule extends Module {
   // This function will return contents waiting for being moderated.
   private function get_links() {
     $network = new Network();
-    $condition = array('C.is_active' => MODERATION_WAITING, 'CT.name' => '"BlogPost"');
+    $condition = array('C.is_active' => MODERATION_WAITING, '!CT.name' => '"Suggestion"');
     $params['cnt'] = TRUE;
     $this->Paging["count"] = Content::load_all_content_for_moderation ($params, $condition);
     $params['cnt'] = FALSE;

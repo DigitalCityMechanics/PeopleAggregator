@@ -1219,7 +1219,11 @@ abstract class Content {
       $sql = "SELECT CT.name AS content_name, C.content_id, C.collection_id, C.title, C.body, C.type, C.author_id, C.changed, C.created, C.is_active FROM {contents} AS C, {content_types} AS CT WHERE 1 AND  CT.type_id = C.type";
       if (is_array($conditions)) {
         foreach ($conditions as $field_name => $field_value) {
-          $sql = $sql .' AND ' . $field_name .' = '.$field_value;
+          if (substr($field_name, 0, 1) == '!') {
+            $sql = $sql .' AND ' . substr($field_name, 1) .' != '.$field_value;
+          } else {
+            $sql = $sql .' AND ' . $field_name .' = '.$field_value;
+          }
         }
       }
       //paging variables if set
