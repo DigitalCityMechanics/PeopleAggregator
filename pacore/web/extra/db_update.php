@@ -11,8 +11,12 @@
 */
 ?>
 <?php
-
-require_once PA::$core_dir . "/web/extra/db_update_page.class.php";
+// if a paproject db_update.php file exists, include it instead
+if (file_exists(PA::$project_dir.'/web/extra/project_db_update_page.class.php')) {
+	require_once(PA::$project_dir.'/web/extra/project_db_update_page.class.php');
+} else {
+	require_once PA::$core_dir . "/web/extra/db_update_page.class.php";
+}
 
   $running_from_script = false;
   $is_quiet = db_update_page::check_quiet();
@@ -34,7 +38,7 @@ require_once PA::$core_dir . "/web/extra/db_update_page.class.php";
     echo "<tr><td>Update PeopleAggregator CORE database schema</td><td style='color: blue'>INFO</td></tr>";
   }
 
-  $p = new db_update_page();
+  $p = (class_exists('project_db_update_page')) ? new project_db_update_page() : new db_update_page();
   $p->main();
 
   if(!$is_quiet && $running_from_script) { ?>
