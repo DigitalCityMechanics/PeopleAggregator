@@ -534,7 +534,7 @@ class InstallTests
         switch ($this->error)
         {
         case 0:
-            $msg = 'This test passed completly. Please, press \'Next\' button.';
+            $msg = 'This test passed completely. Please, press \'Next\' button.';
             $installer->error = false;
             break;
         case 1:

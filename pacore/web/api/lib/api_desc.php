@@ -279,7 +279,8 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 
 'peopleaggregator.newUser'=>array('argstyle'=>'named',
 'return'=>array('content'=>array('msg'=>array('type'=>'string'),
-'id'=>array('type'=>'string'),
+'id'=>array('type'=>'int'),
+'network_id'=>array('type'=>'int'),
 'success'=>array('type'=>'boolean')),
 'type'=>'hash',
 'allow_extra_keys'=>0),
@@ -304,7 +305,6 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 	'args'=>array(
 		'adminPassword'=>array('type'=>'string'),
 		'login'=>array('type'=>'string'),
-		'password'=>array('type'=>'string'),
 	),
 	'type'=>'post'
 ),
