@@ -62,14 +62,10 @@ if (!empty($_POST)) {
 	case 'youtube':
 		$content = '';
 		$gallery_link = '';
-		$title = (isset($_POST) && isset($_POST['video_title'])) ? $_POST['video_title'] : '';
 		$link = (isset($_POST) && isset($_POST['video_url'])) ? $_POST['video_url'] : '';
 		$embedHTML = YouTube::getEmbedHTML($link);
 		if ($embedHTML != '')
 		{
-			if ($title != '') {
-				$content .= '<p>'.$title.'</p>'."\n";
-			}
 			$content .= $embedHTML;
 		}
 		else

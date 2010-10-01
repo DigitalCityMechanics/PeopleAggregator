@@ -23,11 +23,6 @@
 			<input name="video_url" type="text" id="video_url" class="text long" value="" />
 		</div>
 
-		<div class="field">
-			<label for="video_title"><?= __("Video title") ?></label>
-			<input type="text" name="video_title" value="" class="text long" id="video_title"  />
-		</div>
-
 		<input type="hidden" name="media_type" value="youtube" />
 		<input type="hidden" name="content_type" value="media" />
 <?php if (!empty($_REQUEST['gid'])) { ?>
