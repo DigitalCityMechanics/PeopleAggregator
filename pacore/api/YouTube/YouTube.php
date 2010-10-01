@@ -66,8 +66,15 @@ class YouTube extends Zend_Gdata_YouTube {
 			if ($entry !== null) {
 				$videoTitle = $entry->mediaGroup->title;
 				$videoUrl = $youtube->findFlashUrl($entry);
+				$description = $entry->mediaGroup->description;
 
 				if ($videoUrl !== null) {
+					if ($videoTitle !== null && $videoTitle !== '') {
+						$html .= '<p class="video-title"><a href="'.$videoUrl.'">'.$videoTitle.'</a></p>'."\n";
+					} else {
+						$html .= '<p class="video-title"><a href="'.$videoUrl.'">View video on YouTube</a></p>'."\n";
+					}
+					$html .= '<p class="video-link">'.$videoUrl.'</p>'."\n";
 					$html .= '<object width="425" height="350">';
 					$html .= "\t".'<param name="movie" value="'.$videoUrl.'"></param>'."\n";
 					$html .= "\t".'<param name="allowFullScreen" value="true"></param>'."\n";
@@ -75,9 +82,7 @@ class YouTube extends Zend_Gdata_YouTube {
 					$html .= "\t".'<embed src="'.$videoUrl.'" type="application/x-shockwave-flash"'."\n";
 					$html .= "\t\t".'allowscriptaccess="always" allowfullscreen="true" width=425" height="350"></embed>'."\n";
 					$html .= '</object>'."\n";
-					if ($videoTitle !== null && $videoTitle !== '') {
-						$html .= '<p class="video-title">'.$videoTitle.'</p>'."\n";
-					}
+					$html .= '<p class="video-description">'.$description.'</p>'."\n";
 				}
 			}
 		}

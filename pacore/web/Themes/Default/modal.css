@@ -253,7 +253,16 @@ div#user_info li textarea.copyme {
 	display: block;
 }
 
-#modal_window .youtube #preview p.video-title {
-	font-style: italic;
+#modal_window .youtube #preview p.video-title,
+#modal_window .youtube #preview p.video-link {
 	padding: 5px 0;
+}
+
+#modal_window .youtube #preview p.video-link {
+	display: none;
+	font-style: italic;
+}
+
+#modal_window .youtube #preview p.video-description {
+	display: none;
 }
