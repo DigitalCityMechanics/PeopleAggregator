@@ -68,7 +68,7 @@ class User_Registration {
   */
   function register($params, $network_info=NULL) {
      
-
+	$picture = null;
     $this->newuser = new User();
 
     // set API call variable 
@@ -96,6 +96,12 @@ class User_Registration {
       $email = trim($params['email']);
       $password = trim($params['password']);
       $confirm_password = trim($params['confirm_password']);
+      
+      if($this->api_call == true){
+      	// TODO: validate URL
+      	$picture = trim($params['profile_picture_url']);
+      }
+      
       $date_created = (!empty($params['date_created'])) ? $params['date_created'] : null;
       $_years = PA::getYearsList();
       $dob_day   = (!empty($params['dob_day']))   ? trim($params['dob_day']) : null;                         // General data (why? should be personal)
@@ -268,7 +274,13 @@ class User_Registration {
       if($date_created) {  // for users inserted via import accounts script!
        $this->newuser->created = $date_created;
       }
-      $this->newuser->picture = Storage::validateFileId(@$params['user_filename']);
+      if($this->api_call == true){
+      	if($picture != null){
+      		$this->newuser->picture = Storage::validateFileId($picture);
+      	}
+      }else{
+      	$this->newuser->picture = Storage::validateFileId(@$params['user_filename']);
+      }
     }
 
     if ($this->error != TRUE) {

@@ -290,6 +290,7 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 'login'=>array('type'=>'string'),
 'password'=>array('type'=>'string'),
 'email'=>array('type'=>'string'),
+'profilePictureURL'=>array('type'=>'string'),
 'homeNetwork'=>array('default'=>'default',
 'type'=>'string')),
 'type'=>'post'),

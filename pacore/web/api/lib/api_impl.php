@@ -443,7 +443,7 @@ function peopleaggregator_getUserProfile($args)
 
 	$user = new User();
 	$user->load($login);
-
+echo "test";exit;
 	$profile = array();
 	foreach (array(BASIC => "basic", GENERAL => "general", PERSONAL => "personal", PROFESSIONAL => "professional") as $slicekey => $slicename) {
 		$section = array();
@@ -536,6 +536,7 @@ function peopleaggregator_newUser($args)
 		'email' => $args['email'],
 		'password' => $args['password'],
 		'confirm_password' => $args['password'],
+		'profile_picture_url' => $args['profilePictureURL']
 	), $home_network)) {
 		//	header('HTTP/1.1 500 Internal Server Error');
 		return array(

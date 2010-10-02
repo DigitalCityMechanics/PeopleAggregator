@@ -834,6 +834,31 @@ class ImageResize {
     }
 
   }
+  
+ 
+  /**
+   * * Returns an image tag when an HTTP url is given. Also detects image dimensions on the fly
+   * and uses those dimensions. Does not resize image.
+   * @param $ImageURL
+   * @param $Extra_attrs
+   */
+  public static function display_image_from_url($ImageURL, $Extra_attrs = NULL){
+  	//TODO: add max image dimensions code and resize to those if bigger
+	$size = null;
+	$attributes = null;  	
+  	// TODO: look for security implications of doing this. Maybe have a "trusted domain" setting?
+	$size = getimagesize($ImageURL, $info);
+	if(isset($size)){
+		$width = $size[0];
+		$height = $size[1];
+		if(!isset($Extra_attrs)){
+			$attributes = "";	
+		}else{
+			$attributes = $Extra_attrs;
+		}
+		return '<img src="'.$ImageURL.'" style="width='.$width.';height='.$height.'" '. $attributes.' />';
+	}
+  }
 
 }
 ?>
