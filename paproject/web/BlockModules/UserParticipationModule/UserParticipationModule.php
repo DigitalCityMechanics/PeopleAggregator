@@ -12,11 +12,17 @@
 ?>
 <?php
 
+require_once "web/includes/classes/CurlRequestCreator.php";
+
 class UserParticipationModule extends Module {
 
   public $module_type = 'user|network';
   public $module_placement = 'middle';
   public $outer_template = 'outer_public_center_module.tpl';
+  
+  private $_conversations;
+  private $_issues;
+  private $_following;
 
   function __construct() {
     parent::__construct();
@@ -32,6 +38,13 @@ class UserParticipationModule extends Module {
     $this->Paging["page"] = $paging["page"];
     $this->Paging["show"] = 3;
     $this->title = "Participating In...";
+    
+  	if(!empty($this->shared_data['user_info'])) {
+      $this->user = $this->shared_data['user_info'];
+      $this->uid = $this->user->user_id;      
+    } else {
+      return 'skip';
+    }    
   }
   
   function handleRequest($request_method, $request_data) {
@@ -111,6 +124,19 @@ class UserParticipationModule extends Module {
 		global $login_uid, $page_uid;
 		$content = null;
 		if(isset($page_uid)){
+			
+			$this->_conversations = $this->get_conversations_data($this->user->login_name);
+			if(count($this->_conversations) == 0){
+				$this->_conversations[] = array('title'=>'No conversations', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);	
+			}
+			
+			if(count($this->_issues) == 0){
+				$this->_issues[] = array('title'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);	
+			}
+			if(count($this->_following) == 0){
+				$this->_following[] = array('title'=>'Not following any conversations or issues', 'summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);	
+			}
+			
 			$comment = new Comment();
 	
 			$comment->parent_type = TYPE_USER;
@@ -131,7 +157,10 @@ class UserParticipationModule extends Module {
     $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/center_inner_public.tpl';
 
     $inner_html_gen = new Template($tmp_file);
-
+	$inner_html_gen->set('conversations', $this->_conversations);
+	$inner_html_gen->set('issues', $this->_issues);	
+	$inner_html_gen->set('following', $this->_following);
+	
     $inner_html_gen->set('links', $this->links);
     $Pagination = new Pagination;
     $Pagination->setPaging($this->Paging);
@@ -145,6 +174,21 @@ class UserParticipationModule extends Module {
 
     $inner_html = $inner_html_gen->fetch();
     return $inner_html;
+  }
+  
+  /**
+   * Get Conversations data.    
+   * @param $User_id
+   */
+  function get_conversations_data($User_id){
+  	//TODO: throw exceptions and check for bad error codes
+  	//TODO: put URL in App_Config.xml
+  	if(isset($User_id)){  		  	
+		$request = new CurlRequestCreator("http://staging.theciviccommons.com/api/$User_id/conversations", true, 30, 4, false, true, false);	
+		$request->createCurl();		
+		return $request->getJSONResponse();
+  	}
+  	return null;  	  	  
   }
 
   function manage_links($links) {
