@@ -25,6 +25,7 @@ div.participation div.below {
 	clear:both;
 	padding:5px;
 }
+div.tab-links{text-align:right;}
 </style>
 
 <?php global  $login_uid;?>
@@ -51,6 +52,9 @@ div.participation div.below {
 			</div>
 		</div>
 	<?php } // end foreach ?>
+		<div class="tab-links">
+			<a href="http://staging.theciviccommons.com/conversations">View All</a>
+		</div>
 	</div>
 <?php } // end if ?>	
 
@@ -68,8 +72,11 @@ div.participation div.below {
 			<div class="below">
 				<a href="#"><?php echo $issue['participant_count']; ?> Participants</a> | <a href="#"><?php echo $issue['contribution_count']; ?> Contributions</a>
 			</div>
-		</div>
+		</div>		
 	<?php } // end foreach ?>
+		<div class="tab-links">
+			<a href="http://staging.theciviccommons.com/issues">View All</a>
+		</div>
 	</div>
 <?php } // end if ?>	
 
@@ -89,60 +96,9 @@ div.participation div.below {
 			</div>
 		</div>
 	<?php } // end foreach ?>
+		<div class="tab-links">
+			<a href="http://staging.theciviccommons.com/following">View All</a>
+		</div>
 	</div>
 <?php } // end if ?>	
   </div>	
-  <?php /*
-		Here begins the code copied from the Testimonials Module. I will leave it here because perhaps it will provide insight into
-		the way to write the module so that it actually pulls down the data.	-Tom
-
-  $cnt = count($links);
-  if (  $cnt > 0) { ?>
-  
-      <div class="group_list">
-        <table cellspacing="0" cellpadding="0">
-        <? for ($i=0; $i < $cnt; $i++) {
-          $pic = $links[$i]['picture'];?>         
-            <tr>
-              
-              <td align="center" valign="top" width="80">
-                <a href="<?php echo $links[$i]['hyper_link'];?>"><?= uihelper_resize_mk_img($pic, 60, 55, DEFAULT_USER_PHOTO_REL, 'alt="sender"', RESIZE_CROP) ?></a>
-              </td>
-              
-              <td valign="top" width="415">
-              <b><a href="<?php echo $links[$i]['hyper_link'];?>"><?php echo $links[$i]['user_name'];?> said:</a><br />
-              
-
-               <?php echo stripslashes($links[$i]['comment']); ?>
-                
-                <div class="post_info">
-                   <?php 
-                     if(!empty($links[$i]['delete_link'])) { 
-                     ?>
-                     <div id="buttonbar">
-                       <ul>
-                           <li>
-                             <a href="<?php echo $links[$i]['delete_link'];?>"><?= __("Delete") ?></a>
-                           </li>
-                       </ul>
-                     </div>  
-                    <? }
-                   ?>
- 
-                 </div>
-              </td>
-                   
-               <td align="center" valign="top">
-               </td>
-       </tr>
-            
-      <? } ?>
-      </table>
-    </div>
-    <?  } */ /* if( $page_links ) {?>
-   <div class="prev_next">
-     <?php if ($page_first) { echo $page_first; }?>
-     <?php echo $page_links?>
-     <?php if ($page_last) { echo $page_last;}?>
-   </div>
-  <?php } */ ?>

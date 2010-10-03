@@ -13,10 +13,10 @@
 
 /**
  * Usage:
-	 $request = new CurlRequestCreator("http://www.othersite.com/exposed_REST_api", true, 30, 4, false, true, false);
-	 $request->setGet(array("var1"=>"value1", "var2"=>"value2"));
-	 $request->createCurl();
-	 $jsonResponseData = $request->getJSONResponse();
+ $request = new CurlRequestCreator("http://www.othersite.com/exposed_REST_api", true, 30, 4, false, true, false);
+ $request->setGet(array("var1"=>"value1", "var2"=>"value2"));
+ $request->createCurl();
+ $jsonResponseData = $request->getJSONResponse();
  */
 ?>
 <?php
@@ -62,14 +62,14 @@ class CurlRequestCreator {
 	 * Returns response header only.
 	 */
 	public function getResponseHeader(){
-		echo $this->_header;
+		return $this->_header;
 	}
 
 	/**
 	 * Returns response body only.
 	 */
 	public function getResponseBody(){
-		echo $this->_body;
+		return $this->_body;
 	}
 
 
@@ -208,12 +208,12 @@ class CurlRequestCreator {
 
 			$this->_response = curl_exec($s);
 			$this->_status = curl_getinfo($s,CURLINFO_HTTP_CODE);
-			 
+
 			list($this->_header, $this->_body) = explode("\r\n\r\n", $this->_response, 2);
-				
+
 			//get the default response headers
 			$this->response_header_array = curl_getinfo($s);
-				
+
 			if($this->debugMode == true){
 				print "<pre>\n";
 				print_r($this->response_header_array);  // get error info
@@ -221,12 +221,12 @@ class CurlRequestCreator {
 				echo "\n\ncURL error:" . curl_error($s);
 				print "</pre>\n";
 			}
-				
+
 			curl_close($s); // close curl session
 		}catch(Exception $ex){
 			throw $ex;
 		}
-
+		return $this->_status;
 	}
 
 
