@@ -686,6 +686,8 @@ class BootStrap {
 			
 			$pal = new PA_Login();
 		    $pal->log_in($user->user_id, false, $referer);
+		    // Set authToken as a session variable so that it can be accessed anywhere
+		    $_SESSION['authToken'] = $authToken;
           }                             
         } catch (Exception $e) {
           if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED))) {
