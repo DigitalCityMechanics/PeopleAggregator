@@ -261,7 +261,7 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 'success'=>array('type'=>'boolean'),
 'url'=>array('type'=>'string'),
 'login'=>array('type'=>'string'),
-'id'=>array('type'=>'string')),
+'id'=>array('type'=>'int')),
 'type'=>'hash',
 'allow_extra_keys'=>0),
 'args'=>array('login'=>array('type'=>'string')),
