@@ -93,7 +93,7 @@ class UserContributionsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = "http://staging.theciviccommons.com/api/$User_id/conversations";
+			$url = "http://staging.theciviccommons.com/api/$User_id/contributions";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
 			if($responseStatus == 200){				
