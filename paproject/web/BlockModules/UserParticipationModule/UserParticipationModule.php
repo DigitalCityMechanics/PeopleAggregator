@@ -40,8 +40,6 @@ class UserParticipationModule extends Module {
 	public function initializeModule($request_method, $request_data)  {
 		global $paging;
 
-		$this->Paging["page"] = $paging["page"];
-		$this->Paging["show"] = 3;
 		$this->title = "Participating In...";
 
 		if(!empty($this->shared_data['user_info'])) {
