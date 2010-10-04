@@ -470,7 +470,7 @@ function peopleaggregator_getUserProfile($args)
 	return array(
         'success' => TRUE,
         'login' => $user->login_name,
-        'id' => "user:".$user->user_id,
+        'id' => $user->user_id,
         'url' => PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $user->user_id,
         'name' => "$user->firstName $user->lastName",
 	      'profile' => $profile,
@@ -528,15 +528,16 @@ function peopleaggregator_newUser($args)
 	// register the user
 	$reg = new User_Registration();
 	$reg->api_call = true;    // api_call indicates that this is a PeopleAggregator API request
-	if (!$reg->register(
-	array(
+	$newUserData = array(
 		'login_name' => $args['login'],
 		'first_name' => $args['firstName'],
 		'last_name' => $args['lastName'],
 		'email' => $args['email'],
 		'password' => $args['password'],
 		'confirm_password' => $args['password'],
-	), $home_network)) {
+		'profile_picture_url' => $args['profilePictureURL']
+	);
+	if (!$reg->register($newUserData, $home_network)) {
 		//	header('HTTP/1.1 500 Internal Server Error');
 		return array(
 	    'success' => FALSE,

@@ -546,7 +546,7 @@ class User {
       if(!is_valid_web_image_name($this->picture)) { // fix invalid image names
         $this->picture = '';
         Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(SAVING_DELETED_USER,"Invalid image format");
+        throw new PAException(INVALID_FILE,"Invalid image format");
       }
       // added to remove unnecessary check whether the word begins or ends with a 'space' character
       $this->first_name = @trim($this->first_name);

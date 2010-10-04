@@ -36,10 +36,13 @@ function uihelper_preprocess_pic_path($pic) {
 function uihelper_resize_mk_user_img($user_or_picture, $max_x, $max_y, $extra_attrs="") {
 
 // checking that whether this image is Animated or not if this image is animated than make it still image
-
-    $pic = ($user_or_picture instanceof User) ? $user_or_picture->picture : $user_or_picture;
-
-    return ImageResize::resize_mk_img("web", PA::$url, "files/rsz", $max_x, $max_y, uihelper_preprocess_pic_path($pic), DEFAULT_USER_PHOTO_REL, NULL, $extra_attrs, RESIZE_CROP);
+	if (preg_match("|^http://|", $user_or_picture)) {
+	   return ImageResize::display_image_from_url($user_or_picture);
+	}else{
+		$pic = ($user_or_picture instanceof User) ? $user_or_picture->picture : $user_or_picture; 
+		
+    	return ImageResize::resize_mk_img("web", PA::$url, "files/rsz", $max_x, $max_y, uihelper_preprocess_pic_path($pic), DEFAULT_USER_PHOTO_REL, NULL, $extra_attrs, RESIZE_CROP);
+	}
 }
 
 // Resize an image from web/files or Storage and return an <img> tag
