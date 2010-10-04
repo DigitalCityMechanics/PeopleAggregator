@@ -219,7 +219,7 @@ class Group extends ContentCollection {
 
        if (!$access) {
 
-         throw new PAException(OPERATION_NOT_PERMITTED, 'You are not authorised to edit this group.');
+         throw new PAException(OPERATION_NOT_PERMITTED, 'You are not authorized to edit this group.');
        }
 
        $sql = "UPDATE {groups} SET access_type = ?, reg_type = ?, is_moderated = ?, category_id = ? , header_image = ? , header_image_action = ?, display_header_image = ?, group_type =?, extra=? WHERE group_id = ?";
