@@ -109,9 +109,10 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
         }
         break;
     case 'enum':
-        if (!in_array($v, $desc['values']))
+        if (!in_array($v, $desc['values'])){
         	header('HTTP/1.1 412 Precondition Failed');
             api_error("Validation error ($context, $path): '$v' is not a valid enumeration value at position '$path'");
+		}
         break;
     case 'int':
     	$mi = null;
@@ -132,15 +133,17 @@ function validate_content(&$v, $desc, $context, $src_encoding, $convert_output=f
         $v = api_force_utf8($v, $src_encoding);
         break;
     case 'date':
-	if (!($v instanceof IXR_Date))        
+	if (!($v instanceof IXR_Date)){
         header('HTTP/1.1 412 Precondition Failed');
 	    api_error("Validation error ($context, $path): '$v' must be an IXR_Date object");
+	}
 	$v = $v->year.'-'.$v->month.'-'.$v->day;
 	break;
     case 'datetime':
-	if (!($v instanceof IXR_Date))        
+	if (!($v instanceof IXR_Date)){
         header('HTTP/1.1 412 Precondition Failed');
 	    api_error("Validation error ($context, $path): '$v' must be an IXR_Date object");
+	}
 	$v = $v->getIso();
 	break;
     }
