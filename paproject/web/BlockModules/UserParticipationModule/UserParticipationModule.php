@@ -57,19 +57,10 @@ class UserParticipationModule extends Module {
 		if(isset($page_uid)){
 
 			$this->_conversations = $this->get_conversations_data($this->user->login_name);
-			if(count($this->_conversations) == 0){
-				$this->_conversations[] = array('title'=>'No conversations', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);
-			}
-
+				
 			$this->_issues = $this->get_issues_data($this->user->login_name);
-			if(count($this->_issues) == 0){
-				$this->_issues[] = array('title'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);
-			}
-			
+				
 			$this->_following = $this->get_following_data($this->user->login_name);
-			if(count($this->_following) == 0){
-				$this->_following[] = array('title'=>'Not following any conversations or issues', 'summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);
-			}
 
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
@@ -105,12 +96,21 @@ class UserParticipationModule extends Module {
 		if(isset($User_id)){
 			$url = "http://staging.theciviccommons.com/api/$User_id/conversations";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$responseStatus = $request->createCurl();			
-			if($responseStatus == 200){				
-				return $request->getJSONResponse();
+			$responseStatus = $request->createCurl();
+			$defaultResult = array('title'=>'No conversations', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);
+			if($responseStatus == 200){
+				$jsonResults = $request->getJSONResponse();
+				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else{
+					// only show the first 3 conversations
+					$newArray = array_splice($jsonResults, 1, 3);
+					$jsonResults = $newArray;
+				}				
+				return $jsonResults;
 			}else{
-    			Logger::log("UserParticipationModule.get_conversations_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
-				return null;
+				Logger::log("UserParticipationModule.get_conversations_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);
+				return array($defaultResult);
 			}
 		}
 		return null;
@@ -131,12 +131,21 @@ class UserParticipationModule extends Module {
 		if(isset($User_id)){
 			$url = "http://staging.theciviccommons.com/api/$User_id/issues";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$responseStatus = $request->createCurl();			
-			if($responseStatus == 200){				
-				return $request->getJSONResponse();
+			$responseStatus = $request->createCurl();
+			$defaultResult = array('name'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);
+			if($responseStatus == 200){
+				$jsonResults = $request->getJSONResponse();
+				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else{
+					// only show the first 3 conversations
+					$newArray = array_splice($jsonResults, 1, 3);
+					$jsonResults = $newArray;
+				}				
+				return $jsonResults;
 			}else{
-    			Logger::log("UserParticipationModule.get_issues_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
-				return null;
+				Logger::log("UserParticipationModule.get_issues_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);
+				return array($defaultResult);
 			}
 		}
 		return null;
@@ -157,12 +166,21 @@ class UserParticipationModule extends Module {
 		if(isset($User_id)){
 			$url = "http://staging.theciviccommons.com/api/$User_id/following";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$responseStatus = $request->createCurl();			
-			if($responseStatus == 200){				
-				return $request->getJSONResponse();
+			$responseStatus = $request->createCurl();
+			$defaultResult = array('title'=>'Not following any conversations or issues', 'summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);
+			if($responseStatus == 200){
+				$jsonResults = $request->getJSONResponse();
+				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else{
+					// only show the first 3 conversations
+					$newArray = array_splice($jsonResults, 1, 3);
+					$jsonResults = $newArray;
+				}				
+				return $jsonResults;
 			}else{
-    			Logger::log("UserParticipationModule.get_following_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
-				return null;
+				Logger::log("UserParticipationModule.get_following_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);
+				return array($defaultResult);
 			}
 		}
 		return null;
