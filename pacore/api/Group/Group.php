@@ -1053,8 +1053,13 @@ class Group extends ContentCollection {
                                   $picture, // filename / url of a picture
                                   $group_tags, // comma-separated tag list
                                   $group_category, // category id
-                                  $access = 0, $reg = 0, $is_mod = 0,
-				  $header_image = "", $header_image_action = NULL, $display_header_image = NULL, $extra = NULL) {
+                                  $access = 0,
+                                  $reg = 0,
+                                  $is_mod = 0,
+                                  $header_image = "",
+                                  $header_image_action = NULL,
+                                  $display_header_image = NULL,
+                                  $extra = NULL) {
     if (empty($title)) {
       throw new PAException(GROUP_PARAMETER_ERROR, "Please fill in the name of the group");
     }
@@ -1091,6 +1096,39 @@ class Group extends ContentCollection {
 
     return $group_id;
   }
+
+  public static function save_new_org ($ccid, // content collection id
+                                  $uid, // user who created the group
+                                  $title, // group name
+                                  $body, // group description
+                                  $picture, // filename / url of a picture
+                                  $group_tags, // comma-separated tag list
+                                  $group_category, // category id
+                                  $access = 0,
+                                  $reg = 0,
+                                  $is_mod = 0,
+                                  $header_image = "",
+                                  $header_image_action = NULL,
+                                  $display_header_image = NULL,
+                                  $extra = NULL,
+                                  $group_type = 'organization') {
+    // save a new group
+    $groupID = self::save_new_group ($ccid, $uid, $title, $body, $picture, $group_tags,
+      $group_category, $access, $reg, $is_mod, $header_image, $header_image_action,
+      $display_header_image, $extra);
+
+    // change it's type to an org
+    TypedGroupEntity::sync(
+      array(
+        'type' => $group_type,
+        'name' => $title,
+        'group_id' => $groupID
+      )
+	);
+
+	return $groupID;
+  }
+
      /**
    * get number of groups in the system
    * @access public
