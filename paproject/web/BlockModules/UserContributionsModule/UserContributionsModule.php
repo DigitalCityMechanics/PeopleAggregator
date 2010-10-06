@@ -51,14 +51,7 @@ class UserContributionsModule extends Module {
 		if(isset($page_uid)){
 
 			$this->_contributions = $this->get_contributions_data($this->user->login_name);
-			if(count($this->_contributions) == 0){
-				$this->_contributions[] = array('title'=>'No contributions', 'summary'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
-			}
-
 			$this->_thoughts = $this->get_thoughts_data($this->user->login_name);
-			if(count($this->_thoughts) == 0){
-				$this->_thoughts[] = array('title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.');
-			}
 			
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
@@ -95,12 +88,21 @@ class UserContributionsModule extends Module {
 		if(isset($User_id)){
 			$url = "http://staging.theciviccommons.com/api/$User_id/contributions";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
+			$defaultResult = array('title'=>'No contributions', 'summary'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
 			$responseStatus = $request->createCurl();
-			if($responseStatus == 200){				
-				return $request->getJSONResponse();
+			if($responseStatus == 200){
+				$jsonResults = $request->getJSONResponse();
+				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else{
+					// only show the first 3 conversations
+					$newArray = array_splice($jsonResults, 1, 3);
+					$jsonResults = $newArray;
+				}				
+				return $jsonResults;
 			}else{
     			Logger::log("UserContributionsModule.get_contributions_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
-				return null;
+				return array($defaultResult);
 			}
 		}
 		return null;
@@ -112,7 +114,7 @@ class UserContributionsModule extends Module {
 	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
 	 */
 	function get_thoughts_data($User_id){		
-		return null;
+		return array(array('title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
 	}
 }
 ?>

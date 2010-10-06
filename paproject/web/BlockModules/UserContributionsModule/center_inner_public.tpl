@@ -37,7 +37,7 @@ div.participation div.below {
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($contribution['image'])){ ?>
-					<img src="<?php echo $contribution['image']; ?>" alt="contribution image"/>
+					<img src="<?php echo $contribution['image']; ?>" alt="contribution image" style="width:120px;height:80px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $contribution['title']; ?></a></h2>
 				<p><?php echo $contribution['summary']; ?></p>
@@ -58,7 +58,7 @@ div.participation div.below {
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($thought['image'])){ ?>
-					<img src="<?php echo $thought['image']; ?>" alt="thought image"/>
+					<img src="<?php echo $thought['image']; ?>" alt="thought image" style="width:120px;height:80px;" />
 				<?php } ?>
 				<h2><a href="#"><?php echo $thought['title']; ?></a></h2>
 				<p><?php echo $thought['summary']; ?></p>

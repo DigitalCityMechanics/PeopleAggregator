@@ -42,7 +42,7 @@ div.tab-links{text-align:right;}
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($conversation['image'])){ ?>
-					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image"/>
+					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:120px;height:80px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $conversation['title']; ?></a></h2>
 				<p><?php echo $conversation['summary']; ?></p>
@@ -64,9 +64,9 @@ div.tab-links{text-align:right;}
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($issue['image'])){ ?>
-					<img src="<?php echo $issue['image']; ?>" alt="Issue image"/>
+					<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:120px;height:80px;"/>
 				<?php } ?>
-				<h2><a href="#"><?php echo $issue['title']; ?></a></h2>
+				<h2><a href="#"><?php echo $issue['name']; ?></a></h2>
 				<p><?php echo $issue['summary']; ?></p>
 			</div>
 			<div class="below">
@@ -86,7 +86,7 @@ div.tab-links{text-align:right;}
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($followed['image'])){ ?>
-					<img src="<?php echo $followed['image']; ?>" alt="Following image"/>
+					<img src="<?php echo $followed['image']; ?>" alt="Following image" style="width:120px;height:80px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $followed['title']; ?></a></h2>
 				<p><?php echo $followed['summary']; ?></p>
