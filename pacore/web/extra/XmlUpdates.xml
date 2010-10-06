@@ -154,4 +154,11 @@
 		</PAGE_NETWORK_MANAGE_SUGGESTIONS>
     </node_value> 
   </add>
+	<add>
+		<node_value path="//configuration/pages/value" descr="adding PAGE_GROUP_POLL entry">
+			<PAGE_GROUP_POLL category="constant" type="int" readonly="true" section="pages" page_name="Group Pollss" page_type="group">
+				<value>110</value>
+			</PAGE_GROUP_POLL>
+		</node_value> 
+	</add>
 </updates>
