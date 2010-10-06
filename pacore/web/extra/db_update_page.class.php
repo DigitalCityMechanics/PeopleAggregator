@@ -83,13 +83,13 @@ class db_update_page
                                  "INSERT IGNORE INTO {tasks_roles} (`task_id`, `role_id`) VALUES (".$task_id.", ".$child_role['id'].");"
                                 );
        }
-
+/*
 		require_once('api/Suggestion/Suggestion.php');
 		$this->qup(
 			'2010-09-14, by: Jonathan Knapp - adding Suggestion content_type',
 			'INSERT INTO {content_types} (type_id, name, description) VALUES ('.Suggestion::TYPE_ID.', "'.Suggestion::TYPE_NAME.'", "'.Suggestion::TYPE_DESCRIPTION.'")'
 		);
-
+*/
         $this->run_xml_updates();
         run_net_extra();
     }//__endof__ do_updates
