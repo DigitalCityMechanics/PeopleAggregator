@@ -147,6 +147,7 @@
             </group_bulletin_sent>
     </node_value> 
   </add>
+<!--
   <add>
     <node_value path="//configuration/pages/value" descr="adding PAGE_NETWORK_MANAGE_SUGGESTIONS entry">
       	<PAGE_NETWORK_MANAGE_SUGGESTIONS category="constant" type="int" readonly="true" section="pages" page_name="network_manage_suggestions" page_type="network">
@@ -161,4 +162,5 @@
 			</PAGE_GROUP_POLL>
 		</node_value> 
 	</add>
+-->
 </updates>
