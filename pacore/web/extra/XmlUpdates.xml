@@ -42,7 +42,7 @@
       </PAGE_FAMILY_MODERATION>
     </node_value> 
   </add>
-  
+<!--
   <add>
     <node_value path="//configuration/pages/value" descr="adding PAGE_POLL_ARCHIVE entry">
         <PAGE_POLL_ARCHIVE category="constant" type="int" readonly="true" section="pages" page_name="Poll Archive" page_type="network">
@@ -50,7 +50,7 @@
         </PAGE_POLL_ARCHIVE>
     </node_value> 
   </add>
-  
+-->
   <add>
     <node_value path="//notify_members/value" descr="adding Notification choice for User2User messages">
               <user_send_message>
