@@ -301,16 +301,16 @@ class InstallTests
            }
          }
       } else {
-         if((!empty($params['mysql_root_username'])) && (!empty($params['mysql_root_password']))) {
+         if((!empty($params['mysql_root_username']))) {
             // if we have root credentials we will try to create database - so, no exit yet!
-           $this->note("Unable to connect to the MySQL server using the supplied login details", 'warn');
+           $this->note("It is recommended to have a password on the root user's account", 'warn');
          } else {
            $this->note("Unable to connect to the MySQL server using the supplied login details", 'error');
            return false;
          }
       }
 
-      if(!$user_link && !$user_db && (!empty($params['mysql_root_username'])) && (!empty($params['mysql_root_password']))) {
+      if(!$user_link && !$user_db && (!empty($params['mysql_root_username']))) {
         $this->note("Trying administrator login...");
         $admin_link = @mysql_connect($params['db_host'], $params['mysql_root_username'], $params['mysql_root_password']);
 
