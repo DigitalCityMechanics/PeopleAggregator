@@ -599,7 +599,7 @@ INSERT INTO `content_types` (`type_id`, `name`, `description`) VALUES
 (8, 'Question', 'Question'),
 (12, 'TekVideo', 'TekVideo'),
 (13, 'Suggestion', 'A queued message from users to admins'),
-(14, 'Conversation', 'A conversation created for Civic Commons');
+(14, 'Contribution', 'A contribution created for Civic Commons');
 
 -- --------------------------------------------------------
 

@@ -15,14 +15,14 @@ require_once "api/BlogPost/BlogPost.php";
 require_once "api/DB/Dal/Dal.php";
 
 /**
- * A special kind of BlogPost, this class is for user Conversations.
+ * A special kind of BlogPost, this class is for CC user Contributions in PA.
  * @extends BlogPost
  */
-class Conversation extends BlogPost {
+class Contribution extends BlogPost {
 
 	const TYPE_ID = 14;
-	const TYPE_NAME = 'Conversation';
-	const TYPE_DESCRIPTION = 'A conversation created for Civic Commons';
+	const TYPE_NAME = 'Contribution';
+	const TYPE_DESCRIPTION = 'A contribution created for Civic Commons';
 
 	/**
 	 * class Content::__construct
@@ -32,7 +32,7 @@ class Conversation extends BlogPost {
 		$this->type = self::TYPE_ID;
 	}
 
-	public static function save_conversation ($cid, $uid, $title, $body, $track, $tags, $ccid = 0, $is_active = 1, $display_on = 0, $is_default_content = FALSE) {
+	public static function save_contribution ($cid, $uid, $title, $body, $track, $tags, $ccid = 0, $is_active = 1, $display_on = 0, $is_default_content = FALSE) {
 		// global var $path_prefix has been removed - please, use PA::$path static variable
 
 		$errors = array();
@@ -50,7 +50,7 @@ class Conversation extends BlogPost {
 			// ContentCollections.
 			$ccid = (int)$post->parent_collection_id;
 		} else {
-			$post = new Conversation();
+			$post = new Contribution();
 			$post->author_id = $uid;
 			if ($ccid) {
 				$post->parent_collection_id = $ccid;
