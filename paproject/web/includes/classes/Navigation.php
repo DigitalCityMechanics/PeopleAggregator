@@ -295,11 +295,14 @@ class Navigation {
                        'community' => array('caption'=> __('Community'),
                                   'url'=>'#'
 		),
-                       'people' => array('caption'=> __(PA::$people_noun),
-                                  'url'=>$this->base_url . PA_ROUTE_PEOPLES_PAGE
+                       'people' => array('caption'=> __('People'),
+                                  'url'=>$this->base_url . CC_ROUTE_PEOPLE
+		),
+                       'organizations' => array('caption'=> __('Organizations'),
+                                  'url'=>$this->base_url . CC_ROUTE_ORGANIZATIONS
 		),
                        'groups' => array('caption'=> __('About Us'),
-                                  'url'=>$this->base_url . CC_ROUTE_ABOUT
+                                  'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT
 		),
 		);
 		////END OF These are level 2 links shown in second navigation bar
