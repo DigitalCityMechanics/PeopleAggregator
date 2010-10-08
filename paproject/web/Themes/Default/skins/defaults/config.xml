@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <name>Default Theme</name> 
+  <previewImage>preview.gif</previewImage>
+  <networkCssFile>screen.css</networkCssFile>
+  <groupCssFile>screen.css</groupCssFile>
+  <userCssFile>screen.css</userCssFile>
+  <headerImage>header_net.gif</headerImage>
+  <userheaderImage>header_user.gif</userheaderImage>
+  <groupheaderImage>header_group.gif</groupheaderImage>
+  <headerImageOk>no</headerImageOk>
+</config>

@@ -239,7 +239,7 @@ class Navigation {
 	 @return - it sets class variables level_1,level_2,level_3 which can be used further.
 	 **/
 	function make_links() {
-		 
+			
 
 		$user_id = (isset($_SESSION['user']['id'])) ? $_SESSION['user']['id'] : 0;
 		////These are level 1 links shown in top navigation bar
@@ -293,15 +293,17 @@ class Navigation {
                                   'url'=>CC_APPLICATION_URL . CC_ROUTE_ISSUES
 		),
                        'community' => array('caption'=> __('Community'),
-                                  'url'=>'#'
+                                  'sublinks'=>array(
+							                       'people' => array('caption'=> __('People'),
+							                                  'url'=>$this->base_url . CC_ROUTE_PEOPLE
+													),
+							                       'organizations' => array('caption'=> __('Organizations'),
+							                                  'url'=>$this->base_url . CC_ROUTE_ORGANIZATIONS
+													),
+			
+									)
 		),
-                       'people' => array('caption'=> __('People'),
-                                  'url'=>$this->base_url . CC_ROUTE_PEOPLE
-		),
-                       'organizations' => array('caption'=> __('Organizations'),
-                                  'url'=>$this->base_url . CC_ROUTE_ORGANIZATIONS
-		),
-                       'groups' => array('caption'=> __('About Us'),
+                       'about' => array('caption'=> __('About Us'),
                                   'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT
 		),
 		);
@@ -724,7 +726,7 @@ class Navigation {
                                              $level_3 = array('user'=>@$user_children,
                                              'community'=>array( 'orgs' => array('caption'=>__('Orgs'),
                                   'url'=>$this->base_url . PA_ROUTE_USER_PRIVATE)),
-                                             
+                                              
                          'people'=>@$people_children,
                          'family'=>@$family_children,
                          'groups'=>$groups_children,
