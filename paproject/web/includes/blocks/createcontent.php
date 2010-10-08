@@ -112,7 +112,9 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
             if(!isset($query_args['link'])) {
               $query_args['link'] = PA::$url.'/content/cid='.$r['cid'];
             }
-            $redirect = $url_parts['scheme'].'://'.$url_parts['host'].$url_parts['path'].'?'.http_build_query($query_args);
+            $redirect = $url_parts['scheme'].'://'.$url_parts['host'];
+			$redirect .= (isset($url_parts['port']) && $url_parts['port'] != '' && $url_parts['port'] != '80') ? ':'.$url_parts['port'] : '';
+			$redirect .= $url_parts['path'].'?'.http_build_query($query_args);
 		  }
           break;
 
@@ -215,7 +217,9 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 	          if(!isset($query_args['link'])) {
               $query_args['link'] = PA::$url.'/content/cid='.$post_saved['cid'];
 	          }
-	          $redirect = $url_parts['scheme'].'://'.$url_parts['host'].$url_parts['path'].'?'.http_build_query($query_args);
+	          $redirect = $url_parts['scheme'].'://'.$url_parts['host'];
+			  $redirect .= (isset($url_parts['port']) && $url_parts['port'] != '' && $url_parts['port'] != '80') ? ':'.$url_parts['port'] : '';
+			  $redirect .= $url_parts['path'].'?'.http_build_query($query_args);
 		    }
 		    break;
 
