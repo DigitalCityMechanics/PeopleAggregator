@@ -15,7 +15,7 @@
 //variable for Blog save should be according to criteria specified
 
 require_once "api/BlogPost/BlogPost.php";
-require_once "api/Conversation/Conversation.php";
+require_once "api/Contribution/Contribution.php";
 require_once "api/Suggestion/Suggestion.php";
 require_once "web/includes/functions/auto_email_notify.php";
 require_once "api/Activities/Activities.php";
@@ -34,7 +34,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
   $data_array["blog_title"] = trim($_POST["blog_title"]);
 
   filter_all_post($_POST);
-  $valid_post_types = array('BlogPost', 'Conversation', 'Suggestion');
+  $valid_post_types = array('BlogPost', 'Contribution', 'Suggestion');
   $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
     ? $_POST['blog_type'] : 'BlogPost';
 
@@ -100,8 +100,8 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
           $r = BlogPost::save_blogpost($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
           break;
 
-        case 'Conversation':
-          $r = Conversation::save_conversation($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
+        case 'Contribution':
+          $r = Contribution::save_contribution($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
           break;
 
         case 'Suggestion':
@@ -191,8 +191,8 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 			$post_saved = BlogPost::save_blogpost(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
 		    break;
 
-		case 'Conversation':
-			$post_saved = Conversation::save_conversation(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
+		case 'Contribution':
+			$post_saved = Contribution::save_contribution(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
 		    break;
 
 		case 'Suggestion':

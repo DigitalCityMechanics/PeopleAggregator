@@ -26,7 +26,7 @@ install_tinymce('full');
     <select name="blog_type" id="blog_type">
 		<option<?php echo ($blog_type == 'BlogPost') ? ' selected="selected"' : ''; ?> value="BlogPost">BlogPost</option>
 		<option<?php echo ($blog_type == 'Suggestion') ? ' selected="selected"' : ''; ?> value="Suggestion">Suggestion</option>
-		<option<?php echo ($blog_type == 'Conversation') ? ' selected="selected"' : ''; ?> value="Conversation">Conversation</option>
+		<option<?php echo ($blog_type == 'Contribution') ? ' selected="selected"' : ''; ?> value="Contribution">Contribution</option>
 	</select>
   </div>
   <div class="field" >

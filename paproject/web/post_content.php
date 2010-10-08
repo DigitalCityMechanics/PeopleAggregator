@@ -18,7 +18,7 @@ include_once("web/includes/page.php");
 
 require_once "api/Cache/Cache.php";
 require_once "api/Album/Album.php";
-require_once "api/Conversation/Conversation.php";
+require_once "api/Contribution/Contribution.php";
 require_once "api/Suggestion/Suggestion.php";
 // require_once "web/includes/functions/auto_email_notify.php";
 require_once "api/Messaging/MessageDispatcher.class.php";
@@ -84,7 +84,7 @@ function route2groups() {
   $tags = array_unique($tags);
   $net_owner = new User();
   $net_owner->load((int)PA::$network_info->owner_id);
-  $valid_post_types = array('BlogPost', 'Conversation', 'Suggestion');
+  $valid_post_types = array('BlogPost', 'Contribution', 'Suggestion');
   $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
     ? $_POST['blog_type'] : 'BlogPost';
 
@@ -120,8 +120,8 @@ function route2groups() {
             $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
             break;
 
-          case 'Conversation':
-            $res = Conversation::save_conversation(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+          case 'Contribution':
+            $res = Contribution::save_contribution(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
             break;
 
           case 'Suggestion':
@@ -173,8 +173,8 @@ function route2groups() {
             $res = BlogPost::save_blogpost(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
             break;
 
-          case 'Conversation':
-            $res = Conversation::save_conversation(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
+          case 'Contribution':
+            $res = Contribution::save_contribution(0, PA::$login_uid, $_POST['blog_title'], $_POST['description'], NULL, $terms, $gid, $is_active = 1, $display_on_homepage);
             break;
 
           case 'Suggestion':

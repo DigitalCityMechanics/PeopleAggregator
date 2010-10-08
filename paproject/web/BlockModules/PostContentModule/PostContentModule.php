@@ -37,7 +37,7 @@ class PostContentModule extends Module {
     parent::__construct();
     $this->html_block_id = 'PostContentModule';
     $this->id = 0;
-    $validBlogTypes = array('BlogPost', 'Conversation', 'Suggestion');
+    $validBlogTypes = array('BlogPost', 'Contribution', 'Suggestion');
     $this->blog_type = (isset($_GET) && isset($_GET['blog_type']) && in_array($_GET['blog_type'], $validBlogTypes))
 		? $_GET['blog_type'] : 'BlogPost';
   }
