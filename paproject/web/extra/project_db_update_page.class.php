@@ -55,7 +55,7 @@ class project_db_update_page extends db_update_page
         // $this->qup("changed id field in review-type movie", "UPDATE review_type SET review_id = 1 WHERE review_name = 'Movie'");
         // finally, run the 'safe' updates in net_extra.php.
 /*
-		require_once('api/Conversation/Conversation.php');
+		require_once('api/Contribution/Contribution.php');
 		$this->qup(
 			'2010-09-25, by: Jonathan Knapp - adding Conversation content_type',
 			'INSERT INTO {content_types} (type_id, name, description) VALUES ('.Conversation::TYPE_ID.', "'.Conversation::TYPE_NAME.'", "'.Conversation::TYPE_DESCRIPTION.'")'
