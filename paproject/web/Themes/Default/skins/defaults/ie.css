@@ -1,0 +1,6 @@
+* html #selector {
+  /* for IE<6 */
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src='img/image.png');
+  background-image: none;
+  background-repeat: no-repeat;
+  background-color: transparent; }
