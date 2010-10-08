@@ -37,7 +37,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
   $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
     ? $_POST['blog_type'] : 'BlogPost';
 
-  $pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+  $pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
   $redirect = (isset($_POST) && isset($_POST['redirect']) && preg_match($pattern, $_POST['redirect']))
     ? $_POST['redirect'] : '';
 

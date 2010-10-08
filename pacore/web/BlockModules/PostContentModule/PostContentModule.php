@@ -83,7 +83,7 @@ class PostContentModule extends Module {
     $inner_html_blog->set('blog_type', @$this->blog_type);
 
 	$redirect = urldecode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : '');
-	$pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+	$pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
 	$redirect = (preg_match($pattern, $redirect)) ? $redirect : '';
 
     $inner_html_blog->set('redirect', urlencode($redirect));
