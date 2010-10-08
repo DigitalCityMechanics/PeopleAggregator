@@ -38,7 +38,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
   $type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $valid_post_types))
     ? $_POST['blog_type'] : 'BlogPost';
 
-  $pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+  $pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
   $redirect = (isset($_POST) && isset($_POST['redirect']) && preg_match($pattern, $_POST['redirect']))
     ? $_POST['redirect'] : '';
 
@@ -102,6 +102,18 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 
         case 'Contribution':
           $r = Contribution::save_contribution($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
+		  if($type == 'Contribution' && $redirect != '') {
+            $url_parts = parse_url($redirect);
+
+            parse_str($url_parts['query'], $query_args);
+            if(!isset($query_args['title'])) {
+              $query_args['title'] = $_POST["blog_title"];
+            }
+            if(!isset($query_args['link'])) {
+              $query_args['link'] = PA::$url.'/content/cid='.$r['cid'];
+            }
+            $redirect = $url_parts['scheme'].'://'.$url_parts['host'].$url_parts['path'].'?'.http_build_query($query_args);
+		  }
           break;
 
         case 'Suggestion':
@@ -193,6 +205,18 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 
 		case 'Contribution':
 			$post_saved = Contribution::save_contribution(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
+			if($type == 'Contribution' && $redirect != '') {
+	          $url_parts = parse_url($redirect);
+
+	          parse_str($url_parts['query'], $query_args);
+	          if(!isset($query_args['title'])) {
+	            $query_args['title'] = $_POST["blog_title"];
+	          }
+	          if(!isset($query_args['link'])) {
+              $query_args['link'] = PA::$url.'/content/cid='.$post_saved['cid'];
+	          }
+	          $redirect = $url_parts['scheme'].'://'.$url_parts['host'].$url_parts['path'].'?'.http_build_query($query_args);
+		    }
 		    break;
 
 		case 'Suggestion':

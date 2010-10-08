@@ -83,10 +83,10 @@ class PostContentModule extends Module {
     $inner_html_blog->set('blog_type', @$this->blog_type);
 
 	$redirect = urldecode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : '');
-	$pattern = '/(https?:\/\/)?(www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
+	$pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
 	$redirect = (preg_match($pattern, $redirect)) ? $redirect : '';
-
     $inner_html_blog->set('redirect', urlencode($redirect));
+
     $inner_html_blog->set('body', @$this->body);
     $inner_html_blog->set('trackback', @$this->trackback);
     $inner_html_blog->set('tag_entry', @$this->tag_entry);
@@ -108,7 +108,7 @@ class PostContentModule extends Module {
     $inner_html_gen->set('targets', $this->targets);
     $inner_html_gen->set('show_external_blogs', $this->show_external_blogs);
     $inner_html_gen->set('user_groups', $this->get_user_groups());
-    
+
     $inner_html_gen->set('group_access', @$this->group->access_type);
     $inner_html_gen->set('group_reg', @$this->group->rdg_type);
     
