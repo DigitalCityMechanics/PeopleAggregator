@@ -1,8 +1,4 @@
 <?php
-	
-
- ?>
-<?php
   global $app;
   $level_2 = $navigation_links['level_2'];
   if (!empty(PA::$config->simple['use_simplenav'])) {
@@ -33,7 +29,7 @@
       } ?>
     </div>
   <?php endif; ?>
-	<a id='logo' href='/' title='Civic Commons'>Civic Commons</a>
+	<a id='logo' href='<?php echo CC_APPLICATION_URL . "/" ?>' title='Civic Commons'>Civic Commons</a>
 	<div id="header-utility">
 	<?  if(!isset($_SESSION['user'])) { ?>
 	<div id="login-status" class="signed-out">
