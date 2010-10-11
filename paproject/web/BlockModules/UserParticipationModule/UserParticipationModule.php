@@ -54,13 +54,12 @@ class UserParticipationModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-		if(isset($page_uid)){
-
-			$this->_conversations = $this->get_conversations_data($this->user->login_name);
+		if(isset($page_uid)){			
+			$this->_conversations = $this->get_conversations_data($this->user->user_id);
 				
-			$this->_issues = $this->get_issues_data($this->user->login_name);
+			$this->_issues = $this->get_issues_data($this->user->user_id);
 				
-			$this->_following = $this->get_following_data($this->user->login_name);
+			$this->_following = $this->get_following_data($this->user->user_id);
 
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
@@ -94,7 +93,7 @@ class UserParticipationModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = "http://staging.theciviccommons.com/api/$User_id/conversations";
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONVERSATIONS, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
 			$defaultResult = array('title'=>'No conversations', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);
@@ -115,7 +114,7 @@ class UserParticipationModule extends Module {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Get issues data.
 	 * @param 	$User_id
@@ -129,7 +128,7 @@ class UserParticipationModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = "http://staging.theciviccommons.com/api/$User_id/issues";
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_ISSUES, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
 			$defaultResult = array('name'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);
@@ -164,7 +163,7 @@ class UserParticipationModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = "http://staging.theciviccommons.com/api/$User_id/following";
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_FOLLOWING, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
 			$defaultResult = array('title'=>'Not following any conversations or issues', 'summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);
@@ -185,5 +184,20 @@ class UserParticipationModule extends Module {
 		}
 		return null;
 	}
+	
+	/**
+	 * Creates a URL from the given parts into a usable REST URL
+	 * Note: this function is customized for the CivicCommons project URLs (ie. http://www.example.com/$APIFolder/$ObjectIdentifier/$ObjectType
+	 * @param string $SiteURL				Base Site URL to the REST API (ie. http://www.example.com)
+	 * @param string $APIFolder				The folder that lets the web site know that the API is being called (ie. http://www.example.com/api) 
+	 * @param string $ObjectType			The type of object to get (ie. to get conversations, append a api/conversations to the end to get the objects of that type)
+	 * @param string $ObjectIdentifier		The identifier of the specific object to get
+	 */
+	function buildRESTAPIUrl($SiteURL, $APILink, $ObjectType, $ObjectIdentifier){
+		//TODO: add ability to remove double slashes
+		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
+		return $url;
+	}
+	
 }
 ?>

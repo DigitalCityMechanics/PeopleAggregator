@@ -41,8 +41,18 @@ div.tab-links{text-align:right;}
 	<?php foreach($conversations  as $conversation){ ?>
 		<div class="participation">
 			<div class="above">
-				<?php if(isset($conversation['image'])){ ?>
-					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:120px;height:80px;"/>
+				<?php if(isset($conversation['image'])){ 
+					
+					$width = 100;
+					$height = 100;
+					if(isset($conversation['parent_image_width']) && is_Numeric($conversation['parent_image_width'])){
+						$width = $conversation['parent_image_width'];
+					}
+					if(isset($conversation['parent_image_height']) && is_Numeric($conversation['parent_image_height'])){
+						$height = $conversation['parent_image_height'];
+					}
+					?>
+					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $conversation['title']; ?></a></h2>
 				<p><?php echo $conversation['summary']; ?></p>
@@ -53,7 +63,7 @@ div.tab-links{text-align:right;}
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="http://staging.theciviccommons.com/conversations">View All</a>
+			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS; ?>">View All</a>
 		</div>
 	</div>
 <?php } // end if ?>	
@@ -63,8 +73,18 @@ div.tab-links{text-align:right;}
 	<?php foreach($issues  as $issue){ ?>
 		<div class="participation">
 			<div class="above">
-				<?php if(isset($issue['image'])){ ?>
-					<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:120px;height:80px;"/>
+				<?php if(isset($issue['image'])){
+				
+					$width = 100;
+					$height = 100;
+					if(isset($issue['parent_image_width']) && is_Numeric($issue['parent_image_width'])){
+						$width = $issue['parent_image_width'];
+					}
+					if(isset($issue['parent_image_height']) && is_Numeric($issue['parent_image_height'])){
+						$height = $issue['parent_image_height'];
+					}
+					?>
+					<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $issue['name']; ?></a></h2>
 				<p><?php echo $issue['summary']; ?></p>
@@ -75,7 +95,7 @@ div.tab-links{text-align:right;}
 		</div>		
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="http://staging.theciviccommons.com/issues">View All</a>
+			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_ISSUES; ?>">View All</a>
 		</div>
 	</div>
 <?php } // end if ?>	
@@ -85,8 +105,18 @@ div.tab-links{text-align:right;}
 	<?php foreach($following  as $followed){ ?>
 		<div class="participation">
 			<div class="above">
-				<?php if(isset($followed['image'])){ ?>
-					<img src="<?php echo $followed['image']; ?>" alt="Following image" style="width:120px;height:80px;"/>
+				<?php if(isset($followed['image'])){ 
+				
+					$width = 100;
+					$height = 100;
+					if(isset($followed['parent_image_width']) && is_Numeric($followed['parent_image_width'])){
+						$width = $followed['parent_image_width'];
+					}
+					if(isset($followed['parent_image_height']) && is_Numeric($followed['parent_image_height'])){
+						$height = $followed['parent_image_height'];
+					}
+				?>
+					<img src="<?php echo $followed['image']; ?>" alt="Following image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
 				<h2><a href="#"><?php echo $followed['title']; ?></a></h2>
 				<p><?php echo $followed['summary']; ?></p>
@@ -97,7 +127,7 @@ div.tab-links{text-align:right;}
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="http://staging.theciviccommons.com/following">View All</a>
+			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_FOLLOWING; ?>">View All</a>
 		</div>
 	</div>
 <?php } // end if ?>	

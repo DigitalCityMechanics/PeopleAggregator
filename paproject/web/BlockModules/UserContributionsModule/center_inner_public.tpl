@@ -36,11 +36,20 @@ div.participation div.below {
 	<?php foreach($contributions  as $contribution){ ?>
 		<div class="participation">
 			<div class="above">
-				<?php if(isset($contribution['image'])){ ?>
-					<img src="<?php echo $contribution['image']; ?>" alt="contribution image" style="width:120px;height:80px;"/>
+				<?php if(isset($contribution['parent_image'])){ 
+					$width = 100;
+					$height = 100;
+					if(isset($contribution['parent_image_width']) && is_Numeric($contribution['parent_image_width'])){
+						$width = $contribution['parent_image_width'];
+					}
+					if(isset($contribution['parent_image_height']) && is_Numeric($contribution['parent_image_height'])){
+						$height = $contribution['parent_image_height'];
+					}
+				?>
+					<img src="<?php echo $contribution['parent_image']; ?>" alt="contribution image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
-				<h2><a href="#"><?php echo $contribution['title']; ?></a></h2>
-				<p><?php echo $contribution['summary']; ?></p>
+				<h2><a href="<?php echo $contribution['parent_url'] ?>" title="View"><?php echo $contribution['parent_title']; ?></a></h2>
+				<p><?php echo $contribution['comment']; ?></p>
 			</div>
 			<div class="below">
 				<a href="#"><?php echo $contribution['participant_count']; ?> Participants</a> | <a href="#"><?php echo $contribution['contribution_count']; ?> Contributions</a>
@@ -48,7 +57,7 @@ div.participation div.below {
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="http://staging.theciviccommons.com/contributions">View All</a>
+			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_CONTRIBUTIONS; ?>">View All</a>
 		</div>
 	</div>
 <?php } // end if ?>	
@@ -58,7 +67,7 @@ div.participation div.below {
 		<div class="participation">
 			<div class="above">
 				<?php if(isset($thought['image'])){ ?>
-					<img src="<?php echo $thought['image']; ?>" alt="thought image" style="width:120px;height:80px;" />
+					<img src="<?php echo $thought['image']; ?>" alt="thought image" style="width:100px;height:100px;" />
 				<?php } ?>
 				<h2><a href="#"><?php echo $thought['title']; ?></a></h2>
 				<p><?php echo $thought['summary']; ?></p>
@@ -69,7 +78,7 @@ div.participation div.below {
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="http://socialstaging.theciviccommons.com/thoughts">View All</a>
+			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_THOUGHTS; ?>">View All</a>
 		</div>
 	</div>
   </div>

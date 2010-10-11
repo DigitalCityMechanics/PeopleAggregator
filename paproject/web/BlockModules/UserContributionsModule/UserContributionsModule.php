@@ -50,8 +50,8 @@ class UserContributionsModule extends Module {
 	
 		if(isset($page_uid)){
 
-			$this->_contributions = $this->get_contributions_data($this->user->login_name);
-			$this->_thoughts = $this->get_thoughts_data($this->user->login_name);
+			$this->_contributions = $this->get_contributions_data($this->user->user_id);
+			$this->_thoughts = $this->get_thoughts_data($this->user->user_id);
 			
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
@@ -86,9 +86,9 @@ class UserContributionsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = "http://staging.theciviccommons.com/api/$User_id/contributions";
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$defaultResult = array('title'=>'No contributions', 'summary'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('parent_title'=>'No contributions', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
 			$responseStatus = $request->createCurl();
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
@@ -98,7 +98,7 @@ class UserContributionsModule extends Module {
 					// only show the first 3 conversations
 					$newArray = array_splice($jsonResults, 1, 3);
 					$jsonResults = $newArray;
-				}				
+				}
 				return $jsonResults;
 			}else{
     			Logger::log("UserContributionsModule.get_contributions_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
@@ -116,5 +116,21 @@ class UserContributionsModule extends Module {
 	function get_thoughts_data($User_id){		
 		return array(array('title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
 	}
+	
+	
+	/**
+	 * Creates a URL from the given parts into a usable REST URL
+	 * Note: this function is customized for the CivicCommons project URLs (ie. http://www.example.com/$APIFolder/$ObjectIdentifier/$ObjectType
+	 * @param string $SiteURL				Base Site URL to the REST API (ie. http://www.example.com)
+	 * @param string $APIFolder				The folder that lets the web site know that the API is being called (ie. http://www.example.com/api) 
+	 * @param string $ObjectType			The type of object to get (ie. to get conversations, append a api/conversations to the end to get the objects of that type)
+	 * @param string $ObjectIdentifier		The identifier of the specific object to get
+	 */
+	function buildRESTAPIUrl($SiteURL, $APILink, $ObjectType, $ObjectIdentifier){
+		//TODO: add ability to remove double slashes
+		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
+		return $url;
+	}
+	
 }
 ?>
