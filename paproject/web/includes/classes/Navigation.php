@@ -318,9 +318,12 @@ class Navigation {
                                   'url'=>$this->base_url . PA_ROUTE_USER_PRIVATE),
 		);
 		$user_children = $user_children + array(
-                       'user_widgets' => array('caption'=>__('My Widgets'),
-                                  'url'=>$this->base_url.'/'.FILE_WIDGET
-		),
+                       'create_post' => array('caption'=>__('Create a Post'),
+                                  'url'=>$this->base_url . "/post_content.php"),
+		);
+		$user_children = $user_children + array(
+                       'manage_contributions' => array('caption'=>__('Manage My Contributions'),
+                                  'url'=>$this->base_url . "/content_management.php"),
 		);
 		$user_children = $user_children + array(
                        'messages' => array('caption'=>__('My Messages'),
@@ -332,25 +335,6 @@ class Navigation {
                                   'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$uid"
 		),
 		);
-		$user_children = $user_children + array(
-                       'my_events' => array('caption'=>__('My Events'),
-                                  'url'=>$this->base_url.'/'.FILE_USER_CALENDAR
-		),
-                       'my_friends' => array('caption'=>__('My Friends'),
-                                  'url'=>$this->base_url . "/view_all_members.php?view_type=in_relations&amp;uid=$uid"
-		),
-		);
-		$user_children = $user_children + array(
-                       'my_forum'  => array('caption'=>__('My Forum'),
-                                  'url'=>$this->base_url. PA_ROUTE_FORUMS . "/network_id=" .$this->network_info->network_id . '&user_id='.$uid
-		),
-		);
-		$user_children = $user_children + array(
-                       'my_points'  => array('caption'=>__('My Points'),
-                                  'url'=>$this->base_url. PA_ROUTE_POINTS_DIRECTORY . "?uid=$uid"
-		),
-		);
-
 		if (!empty(PA::$config->simple['use_families'])) {
 			// get this users Family or Families
 			require_once "api/Entity/TypedGroupEntityRelation.php";
@@ -382,11 +366,6 @@ class Navigation {
                        'settings' => array('caption'=>__('Edit My Account'),
                                   'url'=>$this->base_url.PA_ROUTE_EDIT_PROFILE
 		),
-		);
-		$user_children = $user_children + array(
-                       'customize_ui' => array('caption'=>__('Themes'),
-                                  'url'=>$this->base_url . PA_ROUTE_CUSTOMIZE_USER_GUI . "/theme/uid=$uid"
-		)
 		);
 		if ( $this->is_anonymous ) {
 			//these links are not for anonymous
@@ -925,9 +904,6 @@ class Navigation {
                                   );
                                   $relation_does_not_exists_links = array('send_message' => array('caption'=>__('Send a message'),
                                   'url'=>$this->base_url.PA_ROUTE_ADDMESSAGE.'/uid='.PA::$page_uid
-                                  ),
-                       'make_connection' => array('caption'=> sprintf(__('Add as %s'), __($def_relations_term)),
-                                  'url'=>$this->base_url.PA_ROUTE_EDIT_RELATIONS.'/uid='.PA::$page_uid.'&amp;do=add&amp;action=EditRelation'
                                   ),
                                   /*
                                    'send_testimonial' => array('caption'=>__('Write Testimonial'),

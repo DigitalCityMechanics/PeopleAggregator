@@ -3,21 +3,15 @@
   <page_id>2</page_id>
   <data>
     <middle>
-      <item>UserContributionsModule</item>
       <item>UserParticipationModule</item>
-      <item>PersonalAnnouncementModule</item>
-      <item>ShowUserCommentModule</item>
-      <item>ShowContentModule</item>
-      <item>ViewFeedsModule</item>
+      <item>UserContributionsModule</item>
     </middle>
     <right>
       <item>UserPhotoModule</item>
       <item>AboutUserModule</item>
       <item>ImagesModule</item>
       <item>MyLinksModule</item>
-      <item>ProfileFeedModule</item>
-      <item>ActivitiesModule</item>
-      <item>NewestGroupsModule</item>
+      <item>MyGroupsModule</item>
     </right>
     <javascripts>
       <item>inplaced.js</item>

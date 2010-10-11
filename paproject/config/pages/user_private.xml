@@ -3,15 +3,12 @@
   <page_id>1</page_id>
   <data>
     <middle>
-      <item>ShowUserCommentModule</item>
-      <item>ShowContentModule</item>
-      <item>ViewFeedsModule</item>
-      <item>BlogSettingsModule</item>
+      <item>UserParticipationModule</item>
+      <item>UserContributionsModule</item>
     </middle>
     <right>
       <item>UserPhotoModule</item>
       <item>AboutUserModule</item>
-      <item>UserMessagesModule</item>
       <item>ImagesModule</item>
       <item>MyGroupsModule</item>
       <item>MyLinksModule</item>
