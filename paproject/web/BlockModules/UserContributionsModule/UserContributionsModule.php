@@ -47,15 +47,15 @@ class UserContributionsModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-	
-		if(isset($page_uid)){
+		//TODO: Do a check for private page, public page or org page
+		//if(isset($page_uid)){
 
 			$this->_contributions = $this->get_contributions_data($this->user->user_id);
 			$this->_thoughts = $this->get_thoughts_data($this->user->user_id);
 			
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
-		}
+		//}
 		return $content;
 	}
 

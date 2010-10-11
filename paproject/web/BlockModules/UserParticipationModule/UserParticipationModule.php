@@ -54,7 +54,8 @@ class UserParticipationModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-		if(isset($page_uid)){			
+		//TODO: Do a check for private page, public page or org page
+		//if(isset($page_uid)){			
 			$this->_conversations = $this->get_conversations_data($this->user->user_id);
 				
 			$this->_issues = $this->get_issues_data($this->user->user_id);
@@ -63,7 +64,7 @@ class UserParticipationModule extends Module {
 
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
-		}
+		//}
 		return $content;
 	}
 
