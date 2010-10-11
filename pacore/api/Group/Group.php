@@ -252,6 +252,14 @@ class Group extends ContentCollection {
            $res = Dal::query($sql, array($this->collection_id, $mod, MODERATOR, $this->created));
          }
          Dal::commit();
+
+		// setup extra permissions for group owner
+         // so, we need to assign group admin role to group owner now:
+         $role_extra = array( 'user' => false, 'network' => false, 'groups' => array($this->collection_id) );
+         $user_roles[] = array('role_id' => GROUP_ADMIN_ROLE, 'extra' => serialize($role_extra));
+ 		 $group_owner = new User();
+		 $group_owner->load($this->author_id);
+         $group_owner->set_user_role($user_roles);
        } catch (Exception $e) {
          Dal::rollback();
          throw $e;
