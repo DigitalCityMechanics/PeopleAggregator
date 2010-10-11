@@ -803,45 +803,25 @@ function peopleaggregator_newOrg($args)
 
 function civiccommons_newOrg($args)
 {
-	$token = $args['authToken'];
-	$g_name = $args['name'];
-	$g_desc = $args['description'];
-	$g_pic = $args['image']; //FIXME: right now this won't work as a url - change to a base64 file?
-	$g_tags = $args['tags'];
-	$g_category_id = api_extract_id("cat", $args['category']);
-	$access_type = api_enum_to_int(array("public", "members"), $args['accessType']);
-	$reg_type = api_enum_to_int(array("open", "moderated", "invite"), $args['registrationType']);
-	$mod_type = api_enum_to_int(array("direct", "moderated"), $args['moderationType']);
-	$header_image = "";
-	$header_image_action = NULL;
-	$display_header_image = NULL;
-	$extra = NULL;
-	$group_type = $args['groupType'];
+	$status = peopleaggregator_newUser($args);
+	if($status['success'] !== true)
+	{
+		return $status;
+	}
 
-	$user = User::from_auth_token($token);
+	$status = peopleaggregator_login($args);
+	if($status['success'] !== true)
+	{
+		return $status;
+	}
 
-	// now create the organization
-	$group_id = Group::save_new_org(
-	0, // collection id?
-	$user->user_id,
-	$g_name,
-	$g_desc,
-	$g_pic,
-	$g_tags,
-	$g_category_id,
-	$access_type,
-	$reg_type,
-	$mod_type,
-	$header_image,
-    $header_image_action,
-    $display_header_image,
-    $extra,
-    $group_type);
+	// get the authToken from api logging in the previously created user
+	$args['authToken'] = $status['authToken'];
 
-	return array(
-        'success' => TRUE,
-        'id' => "org:".$group_id,
-	);
+	// change 'groupName' back to expected 'name'
+	$args['name'] = isset($args['groupName']) ? $args['groupName'] : null;
+
+	return peopleaggregator_newOrg($args);
 }
 
 function api_parse_group_id($id) {
