@@ -3,7 +3,7 @@
   <?php echo $header;?>
   <div id="bg_blog_big"></div>     
   <div id="content">  
-   <div id="col_c" style="float: right;">
+   <div id="col_c" style="float: right;" class="aside supplementary">
     <?php if(isset($array_left_modules) and (count($array_left_modules) > 0 ) ) : ?>
       <?php
         foreach ( $array_left_modules as $left_module )

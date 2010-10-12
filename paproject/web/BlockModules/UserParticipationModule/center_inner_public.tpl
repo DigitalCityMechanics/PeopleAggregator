@@ -18,13 +18,8 @@ div.participation img {
 	float:left;
 	margin:0 13px 5px;
 }
-div.participation h2 {
-	text-decoration:underline;
-}
-div.participation div.below {
-	clear:both;
-	padding:5px;
-}
+div.participation h2 {font-size:100%;}
+div.participation div.below {clear:both;padding:5px;}
 div.tab-links{text-align:right;}
 </style>
 

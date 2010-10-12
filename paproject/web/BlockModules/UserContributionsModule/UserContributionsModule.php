@@ -34,7 +34,7 @@ class UserContributionsModule extends Module {
 	public function initializeModule($request_method, $request_data)  {
 		global $paging;	
 
-		$this->title = "Contributions...";
+		$this->title = "Contributions";
 		
 		if(!empty($this->shared_data['user_info'])) {
 			$this->user = $this->shared_data['user_info'];

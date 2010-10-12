@@ -318,7 +318,7 @@ class Navigation {
                                   'url'=>$this->base_url . PA_ROUTE_USER_PRIVATE),
 		);
 		$user_children = $user_children + array(
-                       'create_post' => array('caption'=>__('Create a Post'),
+                       'create_post' => array('caption'=>__('Create A Post'),
                                   'url'=>$this->base_url . "/post_content.php"),
 		);
 		$user_children = $user_children + array(
