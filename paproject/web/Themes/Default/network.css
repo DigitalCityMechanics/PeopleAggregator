@@ -440,12 +440,9 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	font-weight: normal;
 	margin-left: 5px; }
 
-.module_html {
-	width: 195px;
-	margin: 0;
-	padding: 0; }
+.module_html { margin: 0;padding: 0; }
 
-#UserPhotoModule .module_html { margin: 6px 0 6px 6px; }
+#UserPhotoModule .module_html { text-align:center;padding:0 0 15px 0;}
 
 #GroupAccessModule .module_html {
  /*height: 165px; */
@@ -652,7 +649,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 
 /* H1 in the center column. */
 
-.wide_content h1,
+
 .module_wide h1 {
 	font-size: 22px;
 	color: #0099FF;
@@ -919,6 +916,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	margin: 0;
 	padding: 5px 0 5px 0; }
 
+.mod .mod-content .module_browse_groups {margin:0 0 5px 0;}
 .module_browse_groups li,
 .module_more_info li {
 	list-style: none;
@@ -2669,7 +2667,7 @@ td.message .sb-audio img {
 /* custom styles */
 
 
-#col_b, #col_d { background-color: #ffffff; }
+/*#col_b, #col_d { background-color: #ffffff; }*/
 
 
 
@@ -2863,10 +2861,6 @@ td.message .sb-audio img {
   text-align: center;
   font-weight: normal;
 }
-
-/* This line below added recently by who...? Seems very general to style all h3 this way. Note by MarcS@broadbandmechanics.com */
-
-h3 { border-top: 1px solid #999999;}
 
 /* These are some changes made by Kapil<kapil.juneja@tekritisoftware.com> on 13th april */
 /* for the select theme page */
@@ -3915,3 +3909,13 @@ div.error {
    text-align: center;
    background-color: #EEEEEE;
  }
+
+ /* --- jquery UI customizations ---*/
+ .ui-widget { font-size: 0.9em!important;font-family: Helvetica Neue, Helvetica, Arial, sans-serif!important;}
+.ui-widget .ui-widget { font-size: 0.9em!important; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Helvetica Neue, Helvetica, Arial, sans-serif!important;font-size: 0.7em!important; }
+#tabs-contributions ul.ui-tabs-nav li a,
+#tabs ul.ui-tabs-nav li a {font-size: 0.8em!important;}
+
+/* --- BlockModule Customizations --- */
+.aside .mod h3 {font-size:0.9em;}
