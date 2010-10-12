@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
 <page>
-  <page_id>6</page_id>
+  <page_id>19</page_id>
   <data>
+    <left>
+      <item>RelationsModule</item>
+    </left>
     <middle>
-      <item>PeopleModule</item>
     </middle>
     <right>
-      <item>MembersFacewallModule</item>
+      <item>UserPhotoModule</item>
     </right>
-    <javascripts>
-      <item>peoplepage.js</item>
-    </javascripts>
-    <page_css>
-      <item>fwstyle.css</item>
-      <item>javascript/facewall/tooltip/tooltip.css</item>
-    </page_css>
+    <javascripts/>
+    <page_css/>
     <page_theme>Default</page_theme>
+    <block_type>Homepage</block_type>
     <body_attributes/>
     <access_permission/>
     <navigation_code/>
@@ -63,14 +61,37 @@
           $module_shared_data['content_info'] = null;
         }
       }
-      uihelper_get_network_style();
+      
+      $module_shared_data['media_gallery']['album_id'] = $app->getRequestParam('album_id');
+      $show_view = ($app->getRequestParam('gallery')) ? $app->getRequestParam('gallery') : 'thumb';
+      $module_shared_data['media_gallery']['show_view'] = $show_view;
+      // Handling the type
+      $type_prefix = array('Images','Videos','Audios');
+      if(!$app->getRequestParam('type') || (!in_array(@$app->getRequestParam('type'), $type_prefix))) {
+        // When we doesn't found type
+        $type = 'Images';
+      } else {
+        $type = $app->getRequestParam('type');
+      }
+      $module_shared_data['media_gallery']['media_type'] = $type;
+      $module_name = $type.'MediaGalleryModule';
+      $this->setting_data['middle'] = array($module_name);
+      
+      if($uid = $app->getRequestParam('uid')) {
+        $this->setHeader('header.tpl');  
+        uihelper_set_user_heading($this, true, $uid);
+      } else if($gid = $app->getRequestParam('gid')) {
+        $this->setHeader('header.tpl');
+        uihelper_get_group_style($gid);
+      } else {  
+        uihelper_get_network_style();
+      }
       ]]></boot_code>
     <page_template>container_two_column_right.tpl</page_template>
     <header_template>header.tpl</header_template>
-    <page_mode>public</page_mode>
-    <block_type>Homepage</block_type>
-    <page_type>network</page_type>
+    <page_mode>private</page_mode>
+    <page_type>user|network|group</page_type>
   </data>
-  <page_name>People Page</page_name>
+  <page_name>Media Gallery</page_name>
   <is_configurable>1</is_configurable>
 </page>

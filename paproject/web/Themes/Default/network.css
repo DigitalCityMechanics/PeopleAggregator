@@ -63,8 +63,7 @@
 	float: left; }
 
 #col_d {
-	margin: 0 0 0 21px;
-	width: 972px;
+	margin: 0;	
 	min-height: 800px;
 	max-height: auto; }
 
@@ -1135,10 +1134,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	margin: 0 0 15px 42px;
 	padding: 0; }
 
-#content_post {
-	width: 800px;
-	background-color: transparent;
-	margin: 0 0 0 90px; }
+#content_post {	}
 
 .required { color: red; }
 
@@ -1151,7 +1147,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	background: url(images/bg_navbar_filters.jpg);
 	background-repeat: repeat-x;
 	height: 21px;
-	width: 972px;
 	font-weight: bold;
 	font-size: 8px;
 	border-top: 1px solid #000000; }
@@ -1208,7 +1203,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 .total_content form .very_bigger {
 	font: normal 10px Verdana;
 	color: #000;
-	width: 580px;
 	margin-bottom: 6px;
 	padding-bottom: 8px;
 	border-bottom: 1px dashed #cdcdcd; }
@@ -1495,9 +1489,8 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	border-top: 1px solid #000000; }
 
 .editmainpage form fieldset {
-	width: 600px;
 	display: block;
-	margin: 5px 0 20px 180px;
+	margin: 5px 0 20px 0;
 	padding: 20px 10px 10px 10px;
 	border: 1px solid #000000;
 	background-color: #fff;
@@ -3919,3 +3912,6 @@ div.error {
 
 /* --- BlockModule Customizations --- */
 .aside .mod h3 {font-size:0.9em;}
+
+/* --- Misc Customizations --- */
+div.steps ul {margin:0;}

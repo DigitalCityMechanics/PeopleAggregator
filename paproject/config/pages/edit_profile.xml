@@ -1,24 +1,26 @@
 <?xml version="1.0"?>
 <page>
-  <page_id>6</page_id>
+  <page_id>24</page_id>
   <data>
     <middle>
-      <item>PeopleModule</item>
+      <item>EditProfileModule</item>
     </middle>
-    <right>
-      <item>MembersFacewallModule</item>
-    </right>
+    <right></right>
     <javascripts>
-      <item>peoplepage.js</item>
+      <item>edit_profile.js</item>
     </javascripts>
     <page_css>
-      <item>fwstyle.css</item>
-      <item>javascript/facewall/tooltip/tooltip.css</item>
+      <item>modal.css</item>
     </page_css>
     <page_theme>Default</page_theme>
+    <block_type>Homepage</block_type>
     <body_attributes/>
     <access_permission/>
-    <navigation_code/>
+    <navigation_code><![CDATA[
+        $level_2['highlight'] = 'user';
+        $level_3 = $this->get_level_3('user');
+        $level_3['highlight'] = 'settings';
+      ]]></navigation_code>
     <boot_code><![CDATA[
       if($uid = $app->getRequestParam('uid')) {
         $user = new User();
@@ -63,14 +65,13 @@
           $module_shared_data['content_info'] = null;
         }
       }
-      uihelper_get_network_style();
+      uihelper_set_user_heading($this, true, PA::$login_uid);
       ]]></boot_code>
     <page_template>container_two_column_right.tpl</page_template>
     <header_template>header.tpl</header_template>
-    <page_mode>public</page_mode>
-    <block_type>Homepage</block_type>
+    <page_mode>private</page_mode>
     <page_type>network</page_type>
   </data>
-  <page_name>People Page</page_name>
   <is_configurable>1</is_configurable>
+  <page_name>edit_profile</page_name>
 </page>
