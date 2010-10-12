@@ -237,7 +237,9 @@ function peopleaggregator_login($args)
 
 	$user = api_load_user($login, $pwd);
 
-	$lifetime = 900; // 15 minute authToken
+	//TODO: Remove this large timeout when real data passing is happening
+	// set lifetime to 2 months so the authToken doesn't expire
+	$lifetime = 5259487;
 	$token = $user->get_auth_token($lifetime);
 
 	return array(
