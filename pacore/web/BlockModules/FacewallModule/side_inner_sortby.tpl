@@ -40,6 +40,7 @@
           <?= sprintf(__("(%d %ss)"), $links['users_data'][$counter]['no_of_relations'],
           $rel_term) ?>
         </span>
+    <div class="clear"></div>
   </li>
   <?php 
     }

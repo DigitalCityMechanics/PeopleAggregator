@@ -943,6 +943,10 @@ color: #fff;
 =Miscellaneous
 -----------------------------------------------*/
 
+.clear {
+clear: both;
+}
+
 hr {
 display: block;
 border: 0;

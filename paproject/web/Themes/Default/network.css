@@ -358,7 +358,6 @@ a img { border: 0; }
 
 .module_icon_list li {
 	display: block;
-	height: 35px;
 	margin: 0 0 5px 0;
 	padding-bottom: 5px;
 	list-style: none;
@@ -387,8 +386,8 @@ a img { border: 0; }
 
 .module_icon_list span {
 	display: block;
-	padding-right: 5px !important;
-	padding-top: 3px !important; }
+	line-height: 1.2em;
+	padding-right: 5px !important; }
 
 .module_tagcloud {
 	width: 195px;
