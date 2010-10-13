@@ -354,10 +354,7 @@ a img { border: 0; }
 
 .module_icon_list ul {
 	margin: 8px 0 0 0;
-	list-style: none;
-	width: 154px; }
-
-*html .module_icon_list ul { width: 194px; }
+	list-style: none; }
 
 .module_icon_list li {
 	display: block;
