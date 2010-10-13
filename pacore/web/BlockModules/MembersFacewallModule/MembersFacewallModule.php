@@ -12,8 +12,8 @@
 ?>
 <?php
 /**
- * Project:     PeopleAggregator: a social network developement platform
- * The lastest version of PeopleAggregator can be obtained from:
+ * Project:     PeopleAggregator: a social network development platform
+ * The latest version of PeopleAggregator can be obtained from:
  * http://peopleaggregator.org
  * For questions, help, comments, discussion, etc. please visit
  * http://wiki.peopleaggregator.org/index.php
