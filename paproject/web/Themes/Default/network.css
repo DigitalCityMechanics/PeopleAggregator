@@ -3584,15 +3584,16 @@ table.activities_ranking_list {
    float:right;
    margin-right:1px;
  }
-#poll_module {
-  float:left;
-  width:185px;
-  padding:5px;
+#poll_module .votes {
+  font-size: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  text-align: center;
 }
 #poll_module h5 {
-  margin:0px;
+  margin: 0;
   padding:0px;
-  font-size:12px;
+  font-size:14px;
   font-weight:bold;
   width:100%;
   text-align:center;
@@ -3602,6 +3603,13 @@ table.activities_ranking_list {
   float:left;
   width:100%;
   margin-top:5px;
+}
+#poll_module label {
+	display: block;
+	float: none;
+	margin: 0 10px;
+	text-align: left;
+	width: inherit;
 }
 #poll_module span {
   float:left;
@@ -3622,6 +3630,10 @@ table.activities_ranking_list {
 #poll_button {
   text-align:center;
   width:50px;
+}
+
+#poll_button input {
+	font-size: 14px;
 }
 
 #view_poll span {

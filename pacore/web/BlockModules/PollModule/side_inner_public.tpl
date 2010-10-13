@@ -1,8 +1,8 @@
 <div>
 	<form method="post" action="<?= PA::$url?>/save_vote.php">
     <div id="poll_module">
-      <h5><?= $topic[0]->title ?> (<?= $total_vote?> votes)</h5>
-      <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">See poll results</a>'."\n" : ''; ?>
+      <h5><?= $topic[0]->title ?></h5>
+      <p class="votes">(<?= $total_vote?> votes)</p>
       <?php echo ($show_poll_link != '') ? '<a href="'.$show_poll_link.'">Vote!</a>'."\n" : ''; ?>
       <?php $cnt = count($options);
            for ($i=1; $i<=$cnt; $i++) {
@@ -10,13 +10,10 @@
            		if ($flag == 0) {
 	              $vote = $options['option'.$i]; 
   	         		?>
-              	<div class="one_option">
-              	<span class="option_text">
-              <?= $options['option'.$i]; ?>
-              </span>
-              <input type="radio" name="vote" value="<?= htmlentities(addslashes($vote));?>">
-              <br/>
-              </div>
+		<label class="option_text" for="option_<?= $i; ?>">
+			<input type="radio" id="option_<?= $i; ?>" name="vote" value="<?= htmlentities(addslashes($vote));?>" />
+			<?= $options['option'.$i]; ?>
+		</label>
             <?php 
             } else { 
               $j = $i-1;
@@ -47,7 +44,7 @@
       if ($flag == 0) { ?>
         <div id="poll_button">
           <br/>
-          <input type="submit" name="submit" value="<?= __("Answer") ?>" />
+          <input type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
         </div>
      <? } ?>
     </div>
