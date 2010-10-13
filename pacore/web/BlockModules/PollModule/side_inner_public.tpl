@@ -2,6 +2,8 @@
 	<form method="post" action="<?= PA::$url?>/save_vote.php">
     <div id="poll_module">
       <h5><?= $topic[0]->title ?> (<?= $total_vote?> votes)</h5>
+      <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">See poll results</a>'."\n" : ''; ?>
+      <?php echo ($show_poll_link != '') ? '<a href="'.$show_poll_link.'">Vote!</a>'."\n" : ''; ?>
       <?php $cnt = count($options);
            for ($i=1; $i<=$cnt; $i++) {
            	if ($options['option'.$i] != '') {
