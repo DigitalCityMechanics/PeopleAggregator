@@ -82,6 +82,27 @@ class PostContentModule extends Module {
     $inner_html_blog->set('blog_title', str_replace('"','&quot;',@$this->blog_title));
     $inner_html_blog->set('blog_type', @$this->blog_type);
 
+	switch($this->blog_type) {
+		case 'Contribution':
+			$inner_html_blog->set('message', '<p>Comments are easy to do, but sometimes you need to think about what you\'re writing.
+				So we\'re providing you with a rich text editor, which can have media (video, photos)
+				embedded in the text as well as web links - and you can save off a "draft" of this
+				conversation - just so you get it right.  Thank you BTW for that!  When you\'re done,
+				just hit the "Publish Post" button.</p>');
+			break;
+
+		case 'Suggestion':
+			$inner_html_blog->set('message', '<p>Thanks for your suggestion .....  (copy needed)</p>');
+			break;
+
+		case 'BlogPost':
+			$inner_html_blog->set('message', '<p>Thanks for your thoughts .....  (copy needed)</p>');
+			break;
+
+		default:
+			break;
+	}
+
 	$redirect = urldecode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : '');
 	$pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
 	$redirect = (preg_match($pattern, $redirect)) ? $redirect : '';
