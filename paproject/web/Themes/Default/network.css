@@ -3611,20 +3611,28 @@ table.activities_ranking_list {
 	text-align: left;
 	width: inherit;
 }
-#poll_module span {
-  float:left;
-  width:50px;
+#poll_module .option {
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-top: 10px;
 }
-
+#poll_module .vote_link {
+	margin: 20px 0 0 0;
+}
+#poll_module span.percent {
+	display: inline-block;
+	margin-right: 5px;
+	text-align: left;
+	width: 30px;
+}
+#poll_module span.percent,
+#poll_module span.count {
+	font-size: 13px;
+}
 #poll_module span.poll_bar {
   float:left;
   padding-top:3px;
   width:95px;
-}
-
-#poll_module span.percent {
-  float:right;
-  width:32px;
 }
 
 #poll_button {

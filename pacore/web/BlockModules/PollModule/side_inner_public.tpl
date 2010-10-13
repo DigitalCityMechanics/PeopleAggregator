@@ -3,7 +3,6 @@
     <div id="poll_module">
       <h5><?= $topic[0]->title ?></h5>
       <p class="votes">(<?= $total_vote?> votes)</p>
-      <?php echo ($show_poll_link != '') ? '<a href="'.$show_poll_link.'">Vote!</a>'."\n" : ''; ?>
       <?php $cnt = count($options);
            for ($i=1; $i<=$cnt; $i++) {
            	if ($options['option'.$i] != '') {
@@ -18,21 +17,10 @@
             } else { 
               $j = $i-1;
             ?>
-              <div class="one_option">
-              <span class="option_text">
-              <?= $options['option'.$i]; ?>
-              </span>
-              <span class="poll_bar">
-              	<img src="<?=PA::$url ?>/makebar.php?rating=<?=$percentage[$j]?>&amp;width=95&amp;height=10" border="0" />
-              	</span>
-              <span class="count">
-              (<?=$vote_count[$j]?> votes)
-              </span>
-              <span class="percent">
-              <?=$percentage[$j]?>
-              %</span>
-            <br/>
-            </div>
+              <p class="option"><?= $options['option'.$i]; ?></p>
+			  <span class="percent"><?=$percentage[$j]?>%</span>
+			  <img src="<?=PA::$url ?>/makebar.php?rating=<?=$percentage[$j]?>&amp;width=150&amp;height=10" border="0" />
+              <span class="count">(<?=$vote_count[$j]?> votes)</span>
           <?php
           }
        }
@@ -46,7 +34,9 @@
           <br/>
           <input type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
         </div>
-     <? } ?>
+     <? } else { ?>
+		<?php echo ($show_poll_link != '') ? '<p class="vote_link"><a href="'.$show_poll_link.'">OK, I\'m ready to vote!</a></p>'."\n" : ''; ?>
+	<?php } ?>
     </div>
   </form>
   <?php
