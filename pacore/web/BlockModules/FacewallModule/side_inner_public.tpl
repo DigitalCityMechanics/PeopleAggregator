@@ -29,6 +29,7 @@
 			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b><br/>
           <?= sprintf(__("(%d friends)"), $links['users_data'][$counter]['no_of_relations']) ?>
         </span>
+        <div class="clear"></div>
       </li>
       <?php 
         }
