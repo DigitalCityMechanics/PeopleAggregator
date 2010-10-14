@@ -337,6 +337,9 @@
         <PAGE_NETWORK_MANAGE_SUGGESTIONS category="constant" type="int" readonly="true" section="pages" page_name="network_manage_suggestions" page_type="network">
           <value>738</value>
         </PAGE_NETWORK_MANAGE_SUGGESTIONS>
+		<PAGE_POLL_MODULE category="constant" type="int" readonly="true" section="pages" page_name="page_poll_module" page_type="network">
+          <value>739</value>
+        </PAGE_POLL_MODULE>
       </value>
     </pages>
     <system_strings description="Various strings and messages">
