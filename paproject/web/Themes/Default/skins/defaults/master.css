@@ -238,6 +238,7 @@ padding-left: 25px;
 .dnld.video {background: url(images/video.png) no-repeat 0 3px;}
 .dnld.document {background: url(images/document.png) no-repeat 0 3px;}
 .dnld.image {background: url(images/image.png) no-repeat 0 3px;}
+.dnld.links {background: url(images/link.png) no-repeat 0 3px;}
 .dnld strong {display: block;}
 .dnld p {margin-bottom: .2em;}
 
@@ -943,10 +944,6 @@ color: #fff;
 =Miscellaneous
 -----------------------------------------------*/
 
-.clear {
-clear: both;
-}
-
 hr {
 display: block;
 border: 0;
@@ -1062,6 +1059,13 @@ visibility: hidden;
 
 /* IE6 */
 * html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media {zoom: 1;}
+
+* html .group {zoom: 1;}
+
+/* IE7 */
+*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media {zoom: 1;}
+
+*:first-child+html .group {zoom: 1;}
 
 * html .group {zoom: 1;}
 
