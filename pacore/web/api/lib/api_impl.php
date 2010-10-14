@@ -803,6 +803,29 @@ function peopleaggregator_newOrg($args)
 	);
 }
 
+function civiccommons_newOrg($args)
+{
+	$status = peopleaggregator_newUser($args);
+	if($status['success'] !== true)
+	{
+		return $status;
+	}
+
+	$status = peopleaggregator_login($args);
+	if($status['success'] !== true)
+	{
+		return $status;
+	}
+
+	// get the authToken from api logging in the previously created user
+	$args['authToken'] = $status['authToken'];
+
+	// change 'groupName' back to expected 'name'
+	$args['name'] = isset($args['groupName']) ? $args['groupName'] : null;
+
+	return peopleaggregator_newOrg($args);
+}
+
 function api_parse_group_id($id) {
 	if (preg_match("/^group:(\d+)$/", $id, $m)) {
 		return $m[1];

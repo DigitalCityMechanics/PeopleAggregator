@@ -42,14 +42,18 @@ class PollModule extends Module {
       $total_vote = $obj->load_vote($current[0]->poll_id);
       $this->total_vote_count = count($total_vote);
 
-      $this->topic = $obj->load_poll($current[0]->poll_id, $_GET['gid']);
+      $this->topic = $obj->load_poll($current[0]->poll_id, (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : null);
       $this->options = unserialize($this->topic[0]->options);
       $num_option = count($this->options);
       $cnt = count($total_vote);
+      $this->previous_vote_detected = false;
       if ($cnt > 0) {
         for ($i=0; $i<$cnt; $i++) {
-          if ($total_vote[$i]->user_id == PA::$login_uid || @$_COOKIE['vote'] == $current[0]->poll_id) {
+          if ($total_vote[$i]->user_id == PA::$login_uid || @$_COOKIE['vote'] == $current[0]->poll_id || (isset($_GET) && isset($_GET['show_poll_results']) && $_GET['show_poll_results'] == 'true')) {
             $this->flag = 1;
+            if ($total_vote[$i]->user_id == PA::$login_uid || @$_COOKIE['vote'] == $current[0]->poll_id) {
+              $this->previous_vote_detected = true;
+            }
             for ($j=1; $j<=$num_option; $j++) {
               if ($this->options['option'.$j] != '') {
                 $vote[] = $obj->load_vote_option($current[0]->poll_id, $this->options['option'.$j]);
@@ -86,6 +90,28 @@ class PollModule extends Module {
     $inner_html_gen->set('total_vote', $this->total_vote_count);
     $inner_html_gen->set('options', $this->options);
     $inner_html_gen->set('cnt_prev', $this->cnt_prev);
+
+	$url = isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : '';
+	$query = isset($_SERVER['REDIRECT_QUERY_STRING']) ? $_SERVER['REDIRECT_QUERY_STRING'] : '';
+
+	parse_str($query, $query_vars);
+	if(!isset($query_vars['show_poll_results'])) {
+		$query_vars['show_poll_results'] = 'true';
+	}
+
+	if ($this->flag == 0) {
+		$inner_html_gen->set('show_results_link', $url.((http_build_query($query_vars) != '') ? '?'.http_build_query($query_vars) : ''));
+	} else {
+		$inner_html_gen->set('show_results_link', '');
+	}
+
+	if (!$this->previous_vote_detected && $this->flag == 1) {
+		unset($query_vars['show_poll_results']);
+		$inner_html_gen->set('show_poll_link', $url.((http_build_query($query_vars) != '') ? '?'.http_build_query($query_vars) : ''));
+	} else {
+		$inner_html_gen->set('show_poll_link', '');
+	}
+
     $inner_html = $inner_html_gen->fetch();
     return $inner_html;
   }

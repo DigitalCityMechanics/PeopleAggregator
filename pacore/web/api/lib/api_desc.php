@@ -144,6 +144,64 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 'type'=>'enum'),
 'name'=>array('type'=>'string')),
 'type'=>'post'),
+
+'civiccommons.newOrg'=>array(
+	'argstyle'=>'named',
+	'return'=>array(
+		'content'=>array(
+			'id'=>array('type'=>'string'),
+			'success'=>array('type'=>'boolean')
+		),
+		'type'=>'hash',
+		'allow_extra_keys'=>0
+	),
+	'args'=>array(
+		'firstName'=>array('type'=>'string'),
+		'adminPassword'=>array('type'=>'string'),
+		'lastName'=>array('type'=>'string'),
+		'login'=>array('type'=>'string'),
+		'password'=>array('type'=>'string'),
+		'email'=>array('type'=>'string'),
+		'profilePictureURL'=>array(
+			'optional'=>TRUE,
+			'type'=>'string'
+		),
+		'homeNetwork'=>array(
+			'default'=>'default',
+			'type'=>'string'
+		),
+		'category'=>array('type'=>'string'),
+		'groupType'=>array('type'=>'string'),
+		'registrationType'=>array(
+			'values'=>array(
+				'open',
+				'moderated',
+				'invite'
+			),
+			'type'=>'enum'
+		),
+		'description'=>array('type'=>'string'),
+		'tags'=>array('type'=>'string'),
+		'image'=>array('type'=>'string'),
+		'accessType'=>array(
+			'values'=>array(
+				'public',
+				'members'
+			),
+			'type'=>'enum'
+		),
+		'moderationType'=>array(
+			'values'=>array(
+				'direct',
+				'moderated'
+			),
+			'type'=>'enum'
+		),
+		'groupName'=>array('type'=>'string')
+	),
+	'type'=>'post'
+),
+
 'peopleaggregator.findGroup'=>array('argstyle'=>'named',
 'return'=>array('content'=>array('groups'=>array('item'=>array('content'=>array('id'=>array('type'=>'string'),
 'name'=>array('type'=>'string')),
