@@ -21,14 +21,6 @@
    }
 ?>
 <div id="header-wrapper"><div id="header"<?php echo $style?>>
-  <?php if(@PA::$extra['language_bar_enabled']) : ?>
-    <div class="language_bar">
-      <?php foreach(array_keys($app->installed_languages) as $lang) {
-        $src_url = add_querystring_var($app->request_uri, "lang", $lang);
-        echo "<a href=\"$src_url\"><img src= \"" . PA::$theme_url . "/images/flags/$lang.png\" /></a> ";
-      } ?>
-    </div>
-  <?php endif; ?>
 	<a id='logo' href='<?php echo CC_APPLICATION_URL . "/" ?>' title='Civic Commons'>Civic Commons</a>
 	<div id="header-utility">
 	<?  if(!isset($_SESSION['user'])) { ?>
