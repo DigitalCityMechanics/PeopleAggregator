@@ -27,6 +27,7 @@
       <item>user_skin.css</item>
     </page_css>
     <page_theme>Default</page_theme>
+    <block_type>Homepage</block_type>
     <body_attributes></body_attributes>
     <access_permission/>
     <navigation_code/>
