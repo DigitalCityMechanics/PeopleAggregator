@@ -3934,15 +3934,11 @@ div.error {
    background-color: #EEEEEE;
  }
 
- /* --- jquery UI customizations ---*/
- .ui-widget { font-size: 0.9em!important;font-family: Helvetica Neue, Helvetica, Arial, sans-serif!important;}
-.ui-widget .ui-widget { font-size: 0.9em!important; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Helvetica Neue, Helvetica, Arial, sans-serif!important;font-size: 0.7em!important; }
-#tabs-contributions ul.ui-tabs-nav li a,
-#tabs ul.ui-tabs-nav li a {font-size: 0.8em!important;}
-
 /* --- BlockModule Customizations --- */
 .aside .mod h3 {font-size:0.9em;}
+<<<<<<< Updated upstream
 
 /* --- Misc Customizations --- */
 div.steps ul {margin:0;}
+=======
+>>>>>>> Stashed changes

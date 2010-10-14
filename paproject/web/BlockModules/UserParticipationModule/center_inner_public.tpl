@@ -20,7 +20,7 @@ div.participation img {
 }
 div.participation h2 {font-size:100%;}
 div.participation div.below {clear:both;padding:5px;}
-div.tab-links{text-align:right;}
+div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:uppercase;}
 </style>
 
 <?php global  $login_uid;?>
