@@ -49,7 +49,7 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 					?>
 					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
-				<h2><a href="#"><?php echo $conversation['title']; ?></a></h2>
+				<h2><a href="<?php echo $conversation['url']; ?>"><?php echo $conversation['title']; ?></a></h2>
 				<p><?php echo $conversation['summary']; ?></p>
 			</div>
 			<div class="below">
@@ -100,8 +100,7 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 	<?php foreach($following  as $followed){ ?>
 		<div class="participation">
 			<div class="above">
-				<?php if(isset($followed['image'])){ 
-				
+				<?php if(isset($followed['parent_image'])){ 
 					$width = 100;
 					$height = 100;
 					if(isset($followed['parent_image_width']) && is_Numeric($followed['parent_image_width'])){
@@ -111,10 +110,9 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 						$height = $followed['parent_image_height'];
 					}
 				?>
-					<img src="<?php echo $followed['image']; ?>" alt="Following image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
+					<img src="<?php echo $followed['parent_image']; ?>" alt="followed image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
 				<?php } ?>
-				<h2><a href="#"><?php echo $followed['title']; ?></a></h2>
-				<p><?php echo $followed['summary']; ?></p>
+				<h2><a href="<?php echo $followed['parent_url'] ?>" title="View"><?php echo $followed['parent_title']; ?></a></h2>
 			</div>
 			<div class="below">
 				<a href="#"><?php echo $followed['participant_count']; ?> Participants</a> | <a href="#"><?php echo $followed['contribution_count']; ?> Contributions</a>
