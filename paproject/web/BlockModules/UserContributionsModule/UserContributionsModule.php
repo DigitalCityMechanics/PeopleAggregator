@@ -88,7 +88,7 @@ class UserContributionsModule extends Module {
 		if(isset($User_id)){
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$defaultResult = array('parent_title'=>'No contributions', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('parent_title'=>'No contributions', 'url'=>'#', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
 			$responseStatus = $request->createCurl();
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
