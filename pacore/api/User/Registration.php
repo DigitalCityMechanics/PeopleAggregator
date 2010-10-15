@@ -69,6 +69,12 @@ class User_Registration {
   function register($params, $network_info=NULL) {
      
 	$picture = null;
+	$picture_dimensions = null;
+	$avatar = null;
+	$avatar_dimensions = null;
+	$avatar_small = null;
+	$avatar_small_dimensions = null;
+	
     $this->newuser = new User();
 
     // set API call variable 
@@ -99,7 +105,12 @@ class User_Registration {
       
       if($this->api_call == true){
       	// TODO: validate URL
-      	$picture = trim($params['profile_picture_url']);
+      	$picture = trim($params['profile_picture_url']);      	
+      	$picture_dimensions = $params['profile_picture_dimensions'];
+      	$avatar = trim($params['profile_avatar_url']);
+      	$avatar_dimensions = $params['profile_avatar_dimensions'];
+      	$avatar_small = trim($params['profile_avatar_small_url']);
+      	$avatar_small_dimensions = $params['profile_avatar_small_dimensions'];
       }
       
       $date_created = (!empty($params['date_created'])) ? $params['date_created'] : null;
@@ -277,7 +288,17 @@ class User_Registration {
       if($this->api_call == true){
       	if($picture != null){
       		$this->newuser->picture = Storage::validateFileId($picture);
+      		$this->newuser->picture_dimensions = $picture_dimensions;
       	}
+      	if($avatar != null){
+      		$this->newuser->avatar = Storage::validateFileId($avatar);
+      		$this->newuser->avatar_dimensions = $avatar_dimensions;
+      	}
+      	if($avatar_small != null){
+      		$this->newuser->avatar_small = Storage::validateFileId($avatar_small);
+      		$this->newuser->avatar_small_dimensions = $avatar_small_dimensions;
+      	}
+      	print_r($this->newuser);
       }else{
       	$this->newuser->picture = Storage::validateFileId(@$params['user_filename']);
       }

@@ -359,22 +359,40 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 
 
 'peopleaggregator.newUser'=>array('argstyle'=>'named',
-'return'=>array('content'=>array('msg'=>array('type'=>'string'),
-'id'=>array('type'=>'int'),
-'network_id'=>array('type'=>'int'),
-'success'=>array('type'=>'boolean')),
-'type'=>'hash',
-'allow_extra_keys'=>0),
-'args'=>array('firstName'=>array('type'=>'string'),
-'adminPassword'=>array('type'=>'string'),
-'lastName'=>array('type'=>'string'),
-'login'=>array('type'=>'string'),
-'password'=>array('type'=>'string'),
-'email'=>array('type'=>'string'),
-'profilePictureURL'=>array('optional'=>TRUE,'type'=>'string'),
-'homeNetwork'=>array('default'=>'default',
-'type'=>'string')),
-'type'=>'post'),
+	'return'=>array(
+		'content'=>array(
+		'msg'=>array('type'=>'string'),
+		'id'=>array(
+			'type'=>'int'),
+			'network_id'=>array('type'=>'int'),
+			'success'=>array(
+				'type'=>'boolean')
+			),
+			'type'=>'hash',
+		'allow_extra_keys'=>0
+		),
+	'args'=>array('firstName'=>array('type'=>'string'),
+		'adminPassword'=>array('type'=>'string'),
+		'lastName'=>array('type'=>'string'),
+		'login'=>array('type'=>'string'),
+		'password'=>array('type'=>'string'),
+		'email'=>array('type'=>'string'),
+		'profilePictureURL'=>array('optional'=>TRUE,'type'=>'string'),
+		'profilePictureWidth'=>array('optional'=>TRUE,'type'=>'int'),
+		'profilePictureHeight'=>array('optional'=>TRUE,'type'=>'int'),
+		'profileAvatarURL'=>array('optional'=>TRUE,'type'=>'string'),
+		'profileAvatarWidth'=>array('optional'=>TRUE,'type'=>'int'),
+		'profileAvatarHeight'=>array('optional'=>TRUE,'type'=>'int'),
+		'profileAvatarSmallURL'=>array('optional'=>TRUE,'type'=>'string'),
+		'profileAvatarSmallWidth'=>array('optional'=>TRUE,'type'=>'int'),
+		'profileAvatarSmallHeight'=>array('optional'=>TRUE,'type'=>'int'),				
+		'homeNetwork'=>array(
+			'default'=>'default',
+			'type'=>'string'
+		)
+	),
+	'type'=>'post'
+),
 
 'peopleaggregator.deleteUser'=>array(
 	'argstyle'=>'named',
