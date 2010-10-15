@@ -530,6 +530,10 @@ function peopleaggregator_newUser($args)
 	// register the user
 	$reg = new User_Registration();
 	$reg->api_call = true;    // api_call indicates that this is a PeopleAggregator API request
+	$profile_picture_dimensions = User::image_dimensions_to_array($args['profilePictureURLWidth'], $args['profilePictureURLHeight']);
+	$profile_avatar_dimensions = User::image_dimensions_to_array($args['profileAvatarURLWidth'], $args['profileAvatarURLHeight']);
+	$profile_avatar_small_dimensions = User::image_dimensions_to_array($args['profileAvatarSmallURLWidth'], $args['profileAvatarSmallURLHeight']);
+//	print_r($args);
 	$newUserData = array(
 		'login_name' => $args['login'],
 		'first_name' => $args['firstName'],
@@ -537,7 +541,12 @@ function peopleaggregator_newUser($args)
 		'email' => $args['email'],
 		'password' => $args['password'],
 		'confirm_password' => $args['password'],
-		'profile_picture_url' => $args['profilePictureURL']
+		'profile_picture_url' => $args['profilePictureURL'],
+		'profile_avatar_url' => $args['profileAvatarURL'],
+		'profile_avatar_small_url' => $args['profileAvatarSmallURL'],
+		'profile_picture_dimensions' => $profile_picture_dimensions,
+		'profile_avatar_dimensions' => $profile_avatar_dimensions,
+		'profile_avatar_small_dimensions' => $profile_avatar_small_dimensions,
 	);
 	if (!$reg->register($newUserData, $home_network)) {
 		//	header('HTTP/1.1 500 Internal Server Error');

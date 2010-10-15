@@ -40,6 +40,13 @@ define('CC_ROUTE_ABOUT', 			'/about');
   
     /**
     *
+    *  / -> /index.php
+    *
+    **/
+    "^/blog$"  => "/index.php",
+  
+    /**
+    *
     *  / -> /organizations
     *
     **/

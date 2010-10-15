@@ -97,6 +97,47 @@ class User {
   */
   public $picture;
 
+  // Parag Jagdale: 10/14/10 - added avatar and avatar_small images along with their widths and heights picture width and height ---
+  /**
+  * Dimensions of the image 
+  *
+  * @var array
+  */
+  public $picture_dimensions;
+  
+
+  /**
+  * Filename of the user uploaded photo resized to a medium size.
+  *
+  * @var string
+  */
+  public $avatar;
+  
+  /**
+  * Filename of the user uploaded photo resized to a medium size width.
+  * 
+  *
+  * @var array
+  */
+  public $avatar_dimensions;
+ 
+  
+  /**
+  * Filename of the user uploaded photo resized to a small size.
+  *
+  * @var string
+  */
+  public $avatar_small;
+  
+  /**
+  * Dimensions of the image 
+  *
+  * @var array
+  */
+  public $avatar_small_dimensions;
+  
+// Parag Jadgale --- end  
+  
   /**
   * Is this user active?
   *
@@ -262,6 +303,7 @@ class User {
       $this->changed = $row->changed;
       $this->last_login = $row->last_login;
       $this->picture = $row->picture;
+      $this->avatar = $row->avatar;
       $this->role = $this->load_user_roles();
     }
     $dn = new UserDisplayName($this);
@@ -548,6 +590,20 @@ class User {
         Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
         throw new PAException(INVALID_FILE,"Invalid image format");
       }
+// Parag Jagdale - add extra image size url to store avatar and avatar_small images    
+      if(!is_valid_web_image_name($this->avatar)) { // fix invalid image names
+        $this->avatar = '';
+        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
+        throw new PAException(INVALID_FILE,"Invalid image format");
+      }
+      
+      if(!is_valid_web_image_name($this->avatar_small)) { // fix invalid image names
+        $this->avatar_small = '';
+        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
+        throw new PAException(INVALID_FILE,"Invalid image format");
+      }
+// Parag Jagdale --- end
+      
       // added to remove unnecessary check whether the word begins or ends with a 'space' character
       $this->first_name = @trim($this->first_name);
       $this->last_name  = @trim($this->last_name);
@@ -591,9 +647,13 @@ class User {
         }
         $this->changed = $this->created;
         $this->last_login = time();
-
-        $sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->last_login);
+        if($this->api_call == true){
+        	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
+        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);
+        }else{
+        	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->last_login);
+        }
         Dal::query($sql, $data);
 
     // Code for sending the data to ping server: begin
@@ -636,9 +696,14 @@ class User {
               throw new PAException(USER_EMAIL_NOT_UNIQUE, "Email address that you have given is already taken please give another email address");
             }
           }
-        }    
-        $sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ? WHERE user_id = ?';
-        $data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->user_id);
+        }
+        if($this->api_call == true){
+        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ?, picture_width = ?, picture_height = ?, avatar = ?, avatar_width = ?, avatar_height = ?, avatar_small_width = ?, avatar_small_height = ? WHERE user_id = ?';
+        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->user_id);
+        }else{
+        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ? WHERE user_id = ?';
+        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->user_id);
+        }
         Dal::query($sql, $data);
       }
 
@@ -1900,12 +1965,12 @@ class User {
     $sql = "SELECT DISTINCT (field_type)
       FROM user_profile_data
       WHERE user_id = $uid";
-    $res = Dal::query($sql);
+    $res = Dal::query($sql);/*
     if (PEAR::isError($res)) {
       Logger::log(" Throwing exception DB_QUERY_FAILED | " .
                   "Message: $res->getMessage()", LOGGER_ERROR);
       throw new PAException(DB_QUERY_FAILED, $res->getMessage());
-    }
+    }*/
     if ($res->numrows() > 0) {
       while ($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
         $sections[] = $row->field_type;
@@ -2434,6 +2499,18 @@ class User {
     list($login) = Dal::query_one("SELECT login_name FROM {users} WHERE user_id=? AND is_active=1", Array($user_id));
     Logger::log("Exit: function User::get_login_name_from_id");
     return $login;
+  }
+  
+  /***
+   * Create a standard dimensions array from a width and height value
+   * @author	Parag Jagdale
+   * @date		10/14/10
+   * @param	width	integer
+   * @param height	integer
+   */
+  public static function image_dimensions_to_array($width, $height){
+  	echo $width;
+  	return array('width'=>100, 'height'=>100);
   }
 }
 ?>

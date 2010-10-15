@@ -2974,7 +2974,18 @@ CREATE TABLE IF NOT EXISTS `users` (
 `last_name` varchar(100) default NULL,
 `email` varchar(255) NOT NULL default '',
 `is_active` tinyint(1) NOT NULL default '0',
+-- picture is the large photo
 `picture` varchar(255) default NULL,
+`picture_width` int(3) default NULL,
+`picture_height` int(3) default NULL,
+-- avatar is the medium sized photo
+`avatar` varchar(255) default NULL,
+`avatar_width` int(3) default NULL,
+`avatar_height` int(3) default NULL,
+-- avatar_small is the small photo used in the header etc.
+`avatar_small` varchar(255) default NULL,
+`avatar_small_width` int(3) default NULL,
+`avatar_small_height` int(3) default NULL,
 `created` int(11) NOT NULL default '0',
 `changed` int(11) NOT NULL default '0',
 `last_login` int(11) default NULL,
