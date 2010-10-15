@@ -298,7 +298,6 @@ class User_Registration {
       		$this->newuser->avatar_small = Storage::validateFileId($avatar_small);
       		$this->newuser->avatar_small_dimensions = $avatar_small_dimensions;
       	}
-      	print_r($this->newuser);
       }else{
       	$this->newuser->picture = Storage::validateFileId(@$params['user_filename']);
       }
