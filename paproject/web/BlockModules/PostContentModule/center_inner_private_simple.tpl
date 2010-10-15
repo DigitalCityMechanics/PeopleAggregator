@@ -25,9 +25,9 @@ require_once "api/Permissions/PermissionsHandler.class.php";
   <div class="steps">
     <ul>
     <?php if ($is_edit) { ?>
-      <li><h3><?= __("edit your post") ?></h3></li>
+      <li><h1><?= __("Edit Your Post") ?></h1></li>
     <? } else { ?>
-      <li><h3><?= __("create your post") ?></h3></li>
+      <li><h1><?= __("Create Your Post") ?></h1></li>
     <? } ?>
     </ul>
     <ul id="create_blog_form">
@@ -36,14 +36,13 @@ require_once "api/Permissions/PermissionsHandler.class.php";
         </li>
       </ul>
       <ul>
-      <li><h3>publish post</h3></li>
     </ul>
     <ul id="publish_post">
         <li>
-           <input type="button" name="cancel" value="Cancel" onclick="JavaScript:   document.location='<?= PA::$url . PA_ROUTE_USER_PRIVATE  ?>';"/>
            <input type="hidden" name="save_publish_post" value="1" id="save_publish_post" />
            <input type="hidden" name="publish" value="<?php echo (!$is_edit) ? 'Publish Post' : 'Update Post'; ?>">
-           <input type="submit" name="publish_post" value="<?php echo (!$is_edit) ? 'Publish Post' : 'Update Post'; ?>" />
+           <input type="submit" name="publish_post" class="submit" value="<?php echo (!$is_edit) ? 'Publish Post' : 'Update Post'; ?>" />
+           or <a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE  ?>">cancel</a>
         </li>
       </ul>
       </div>

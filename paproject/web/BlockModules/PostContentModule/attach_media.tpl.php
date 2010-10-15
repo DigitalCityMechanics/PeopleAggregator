@@ -11,13 +11,10 @@
 */
 ?>
 <fieldset id='media'>
-  <legend><a><b><?= __('Attach Media')?></b></a></legend>
-  <div id="buttonbar">
   <ul>
-  <li><a href="#" onclick="return show_upload('Images');"><?=__('Image')?></a></li>
-  <li><a href="#" onclick="return show_upload('YouTube');"><?=__('YouTube')?></a></li>
+    <li><a href="#" class="button" onclick="return show_upload('Images');"><?=__('Attach Image')?></a></li>
+    <li><a href="#" class="button" onclick="return show_upload('YouTube');"><?=__('Attach YouTube Video')?></a></li>
   </ul>
-  </div>
   <div id="attach_media" style="display:none;"></div>
 	</fieldset>
 <br clear="all" />

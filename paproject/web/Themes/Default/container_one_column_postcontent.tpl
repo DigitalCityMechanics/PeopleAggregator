@@ -3,7 +3,7 @@
 <?php echo $header;?>
 <div id="bg_blog_big"></div>
 <div id="content">  
-  <div id="col_d">
+  <div id="col_d" class="content-container">
     <?php
       if ( isset($array_middle_modules) and (count( $array_middle_modules ) > 0 ) ) {
         foreach ( $array_middle_modules as $middle_module ) {
