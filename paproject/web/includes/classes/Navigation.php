@@ -314,15 +314,15 @@ class Navigation {
 		//we need uid for some links
 		$user_children = array();
 		$user_children = $user_children + array(
-                       'user_private' => array('caption'=>__('My Page'),
-                                  'url'=>$this->base_url . PA_ROUTE_USER_PRIVATE),
+                       'user_private' => array('caption'=>__('My Public Page'),
+                                  'url'=>$this->base_url . PA_ROUTE_USER_PUBLIC . '/' . $uid),
 		);
 		$user_children = $user_children + array(
                        'create_post' => array('caption'=>__('Create A Post'),
                                   'url'=>$this->base_url . "/post_content.php"),
 		);
 		$user_children = $user_children + array(
-                       'manage_contributions' => array('caption'=>__('Manage My Contributions'),
+                       'manage_contributions' => array('caption'=>__('Manage My Contributions &amp; Drafts'),
                                   'url'=>$this->base_url . "/content_management.php"),
 		);
 		$user_children = $user_children + array(

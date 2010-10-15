@@ -2509,8 +2509,7 @@ class User {
    * @param height	integer
    */
   public static function image_dimensions_to_array($width, $height){
-  	echo $width;
-  	return array('width'=>100, 'height'=>100);
+  	return array('width'=>$width, 'height'=>$height);
   }
 }
 ?>
