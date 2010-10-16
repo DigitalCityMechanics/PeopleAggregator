@@ -530,9 +530,9 @@ function peopleaggregator_newUser($args)
 	// register the user
 	$reg = new User_Registration();
 	$reg->api_call = true;    // api_call indicates that this is a PeopleAggregator API request
-	$profile_picture_dimensions = User::image_dimensions_to_array($args['profilePictureURLWidth'], $args['profilePictureURLHeight']);
-	$profile_avatar_dimensions = User::image_dimensions_to_array($args['profileAvatarURLWidth'], $args['profileAvatarURLHeight']);
-	$profile_avatar_small_dimensions = User::image_dimensions_to_array($args['profileAvatarSmallURLWidth'], $args['profileAvatarSmallURLHeight']);
+	$profile_picture_dimensions = User::image_dimensions_to_array($args['profilePictureWidth'], $args['profilePictureHeight']);
+	$profile_avatar_dimensions = User::image_dimensions_to_array($args['profileAvatarWidth'], $args['profileAvatarHeight']);
+	$profile_avatar_small_dimensions = User::image_dimensions_to_array($args['profileAvatarSmallWidth'], $args['profileAvatarSmallHeight']);
 
 	$newUserData = array(
 		'login_name' => $args['login'],
