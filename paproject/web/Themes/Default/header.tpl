@@ -50,7 +50,7 @@
 					<?php echo uihelper_resize_mk_user_img($login_user->picture, 40, 40, 'alt="User Picture" class="callout"'); ?>
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
-				<a title="logout" href="<?php echo CC_APPLICATION_URL . "/people/logout" ?>">Logout</a>
+				<a title="logout" href="/logout.php">Logout</a>
 			</div>
        		<?php /*include("web/includes/shortcuts_menu.php");*/ ?>
 		</div>
