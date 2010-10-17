@@ -364,25 +364,66 @@ class InstallTests
       if(!$user_db) {
 	      $this->note("The database was successfully created.", 'ok');
 	      // now set up databases
+	      
 	      $this->note("Initializing database ... ", 'info');
-	      if($sql_file = getShadowedPath("web/install/PeepAgg.mysql")) {
-		      if($this->run_query_file($sql_file, $user_link)) {
-			      $this->note("The database was successfully populated.", 'ok');
-			      define("CURRENT_DB", $params['db_name']);
-			      $peepagg_dsn = "mysql://". $params['db_user'] .
-				      ":". $params['db_password'] .
-				      "@". $params['db_host'] .
-				      "/". $params['db_name'];
-			      $this->peepagg_dsn = $peepagg_dsn;
-			      $this->admin_exsts = false;
+//	Parag Jagdale - 10/16/10:	Add ability to specify seed file that contains data to insert      
+	      if(isset($params['insert_seed_data'])){
+			  // use the PeepAgg structure and seed files 
+		      if($sql_file = getShadowedPath("web/install/PeepAgg.structure.mysql")) {
+			      if($this->run_query_file($sql_file, $user_link)) {
+				      $this->note("The database structure was successfully created.", 'ok');
+				      define("CURRENT_DB", $params['db_name']);
+				      $peepagg_dsn = "mysql://". $params['db_user'] .
+					      ":". $params['db_password'] .
+					      "@". $params['db_host'] .
+					      "/". $params['db_name'];
+				      $this->peepagg_dsn = $peepagg_dsn;
+				      $this->admin_exsts = false;		      
+			      }
 		      } else {
-			      $this->note("The installer is unable to execute MySQL queries.", 'error');
+			      $this->note("File <code>$sql_file</code> does not exists.", 'error');
 			      return false;
 		      }
-	      } else {
-		      $this->note("File <code>$fn</code> does not exists.", 'error');
-		      return false;
+		      // run the PeepAgg seed file
+		      if($sql_file = getShadowedPath("web/install/PeepAgg.seed.mysql")) {
+			      if($this->run_query_file($sql_file, $user_link)) {
+				      $this->note("The database was successfully inserted with seed data.", 'ok');
+				      $peepagg_dsn = "mysql://". $params['db_user'] .
+					      ":". $params['db_password'] .
+					      "@". $params['db_host'] .
+					      "/". $params['db_name'];
+				      $this->peepagg_dsn = $peepagg_dsn;
+				      $this->admin_exsts = false;		      
+			      }
+		      } else {
+			      $this->note("File <code>$sql_file</code> does not exists.", 'error');
+			      return false;
+		      }
+		      
+			  $this->admin_exists = $this->check_admin_exists($user_link);
+		      	
+	      }else{
+			  // use the normal PeepAgg.mysql which contains both the structure and basic data to seed all in one file
+		      if($sql_file = getShadowedPath("web/install/PeepAgg.mysql")) {
+			      if($this->run_query_file($sql_file, $user_link)) {
+				      $this->note("The database was successfully populated.", 'ok');
+				      define("CURRENT_DB", $params['db_name']);
+				      $peepagg_dsn = "mysql://". $params['db_user'] .
+					      ":". $params['db_password'] .
+					      "@". $params['db_host'] .
+					      "/". $params['db_name'];
+				      $this->peepagg_dsn = $peepagg_dsn;
+				      $this->admin_exsts = false;
+			      } else {
+				      $this->note("The installer is unable to execute MySQL queries.", 'error');
+				      return false;
+			      }
+		      } else {
+			      $this->note("File <code>$fn</code> does not exists.", 'error');
+			      return false;
+		      }
 	      }
+// Parag Jagdale - 10/17/10: end	      
       } else {
 	      define("CURRENT_DB", $params['db_name']);
 	      $peepagg_dsn = "mysql://". $params['db_user'] .
@@ -390,12 +431,7 @@ class InstallTests
 		      "@". $params['db_host'] .
 		      "/". $params['db_name'];
 	      $this->peepagg_dsn = $peepagg_dsn;
-	      $sql = "SELECT * FROM `users` WHERE `user_id` = '1'";
-	      if (mysql_num_rows($this->run_query($sql, $user_link)) > 0) {
-		      $this->note("Found existing admin user. Disabling install admin user setup...", "ok");
-		      $this->admin_exists = true;
-	      }
-	      
+	      $this->admin_exists = $this->check_admin_exists($user_link);
       }
      // now run upgrade scripts
       $this->note("Running database upgrade script.", 'info');
@@ -411,7 +447,23 @@ class InstallTests
 
       return true;
     }
-
+    
+    /**
+     * Queries the given database to check if any users with the userid of 1 is returned (the administrator).
+     * If there is a user with a userid of 1, returns true, else false 
+     * @param MYSQL link $user_link
+     * @return boolean
+     */
+	private function check_admin_exists($user_link){
+		$sql = "SELECT * FROM `users` WHERE `user_id` = '1'";
+		if (mysql_num_rows($this->run_query($sql, $user_link)) > 0) {
+			$this->note("Found existing admin user. Disabling install admin user setup...", "ok");
+			return true;
+		}else{
+			return false;			
+		}
+	} 
+	
     private function run_query_file($fn, $user_link) {
       $sql = file_get_contents($fn);
       if(!$sql) {

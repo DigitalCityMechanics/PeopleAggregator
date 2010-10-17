@@ -17,10 +17,16 @@
 		$("#create_db").click(function(){
 			$("#mysql_root_username").attr("disabled", false);
 			$("#mysql_root_password").attr("disabled", false);
+			$(".seed_field input").attr("disabled", false);
+			$(".seed_field").show();
+			$(".root_info").show();
 		});
 		$("#use_existing_db").click(function(){
 			$("#mysql_root_username").attr("disabled", true);
 			$("#mysql_root_password").attr("disabled", true);
+			$(".seed_field input").attr("disabled", true);
+			$(".seed_field").hide();
+			$(".root_info").hide();
 		});
 	});	
 	
