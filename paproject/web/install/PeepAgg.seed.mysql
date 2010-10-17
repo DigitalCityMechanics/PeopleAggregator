@@ -153,10 +153,11 @@ INSERT INTO `content_types` (`type_id`, `name`, `description`) VALUES
 -- Dumping data for table `message_folder`
 --
 
-INSERT INTO `message_folder` (`fid`, `uid`, `name`) VALUES
-(1, 1, 'Inbox'),
-(2, 1, 'Sent'),
-(3, 1, 'Draft');
+LOCK TABLES `message_folder` WRITE;
+/*!40000 ALTER TABLE `message_folder` DISABLE KEYS */;
+INSERT INTO `message_folder` VALUES (1,1,'Inbox'),(2,1,'Sent'),(3,1,'Draft'),(4,2,'Inbox'),(5,2,'Sent'),(6,2,'Draft'),(7,3,'Inbox'),(8,3,'Sent'),(9,3,'Draft'),(10,4,'Inbox'),(11,4,'Sent'),(12,4,'Draft');
+/*!40000 ALTER TABLE `message_folder` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -215,12 +216,20 @@ INSERT INTO `modules_settings` (`module_name`, `module_id`, `is_active`, `title`
 
 -- --------------------------------------------------------
 
+
 --
--- Dumping data for table `networks_users`
+-- Dumping data for table `networks`
 --
 
+LOCK TABLES `networks` WRITE;
+/*!40000 ALTER TABLE `networks` DISABLE KEYS */;
+INSERT INTO `networks` VALUES (1,'PeopleAggregator','default','PeopleAggregator',1,0,0,'This is home network for PeopleAggregator',NULL,NULL,NULL,1,1286487985,1286586838,0,'a:17:{s:5:\"basic\";a:1:{s:12:\"header_image\";a:2:{s:4:\"name\";N;s:6:\"option\";s:1:\"1\";}}s:12:\"notify_owner\";a:13:{s:20:\"some_joins_a_network\";a:2:{s:7:\"caption\";s:24:\"some one joins a network\";s:5:\"value\";s:1:\"0\";}s:14:\"content_posted\";a:2:{s:7:\"caption\";s:27:\"posts or content is created\";s:5:\"value\";s:1:\"0\";}s:13:\"group_created\";a:2:{s:7:\"caption\";s:33:\"a group is created on the network\";s:5:\"value\";s:1:\"0\";}s:22:\"group_settings_updated\";a:2:{s:7:\"caption\";s:27:\"group settings data changed\";s:5:\"value\";s:1:\"0\";}s:14:\"media_uploaded\";a:2:{s:7:\"caption\";s:35:\"media is uploaded to a user gallery\";s:5:\"value\";s:1:\"0\";}s:20:\"group_media_uploaded\";a:2:{s:7:\"caption\";s:36:\"media is uploaded to a group gallery\";s:5:\"value\";s:1:\"0\";}s:14:\"relation_added\";a:2:{s:7:\"caption\";s:29:\"a new relation is established\";s:5:\"value\";s:1:\"0\";}s:27:\"reciprocated_relation_estab\";a:2:{s:7:\"caption\";s:39:\"a reciprocated relationship establsihed\";s:5:\"value\";s:1:\"0\";}s:27:\"content_posted_to_comm_blog\";a:2:{s:7:\"caption\";s:51:\"new content is sent to the home page community blog\";s:5:\"value\";s:1:\"0\";}s:23:\"report_abuse_on_content\";a:2:{s:7:\"caption\";s:24:\"report abuse on contents\";s:5:\"value\";s:1:\"1\";}s:23:\"report_abuse_on_comment\";a:2:{s:7:\"caption\";s:24:\"report abuse on comments\";s:5:\"value\";s:1:\"1\";}s:16:\"content_modified\";a:2:{s:7:\"caption\";s:25:\"content has been modified\";s:5:\"value\";s:1:\"0\";}s:19:\"new_user_registered\";a:2:{s:7:\"caption\";s:34:\"new user registered on the network\";s:5:\"value\";s:1:\"1\";}}s:14:\"notify_members\";a:9:{s:17:\"invitation_accept\";a:3:{s:7:\"caption\";s:54:\"their invitation to join the network has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:38:\"relationship_created_with_other_member\";a:3:{s:7:\"caption\";s:56:\"someone has made them a friend or other kind of relation\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:24:\"someone_join_their_group\";a:3:{s:7:\"caption\";s:39:\"someone has joined a group they created\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"friend_request_sent\";a:3:{s:7:\"caption\";s:38:\"someone has sent them a friend request\";s:5:\"value\";s:1:\"1\";s:13:\"user_settable\";s:1:\"1\";}s:21:\"friend_request_denial\";a:3:{s:7:\"caption\";s:37:\"someone has denied to be their friend\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:13:\"bulletin_sent\";a:3:{s:7:\"caption\";s:36:\"network operator has sent a bulletin\";s:5:\"value\";s:1:\"3\";s:13:\"user_settable\";s:1:\"1\";}s:15:\"welcome_message\";a:3:{s:7:\"caption\";s:15:\"Welcome message\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:19:\"invite_accept_group\";a:3:{s:7:\"caption\";s:50:\"their invitation to join a group has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:23:\"friend_request_approved\";a:3:{s:7:\"caption\";s:41:\"someone has approved their friend request\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}}s:13:\"user_defaults\";a:7:{s:12:\"user_friends\";N;s:21:\"default_image_gallery\";N;s:21:\"default_audio_gallery\";N;s:21:\"default_video_gallery\";N;s:13:\"default_links\";s:1:\"0\";s:12:\"default_blog\";s:1:\"0\";s:13:\"desktop_image\";a:2:{s:4:\"name\";N;s:6:\"option\";s:1:\"1\";}}s:20:\"relationship_options\";a:5:{s:16:\"closest_relation\";a:2:{s:7:\"caption\";s:16:\"closest relation\";s:5:\"value\";s:11:\"Best Friend\";}s:14:\"close_relation\";a:2:{s:7:\"caption\";s:14:\"close relation\";s:5:\"value\";s:11:\"Good friend\";}s:8:\"relation\";a:2:{s:7:\"caption\";s:8:\"relation\";s:5:\"value\";s:6:\"Friend\";}s:16:\"distant_relation\";a:2:{s:7:\"caption\";s:16:\"distant relation\";s:5:\"value\";s:12:\"Acquaintance\";}s:21:\"most_distant_relation\";a:2:{s:7:\"caption\";s:21:\"most distant relation\";s:5:\"value\";s:11:\"Haven\'t Met\";}}s:19:\"network_group_title\";s:14:\"Community Blog\";s:15:\"network_feature\";s:0:\"\";s:18:\"top_navigation_bar\";i:0;s:26:\"network_content_moderation\";i:0;s:25:\"reciprocated_relationship\";i:1;s:16:\"captcha_required\";i:0;s:22:\"show_people_with_photo\";i:0;s:17:\"msg_waiting_blink\";i:0;s:16:\"email_validation\";i:1;s:20:\"language_bar_enabled\";i:0;s:16:\"default_language\";s:7:\"english\";s:12:\"network_skin\";s:8:\"defaults\";}',4,1);
+/*!40000 ALTER TABLE `networks` ENABLE KEYS */;
+UNLOCK TABLES;
+-- Dumping data for table `networks_users`
+--
 INSERT INTO `networks_users` (`network_id`, `user_id`, `user_type`, `created`) VALUES
-(1, 1, 'owner', 1247499193);
+(1,1,'owner',1247499193),(1,2,'member',1286488773),(1,3,'member',1286489089),(1,4,'member',1286503340);
 
 -- --------------------------------------------------------
 
@@ -521,34 +530,34 @@ INSERT INTO `tasks_roles` (`id`, `task_id`, `role_id`) VALUES
 
 -- --------------------------------------------------------
 --
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'administrator','f4b5bbae81f37eacba49b8a95aeb266f','People','Aggregator','civiccommons.staging@gmail.com',1,NULL,0,0,NULL,0,0,NULL,0,0,1286488130,1286488130,1286586787,NULL),(2,'winston.tsang@radberry.com','$2a$10$umGF8W4a.lhInxXJEHC8lOSi/xwJjnRwOHNRne1.kh9Dx0qFwtrNi','Winston','Tsang','winston.tsang@radberry.com',1,NULL,0,0,NULL,0,0,NULL,0,0,1286488773,1286488773,1286832768,NULL),(3,'brandon.dimcheff@gmail.com','$2a$10$r9mezjzYOGpRdWCF6fmdx.yKrp0CNqWdqmUpHX3s1dvaqOAHYu9be','Brandon','Dimcheff','brandon.dimcheff@gmail.com',1,NULL,0,0,NULL,0,0,NULL,0,0,1286489089,1286489089,1286489089,NULL),(4,'bdielman@gmail.com','$2a$10$2faPN9eTtPc.OsEkclCDx.NYK9/ZX5LM/hwB46pHL8PGuETR/Pbxu','Brad','Dielman','bdielman@gmail.com',1,NULL,0,0,NULL,0,0,NULL,0,0,1286503340,1286503340,1286503340,NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+-- --------------------------------------------------------
+--
 -- Dumping data for table `users_roles`
 --
 
-INSERT INTO `users_roles` (`user_id`, `role_id`, `extra`) VALUES
-(1, 1, 'a:3:{s:4:"user";b:0;s:7:"network";b:1;s:6:"groups";a:0:{}}');
+LOCK TABLES `users_roles` WRITE;
+/*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
+INSERT INTO `users_roles` VALUES (1,1,'a:3:{s:4:\"user\";b:0;s:7:\"network\";b:1;s:6:\"groups\";a:0:{}}'),(2,2,'a:3:{s:4:\"user\";b:1;s:7:\"network\";b:1;s:6:\"groups\";a:0:{}}'),(3,2,'a:3:{s:4:\"user\";b:1;s:7:\"network\";b:1;s:6:\"groups\";a:0:{}}'),(4,2,'a:3:{s:4:\"user\";b:1;s:7:\"network\";b:1;s:6:\"groups\";a:0:{}}');
+/*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 -- Dumping data for table `user_profile_data`
 --
-
-INSERT INTO `user_profile_data` (`user_id`, `field_name`, `field_value`, `field_type`, `field_perm`, `seq`) VALUES
-(1, 'settings', 'a:10:{s:17:"invitation_accept";a:3:{s:7:"caption";s:44:"join network invitations have been accepted.";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:19:"invite_accept_group";a:3:{s:7:"caption";s:42:"join group invitations have been accepted.";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:38:"relationship_created_with_other_member";a:3:{s:7:"caption";s:56:"someone has made them a friend or other kind of relation";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:24:"someone_join_their_group";a:3:{s:7:"caption";s:39:"someone has joined a group they created";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:19:"friend_request_sent";a:3:{s:7:"caption";s:38:"someone has sent them a friend request";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:23:"friend_request_approved";a:3:{s:7:"caption";s:39:"someone has approve your friend request";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:21:"friend_request_denial";a:3:{s:7:"caption";s:37:"someone has denied to be their friend";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:13:"bulletin_sent";a:3:{s:7:"caption";s:36:"network operator has sent a bulletin";s:5:"value";s:1:"0";s:13:"user_settable";s:1:"1";}s:15:"welcome_message";a:3:{s:7:"caption";s:15:"Welcome message";s:5:"value";s:1:"1";s:13:"user_settable";N;}s:17:"msg_waiting_blink";s:1:"0";}', 'notifications', 0, NULL),
-(1, 'last_name', 'PeepAgg', '4', 1, NULL),
-(1, 'first_name', 'Admin', '4', 1, NULL),
-(1, 'postal_code', NULL, '1', 0, NULL),
-(1, 'phone', NULL, '1', 0, NULL),
-(1, 'homeAddress2', NULL, '1', 0, NULL),
-(1, 'homeAddress1', NULL, '1', 0, NULL),
-(1, 'dob_year', '1933', '1', 0, NULL),
-(1, 'dob_month', '1', '1', 0, NULL),
-(1, 'dob_day', '1', '1', 0, NULL),
-(1, 'dob', '1933-1-1', '1', 0, NULL),
-(1, 'country', NULL, '1', 0, NULL),
-(1, 'city', NULL, '1', 0, NULL),
-(1, 'state', NULL, '1', 0, NULL),
-(1, 'user_caption_image', 'bay.jpg', '1', 0, NULL),
-(1, 'time_spent', '27', '5', 0, NULL);
-
+LOCK TABLES `user_profile_data` WRITE;
+/*!40000 ALTER TABLE `user_profile_data` DISABLE KEYS */;
+INSERT INTO `user_profile_data` VALUES (1,'settings','a:10:{s:17:\"invitation_accept\";a:3:{s:7:\"caption\";s:44:\"join network invitations have been accepted.\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"invite_accept_group\";a:3:{s:7:\"caption\";s:42:\"join group invitations have been accepted.\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:38:\"relationship_created_with_other_member\";a:3:{s:7:\"caption\";s:56:\"someone has made them a friend or other kind of relation\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:24:\"someone_join_their_group\";a:3:{s:7:\"caption\";s:39:\"someone has joined a group they created\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"friend_request_sent\";a:3:{s:7:\"caption\";s:38:\"someone has sent them a friend request\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:23:\"friend_request_approved\";a:3:{s:7:\"caption\";s:39:\"someone has approve your friend request\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:21:\"friend_request_denial\";a:3:{s:7:\"caption\";s:37:\"someone has denied to be their friend\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:13:\"bulletin_sent\";a:3:{s:7:\"caption\";s:36:\"network operator has sent a bulletin\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:15:\"welcome_message\";a:3:{s:7:\"caption\";s:15:\"Welcome message\";s:5:\"value\";s:1:\"1\";s:13:\"user_settable\";N;}s:17:\"msg_waiting_blink\";s:1:\"0\";}','notifications',0,NULL),(1,'last_name','PeepAgg','4',1,NULL),(1,'first_name','Admin','4',1,NULL),(1,'postal_code',NULL,'1',0,NULL),(1,'phone',NULL,'1',0,NULL),(1,'homeAddress2',NULL,'1',0,NULL),(1,'homeAddress1',NULL,'1',0,NULL),(1,'dob_year','1933','1',0,NULL),(1,'dob_month','1','1',0,NULL),(1,'dob_day','1','1',0,NULL),(1,'dob','1933-1-1','1',0,NULL),(1,'country',NULL,'1',0,NULL),(1,'city',NULL,'1',0,NULL),(1,'state',NULL,'1',0,NULL),(1,'user_caption_image','bay.jpg','1',0,NULL),(1,'time_spent','207','5',0,NULL),(2,'last_name','Tsang','4',1,NULL),(2,'settings','a:10:{s:17:\"invitation_accept\";a:3:{s:7:\"caption\";s:54:\"their invitation to join the network has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:38:\"relationship_created_with_other_member\";a:3:{s:7:\"caption\";s:56:\"someone has made them a friend or other kind of relation\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:24:\"someone_join_their_group\";a:3:{s:7:\"caption\";s:39:\"someone has joined a group they created\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"friend_request_sent\";a:3:{s:7:\"caption\";s:38:\"someone has sent them a friend request\";s:5:\"value\";s:1:\"1\";s:13:\"user_settable\";s:1:\"1\";}s:21:\"friend_request_denial\";a:3:{s:7:\"caption\";s:37:\"someone has denied to be their friend\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:13:\"bulletin_sent\";a:3:{s:7:\"caption\";s:36:\"network operator has sent a bulletin\";s:5:\"value\";s:1:\"3\";s:13:\"user_settable\";s:1:\"1\";}s:15:\"welcome_message\";a:3:{s:7:\"caption\";s:15:\"Welcome message\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:19:\"invite_accept_group\";a:3:{s:7:\"caption\";s:50:\"their invitation to join a group has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:23:\"friend_request_approved\";a:3:{s:7:\"caption\";s:41:\"someone has approved their friend request\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:17:\"msg_waiting_blink\";i:0;}','notifications',0,NULL),(2,'first_name','Winston','4',1,NULL),(2,'postal_code',NULL,'1',0,NULL),(2,'phone',NULL,'1',0,NULL),(2,'homeAddress2',NULL,'1',0,NULL),(2,'homeAddress1',NULL,'1',0,NULL),(2,'dob_year',NULL,'1',0,NULL),(2,'dob_month',NULL,'1',0,NULL),(2,'dob_day',NULL,'1',0,NULL),(2,'dob','--','1',0,NULL),(2,'country',NULL,'1',0,NULL),(2,'city',NULL,'1',0,NULL),(2,'state',NULL,'1',0,NULL),(2,'user_caption_image','bay_boat.jpg','1',0,NULL),(3,'last_name','Dimcheff','4',1,NULL),(3,'settings','a:10:{s:17:\"invitation_accept\";a:3:{s:7:\"caption\";s:54:\"their invitation to join the network has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:38:\"relationship_created_with_other_member\";a:3:{s:7:\"caption\";s:56:\"someone has made them a friend or other kind of relation\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:24:\"someone_join_their_group\";a:3:{s:7:\"caption\";s:39:\"someone has joined a group they created\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"friend_request_sent\";a:3:{s:7:\"caption\";s:38:\"someone has sent them a friend request\";s:5:\"value\";s:1:\"1\";s:13:\"user_settable\";s:1:\"1\";}s:21:\"friend_request_denial\";a:3:{s:7:\"caption\";s:37:\"someone has denied to be their friend\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:13:\"bulletin_sent\";a:3:{s:7:\"caption\";s:36:\"network operator has sent a bulletin\";s:5:\"value\";s:1:\"3\";s:13:\"user_settable\";s:1:\"1\";}s:15:\"welcome_message\";a:3:{s:7:\"caption\";s:15:\"Welcome message\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:19:\"invite_accept_group\";a:3:{s:7:\"caption\";s:50:\"their invitation to join a group has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:23:\"friend_request_approved\";a:3:{s:7:\"caption\";s:41:\"someone has approved their friend request\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:17:\"msg_waiting_blink\";i:0;}','notifications',0,NULL),(3,'first_name','Brandon','4',1,NULL),(3,'postal_code',NULL,'1',0,NULL),(3,'phone',NULL,'1',0,NULL),(3,'homeAddress2',NULL,'1',0,NULL),(3,'homeAddress1',NULL,'1',0,NULL),(3,'dob_year',NULL,'1',0,NULL),(3,'dob_month',NULL,'1',0,NULL),(3,'dob_day',NULL,'1',0,NULL),(3,'dob','--','1',0,NULL),(3,'country',NULL,'1',0,NULL),(3,'city',NULL,'1',0,NULL),(3,'state',NULL,'1',0,NULL),(3,'user_caption_image','delhi.jpg','1',0,NULL),(1,'profile_visitor_count','84','PROFILE_VIEWS',1,NULL),(3,'profile_visitor_count','86','PROFILE_VIEWS',1,NULL),(4,'settings','a:10:{s:17:\"invitation_accept\";a:3:{s:7:\"caption\";s:54:\"their invitation to join the network has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:38:\"relationship_created_with_other_member\";a:3:{s:7:\"caption\";s:56:\"someone has made them a friend or other kind of relation\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:24:\"someone_join_their_group\";a:3:{s:7:\"caption\";s:39:\"someone has joined a group they created\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:19:\"friend_request_sent\";a:3:{s:7:\"caption\";s:38:\"someone has sent them a friend request\";s:5:\"value\";s:1:\"1\";s:13:\"user_settable\";s:1:\"1\";}s:21:\"friend_request_denial\";a:3:{s:7:\"caption\";s:37:\"someone has denied to be their friend\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"1\";}s:13:\"bulletin_sent\";a:3:{s:7:\"caption\";s:36:\"network operator has sent a bulletin\";s:5:\"value\";s:1:\"3\";s:13:\"user_settable\";s:1:\"1\";}s:15:\"welcome_message\";a:3:{s:7:\"caption\";s:15:\"Welcome message\";s:5:\"value\";s:1:\"0\";s:13:\"user_settable\";s:1:\"0\";}s:19:\"invite_accept_group\";a:3:{s:7:\"caption\";s:50:\"their invitation to join a group has been accepted\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:23:\"friend_request_approved\";a:3:{s:7:\"caption\";s:41:\"someone has approved their friend request\";s:5:\"value\";s:1:\"2\";s:13:\"user_settable\";s:1:\"1\";}s:17:\"msg_waiting_blink\";i:0;}','notifications',0,NULL),(4,'last_name','Dielman','4',1,NULL),(4,'first_name','Brad','4',1,NULL),(4,'postal_code',NULL,'1',0,NULL),(4,'phone',NULL,'1',0,NULL),(4,'homeAddress2',NULL,'1',0,NULL),(4,'homeAddress1',NULL,'1',0,NULL),(4,'dob_year',NULL,'1',0,NULL),(4,'dob_month',NULL,'1',0,NULL),(4,'dob_day',NULL,'1',0,NULL),(4,'dob','--','1',0,NULL),(4,'country',NULL,'1',0,NULL),(4,'city',NULL,'1',0,NULL),(4,'state',NULL,'1',0,NULL),(4,'user_caption_image','bay.jpg','1',0,NULL),(4,'profile_visitor_count','92','PROFILE_VIEWS',1,NULL);
+/*!40000 ALTER TABLE `user_profile_data` ENABLE KEYS */;
+UNLOCK TABLES;
 -- --------------------------------------------------------
 
 --
@@ -556,6 +565,6 @@ INSERT INTO `user_profile_data` (`user_id`, `field_name`, `field_value`, `field_
 --
 
 INSERT INTO `User_seq` (`id`) VALUES
-(1);
+(4);
 
 -- --------------------------------------------------------
