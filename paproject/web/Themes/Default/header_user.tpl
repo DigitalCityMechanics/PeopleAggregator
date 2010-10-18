@@ -110,3 +110,18 @@
         </form>
 	<?php } ?>
 </div></div><!-- /.nav -->
+<?php if(isset($use_feature_mast) && $use_feature_mast){ ?>
+<div class="feature-mast">
+	<div class="wrapper">
+		<div class="content-container">
+			<div class="main-content">
+				<h1><?php echo (isset($title) && $title != '') ? $title : '(no title set)'; ?></h1>
+				<p class="convo-meta"><?php echo (isset($metadata) && $metadata != '') ? $metadata : ''; ?></p>
+			</div>
+			<div class="aside supplementary">
+				<?php echo (isset($aside) && $aside != '') ? $aside : ''; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>

@@ -3,7 +3,6 @@
   <page_id>2</page_id>
   <data>
     <middle>
-      <item>UserNameModule</item>
       <item>UserParticipationModule</item>
       <item>UserContributionsModule</item>
     </middle>
@@ -109,6 +108,10 @@
             $this->add_header_html($parameter);
             $this->add_header_css($css_path . "user_skin.css");
         }
+
+		// setup the header to use the feature_mast and show the user's name
+		$this->header->set('use_feature_mast', true);
+		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);
 
         $current_feed_data = array();
         $profile_feeds = UserProfileFeed::get_user_profile_feeds($uid, $uid);
