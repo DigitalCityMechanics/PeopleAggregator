@@ -46,7 +46,7 @@
       ?>
 		<div id="login-status"  onmouseover="javascript:show_hide_shortcuts.onmouseover('open_close');" onmouseout="javascript:show_hide_shortcuts.onmouseout('open_close');">
 			<div class="offset-2">
-   				<a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>" title="Parag Jagdale">
+   				<a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>" title="<?php echo $user_name; ?>">
    				<?php
    					if(!isset($login_user->avatar_small_dimensions['width']) || $login_user->avatar_small_dimensions['width'] == 0){
 						$aWidth = 40;
