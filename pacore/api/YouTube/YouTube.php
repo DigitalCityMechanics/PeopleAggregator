@@ -75,12 +75,13 @@ class YouTube extends Zend_Gdata_YouTube {
 						$html .= '<p class="video-title"><a href="'.$videoUrl.'">View video on YouTube</a></p>'."\n";
 					}
 					$html .= '<p class="video-link">'.$videoUrl.'</p>'."\n";
-					$html .= '<object width="425" height="350">';
+					$html .= '<object width="300" height="180">';
 					$html .= "\t".'<param name="movie" value="'.$videoUrl.'"></param>'."\n";
 					$html .= "\t".'<param name="allowFullScreen" value="true"></param>'."\n";
 					$html .= "\t".'<param name="allowscriptaccess" value="always"></param>'."\n";
+					$html .= "\t".'<param name="wmode" value="opaque"></param>'."\n";
 					$html .= "\t".'<embed src="'.$videoUrl.'" type="application/x-shockwave-flash"'."\n";
-					$html .= "\t\t".'allowscriptaccess="always" allowfullscreen="true" width=425" height="350"></embed>'."\n";
+					$html .= "\t\t".'allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width=425" height="350"></embed>'."\n";
 					$html .= '</object>'."\n";
 					$html .= '<p class="video-description">'.$description.'</p>'."\n";
 				}
