@@ -162,10 +162,10 @@ UNLOCK TABLES;
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `Message_seq`
+-- Dumping data for table `message_seq`
 --
 
-INSERT INTO `Message_seq` (`id`) VALUES
+INSERT INTO `message_seq` (`id`) VALUES
 (1);
 
 -- --------------------------------------------------------
