@@ -895,10 +895,10 @@ CREATE TABLE IF NOT EXISTS `message_folder` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message_seq`
+-- Table structure for table `Message_seq`
 --
 
-CREATE TABLE IF NOT EXISTS `message_seq` (
+CREATE TABLE IF NOT EXISTS `Message_seq` (
   `id` int(10) unsigned NOT NULL auto_increment,
   PRIMARY KEY (`id`)
 ) TYPE=MyISAM   AUTO_INCREMENT=2 ;
@@ -1910,10 +1910,10 @@ CREATE TABLE IF NOT EXISTS `user_profile_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_seq`
+-- Table structure for table `User_seq`
 --
 
-CREATE TABLE IF NOT EXISTS `user_seq` (
+CREATE TABLE IF NOT EXISTS `User_seq` (
   `id` int(10) unsigned NOT NULL auto_increment,
   PRIMARY KEY (`id`)
 ) TYPE=MyISAM   AUTO_INCREMENT=2 ;
