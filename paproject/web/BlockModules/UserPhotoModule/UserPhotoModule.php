@@ -54,7 +54,7 @@ class UserPhotoModule extends Module {
       default:
         $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
       break;
-    }print_r($this->user);
+    }
     $inner_html_gen = new Template($inner_template);
     $inner_html_gen->set('picture', $this->user->picture);
     $inner_html_gen->set('picture_width', $this->user->picture_dimensions['width']);
