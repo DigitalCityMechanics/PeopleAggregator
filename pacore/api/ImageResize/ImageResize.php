@@ -842,22 +842,26 @@ class ImageResize {
    * @param $ImageURL
    * @param $Extra_attrs
    */
-  public static function display_image_from_url($ImageURL, $Extra_attrs = NULL){
+  public static function display_image_from_url($ImageURL, $Width=NULL, $Height=NULL, $Extra_attrs = NULL){
   	//TODO: add max image dimensions code and resize to those if bigger
 	$size = null;
 	$attributes = null;  	
-  	// TODO: look for security implications of doing this. Maybe have a "trusted domain" setting?
-	$size = getimagesize($ImageURL, $info);
-	if(isset($size)){
-		$width = $size[0];
-		$height = $size[1];
-		if(!isset($Extra_attrs)){
-			$attributes = "";	
-		}else{
-			$attributes = $Extra_attrs;
+  	
+	if((!isset($Width) && !isset($Height)) || $Width == 0 && $Height == 0){
+		// TODO: look for security implications of doing this. Maybe have a "trusted domain" setting?
+		$size = getimagesize($ImageURL, $info);
+		if(isset($size)){
+			$Width = $size[0];
+			$Height = $size[1];
 		}
-		return '<img src="'.$ImageURL.'" style="width='.$width.';height='.$height.'" '. $attributes.' />';
 	}
+	
+	if(!isset($Extra_attrs)){
+		$attributes = "";	
+	}else{
+		$attributes = $Extra_attrs;
+	}
+		return '<img src="'.$ImageURL.'" width="'.$Width.'" height="'.$Width.'" '. $attributes.' />';	
   }
 
 }

@@ -35,9 +35,12 @@ function uihelper_preprocess_pic_path($pic) {
 // display the image.
 function uihelper_resize_mk_user_img($user_or_picture, $max_x, $max_y, $extra_attrs="") {
 
-// checking that whether this image is Animated or not if this image is animated than make it still image
+	if(!isset($user_or_picture)){
+		$defaultImg = 'files/default.png';
+		return ImageResize::display_image_from_url($defaultImg, $max_x, $max_y, $extra_attrs);
+	}
 	if (preg_match("|^http://|", $user_or_picture)) {
-	   return ImageResize::display_image_from_url($user_or_picture);
+	   return ImageResize::display_image_from_url($user_or_picture, $max_x, $max_y, $extra_attrs);
 	}else{
 		$pic = ($user_or_picture instanceof User) ? $user_or_picture->picture : $user_or_picture; 
 		

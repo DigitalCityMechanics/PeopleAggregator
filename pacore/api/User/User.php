@@ -303,7 +303,11 @@ class User {
       $this->changed = $row->changed;
       $this->last_login = $row->last_login;
       $this->picture = $row->picture;
+      $this->picture_dimensions = $this->image_dimensions_to_array($row->picture_width, $row->picture_height);
       $this->avatar = $row->avatar;
+      $this->avatar_dimensions = $this->image_dimensions_to_array($row->avatar_width, $row->avatar_height);
+      $this->avatar_small = $row->avatar_small;
+      $this->avatar_small_dimensions = $this->image_dimensions_to_array($row->avatar_small_width, $row->avatar_small_height);
       $this->role = $this->load_user_roles();
     }
     $dn = new UserDisplayName($this);
@@ -2509,6 +2513,12 @@ class User {
    * @param height	integer
    */
   public static function image_dimensions_to_array($width, $height){
+  	if(!isset($width) || $width == ''){
+  		$width = 0;
+  	}
+  	if(!isset($height) || $height == ''){
+  		$height = 0;
+  	}
   	return array('width'=>$width, 'height'=>$height);
   }
 }

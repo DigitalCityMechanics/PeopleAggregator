@@ -335,6 +335,8 @@ class Navigation {
                                   'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$uid"
 		),
 		);
+		
+		/* Parag Jagdale - 10-18-10: Removed Famileles since it is not needed by CivicCommons
 		if (!empty(PA::$config->simple['use_families'])) {
 			// get this users Family or Families
 			require_once "api/Entity/TypedGroupEntityRelation.php";
@@ -361,7 +363,7 @@ class Navigation {
 				));
 			}
 		} // end of !empty(PA::$config->simple['use_families'])
-
+*/
 		$user_children = $user_children + array(
                        'settings' => array('caption'=>__('Edit My Account'),
                                   'url'=>$this->base_url.PA_ROUTE_EDIT_PROFILE

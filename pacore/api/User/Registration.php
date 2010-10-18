@@ -110,7 +110,7 @@ class User_Registration {
       	$avatar = trim($params['profile_avatar_url']);
       	$avatar_dimensions = $params['profile_avatar_dimensions'];
       	$avatar_small = trim($params['profile_avatar_small_url']);
-      	$avatar_small_dimensions = $params['profile_avatar_small_dimensions'];
+      	$avatar_small_dimensions = $params['profile_avatar_small_dimensions'];      	
       }
       
       $date_created = (!empty($params['date_created'])) ? $params['date_created'] : null;
@@ -289,14 +289,20 @@ class User_Registration {
       	if($picture != null){
       		$this->newuser->picture = Storage::validateFileId($picture);
       		$this->newuser->picture_dimensions = $picture_dimensions;
+      	}else{
+      		$this->newuser->picture_dimensions = User::image_dimensions_to_array(0, 0);
       	}
       	if($avatar != null){
       		$this->newuser->avatar = Storage::validateFileId($avatar);
       		$this->newuser->avatar_dimensions = $avatar_dimensions;
+      	}else{
+      		$this->newuser->avatar_dimensions = User::image_dimensions_to_array(0, 0);
       	}
       	if($avatar_small != null){
       		$this->newuser->avatar_small = Storage::validateFileId($avatar_small);
       		$this->newuser->avatar_small_dimensions = $avatar_small_dimensions;
+      	}else{
+      		$this->newuser->avatar_small_dimensions = User::image_dimensions_to_array(0, 0);
       	}
       }else{
       	$this->newuser->picture = Storage::validateFileId(@$params['user_filename']);

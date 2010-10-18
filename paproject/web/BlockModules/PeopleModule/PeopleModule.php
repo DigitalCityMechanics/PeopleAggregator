@@ -298,20 +298,24 @@ class PeopleModule extends Module {
          $users = Network::get_network_members(PA::$network_info->network_id, $params);
        }
     }
+// Parag Jagdale - 10-17-10:	Modified to support new avatar image URL, width and height    
     $users_count = count(@$users['users_data']);
     if ($users_count) {
       $user_profiles = $this->get_profile_data($users['users_data']);
       for($cnt = 0; $cnt < $users_count; $cnt++) {
-        if (empty($users['users_data'][$cnt]['picture'])) {
-          $users['users_data'][$cnt]['picture'] = 'files/default.png';
-          $big_img = uihelper_resize_img($users['users_data'][$cnt]['picture'], 120, 120, NULL, "alt=\"".$users['users_data'][$cnt]['login_name'] ."\"");
+        if (empty($users['users_data'][$cnt]['avatar'])) {
+          $users['users_data'][$cnt]['avatar'] = 'files/default.png';
+          $big_img = uihelper_resize_img($users['users_data'][$cnt]['avatar'], 120, 120, NULL, "alt=\"".$users['users_data'][$cnt]['login_name'] ."\"");
           $users['users_data'][$cnt]['big_picture'] = $big_img['url'];
         } else {
-          $img = uihelper_resize_mk_user_img($users['users_data'][$cnt]['picture'], 80, 80, 'alt="PA"');
-          $big_img = uihelper_resize_img($users['users_data'][$cnt]['picture'], 120, 120, NULL, "alt=\"".$users['users_data'][$cnt]['login_name']."\"");
-          $users['users_data'][$cnt]['big_picture'] = $big_img['url'];
-          preg_match("/src=\"([^']*?)\"/", $img, $match);//preg_match to get the src of the image
-          $users['users_data'][$cnt]['picture'] = $match[1];
+        	  		                  	          		        	         		        
+        	if (preg_match("|^http://|", $users['users_data'][$cnt]['avatar'])) {
+        		$users['users_data'][$cnt]['big_picture'] = $users['users_data'][$cnt]['avatar'];
+        	}else{
+        		$big_img = uihelper_resize_img($users['users_data'][$cnt]['avatar'], $users['users_data'][$cnt]['avatar_width'], $users['users_data'][$cnt]['avatar_height'], NULL, "alt=\"".$users['users_data'][$cnt]['login_name']."\"");
+        		$users['users_data'][$cnt]['big_picture'] = $big_img['url'];
+        	}
+
         }
         $users['users_data'][$cnt] = array_merge($users['users_data'][$cnt], $user_profiles[$cnt]);
       }

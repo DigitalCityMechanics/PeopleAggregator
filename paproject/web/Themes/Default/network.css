@@ -2507,9 +2507,7 @@ form fieldset.center_box .field h5 {
 
 
 .network_config form fieldset.center_box {
-	width: 690px;
-	border: 1px solid #cdcdcd;
-	margin: 10px 0 0 21px; }
+	border: 1px solid #cdcdcd;}
 
 *html .network_config form fieldset.center_box { margin: 10px 0 0 31px; }
 
@@ -3936,3 +3934,6 @@ div.error {
 
 /* --- Misc Customizations --- */
 div.steps ul {margin:0;}
+/* -- TODO: Spend more time on these later, these were fixed for emergency */
+#accordion {font-size:0.8em;}
+.center_box {font-size:0.8em;}
