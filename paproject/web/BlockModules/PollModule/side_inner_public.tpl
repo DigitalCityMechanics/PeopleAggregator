@@ -33,7 +33,7 @@
       <?php 
       if ($flag == 0) { ?>
         <div class="form-block" id="poll_button">
-          <input type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
+          <input class="submit" type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
         </div>
      <? } else { ?>
 		<?php echo ($show_poll_link != '') ? '<p class="vote_link"><a href="'.$show_poll_link.'">OK, I\'m ready to vote!</a></p>'."\n" : ''; ?>
