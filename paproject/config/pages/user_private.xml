@@ -3,6 +3,7 @@
   <page_id>1</page_id>
   <data>
     <middle>
+      <item>UserNameModule</item>
       <item>UserParticipationModule</item>
       <item>UserContributionsModule</item>
     </middle>
