@@ -190,6 +190,12 @@ a.cancel {font-weight: normal;}
 .form-group .related {margin-left: 80px;}
 .form-group .related input.textbox {width: 400px;}
 .validation-error {color: #ae1111;}
+div.validation-error > ul > li { 
+float: none; 
+margin: 0; 
+padding: 0;
+text-align: left;
+}
 .field-with-error input.textbox {background-color: #fff8f8;}
 div.issue-selection p {
 float: left;
@@ -676,6 +682,12 @@ border-radius: 8px;
 }
 
 /* Conversation Utility */
+.edit-contribution {
+float: right;
+}
+.edit-contribution a {
+margin-left: 15px;
+}
 div.convo-utility {
 border: 1px solid #777;
 background: #e3e3e3;
