@@ -2513,6 +2513,12 @@ class User {
    * @param height	integer
    */
   public static function image_dimensions_to_array($width, $height){
+  	if(!isset($width) || $width == ''){
+  		$width = 0;
+  	}
+  	if(!isset($height) || $height == ''){
+  		$height = 0;
+  	}
   	return array('width'=>$width, 'height'=>$height);
   }
 }
