@@ -325,11 +325,13 @@ class Navigation {
                        'manage_contributions' => array('caption'=>__('Manage My Contributions &amp; Drafts'),
                                   'url'=>$this->base_url . "/content_management.php"),
 		);
+/*
 		$user_children = $user_children + array(
                        'messages' => array('caption'=>__('My Messages'),
                                   'url'=>$this->base_url . PA_ROUTE_MYMESSAGE
 		),
 		);
+*/
 		$user_children = $user_children + array(
                        'my_gallery' => array('caption'=>__('My Gallery'),
                                   'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$uid"
