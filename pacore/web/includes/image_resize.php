@@ -36,7 +36,7 @@ function uihelper_preprocess_pic_path($pic) {
 function uihelper_resize_mk_user_img($user_or_picture, $max_x, $max_y, $extra_attrs="") {
 
 	if(!isset($user_or_picture)){
-		$defaultImg = 'files/default.png';
+		$defaultImg = PA::$url . '/files/default.png';
 		return ImageResize::display_image_from_url($defaultImg, $max_x, $max_y, $extra_attrs);
 	}
 	if (preg_match("|^http://|", $user_or_picture)) {

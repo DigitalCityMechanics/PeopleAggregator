@@ -14,8 +14,8 @@
   <div id="imgcontainer_<?= $link['user_id'] ?>" >
     <a href="<?= $link['user_url'] ?>">
     	<?php 
-    		$width = 80;
-    		$height = 80;
+    		$width = 70;
+    		$height = 70;
     		if(isset($link['avatar_width']) && $link['avatar_width'] > 0){
     			$width = $link['avatar_width'];
     		}
