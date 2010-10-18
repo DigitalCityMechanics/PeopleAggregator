@@ -906,11 +906,10 @@ class Navigation {
                                    )
                                    */
                                   );
-								  /*
+
                                   $relation_does_not_exists_links = array('send_message' => array('caption'=>__('Send a message'),
                                   'url'=>$this->base_url.PA_ROUTE_ADDMESSAGE.'/uid='.PA::$page_uid
                                   ),
-								  */
                                   /*
                                    'send_testimonial' => array('caption'=>__('Write Testimonial'),
                                    'url'=>$this->base_url.'/'.FILE_WRITE_TESTIMONIAL.'?uid='.PA::$page_uid
@@ -920,7 +919,8 @@ class Navigation {
                                    )
                                    */
 
-                                  //);
+                                  );
+
                                   if (PA::$page_uid==PA::$login_uid) {//login and get uid same means user's public page
                                   	$level_2['highlight'] = 'user';
                                   	$level_3 = $this->get_level_3('user');
@@ -929,12 +929,12 @@ class Navigation {
                                   	//user's public page requires different link rendering
                                   	if (!empty($relations_ids)) {
                                   		if (in_array(PA::$page_uid, $relations_ids)) {
-                                  			$left_user_public_links = $relation_already_exists_links;
+                                  			//$left_user_public_links = $relation_already_exists_links;
                                   		} else {
-                                  			$left_user_public_links = $relation_does_not_exists_links;
+                                  			//$left_user_public_links = $relation_does_not_exists_links;
                                   		}
                                   	} else {
-                                  		$left_user_public_links = $relation_does_not_exists_links;
+                                  		//$left_user_public_links = $relation_does_not_exists_links;
                                   	}
                                   }
 				}
