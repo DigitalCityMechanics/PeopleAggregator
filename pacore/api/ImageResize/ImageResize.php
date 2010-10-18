@@ -847,12 +847,12 @@ class ImageResize {
 	$size = null;
 	$attributes = null;  	
   	
-	if(!isset($Width) && !isset($Height)){
+	if((!isset($Width) && !isset($Height)) || $Width == 0 && $Height == 0){
 		// TODO: look for security implications of doing this. Maybe have a "trusted domain" setting?
 		$size = getimagesize($ImageURL, $info);
 		if(isset($size)){
 			$Width = $size[0];
-			$Width = $size[1];
+			$Height = $size[1];
 		}
 	}
 	
