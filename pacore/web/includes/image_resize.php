@@ -37,7 +37,7 @@ function uihelper_resize_mk_user_img($user_or_picture, $max_x, $max_y, $extra_at
 
 // checking that whether this image is Animated or not if this image is animated than make it still image
 	if (preg_match("|^http://|", $user_or_picture)) {
-	   return ImageResize::display_image_from_url($user_or_picture);
+	   return ImageResize::display_image_from_url($user_or_picture, $max_x, $max_y);
 	}else{
 		$pic = ($user_or_picture instanceof User) ? $user_or_picture->picture : $user_or_picture; 
 		
