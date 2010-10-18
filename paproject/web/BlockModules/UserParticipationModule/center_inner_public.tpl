@@ -40,11 +40,11 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 					
 					$width = 100;
 					$height = 100;
-					if(isset($conversation['parent_image_width']) && is_Numeric($conversation['parent_image_width'])){
-						$width = $conversation['parent_image_width'];
+					if(isset($conversation['image_width']) && is_Numeric($conversation['image_width'])){
+						$width = $conversation['image_width'];
 					}
-					if(isset($conversation['parent_image_height']) && is_Numeric($conversation['parent_image_height'])){
-						$height = $conversation['parent_image_height'];
+					if(isset($conversation['image_height']) && is_Numeric($conversation['image_height'])){
+						$height = $conversation['image_height'];
 					}
 					?>
 					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
@@ -72,11 +72,11 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 				
 					$width = 100;
 					$height = 100;
-					if(isset($issue['parent_image_width']) && is_Numeric($issue['parent_image_width'])){
-						$width = $issue['parent_image_width'];
+					if(isset($issue['image_width']) && is_Numeric($issue['image_width'])){
+						$width = $issue['image_width'];
 					}
-					if(isset($issue['parent_image_height']) && is_Numeric($issue['parent_image_height'])){
-						$height = $issue['parent_image_height'];
+					if(isset($issue['image_height']) && is_Numeric($issue['image_height'])){
+						$height = $issue['image_height'];
 					}
 					?>
 					<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>

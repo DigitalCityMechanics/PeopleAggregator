@@ -20,7 +20,7 @@ install_tinymce('full');
   <?php echo isset($message) ? '<div class="message">'.$message.'</div>'."\n" : ''; ?>
   <div class="field" >
     <label for="title"><span class="required"> * </span><b> <?= __("Title") ?>:</b></label>
-    <input type="text" name="blog_title" class="text long" id="title" style="width:647px;" value="<?=stripslashes($blog_title)?>"/>
+    <input type="text" name="blog_title" class="textbox long" id="title" style="width:647px;" value="<?=stripslashes($blog_title)?>"/>
   </div>
   <input name="blog_type" type="hidden" value="<?php echo $blog_type; ?>" />
   <input name="redirect" type="hidden" value="<?php echo urldecode(stripslashes($redirect)); ?>" />
@@ -45,8 +45,8 @@ include $file;
 
 <fieldset id='tags'>
   <legend><a><b><?= __("Tags") ?></b></a></legend>
-  <input type="text" class="text long" id="tags"  name="tags" value="<?=stripslashes($tag_entry)?>" style="width:647px;" />
-  <br /><?= __("Separate tags with commas") ?>
+  <input type="text" class="textbox long" id="tags"  name="tags" value="<?=stripslashes($tag_entry)?>" style="width:647px;" />
+  <p class="fineprint"><?= __("Separate tags with commas") ?></p>
 </fieldset>
   <input type="hidden" name="cid" value="<?php echo $cid ?>"/> 
   <? if (isset($group_id)) { ?>
