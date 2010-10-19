@@ -7,7 +7,7 @@
 		$("#tabs").tabs();
 		$(".collapseButton").hide();
 		$(".viewButton").click(function(e){
-			$(this).parent().siblings('.item').each(function(){
+			$(this).parent().siblings('.items').children('.item').each(function(){
 				if($(this).hasClass('hide')){
 					$(this).removeClass('hide');
 					$(this).addClass('show shown');
@@ -19,7 +19,7 @@
 		});
 		
 		$(".collapseButton").click(function(e){
-			$(this).parent().siblings('.item').each(function(){
+			$(this).parent().siblings('.items').children('.item').each(function(){
 				if($(this).hasClass('shown')){
 					$(this).addClass('hide');
 					$(this).removeClass('show shown');
@@ -32,23 +32,6 @@
 	});
 </script>
 
-<style type="text/css">
-div.item {
-	background-color:#FFF;
-	margin-bottom:10px;
-	padding:4px;
-}
-div.item img {
-	float:left;
-	margin:0 13px 5px;
-}
-div.item h2 {font-size:100%;}
-div.item div.below {clear:both;padding:5px;}
-div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:uppercase;}
-div.show.item{display:block;}
-div.hide.item{display:none;}
-</style>
-
 <?php global  $login_uid;?>
 
 <div id="tabs">
@@ -59,13 +42,14 @@ div.hide.item{display:none;}
 	</ul>
 <?php if(count($conversations) > 0){ ?>
 	<div id="tabs-1">
-	<?php 
-		foreach($conversations  as $conversation){
+		<div class="items">
+		<?php 
+			foreach($conversations  as $conversation){
 			$show = ($conversation['show'] == 1) ? "show" : "hide";  
 	?>
-		<div class="item <?php echo $show; ?>">
-			<div class="above">
-				<?php if(isset($conversation['image'])){ 
+			<div class="item <?php echo $show; ?>">
+				<div class="above">
+					<?php if(isset($conversation['image'])){ 
 					
 					$width = 100;
 					$height = 100;
@@ -76,16 +60,17 @@ div.hide.item{display:none;}
 						$height = $conversation['image_height'];
 					}
 					?>
-					<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
-				<?php } ?>
-				<h2><a href="<?php echo $conversation['url']; ?>"><?php echo $conversation['title']; ?></a></h2>
-				<p><?php echo $conversation['summary']; ?></p>
+						<img src="<?php echo $conversation['image']; ?>" alt="Conversation image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
+					<?php } ?>
+					<h2><a href="<?php echo $conversation['url']; ?>"><?php echo $conversation['title']; ?></a></h2>
+					<p><?php echo $conversation['summary']; ?></p>
+				</div>
+				<div class="below">
+					<a href="#"><?php echo $conversation['participant_count']; ?> Participants</a> | <a href="#"><?php echo $conversation['contribution_count']; ?> Contributions</a>
+				</div>
 			</div>
-			<div class="below">
-				<a href="#"><?php echo $conversation['participant_count']; ?> Participants</a> | <a href="#"><?php echo $conversation['contribution_count']; ?> Contributions</a>
-			</div>
+		<?php } // end foreach ?>
 		</div>
-	<?php } // end foreach ?>
 		<div class="tab-links">
 			<a class="viewButton" href="#">View All</a>
 			<a class="collapseButton" href="#">Collapse</a>
@@ -95,13 +80,14 @@ div.hide.item{display:none;}
 
 <?php if(count($issues) > 0){ ?>
 	<div id="tabs-2">
-	<?php 
-		foreach($issues  as $issue){
+		<div class="items">
+		<?php 
+			foreach($issues  as $issue){
 			$show = ($issue['show'] == 1) ? "show" : "hide"; 
 	?>
-		<div class="item <?php echo $show; ?>">
-			<div class="above">
-				<?php if(isset($issue['image'])){
+			<div class="item <?php echo $show; ?>">
+				<div class="above">
+					<?php if(isset($issue['image'])){
 				
 					$width = 100;
 					$height = 100;
@@ -112,16 +98,17 @@ div.hide.item{display:none;}
 						$height = $issue['image_height'];
 					}
 					?>
-					<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
-				<?php } ?>
-				<h2><a href="#"><?php echo $issue['name']; ?></a></h2>
-				<p><?php echo $issue['summary']; ?></p>
-			</div>
-			<div class="below">
-				<a href="#"><?php echo $issue['participant_count']; ?> Participants</a> | <a href="#"><?php echo $issue['contribution_count']; ?> Contributions</a>
-			</div>
-		</div>		
-	<?php } // end foreach ?>
+						<img src="<?php echo $issue['image']; ?>" alt="Issue image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
+					<?php } ?>
+					<h2><a href="#"><?php echo $issue['name']; ?></a></h2>
+					<p><?php echo $issue['summary']; ?></p>
+				</div>
+				<div class="below">
+					<a href="#"><?php echo $issue['participant_count']; ?> Participants</a> | <a href="#"><?php echo $issue['contribution_count']; ?> Contributions</a>
+				</div>
+			</div>		
+		<?php } // end foreach ?>
+		</div>
 		<div class="tab-links">
 			<a class="viewButton" href="#">View All</a>
 			<a class="collapseButton" href="#">Collapse</a>
@@ -131,13 +118,14 @@ div.hide.item{display:none;}
 
 <?php if(count($following) > 0){ ?>
 	<div id="tabs-3">
-	<?php 
-		foreach($following  as $followed){ 
+			<div class="items">
+		<?php 
+			foreach($following  as $followed){ 
 			$show = ($followed['show'] == 1) ? "show" : "hide";
 	?>
-		<div class="item <?php echo $show; ?>">
-			<div class="above">
-				<?php if(isset($followed['parent_image'])){ 
+			<div class="item <?php echo $show; ?>">
+				<div class="above">
+					<?php if(isset($followed['parent_image'])){ 
 					$width = 100;
 					$height = 100;
 					if(isset($followed['parent_image_width']) && is_Numeric($followed['parent_image_width'])){
@@ -147,15 +135,16 @@ div.hide.item{display:none;}
 						$height = $followed['parent_image_height'];
 					}
 				?>
-					<img src="<?php echo $followed['parent_image']; ?>" alt="followed image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
-				<?php } ?>
-				<h2><a href="<?php echo $followed['parent_url'] ?>" title="View"><?php echo $followed['parent_title']; ?></a></h2>
+						<img src="<?php echo $followed['parent_image']; ?>" alt="followed image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
+					<?php } ?>
+					<h2><a href="<?php echo $followed['parent_url'] ?>" title="View"><?php echo $followed['parent_title']; ?></a></h2>
+				</div>
+				<div class="below">
+					<a href="#"><?php echo $followed['participant_count']; ?> Participants</a> | <a href="#"><?php echo $followed['contribution_count']; ?> Contributions</a>
+				</div>
 			</div>
-			<div class="below">
-				<a href="#"><?php echo $followed['participant_count']; ?> Participants</a> | <a href="#"><?php echo $followed['contribution_count']; ?> Contributions</a>
-			</div>
+		<?php } // end foreach ?>
 		</div>
-	<?php } // end foreach ?>
 		<div class="tab-links">
 			<a class="viewButton" href="#">View All</a>
 			<a class="collapseButton" href="#">Collapse</a>
