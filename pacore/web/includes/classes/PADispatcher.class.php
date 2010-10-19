@@ -147,6 +147,7 @@
      $app = new BootStrap(PA_PROJECT_ROOT_DIR, $this->current_route, $this->route_query_str);
      $GLOBALS['app'] = $app;                   // make $app object available in global scope
      $app->loadConfigFile(APPLICATION_CONFIG_FILE);
+     $app->detectDBSettings();
      $app->autoLoadFiles($this->auto_load_list);
      $app->loadLanguageFiles();
 
@@ -174,7 +175,6 @@
 
      if(PA::$config->pa_installed) {
        $app->detectNetwork();
-       $app->detectDBSettings();
        $app->getCurrentUser();
 
 
