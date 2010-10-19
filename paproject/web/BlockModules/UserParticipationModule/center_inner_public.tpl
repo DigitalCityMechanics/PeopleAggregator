@@ -5,22 +5,48 @@
 <script type="text/javascript">
 	$(function() {
 		$("#tabs").tabs();
+		$(".collapseButton").hide();
+		$(".viewButton").click(function(e){
+			$(this).parent().siblings('.item').each(function(){
+				if($(this).hasClass('hide')){
+					$(this).removeClass('hide');
+					$(this).addClass('show shown');
+				}
+			});
+			$(this).siblings('.collapseButton').show();
+			$(this).hide();
+			e.preventDefault();
+		});
+		
+		$(".collapseButton").click(function(e){
+			$(this).parent().siblings('.item').each(function(){
+				if($(this).hasClass('shown')){
+					$(this).addClass('hide');
+					$(this).removeClass('show shown');
+				}
+			});
+			$(this).siblings('.viewButton').show();
+			$(this).hide();
+			e.preventDefault();
+		});
 	});
 </script>
 
 <style type="text/css">
-div.participation {
+div.item {
 	background-color:#FFF;
 	margin-bottom:10px;
 	padding:4px;
 }
-div.participation img {
+div.item img {
 	float:left;
 	margin:0 13px 5px;
 }
-div.participation h2 {font-size:100%;}
-div.participation div.below {clear:both;padding:5px;}
+div.item h2 {font-size:100%;}
+div.item div.below {clear:both;padding:5px;}
 div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:uppercase;}
+div.show.item{display:block;}
+div.hide.item{display:none;}
 </style>
 
 <?php global  $login_uid;?>
@@ -33,8 +59,11 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 	</ul>
 <?php if(count($conversations) > 0){ ?>
 	<div id="tabs-1">
-	<?php foreach($conversations  as $conversation){ ?>
-		<div class="participation">
+	<?php 
+		foreach($conversations  as $conversation){
+			$show = ($conversation['show'] == 1) ? "show" : "hide";  
+	?>
+		<div class="item <?php echo $show; ?>">
 			<div class="above">
 				<?php if(isset($conversation['image'])){ 
 					
@@ -58,15 +87,19 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS; ?>">View All</a>
+			<a class="viewButton" href="#">View All</a>
+			<a class="collapseButton" href="#">Collapse</a>
 		</div>
 	</div>
 <?php } // end if ?>	
 
 <?php if(count($issues) > 0){ ?>
 	<div id="tabs-2">
-	<?php foreach($issues  as $issue){ ?>
-		<div class="participation">
+	<?php 
+		foreach($issues  as $issue){
+			$show = ($issue['show'] == 1) ? "show" : "hide"; 
+	?>
+		<div class="item <?php echo $show; ?>">
 			<div class="above">
 				<?php if(isset($issue['image'])){
 				
@@ -90,15 +123,19 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 		</div>		
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_ISSUES; ?>">View All</a>
+			<a class="viewButton" href="#">View All</a>
+			<a class="collapseButton" href="#">Collapse</a>
 		</div>
 	</div>
 <?php } // end if ?>	
 
 <?php if(count($following) > 0){ ?>
 	<div id="tabs-3">
-	<?php foreach($following  as $followed){ ?>
-		<div class="participation">
+	<?php 
+		foreach($following  as $followed){ 
+			$show = ($followed['show'] == 1) ? "show" : "hide";
+	?>
+		<div class="item <?php echo $show; ?>">
 			<div class="above">
 				<?php if(isset($followed['parent_image'])){ 
 					$width = 100;
@@ -120,7 +157,8 @@ div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:upper
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_FOLLOWING; ?>">View All</a>
+			<a class="viewButton" href="#">View All</a>
+			<a class="collapseButton" href="#">Collapse</a>
 		</div>
 	</div>
 <?php } // end if ?>	

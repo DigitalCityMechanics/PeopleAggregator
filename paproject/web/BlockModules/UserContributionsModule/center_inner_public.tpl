@@ -7,19 +7,19 @@
 	});
 </script>
 <style type="text/css">
-div.participation {
+div.item {
 	background-color:#FFF;
 	margin-bottom:10px;
 	padding:4px;
 }
-div.participation img {
+div.item img {
 	float:left;
 	margin:0 13px 5px;
 }
-div.participation h2 {
+div.item h2 {
 	text-decoration:underline;
 }
-div.participation div.below {
+div.item div.below {
 	clear:both;
 	padding:5px;
 }
@@ -33,8 +33,11 @@ div.participation div.below {
 	</ul>
 <?php if(count($contributions) > 0){ ?>	
 	<div id="tabs-contributions-1">
-	<?php foreach($contributions  as $contribution){ ?>
-		<div class="participation">
+	<?php 
+		foreach($contributions  as $contribution){
+			$show = ($contribution['show'] == 1) ? "show" : "hide";  
+	?>
+		<div class="item <?php echo $show; ?>">
 			<div class="above">
 				<?php if(isset($contribution['parent_image'])){ 
 					$width = 100;
@@ -57,14 +60,18 @@ div.participation div.below {
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_CONTRIBUTIONS; ?>">View All</a>
+			<a class="viewButton" href="#">View All</a>
+			<a class="collapseButton" href="#">Collapse</a>
 		</div>
 	</div>
 <?php } // end if ?>	
 <?php if(count($thoughts) > 0){ ?>	
 	<div id="tabs-contributions-2">
-	<?php foreach($thoughts  as $thought){ ?>
-		<div class="participation">
+	<?php 
+		foreach($thoughts  as $thought){
+			$show = ($thought['show'] == 1) ? "show" : "hide";  
+	 ?>
+		<div class="item <?php echo $show; ?>">
 			<div class="above">
 				<?php if(isset($thought['image'])){ ?>
 					<img src="<?php echo $thought['image']; ?>" alt="thought image" style="width:100px;height:100px;" />
@@ -78,7 +85,8 @@ div.participation div.below {
 		</div>
 	<?php } // end foreach ?>
 		<div class="tab-links">
-			<a href="<?php echo CC_APPLICATION_URL . CC_ROUTE_THOUGHTS; ?>">View All</a>
+			<a class="viewButton" href="#">View All</a>
+			<a class="collapseButton" href="#">Collapse</a>
 		</div>
 	</div>
   </div>

@@ -88,7 +88,7 @@ class UserContributionsModule extends Module {
 		if(isset($User_id)){
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$defaultResult = array('parent_title'=>'No contributions', 'url'=>'#', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('show'=>true, 'parent_title'=>'No contributions', 'url'=>'#', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not made any contributions.', 'participant_count' => 0, 'contribution_count' => 0);
 			$responseStatus = $request->createCurl();
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
@@ -96,7 +96,7 @@ class UserContributionsModule extends Module {
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = array_splice($jsonResults, 1, 3);
+					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
 					$jsonResults = $newArray;
 				}
 				return $jsonResults;
@@ -114,7 +114,7 @@ class UserContributionsModule extends Module {
 	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
 	 */
 	function get_thoughts_data($User_id){		
-		return array(array('title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
+		return array(array('show'=>true, 'title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
 	}
 	
 	
@@ -130,6 +130,26 @@ class UserContributionsModule extends Module {
 		//TODO: add ability to remove double slashes
 		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
 		return $url;
+	}
+	
+	/**
+	 * Changes array to show certain items
+	 * @param $ArrayToChange
+	 * @param $NumberOfItemsToShow
+	 */
+	function setItemsToShow($ArrayToChange, $NumberOfItemsToShow){	
+		$i = 0;
+		foreach($ArrayToChange as $arrayItem){
+			
+			if($i < $NumberOfItemsToShow){
+				$arrayItem['show'] = true;
+			}else{
+				$arrayItem['show'] = false;
+			}
+			$ArrayToChange[$i] = $arrayItem;
+			$i++;
+		}
+		return $ArrayToChange;
 	}
 	
 }
