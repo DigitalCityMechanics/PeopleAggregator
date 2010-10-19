@@ -97,14 +97,14 @@ class UserParticipationModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONVERSATIONS, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('title'=>'No conversations', 'url'=>'#', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('show'=>true, 'title'=>'No conversations', 'url'=>'#', 'summary'=>'You are not participating in any conversations.', 'participant_count' => 0, 'contribution_count' => 0);
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = array_splice($jsonResults, 1, 3);
+					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
 					$jsonResults = $newArray;
 				}				
 				return $jsonResults;
@@ -132,14 +132,14 @@ class UserParticipationModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_ISSUES, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('name'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('show'=>true, 'name'=>'No issues', 'summary'=>'You are not participating in any issues.', 'participant_count' => 0, 'contribution_count' => 0);
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = array_splice($jsonResults, 1, 3);
+					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
 					$jsonResults = $newArray;
 				}				
 				return $jsonResults;
@@ -167,16 +167,16 @@ class UserParticipationModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_FOLLOWING, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('parent_title'=>'Not following any conversations or issues', 'parent_url' => '#','summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);
+			$defaultResult = array('show'=>true, 'parent_title'=>'Not following any conversations or issues', 'parent_url' => '#','summary'=>'You are not following any issues of contributions', 'participant_count' => 0, 'contribution_count' => 0);
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = array_splice($jsonResults, 1, 3);
+					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
 					$jsonResults = $newArray;
-				}				
+				}
 				return $jsonResults;
 			}else{
 				Logger::log("UserParticipationModule.get_following_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);
@@ -198,6 +198,26 @@ class UserParticipationModule extends Module {
 		//TODO: add ability to remove double slashes
 		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
 		return $url;
+	}
+	
+	/**
+	 * Changes array to show certain items
+	 * @param $ArrayToChange
+	 * @param $NumberOfItemsToShow
+	 */
+	function setItemsToShow($ArrayToChange, $NumberOfItemsToShow){	
+		$i = 0;
+		foreach($ArrayToChange as $arrayItem){
+			
+			if($i < $NumberOfItemsToShow){
+				$arrayItem['show'] = true;
+			}else{
+				$arrayItem['show'] = false;
+			}
+			$ArrayToChange[$i] = $arrayItem;
+			$i++;
+		}
+		return $ArrayToChange;
 	}
 	
 }

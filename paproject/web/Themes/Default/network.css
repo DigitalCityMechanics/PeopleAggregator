@@ -3932,6 +3932,18 @@ div.error {
 /* --- BlockModule Customizations --- */
 .aside .mod h3 {font-size:0.9em;}
 
+/* -- UserParticipationModule and UserContributionsModule customizations --*/
+div.items {overflow:auto;height:545px;}
+div.item {background-color:#FFF;margin-bottom:10px;padding:4px;}
+div.item img {float:left;margin:0 13px 5px;}
+div.item h2 {font-size:100%;}
+div.item div.below {clear:both;padding:5px;}
+div.tab-links{text-align:right; color:#999; font-size:11px; text-transform:uppercase;padding:10px 0 0 0 ;}
+div.show.item{display:block;}
+div.hide.item{display:none;}
+div.item h2 {text-decoration:underline;}
+div.item div.below {clear:both;padding:5px;}
+
 /* --- Misc Customizations --- */
 div.steps ul {margin:0;}
 /* -- TODO: Spend more time on these later, these were fixed for emergency */
