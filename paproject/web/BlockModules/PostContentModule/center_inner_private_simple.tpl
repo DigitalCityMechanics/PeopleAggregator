@@ -35,8 +35,150 @@ require_once "api/Permissions/PermissionsHandler.class.php";
           <?php echo $center_content; ?>
         </li>
       </ul>
-      <ul>
-    </ul>
+	<?php if(!$is_edit) { 
+		// turn off full routing for private groups
+
+		if (!empty(PA::$config->simple['omit_routing'])) { 
+			// give user a very simmple routing option here
+			?>
+	    <ul id="routing">
+	        <li>
+	              <?php 
+
+	                if ($permission_to_post) { ?>
+	            <fieldset>
+	              <legend><?= __("Routing") ?></legend>
+	              <input type="checkbox" name="route_to_pa_home" value="1" 
+	              <?php 
+	              		if (!empty($_POST['route_to_pa_home'])) {
+	              			echo 'checked="checked"';
+	              		} ?> />
+	              	<?php 
+	              	  // To display network owner specified title on home page.
+	              	  $extra = unserialize($network_info->extra);
+	              	  $block_heading_net= @$extra['network_group_title'];
+	              	  $block_heading_net = ($block_heading_net) ? $block_heading_net : __("Community Blog");
+	              	  echo sprintf(__("Post to %s (On this networks home page)"), $block_heading_net) ?>
+	            </fieldset>
+	              <?php } ?>
+	          </li>
+	        </ul>
+	<?php } else {
+					// show more fully featured routing
+					if(!$is_edit) { ?>
+	      <ul>
+	      <li><p><?= __("You can route this post to one or many destinations with the selectors below.") ?>.</a></p></li>
+	      <li><p>*<?= __("Please note that routing does not post to private groups") ?></p></li>
+	    </ul>
+	    <ul id="routing">
+	        <li>
+	            <fieldset>
+	              <legend><?= __("Routing") ?></legend>
+	              <?php 
+	                $permission_to_post = PermissionsHandler::can_user(PA::$login_uid, array('permissions' => 'post_to_community'));
+	                if ($permission_to_post) { ?>
+	                 <input type="checkbox" name="route_to_pa_home" value="1" <?php if (@$_POST['route_to_pa_home'] == 1 ) { echo 'checked="checked"';}?> />
+	                 <?= __("Post to community Blog (On this networks home page)")?>
+	              <?php } ?>
+	              <?php
+	                $existing_route_targets_group = @$_POST['route_targets_group'];
+	                if (!$existing_route_targets_group) $existing_route_targets_group = array();
+	              if(count($user_groups) && !empty($_REQUEST['ccid'])) { ?>
+	              <div id="route_targets">
+	                <h4><label for="route_targets_groups"><?= __("Send to selected group blogs") ?> *</label></h4>
+	                    <select id="route_targets_groups" name="route_targets_group[]" multiple="multiple" onchange="deselect_others('route_targets_groups');">
+	<!--                    
+	                    <option value="-2">----Select none of my group blogs</option>
+	                    <option value="-1">----Select all of my group blogs</option>
+	-->                    
+	                    <option value=""> Select group blogs </option>
+	                    <?php 
+	                        $var_groups="";
+	                        for ($counter = 0; $counter < count($user_groups); $counter++) {
+	                          $grp_id = $user_groups[$counter]['gid'];
+	                          if( $grp_id == $ccid || in_array($grp_id, $existing_route_targets_group)) {
+	                              $selected = "selected";
+	                          } else {
+	                              $selected = "";
+	                             }
+	                             $var_groups = $var_groups.$user_groups[$counter]['gid'].',';
+	                       ?> 
+	                          <?php $permission_to_post = PermissionsHandler::can_group_user(PA::$login_uid, $user_groups[$counter]['gid'], array('permissions' => 'post_to_group'));
+	                          if ($permission_to_post) {?>
+	                            <option value="<?php echo $user_groups[$counter]['gid'];?>" <?php echo $selected?>><?php echo  chop_string(stripslashes($user_groups[$counter]['name']), NAME_LENGTH);?>
+	                            </option>
+	                          <?php } ?>  
+	                            <?php }?>     
+	                            <?php $var_groups = substr($var_groups, 0, -1);?>               
+	                        </select>
+	                        <input type="hidden" value="<?php echo $var_groups;?>" name="Allgroups"/>
+	             <?php /* } else {
+	                 echo "You have not joined any group right now.<a href='".PA::$url . PA_ROUTE_GROUPS ."'>Click Here</a> to join a group";
+	             } */?>
+	<!--                
+	                <p>For multiple selections hold down the &lt;Ctrl&gt;key PC or the</p>
+	                <p>&lt;Command&gt; key(Mac) while clicking the desired selections.</p>
+	                <p>* Post will not appear in moderated groups unless owner of group moderates them.</p>
+	-->                
+	              </div>
+	            <?php } ?>
+	            <?php
+	            if (empty(PA::$config->simple['omit_advacedprofile'])) {
+	            ?>
+	                <h4><label for="route_targets_groups"><?= __("Send to selected external blogs") ?> *</label></h4>
+	                <?php if($show_external_blogs) {
+	                  $existing_route_targets_external = @$_POST['route_targets_external'];
+			  if (!$existing_route_targets_external) $existing_route_targets_external = array();
+	                ?>
+	                <select id="route_targets_external" name="route_targets_external[]" multiple="multiple" onchange="deselect_others('route_targets_external');">
+	                  <option value="-2">----Select none of my external blogs</option>
+	                  <option value="-1">----Select all of my external blogs</option>
+	                  <?php  $var_external_blogs = "";
+	                           for ($counter = 0; $counter < count($targets); $counter++) { 
+	                              $var_external_blogs = $var_external_blogs.$targets[$counter]['ID'].',';
+	                 ?>   <option value="<?php echo $targets[$counter]['ID'];?>"<?php if (in_array($targets[$counter]['ID'], $existing_route_targets_external)) echo " selected"; ?>><?php echo stripslashes($targets[$counter]['title']);?></option>
+	                <?php } ?>
+	               </select>
+	             <?php } else { echo $outputthis_error_mesg; } ?>
+	             <?php $var_external_blogs = substr(@$var_external_blogs, 0, -1);?>
+	             <input type="hidden" value="<?php echo $var_external_blogs;?>" name="Allexternal_blog"/>
+	       <?php } // end if not omit_advacedprofile?>
+
+	       <?php if($album_type != -1) {
+		  $existing_route_targets_album = @$_POST['route_targets_album'];
+		  if (!$existing_route_targets_album) $existing_route_targets_album = array();
+	       ?>
+	         <h4><label for="route_targets_groups"><?= __("Select albums in your media gallery to send to") ?> *</label></h4>
+	          <select id="route_targets_album" name="route_targets_album[]" multiple="multiple" onchange="deselect_others('route_targets_album');">    
+	           <option value="-2">----<?= __("Select none of my galleries") ?></option>
+	           <option value="-1">----<?= __("Select all of my galleries") ?></option>
+	              <?php if(count($user_albums)) {
+	                $var_album = "";
+	                for($counter = 0; $counter < count($user_albums); $counter++) {
+	              ?>
+	              <option value="<?php echo $user_albums[$counter]['collection_id']; ?>"<?php
+	if (in_array($user_albums[$counter]['collection_id'], $existing_route_targets_album)) echo " selected";
+	 ?>><?php echo chop_string($user_albums[$counter]['description'], 20);?></option>
+	              <?php $var_album = $var_album . $user_albums[$counter]['collection_id'] .',';?>
+	              <?php }
+	                } else {
+	                echo __("No Albums");
+	              }
+	              $var_album = substr($var_album, 0, -1);
+	            ?>
+	            </select>
+	            <input type="hidden" name="all_album" value="<?php echo $var_album;?>"/>  
+	            <?= __("Or, create a new album in your media gallery") ?> <input type="text" name="new_album" />    
+	         <?php } ?>
+	           </fieldset>
+
+	        </li>
+	      </ul>
+<?php
+			} 
+		}
+	}
+?>
     <ul id="publish_post">
         <li>
            <input type="hidden" name="save_publish_post" value="1" id="save_publish_post" />

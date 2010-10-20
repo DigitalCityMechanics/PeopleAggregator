@@ -40,6 +40,14 @@ require_once "api/User/UserPopularity.class.php";
 * @author Tekriti Software
 */
 class User {
+
+	const MIN_LOGIN_NAME_LENGTH = 3;
+	const MAX_LOGIN_NAME_LENGTH = 255;
+
+	const MAX_FIRST_NAME_LENGTH = 45;
+
+	const MAX_LAST_NAME_LENGTH = 45;
+
   /**
   * The uid associated with this user.
   *
@@ -770,14 +778,14 @@ class User {
       throw new PAException(USER_INVALID_LOGIN_NAME,'The login name is not a valid authentication ID. Name: ' . $this->login_name);
     }
 
-    if (strlen($this->login_name) > 50) {
-      Logger::log("Throwing exception USER_INVALID_LOGIN_NAME | Message: The login name is too long: it must be less than 16 characters. Name: " . $this->login_name, LOGGER_ERROR);
-      throw new PAException(USER_INVALID_LOGIN_NAME,'The login name is too long: it must be less than 16 characters. Name: ' . $this->login_name);
+    if (strlen($this->login_name) >= self::MAX_LOGIN_NAME_LENGTH) {
+      Logger::log("Throwing exception USER_INVALID_LOGIN_NAME | Message: The login name is too long: it must be ".self::MAX_LOGIN_NAME_LENGTH." characters or less. Name: " . $this->login_name, LOGGER_ERROR);
+      throw new PAException(USER_INVALID_LOGIN_NAME,'The login name is too long: it must be '.self::MAX_LOGIN_NAME_LENGTH.' characters or less. Name: ' . $this->login_name);
     }
 
-    if (strlen($this->login_name) < 3) {
-      Logger::log("Throwing exception USER_INVALID_LOGIN_NAME | Message: The login name is too short: it must be greater than 5 characters. Name: " . $this->login_name, LOGGER_ERROR);
-      throw new PAException(USER_INVALID_LOGIN_NAME,'The login name is too short: it must be greater than 2 characters. Name: ' . $this->login_name);
+    if (strlen($this->login_name) <= self::MIN_LOGIN_NAME_LENGTH) {
+      Logger::log("Throwing exception USER_INVALID_LOGIN_NAME | Message: The login name is too short: it must be ".self::MIN_LOGIN_NAME_LENGTH." characters or greater. Name: " . $this->login_name, LOGGER_ERROR);
+      throw new PAException(USER_INVALID_LOGIN_NAME,'The login name is too short: it must be '.self::MIN_LOGIN_NAME_LENGTH.' characters or greater. Name: ' . $this->login_name);
     }
 
     // Checking First name of the user.
@@ -786,9 +794,9 @@ class User {
       throw new PAException(USER_INVALID_NAME,'The first name is not a valid authentication ID. Name: ' . $this->first_name);
     }
 
-    if (strlen($this->first_name) > 45) {
-      Logger::log("Throwing exception USER_INVALID_NAME | Message: The first name is too long: it must be less than 45 characters. Name: " . $this->first_name, LOGGER_ERROR);
-      throw new PAException(USER_INVALID_NAME,'The first name is too long: it must be less than 45 characters. Name: ' . $this->first_name);
+    if (strlen($this->first_name) >= self::MAX_FIRST_NAME_LENGTH) {
+      Logger::log("Throwing exception USER_INVALID_NAME | Message: The first name is too long: it must be ".self::MAX_FIRST_NAME_LENGTH." characters or less. Name: " . $this->first_name, LOGGER_ERROR);
+      throw new PAException(USER_INVALID_NAME,'The first name is too long: it must be '.self::MAX_FIRST_NAME_LENGTH.' characters or less. Name: ' . $this->first_name);
     }
 
     // Checking last name of the user.
@@ -797,9 +805,9 @@ class User {
       throw new PAException(USER_INVALID_NAME,'The last name is not a valid authentication ID. Name: ' . $this->last_name);
     }
 
-    if (strlen($this->last_name) > 45) {
-      Logger::log("Throwing exception USER_INVALID_NAME | Message: The last name is too long: it must be less than 45 characters. Name: " . $this->last_name, LOGGER_ERROR);
-      throw new PAException(USER_INVALID_NAME,'The last name is too long: it must be less than 45 characters. Name: ' . $this->last_name);
+    if (strlen($this->last_name) >= self::MAX_LAST_NAME_LENGTH) {
+      Logger::log("Throwing exception USER_INVALID_NAME | Message: The last name is too long: it must be ".self::MAX_LAST_NAME_LENGTH." characters or less. Name: " . $this->last_name, LOGGER_ERROR);
+      throw new PAException(USER_INVALID_NAME,'The last name is too long: it must be '.self::MAX_LAST_NAME_LENGTH.' characters or less. Name: ' . $this->last_name);
     }
 
     // Check for email.

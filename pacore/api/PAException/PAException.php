@@ -32,6 +32,9 @@ class PAException extends Exception {
 	    if(isset($httpStatusCode)){
 		    // set http header error code
 	    	header(HttpStatusCodes::httpHeaderFor($httpStatusCode));
+
+			// log the occrance in php error log
+			//user_error(print_r($httpStatusCode, true), E_USER_WARNING);
 	    }	    
     }catch(Exception $ex){
     	// ignore this exception. No need to throw it since the HttpStatusCode is

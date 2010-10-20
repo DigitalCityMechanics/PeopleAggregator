@@ -189,13 +189,29 @@ class PAInstaller {
       $form->addInputField('password', __('Database password'),
                              array('id' => 'db_password', 'required' => true, 'value' => '')
       );
-      $form->addHtml('<p class="inst_info">'.__('If you would like PeopleAggregator to create this user for you, please provide your MySQL root password.').'</p>');
+      $form->addHtml('<p class="inst_info root_info">'.__('If you would like PeopleAggregator to create this user for you, please provide your MySQL root password.').'</p>');
       $form->addInputField('text', __('MySQL root username'),
-                             array('id' => 'mysql_root_username', 'required' => false, 'value' => '')
+                             array('id' => 'mysql_root_username', 'required' => false, 'value' => '', 'css_class' => 'field root_info')
       );
       $form->addInputField('password', __('MySQL root password'),
-                             array('id' => 'mysql_root_password', 'required' => false, 'value' => '')
+                             array('id' => 'mysql_root_password', 'required' => false, 'value' => '', 'css_class' => 'field root_info')
       );
+
+// Parag Jagdale - 10/17/10: 	If a seed file and a structure file is detected, we can offer the administrator the option to seed their database 
+//								during installation with seed data. This is useful during the development phase of a project, or when creating a 
+//								fresh installation. 
+//	TODO: test this with seed and structure file in /PACORE, not just /PAPROJECT  
+      if(getShadowedPath("web/install/PeepAgg.structure.mysql")){
+	      if($sql_file = getShadowedPath("web/install/PeepAgg.seed.mysql")) {
+		      $form->addHtml('<p class="inst_info seed_field">'.__('PeopleAggregator has detected a seed file. Check the box below if you wish to insert seed data from the file.</p>'));		      
+		      
+		      $form->addInputField('checkbox', __('Insert seed data from ' . basename($sql_file)),
+		                             array('id' => 'insert_seed_data', 'required' => false, 'value' => '', 'css_class' => 'field seed_field')
+		      );
+	      }
+      }
+// Parag Jagdale - 10/17/10 end
+ 	      
       $form->addInputTag('hidden', array('id' => 'section_name', 'value' => $section_name));
       $form->addHtml('</div>');
       $form->closeTag('fieldset');

@@ -256,7 +256,8 @@ class PADownloadManager {
   }
 
   private function streamDownloads($file_path, $ext) {
-      $file = end(explode('/', $file_path));
+      $parts = explode('/', $file_path);
+      $file = end($parts);
       switch($ext){
           case "asf":     $type = "video/x-ms-asf";                break;
           case "avi":     $type = "video/x-msvideo";               break;

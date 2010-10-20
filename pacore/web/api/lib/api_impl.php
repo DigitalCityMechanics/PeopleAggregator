@@ -814,25 +814,30 @@ function peopleaggregator_newOrg($args)
 
 function civiccommons_newOrg($args)
 {
-	$status = peopleaggregator_newUser($args);
-	if($status['success'] !== true)
+	$status_newuser = peopleaggregator_newUser($args);
+	if($status_newuser['success'] !== true)
 	{
-		return $status;
+		return $status_newuser;
 	}
 
-	$status = peopleaggregator_login($args);
-	if($status['success'] !== true)
+	$status_login = peopleaggregator_login($args);
+	if($status_login['success'] !== true)
 	{
-		return $status;
+		return $status_login;
 	}
 
 	// get the authToken from api logging in the previously created user
-	$args['authToken'] = $status['authToken'];
+	$args['authToken'] = $status_login['authToken'];
 
 	// change 'groupName' back to expected 'name'
 	$args['name'] = isset($args['groupName']) ? $args['groupName'] : null;
-
-	return peopleaggregator_newOrg($args);
+	$status_neworg = peopleaggregator_newOrg($args);
+	if($status_neworg['success'] === true)
+	{
+		$status_neworg['org_id'] = intval(substr($status_neworg['id'], strpos($status_neworg['id'], ':') + 1));
+		$status_neworg['id'] = $status_newuser['id'];
+	}
+	return $status_neworg;
 }
 
 function api_parse_group_id($id) {
