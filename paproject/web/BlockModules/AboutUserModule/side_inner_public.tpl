@@ -6,10 +6,7 @@
   <ul class="members">
     <li>
     <span>
-      <b><?php $name_string = $user->first_name.' '.$user->last_name;
-            $name_string = chop_string($name_string,17);
-            echo $name_string;?></b>
-      <?php if (!empty($user_data_general['city'])) { echo $user_data_general['city'];}?><br />
+      <?php if (!empty($user_data_general['city'])) { echo $user_data_general['city'] . "<br />";}?>
       <?php if (!empty($user_data_general['country'])) { echo $user_data_general['country']; }?>
     </span>
     </li>
