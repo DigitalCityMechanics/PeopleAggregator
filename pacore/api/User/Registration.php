@@ -286,19 +286,19 @@ class User_Registration {
        $this->newuser->created = $date_created;
       }
       if($this->api_call == true){
-      	if($picture != null){
+      	if($picture != null && $picture != ''){
       		$this->newuser->picture = Storage::validateFileId($picture);
       		$this->newuser->picture_dimensions = $picture_dimensions;
       	}else{
       		$this->newuser->picture_dimensions = User::image_dimensions_to_array(0, 0);
       	}
-      	if($avatar != null){
+      	if($avatar != null && $avatar != ''){
       		$this->newuser->avatar = Storage::validateFileId($avatar);
       		$this->newuser->avatar_dimensions = $avatar_dimensions;
       	}else{
       		$this->newuser->avatar_dimensions = User::image_dimensions_to_array(0, 0);
       	}
-      	if($avatar_small != null){
+      	if($avatar_small != null && $avatar_small != ''){
       		$this->newuser->avatar_small = Storage::validateFileId($avatar_small);
       		$this->newuser->avatar_small_dimensions = $avatar_small_dimensions;
       	}else{
