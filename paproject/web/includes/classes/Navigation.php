@@ -313,64 +313,65 @@ class Navigation {
 		$uid = $this->get_uid();
 		//we need uid for some links
 		$user_children = array();
-		$user_children = $user_children + array(
-                       'user_private' => array('caption'=>__('My Public Page'),
-                                  'url'=>$this->base_url . PA_ROUTE_USER_PUBLIC . '/' . $uid),
-		);
-		$user_children = $user_children + array(
-                       'create_post' => array('caption'=>__('Create A Post'),
-                                  'url'=>$this->base_url . "/post_content.php"),
-		);
-		$user_children = $user_children + array(
-                       'manage_contributions' => array('caption'=>__('Manage My Contributions &amp; Drafts'),
-                                  'url'=>$this->base_url . "/content_management.php"),
-		);
-/*
-		$user_children = $user_children + array(
-                       'messages' => array('caption'=>__('My Messages'),
-                                  'url'=>$this->base_url . PA_ROUTE_MYMESSAGE
-		),
-		);
-*/
-		$user_children = $user_children + array(
-                       'my_gallery' => array('caption'=>__('My Gallery'),
-                                  'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$uid"
-		),
-		);
-		
-		/* Parag Jagdale - 10-18-10: Removed Famileles since it is not needed by CivicCommons
-		if (!empty(PA::$config->simple['use_families'])) {
-			// get this users Family or Families
-			require_once "api/Entity/TypedGroupEntityRelation.php";
-			$userfamilyRelations = TypedGroupEntityRelation::get_relation_for_user($uid, 'family');
-			if (count($userfamilyRelations) == 1) {
-				$user_children = $user_children + array(
-    	'my_family'  => array('caption'=>__('My Family'),
-    	'url' => $this->base_url. PA_ROUTE_FAMILY . "?gid=" . $userfamilyRelations[0]->object_id
-				));
-			} else {
-				$html = "<ul>";
-				foreach($userfamilyRelations as $i=>$relation) {
-					$group = ContentCollection::load_collection((int)$relation->object_id, PA::$login_uid);
-					$html .= "<li>";
-					$html .= "<a href=\"".
-					$this->base_url. PA_ROUTE_FAMILY . "?gid=" . $relation->object_id
-					."\">".$group->title."</a>";
-					$html .= "</li>";
+		if($this->current_page == PAGE_USER_PRIVATE){
+			$user_children = $user_children + array(
+	                       'user_private' => array('caption'=>__('My Public Page'),
+	                                  'url'=>$this->base_url . PA_ROUTE_USER_PUBLIC . '/' . $uid),
+			);
+			$user_children = $user_children + array(
+	                       'create_post' => array('caption'=>__('Create A Post'),
+	                                  'url'=>$this->base_url . "/post_content.php"),
+			);
+			$user_children = $user_children + array(
+	                       'manage_contributions' => array('caption'=>__('Manage My Contributions &amp; Drafts'),
+	                                  'url'=>$this->base_url . "/content_management.php"),
+			);
+	/*
+			$user_children = $user_children + array(
+	                       'messages' => array('caption'=>__('My Messages'),
+	                                  'url'=>$this->base_url . PA_ROUTE_MYMESSAGE
+			),
+			);
+	*/
+			$user_children = $user_children + array(
+	                       'my_gallery' => array('caption'=>__('My Gallery'),
+	                                  'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$uid"
+			),
+				);
+			/* Parag Jagdale - 10-18-10: Removed Families since it is not needed by CivicCommons
+			if (!empty(PA::$config->simple['use_families'])) {
+				// get this users Family or Families
+				require_once "api/Entity/TypedGroupEntityRelation.php";
+				$userfamilyRelations = TypedGroupEntityRelation::get_relation_for_user($uid, 'family');
+				if (count($userfamilyRelations) == 1) {
+					$user_children = $user_children + array(
+	    	'my_family'  => array('caption'=>__('My Family'),
+	    	'url' => $this->base_url. PA_ROUTE_FAMILY . "?gid=" . $userfamilyRelations[0]->object_id
+					));
+				} else {
+					$html = "<ul>";
+					foreach($userfamilyRelations as $i=>$relation) {
+						$group = ContentCollection::load_collection((int)$relation->object_id, PA::$login_uid);
+						$html .= "<li>";
+						$html .= "<a href=\"".
+						$this->base_url. PA_ROUTE_FAMILY . "?gid=" . $relation->object_id
+						."\">".$group->title."</a>";
+						$html .= "</li>";
+					}
+					$html .= "</ul>";
+					$user_children = $user_children + array(
+	    	'my_family'  => array('caption'=>__('My Families'),
+	    	'html' => $html
+					));
 				}
-				$html .= "</ul>";
-				$user_children = $user_children + array(
-    	'my_family'  => array('caption'=>__('My Families'),
-    	'html' => $html
-				));
-			}
-		} // end of !empty(PA::$config->simple['use_families'])
-*/
-		$user_children = $user_children + array(
-                       'settings' => array('caption'=>__('Edit My Account'),
-                                  'url'=>$this->base_url.PA_ROUTE_EDIT_PROFILE
-		),
-		);
+			} // end of !empty(PA::$config->simple['use_families'])
+		*/
+			$user_children = $user_children + array(
+	                       'settings' => array('caption'=>__('Edit My Account'),
+	                                  'url'=>$this->base_url.PA_ROUTE_EDIT_PROFILE
+			),
+			);
+		}
 		if ( $this->is_anonymous ) {
 			//these links are not for anonymous
 			unset($user_children);
