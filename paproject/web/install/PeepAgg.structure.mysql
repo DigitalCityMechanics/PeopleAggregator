@@ -890,7 +890,7 @@ CREATE TABLE IF NOT EXISTS `message_folder` (
   `name` varchar(255) NOT NULL default '',
   PRIMARY KEY (`fid`),
   KEY `name_to_fid` (`uid`,`name`)
-) TYPE=MyISAM   AUTO_INCREMENT=4 ;
+) TYPE=MyISAM   AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -1916,7 +1916,7 @@ CREATE TABLE IF NOT EXISTS `user_profile_data` (
 CREATE TABLE IF NOT EXISTS `User_seq` (
   `id` int(10) unsigned NOT NULL auto_increment,
   PRIMARY KEY (`id`)
-) TYPE=MyISAM   AUTO_INCREMENT=2 ;
+) TYPE=MyISAM   AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
