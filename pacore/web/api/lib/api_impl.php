@@ -834,7 +834,7 @@ function civiccommons_newOrg($args)
 	$status_neworg = peopleaggregator_newOrg($args);
 	if($status_neworg['success'] === true)
 	{
-		$status_neworg['org_id'] = $status_neworg['id'];
+		$status_neworg['org_id'] = intval(substr($status_neworg['id'], strpos($status_neworg['id'], ':') + 1));
 		$status_neworg['id'] = $status_newuser['id'];
 	}
 	return $status_neworg;
