@@ -333,7 +333,7 @@ class Storage {
   public static function parseId($file_id, $allow_numeric=FALSE) {
     if ($allow_numeric && preg_match("/^\d+$/", $file_id)) return (int)$file_id;
     if (preg_match("|^pa://(\d+)|", $file_id, $m)) return (int)$m[1];
-    throw new PAException(INVALID_ID, "Failed to parse file ID: $file_id");
+//    throw new PAException(INVALID_ID, "Failed to parse file ID: $file_id");
   }
 
   // public API: validateFileId
@@ -342,8 +342,10 @@ class Storage {
     if (!trim($file_id)) return NULL;
     // if it's a pa:// id - ok
     try {
-      self::parseId($file_id);
-      return $file_id;
+      if(self::parseId($file_id) != NULL)
+      {
+         return $file_id;
+      }
     } catch (PAException $e) {
       if ($e->getCode() != INVALID_ID) throw $e;
     }
