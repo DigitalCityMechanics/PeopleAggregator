@@ -150,7 +150,7 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 	'return'=>array(
 		'content'=>array(
 			'id'=>array('type'=>'int'),
-			'org_id'=>array('type'=>'string'),
+			'org_id'=>array('type'=>'int'),
 			'success'=>array('type'=>'boolean')
 		),
 		'type'=>'hash',
