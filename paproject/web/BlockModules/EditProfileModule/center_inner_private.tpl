@@ -23,29 +23,6 @@
   <li<?php isActiveNav('professional', $type) ?>>
     <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=professional" id="show-professional"><?= __("Professional Info") ?></a>
   </li>
-
-    </li>
-  <li <?php isActiveNav('notifications', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=notifications" id="show-notifications"><?= __("Notifications") ?></a>
-  </li>
-  <li <?php isActiveNav('contacts', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_USER_CONTACTS?>?type=contacts" id="show-contacts"><?= __("Import Contacts") ?></a>
-  </li>
-
-  <?php
-    if (empty(PA::$config->simple['omit_advacedprofile'])) {
-  ?>
-
-  <li<?php isActiveNav('export', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=export" id="show-export"><?= __("Export") ?></a>
-  </li>
-
-  <?php
-    }
-  ?>
-  <li<?php isActiveNav('delete_account', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=delete_account" id="show-delete_account"><?= __("Delete Account") ?></a>
-  </li>
 </ul>
 
 <? if ($type == 'basic') { ?>
