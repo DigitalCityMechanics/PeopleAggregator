@@ -23,7 +23,7 @@ require_once "api/Logger/Logger.php";
 
 class UserParticipationModule extends Module {
 
-	public $module_type = 'user|network';
+	public $module_type = 'user|network|group';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
 
@@ -45,6 +45,8 @@ class UserParticipationModule extends Module {
 		if(!empty($this->shared_data['user_info'])) {
 			$this->user = $this->shared_data['user_info'];
 			$this->uid = $this->user->user_id;
+		} elseif(!empty($this->shared_data['group_info'])) {
+			$this->uid = $this->shared_data['group_info']->owner_id;
 		} else {
 			return 'skip';
 		}
@@ -55,12 +57,12 @@ class UserParticipationModule extends Module {
 		global $login_uid, $page_uid;
 		$content = null;
 		//TODO: Do a check for private page, public page or org page
-		//if(isset($page_uid)){			
-			$this->_conversations = $this->get_conversations_data($this->user->user_id);
+		//if(isset($page_uid)){
+			$this->_conversations = $this->get_conversations_data($this->uid);
 				
-			$this->_issues = $this->get_issues_data($this->user->user_id);
+			$this->_issues = $this->get_issues_data($this->uid);
 				
-			$this->_following = $this->get_following_data($this->user->user_id);
+			$this->_following = $this->get_following_data($this->uid);
 
 			$this->inner_HTML = $this->generate_inner_html ();
 			$content = parent::render();
