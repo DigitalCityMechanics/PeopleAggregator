@@ -22,11 +22,13 @@ class UserContributionsModule extends Module {
 	public $module_type = 'user|network';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
+	
 	public $mode = self::USERMODE;
 	
 	const USERMODE = 0;
 	const ORGMODE = 1;
 	
+	private $uid;
 	private $_contributions;
 	private $_thoughts;
 

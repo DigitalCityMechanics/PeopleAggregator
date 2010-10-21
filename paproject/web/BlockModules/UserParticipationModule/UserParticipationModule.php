@@ -26,7 +26,8 @@ class UserParticipationModule extends Module {
 	public $module_type = 'user|network';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
-
+	
+	private $uid;
 	private $_conversations;
 	private $_issues;
 	private $_following;
@@ -45,6 +46,9 @@ class UserParticipationModule extends Module {
 		if(!empty($this->shared_data['user_info'])) {
 			$this->user = $this->shared_data['user_info'];
 			$this->uid = $this->user->user_id;
+		}else if(!empty($this->shared_data['group_info'])){
+			$this->group = $this->shared_data['group_info'];
+			$this->uid = $this->group->owner_id;
 		} else {
 			return 'skip';
 		}
@@ -54,17 +58,15 @@ class UserParticipationModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-		//TODO: Do a check for private page, public page or org page
-		//if(isset($page_uid)){			
-			$this->_conversations = $this->get_conversations_data($this->user->user_id);
-				
-			$this->_issues = $this->get_issues_data($this->user->user_id);
-				
-			$this->_following = $this->get_following_data($this->user->user_id);
+		
+		$this->_conversations = $this->get_conversations_data($this->uid);
+			
+		$this->_issues = $this->get_issues_data($this->uid);
+			
+		$this->_following = $this->get_following_data($this->uid);
 
-			$this->inner_HTML = $this->generate_inner_html ();
-			$content = parent::render();
-		//}
+		$this->inner_HTML = $this->generate_inner_html ();
+		$content = parent::render();
 		return $content;
 	}
 
