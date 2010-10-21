@@ -82,6 +82,8 @@ class UserContributionsModule extends Module {
 		$inner_html_gen->set('contributions', $this->_contributions);
 		$inner_html_gen->set('thoughts', $this->_thoughts);
 		$inner_html_gen->set('mode', $this->mode);
+		$inner_html_gen->set('USERMODE', self::USERMODE);
+		$inner_html_gen->set('ORGMODE', self::ORGMODE);
 		
 		$inner_html = $inner_html_gen->fetch();
 		return $inner_html;

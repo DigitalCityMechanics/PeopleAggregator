@@ -13,10 +13,10 @@
 
 <div id="tabs-contributions">
 	<ul>
-	<?php if($mode == 0){ ?>
+	<?php if($mode == $USERMODE){ ?>
 			<li><a href="#tabs-contributions-1">Contributions</a></li>
 			<li><a href="#tabs-contributions-2">Thoughts</a></li>
-	<?php }else{ ?>	
+	<?php }else if($mode == $ORGMODE){ ?>	
 			<li><a href="#tabs-contributions-2">Posts</a></li>
 			<li><a href="#tabs-contributions-1">Contributions</a></li>
 	<?php } ?>
