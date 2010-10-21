@@ -57,7 +57,8 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
 
     try {
       // $this is  DynamicProfile class instance
-      $this->save('general', GENERAL);
+// Parag Jagdale - 10-21-10: hard codes the permissions to be 1 (everyone)
+      $this->save('general', GENERAL, 1);
       Tag::add_tags_to_user(PA::$user->user_id, $terms);
     } catch (PAException $e) {
       $msg = "$e->message";
@@ -96,30 +97,19 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
 </div>
 <?php } ?>
       <form enctype="multipart/form-data" name="drop_list" action="" method="post">
-          <div class="form-block">
-            <label for="multiple_select"><?= __("Select for All") ?></label>
-
-            <div>
-      <?php echo uihelper_get_user_access_list('select_multiple',
-        'NONE',
-        $other_params = ' onchange="javascript: set_all_perms(this)"');?>
-            </div>
-            <br />
-            &nbsp;
-          </div>
 
           <?php
-            $this->textfield(__('Slogan'), 'user_caption', 'general', NULL, TRUE, __("Slogan will appear on your Public Page."));
-            $this->textfield(__('Shout Out'), 'sub_caption', 'general', NULL, TRUE, __("Shout out will appear on your Public Page."));
+            $this->textfield(__('Slogan'), 'user_caption', 'general', NULL, FALSE, __("Slogan will appear on your Public Page."));
+            $this->textfield(__('Shout Out'), 'sub_caption', 'general', NULL, FALSE, __("Shout out will appear on your Public Page."));
 
           $sex = array();
           $sex[] = array('label'=>'Male','value'=>'Male');
           $sex[] = array('label'=>'Female','value'=>'Female');
-          $this->radiobar(__("Gender"), 'sex', $sex, 'general');
-          $this->dateselect(__("Date of Birth"), 'dob', 'general');
-          $this->textfield(__("Address"), "homeAddress1", 'general',NULL, TRUE, NULL);
-          $this->textfield(__("Address 2"), "homeAddress2", 'general',NULL, TRUE, NULL);
-          $this->textfield(__("City"), "city", 'general');
+          $this->radiobar(__("Gender"), 'sex', $sex, 'general', NULL, FALSE);
+          $this->dateselect(__("Date of Birth"), 'dob', 'general',NULL, FALSE);
+          $this->textfield(__("Address"), "homeAddress1", 'general',NULL, FALSE, NULL);
+          $this->textfield(__("Address 2"), "homeAddress2", 'general',NULL, FALSE, NULL);
+          $this->textfield(__("City"), "city", 'general', NULL, FALSE);
 //          $this->select(__('State/Province'), 'state', array_values(PA::getStatesList()), 'general');
           ?>
 <!--
@@ -128,15 +118,15 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
           </div>
 -->
           <?php
-          $this->textfield(__('State/Province'), 'state', "general");
-          $this->select(__("Country"), "country", array_values(PA::getCountryList()), 'general');
-//          $this->textfield(__("Country"), "country", "general");
-          $this->textfield(__("Zip/Postal Code"), "postal_code", "general");
-          $this->textfield(__("Phone"), "phone", 'general',NULL, TRUE, NULL);
-          $this->textfield(__("Mobile Phone"), "mobilePhone", 'general',NULL, TRUE, NULL);
+          $this->textfield(__('State/Province'), 'state', "general", NULL, FALSE);
+          $this->select(__("Country"), "country", array_values(PA::getCountryList()), 'general', NULL, FALSE);
+//          $this->textfield(__("Country"), "country", "general", NULL, FALSE);
+          $this->textfield(__("Zip/Postal Code"), "postal_code", "general", NULL, FALSE);
+          $this->textfield(__("Phone"), "phone", 'general',NULL, FALSE, NULL);
+          $this->textfield(__("Mobile Phone"), "mobilePhone", 'general',NULL, FALSE, NULL);
 
 
-          $this->textarea(__("User Tags (Interests)"), "user_tags", "general", NULL, TRUE,
+          $this->textarea(__("User Tags (Interests)"), "user_tags", "general", NULL, FALSE,
           __("Seperate tags with commas."));
           ?>
 
