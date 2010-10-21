@@ -116,7 +116,35 @@ class UserContributionsModule extends Module {
 	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
 	 */
 	function get_thoughts_data($User_id){		
-		return array(array('show'=>true, 'title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
+		//TODO: throw exceptions and check for bad error codes
+		//TODO: put URL in App_Config.xml
+		// TEMPORARY TEST CODE, REMOVE LATER
+		if(isset($_GET['testuser'])){
+			$User_id = $_GET['testuser'];
+		}
+		if(isset($User_id)){
+//			$url = $this->buildRESTAPIUrl(PA::$url, CC_APPLICATION_URL_TO_API, CC_ROUTE_THOUGHTS, $User_id);
+			$url = 'http://www.peeps.com/api/json.php/civiccommons/thoughts';
+			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
+			$request->setPost(array('user_id' => $User_id));
+			$defaultResult = array('show'=>true, 'parent_title'=>'No thoughts', 'url'=>'#', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not shared any thoughts.', 'participant_count' => 0, 'contribution_count' => 0);
+			$responseStatus = $request->createCurl();
+			if($responseStatus == 200){
+				$jsonResults = $request->getJSONResponse();
+				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else{
+					// only show the first 3 conversations
+					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
+					$jsonResults = $newArray;
+				}
+				return $jsonResults;
+			}else{
+    			Logger::log("UserContributionsModule.get_contributions_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
+				return array($defaultResult);
+			}
+		}
+		return null;
 	}
 	
 	

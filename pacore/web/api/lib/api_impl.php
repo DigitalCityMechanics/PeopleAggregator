@@ -840,6 +840,34 @@ function civiccommons_newOrg($args)
 	return $status_neworg;
 }
 
+function civiccommons_thoughts($args)
+{
+	$uid = is_int(intval($args['user_id'])) ? intval($args['user_id']) : null;
+	if($uid == null) {
+		return array();
+	}
+
+	$results = array(
+		array(
+			"title"=>"Death Penalty methodology",
+//			"image"=>"http://s3.amazonaws.com/cc-staging/images/2/panel/capital-punishment.jpg",
+//			"image_width"=>198,
+//			"image_height"=>130,
+			"summary"=>"Which particular kind of Death Penalty apparatus or methodology is the subject of this conversation.",
+			"url"=>"http://staging.theciviccommons.com/conversations/2"
+		),
+		array(
+			"title"=>"Ohio Gov Race",
+			"image"=>"http://s3.amazonaws.com/cc-staging/images/4/panel/ohio22310.jpg",
+			"image_width"=>198,
+			"image_height"=>130,
+			"summary"=>"Ohio is having a gubernatorial election in one month.  What does this mean to you?",
+			"url"=>"http://staging.theciviccommons.com/conversations/4"
+		)
+	);
+	return $results;
+}
+
 function api_parse_group_id($id) {
 	if (preg_match("/^group:(\d+)$/", $id, $m)) {
 		return $m[1];

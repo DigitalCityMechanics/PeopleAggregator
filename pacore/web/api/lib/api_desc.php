@@ -203,6 +203,29 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 	'type'=>'post'
 ),
 
+'civiccommons.thoughts'=>array(
+	'argstyle'=>'named',
+	'return'=>array(
+		'item'=>array(
+			'content'=>array(
+				'title'=>array('type'=>'string'),
+				'image'=>array('optional'=>TRUE,'type'=>'string'),
+				'image_width'=>array('optional'=>TRUE,'type'=>'int'),
+				'image_height'=>array('optional'=>TRUE,'type'=>'int'),
+				'summary'=>array('type'=>'string'),
+				'url'=>array('type'=>'string')
+			),
+			'type'=>'hash',
+			'allow_extra_keys'=>0
+		),
+		'type'=>'array'
+	),
+	'args'=>array(
+		'user_id'=>array('type'=>'int')
+	),
+	'type'=>'post'
+),
+
 'peopleaggregator.findGroup'=>array('argstyle'=>'named',
 'return'=>array('content'=>array('groups'=>array('item'=>array('content'=>array('id'=>array('type'=>'string'),
 'name'=>array('type'=>'string')),
