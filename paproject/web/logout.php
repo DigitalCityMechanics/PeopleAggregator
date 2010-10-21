@@ -24,8 +24,23 @@ require_once "web/includes/classes/UrlHelper.class.php";
 if (!empty($_REQUEST['return'])) {
   $return = $_REQUEST['return'];
 } else {
-	// build rthe url via UrlHelper so we can respect the SSL directives
+	
+	// Parag Jagdale - 10/14/10
+	$redirectQueryString = $_GET['redirect'];
+	
+	if(isset($redirectQueryString)){
+		//TODO: check if there are security implications to sending this directly
+		//		to header(Location: ), or if there needs to be cleanup of the parameter
+		$return = $redirectQueryString;
+	}else{
+		$return = CC_APPLICATION_URL . "/people/logout";
+	}
+	// end	
+	
+	/* Removed ability to return to FILE_LOGIN for CivicCommons - Parag Jagdale 10-21-10	
+	// build rthe url via UrlHelper so we can respect the SSL directives	
 	$return = UrlHelper::url_for(PA::$url . '/' . FILE_LOGIN, array(), 'https');
+	*/
 }
 
 // destroy the login cookie
@@ -39,10 +54,6 @@ CachedTemplate::invalidate_cache($file);
 $_SESSION = array();
 session_destroy();
 session_start();
-
-// Parag Jagdale - 10/14/10
-$return = CC_APPLICATION_URL . "/people/logout";
-// end
 
 header("Location: $return");
 exit;
