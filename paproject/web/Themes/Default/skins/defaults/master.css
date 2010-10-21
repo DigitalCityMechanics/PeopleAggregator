@@ -10,7 +10,7 @@ font-size: 100%;
 }
 
 /* Typography */
-div#header-wrapper, div.wrapper, div#nav-wrapper, div#footer, div#legal {font-size: .875em;}
+div#header-wrapper, div.wrapper, div#content, div#nav-wrapper, div#footer, div#legal {font-size: .875em;}
 p {
 line-height: 1.4em;
 margin-bottom: .8em;
@@ -38,7 +38,18 @@ margin-left: 0;
 border-bottom: none;
 padding-bottom: 0;
 }
-.conversations li .conversations {margin-top: 2em;}
+.conversations {margin: 0;}
+/* .conversations li .conversations {margin-top: 1em;} */
+.conversations.divided li {
+margin-bottom: 0;
+margin-top: 0;
+padding-bottom: 15px;
+padding-top: 15px;
+}
+/* .conversations.divided li:first-child {padding-top: 0;} */
+.conversations.divided .input-with-options li {padding: 0;}
+.conversations.divided .input-with-options li a.button {margin: 5px 10px 5px 0;}
+div#show_conversation {margin-top: -15px;}
 .divided li {
 border-bottom: 1px dashed #bbb;
 margin-bottom: 1em;
@@ -53,21 +64,13 @@ ul li, ol li, dl dd {
 line-height: 1.4em;
 margin-bottom: .5em;
 }
-
-dl{
-  margin-bottom:1em;
+dl {margin-bottom:1em;}
+dl dt {
+font-weight:bold;
+margin-bottom:0.5em;
+font-size:1.2em;
 }
-dl dt{
-  font-weight:bold;
-  margin-bottom:0.5em;
-  font-size:1.2em;
-}
-dl dd{
-  margin-bottom:1em;
-}
-
-
-
+dl dd {margin-bottom:1em;}
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 h1 {
 color: #555;
@@ -172,7 +175,7 @@ width: 448px;
 div.checkbox input {width: auto;}
 input.file {padding: 7px 0;}
 input.placeholder, textarea.placeholder {color: #ccc;}
-.input-with-options {margin-bottom: 20px;}
+/* .input-with-options {margin-bottom: 8px;} */
 .input-with-options label {
 background-color: #4d748d;
 color: #d3e7f4;
@@ -213,11 +216,18 @@ width: 480px;
 }
 .aside .general-aside input.textbox, .aside .general-aside textarea {width: 97%;}
 .aside .general-aside .submit {margin-left: 0;}
-.general-aside div.radio label {
+.general-aside div.radio label, .general-aside div.form-block-radio label {
 float: none;
 margin-right: 0;
+padding-bottom: 8px;
+padding-top: 0;
 text-align: left;
 width: 100%;
+}
+div#poll_button {margin-top: 5px;}
+div#poll_button input.submit {
+float: left;
+margin-right: 5px;
 }
 /* .general-aside {margin-bottom: 1em;} */
 
@@ -381,7 +391,7 @@ margin-left: 8px;
 -----------------------------------------------*/
 
 /* Content Sections */
-.wrapper {
+.wrapper, #content {
 margin: auto auto 10px;
 padding: 10px 10px 0;
 width: 940px;
@@ -625,7 +635,6 @@ padding-left: 0;
 padding-right: 0;
 width: 100%;
 }
-
 
 /*-----------------------------------------------
 =Single Conversation Page Styles
@@ -973,6 +982,9 @@ color: #fff;
 =Miscellaneous
 -----------------------------------------------*/
 
+/* Temporary fix - Testing */
+
+p.article {margin: 0;}
 hr {
 display: block;
 border: 0;
@@ -1069,11 +1081,15 @@ padding-top: 15px;
 margin-top: -10px;
 }
 
+/* Buttons for Colorbox Modal Window */
+div#colorbox div.tab-area {padding: 10px;}
+div#colorbox div.tab-area li {margin-bottom: 10px;}
+
 /*-----------------------------------------------
 =Self Clearing Floats
 -----------------------------------------------*/
 
-#wrapper:after, #header:after, .feature:after, div.tab-strip ul:after, div.tab-area:after, #nav:after, #header-wrapper:after, .section:after, .content-container:after, .photobank:after, div.three-col:after, div.three-col-sm:after, .form-block:after, .offset-1:after, .offset-2:after, form:after, .convo-utility:after, ul.social-media:after {
+#wrapper:after, #header:after, .feature:after, div.tab-strip ul:after, div.tab-area:after, #nav:after, #header-wrapper:after, .section:after, .content-container:after, .photobank:after, div.three-col:after, div.three-col-sm:after, .form-block:after, .offset-1:after, .offset-2:after, form:after, .convo-utility:after, ul.social-media:after, div.two-col:after, div.two-col-sm:after, .conversations:after {
 content: ".";
 display: block;
 height: 0;
@@ -1091,12 +1107,12 @@ visibility: hidden;
 }
 
 /* IE6 */
-* html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media {zoom: 1;}
+* html #wrapper, * html #content, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations {zoom: 1;}
 
 * html .group {zoom: 1;}
 
 /* IE7 */
-*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media {zoom: 1;}
+*:first-child+html #wrapper, *:first-child+html #content, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations {zoom: 1;}
 
 *:first-child+html .group {zoom: 1;}
 
