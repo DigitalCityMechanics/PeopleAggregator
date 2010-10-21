@@ -65,7 +65,9 @@
 		</div>
       <? } ?>
 		<div class="important">
-			<p>We need your help. <a href="/post_content.php?blog_type=Suggestion">Suggest a Topic</a></p>
+			<p>
+				<a href='<?=CC_APPLICATION_URL ?>/post_content.php?blog_type=Suggestion'>Help build the Commons</a> 
+ 			</p>
 		</div>
 	</div><!-- /.header-utility -->
 </div></div><!-- /.header -->
