@@ -22,7 +22,11 @@ class UserContributionsModule extends Module {
 	public $module_type = 'user|network';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
-
+	public $mode = self::USERMODE;
+	
+	const USERMODE = 0;
+	const ORGMODE = 1;
+	
 	private $_contributions;
 	private $_thoughts;
 
@@ -39,6 +43,11 @@ class UserContributionsModule extends Module {
 		if(!empty($this->shared_data['user_info'])) {
 			$this->user = $this->shared_data['user_info'];
 			$this->uid = $this->user->user_id;
+			$this->mode = self::USERMODE;
+		}else if(!empty($this->shared_data['group_info'])){
+			$this->group = $this->shared_data['group_info'];
+			$this->uid = $this->group->owner_id;
+			$this->mode = self::ORGMODE;
 		} else {
 			return 'skip';
 		}
@@ -47,15 +56,18 @@ class UserContributionsModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-		//TODO: Do a check for private page, public page or org page
-		//if(isset($page_uid)){
+		
+		$this->_contributions = $this->get_contributions_data($this->uid);
+		
+		if($this->mode == self::USERMODE){
+			$this->_thoughts = $this->get_thoughts_data($this->uid);
+		}else if($this->mode == self::ORGMODE){
+			$this->_thoughts = $this->get_posts_data($this->uid);
+		}
+		
+		$this->inner_HTML = $this->generate_inner_html ();
+		$content = parent::render();
 
-			$this->_contributions = $this->get_contributions_data($this->user->user_id);
-			$this->_thoughts = $this->get_thoughts_data($this->user->user_id);
-			
-			$this->inner_HTML = $this->generate_inner_html ();
-			$content = parent::render();
-		//}
 		return $content;
 	}
 
@@ -67,6 +79,7 @@ class UserContributionsModule extends Module {
 		$inner_html_gen = new Template($tmp_file);
 		$inner_html_gen->set('contributions', $this->_contributions);
 		$inner_html_gen->set('thoughts', $this->_thoughts);
+		$inner_html_gen->set('mode', $this->mode);
 		
 		$inner_html = $inner_html_gen->fetch();
 		return $inner_html;
@@ -115,6 +128,16 @@ class UserContributionsModule extends Module {
 	 */
 	function get_thoughts_data($User_id){		
 		return array(array('show'=>true, 'title'=>'No thoughts', 'summary'=>'You have not shared in any thoughts.'));
+	}
+	
+	
+	/**
+	 * Get posts data.
+	 * @param 	$User_id
+	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
+	 */
+	function get_posts_data($User_id){		
+		return array(array('show'=>true, 'title'=>'No posts', 'summary'=>'You have not shared in any posts.'));
 	}
 	
 	

@@ -13,8 +13,13 @@
 
 <div id="tabs-contributions">
 	<ul>
-		<li><a href="#tabs-contributions-1">Contributions</a></li>
-		<li><a href="#tabs-contributions-2">Thoughts</a></li>
+	<?php if($mode == 0){ ?>
+			<li><a href="#tabs-contributions-1">Contributions</a></li>
+			<li><a href="#tabs-contributions-2">Thoughts</a></li>
+	<?php }else{ ?>	
+			<li><a href="#tabs-contributions-2">Posts</a></li>
+			<li><a href="#tabs-contributions-1">Contributions</a></li>
+	<?php } ?>
 	</ul>
 <?php if(count($contributions) > 0){ ?>	
 	<div id="tabs-contributions-1">

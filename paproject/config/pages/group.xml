@@ -10,6 +10,8 @@
       <item>ActivitiesModule</item>
     </left>
     <middle>
+      <item>UserContributionsModule</item>
+      <item>UserParticipationModule</item>
       <item>GroupActionsModule</item>
       <item>TypedGroupModule</item>
       <item>ShowContentModule</item>
