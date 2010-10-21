@@ -48,7 +48,6 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'professional')) {
 
   <h1><?= __("Professional Info") ?></h1>
       <form enctype="multipart/form-data" action="" method="post" >
-        <fieldset>
     <div class="field">
       <h4><label for="multiple_select"><?= __("Select for All") ?></label></h4>
       <div>
@@ -65,7 +64,7 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'professional')) {
     $v = @$f['value'];
   ?>
       <div class="field_medium">
-        <h4><label for="<?=$fieldname.'[value]'?>"><?=$label?></label></h4>
+        <label for="<?=$fieldname.'[value]'?>"><?=$label?></label>
         <div class="center">
         <input type="file" class="text normal" id="user_cv" name="user_cv" />
         </div>
@@ -74,7 +73,7 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'professional')) {
           print uihelper_get_user_access_list($fieldname."[perm]", $f["perm"]);
         ?>
         </div>
-            <div class="field_text">
+            <div class="form-block">
               <?= __("Valid file types are .doc and .pdf") ?>.
               <?php if (!empty($v)) {
               ?><span class="required"><?= __("This will replace your current CV") ?> (<a href="<?= htmlspecialchars(Storage::getURL($v)) ?>">click here to download</a>)<span>
@@ -99,11 +98,10 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'professional')) {
             $this->textarea(__("Languages"), "languages", "professional");
             $this->textarea(__("Honors &amp; Awards"), "awards", "professional");
           ?>
-        </fieldset>
 
-        <div class="button_position">
+        <div class="form-block">
           <input type="hidden" name="profile_type" value="professional" />
-          <input type="submit" name="submit" value="<?= __("Apply Changes") ?>" />
+          <input type="submit" name="submit" class="submit" value="<?= __("Apply Changes") ?>" />
         </div>
 
       </form>

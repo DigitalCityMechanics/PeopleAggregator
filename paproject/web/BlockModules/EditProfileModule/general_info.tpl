@@ -96,9 +96,8 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
 </div>
 <?php } ?>
       <form enctype="multipart/form-data" name="drop_list" action="" method="post">
-        <fieldset>
-          <div class="field">
-            <h4><label for="multiple_select"><?= __("Select for All") ?></label></h4>
+          <div class="form-block">
+            <label for="multiple_select"><?= __("Select for All") ?></label>
 
             <div>
       <?php echo uihelper_get_user_access_list('select_multiple',
@@ -124,7 +123,7 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
 //          $this->select(__('State/Province'), 'state', array_values(PA::getStatesList()), 'general');
           ?>
 <!--
-          <div class="field" id="other_state_div" style="display:none;">
+          <div class="form-block" id="other_state_div" style="display:none;">
           <?php echo $this->textfield(__('Other state'), 'state_other', 'general', NULL, FALSE); ?>
           </div>
 -->
@@ -141,11 +140,9 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'general')) {
           __("Seperate tags with commas."));
           ?>
 
-        </fieldset>
-
         <div class="button_position">
           <input type="hidden" name="profile_type" value="general" />
-          <input type="submit" name="submit" value="<?= __("Apply Changes") ?>" />
+          <input type="submit" name="submit" class="submit" value="<?= __("Apply Changes") ?>" />
         </div>
 
 

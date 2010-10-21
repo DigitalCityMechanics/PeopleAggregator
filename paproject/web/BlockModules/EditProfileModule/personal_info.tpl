@@ -28,8 +28,7 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'personal')) {
   <h1><?= __("Personal Info") ?></h1>
 
     <form enctype="multipart/form-data" name="drop_list" action="" method="post">
-      <fieldset>
-    <div class="field">
+    <div class="form-block">
       <h4><label for="multiple_select"><?= __("Select for All") ?></label></h4>
       <div>
       <?php echo uihelper_get_user_access_list('select_multiple',
@@ -49,11 +48,10 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'personal')) {
     $this->textarea(__("TV Shows"), "tv_shows", "personal");
     $this->textarea(__("Cuisines"), "cusines", "personal");
   ?>
-      </fieldset>
 
-      <div class="button_position">
+      <div class="form-block">
         <input type="hidden" name="profile_type" value="personal" />
-        <input type="submit" name="submit" value="<?= __("Apply Changes") ?>" />
+        <input type="submit" name="submit" class="submit" value="<?= __("Apply Changes") ?>" />
       </div>
 
     </form>
