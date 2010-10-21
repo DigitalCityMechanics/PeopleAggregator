@@ -417,7 +417,7 @@ class Navigation {
 
 		/// group general children
 		//    $users_first_group_id = $this->get_users_first_group_id();
-		$groups_general =  array('find_groups' => array('caption'=>sprintf(__('Find %s'), __(PA::$group_noun_plural)),
+		$groups_general =  array('find_groups' => array('caption'=>sprintf(__('Find %s'), __(PA::$org_noun_plural)),
                                   'url'=>$this->base_url . PA_ROUTE_GROUPS
 		),
                        'create_group' => array('caption'=>__('Create'),
@@ -440,23 +440,23 @@ class Navigation {
 		$group_specific =  array(
 		// these are the links everyone get's to see
     	'group_home' => array(
-    		'caption'=>sprintf(__('%s Home'), __(PA::$group_noun)),
+    		'caption'=>sprintf(__('%s Home'), __(PA::$org_noun)),
     		'url'=>$this->base_url . PA_ROUTE_GROUP . '/gid='.$group_id
 		),
     	'group_forum' => array(
-    		'caption' => sprintf(__('%s Forum'), __(PA::$group_noun)),
+    		'caption' => sprintf(__('%s Forum'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_FORUMS . "/network_id=" .$this->network_info->network_id . '&gid='.$group_id
 		),
     	'group_members' => array(
-    		'caption' => sprintf(__('%s Members'), __(PA::$group_noun)),
+    		'caption' => sprintf(__('%s Members'), __(PA::$org_noun)),
     		'url' => $this->base_url.'/'.FILE_VIEW_ALL_MEMBERS.'?gid='.$group_id
 		),
     	'group_gallery' => array(
-    		'caption' => sprintf(__('%s Gallery'), __(PA::$group_noun)),
+    		'caption' => sprintf(__('%s Gallery'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . '/view=groups_media&amp;gid='.$group_id
 		),
     	'group_events' => array(
-    		'caption' => sprintf(__('%s Events'), __(PA::$group_noun)),
+    		'caption' => sprintf(__('%s Events'), __(PA::$org_noun)),
     		'url' => $this->base_url.'/'.FILE_GROUP_CALENDAR.'?gid='.$group_id
 		)
 		);
@@ -514,15 +514,15 @@ class Navigation {
 			if ($group_owner) {
 				$group_specific = $group_specific + array(
 						'settings' => array(
-							'caption' => __("Group Settings"),
+							'caption' => __(PA::$org_noun." Settings"),
 							'url' => PA::$url .'/addgroup.php?gid='.$gid
 				),
 						'group_poll_select' => array(
-					    		'caption' => sprintf(__('%s Poll Select'), __(PA::$group_noun)),
+					    		'caption' => sprintf(__('%s Poll Select'), __(PA::$org_noun)),
     							'url' => $this->base_url .'/group_poll.php?gid='.$group_id.'&type=select'
     							),
 						'group_poll_create' => array(
-					    		'caption' => sprintf(__('%s Poll Create'), __(PA::$group_noun)),
+					    		'caption' => sprintf(__('%s Poll Create'), __(PA::$org_noun)),
     							'url' => $this->base_url .'/group_poll.php?gid='.$group_id.'&type=create'
     							),
     							);
@@ -532,7 +532,7 @@ class Navigation {
 			if ($group_moderator) {
 				$group_specific = $group_specific + array(
 						'bulletin' => array(
-							'caption' => __("Group Bulletin"),
+							'caption' => __(PA::$org_noun." Bulletin"),
 							'url' => PA::$url . PA_ROUTE_GROUP_BULLETINS.'?gid='.$gid
 				),
 						'moderate' => array(
@@ -544,7 +544,7 @@ class Navigation {
 							'url' => PA::$url .'/manage_group_content.php?gid='.$gid
 				),
 					'group_customize_ui' => array(
-						'caption' => __('Group Appearance'),
+						'caption' => __(PA::$org_noun.' Appearance'),
 						'url' => $this->base_url. PA_ROUTE_CUSTOMIZE_GROUP_GUI . '/theme/gid='.$group_id
 				)
 				);
@@ -684,7 +684,7 @@ class Navigation {
                                           .'?page_id=user_default_page_id'
                                           ),
                                     'group_directory_page_id'
-                                    => array('caption'=>__('Group Directory Page'),
+                                    => array('caption'=>__(PA::$org_noun.' Directory Page'),
                                     'url'=>$this->base_url.'/'.FILE_MODULE_SELECTOR.
                                     '?page_id=group_directory_page_id'
                                     ),
