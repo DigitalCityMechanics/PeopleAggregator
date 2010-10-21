@@ -17,12 +17,6 @@
   <li<?php isActiveNav('general', $type) ?>>
     <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=general" id="show-general"><?= __("General Info") ?></a>
   </li>
-  <li<?php isActiveNav('personal', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=personal" id="show-personal"><?= __("Personal Info") ?></a>
-  </li>
-  <li<?php isActiveNav('professional', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=professional" id="show-professional"><?= __("Professional Info") ?></a>
-  </li>
 </ul>
 
 <? if ($type == 'basic') { ?>
