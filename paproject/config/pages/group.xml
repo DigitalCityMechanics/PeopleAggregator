@@ -5,6 +5,7 @@
     <left>
       <item>GroupAccessModule</item>
       <item>MembersFacewallModule</item>
+      <item>PollModule</item>
       <item>ImagesModule</item>
       <item>ActivitiesModule</item>
     </left>
