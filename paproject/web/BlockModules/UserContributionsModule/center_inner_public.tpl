@@ -67,13 +67,12 @@
 			<div class="item <?php echo $show; ?>">
 				<div class="above">
 					<?php if(isset($thought['image'])){ ?>
-						<img src="<?php echo $thought['image']; ?>" alt="thought image" style="width:100px;height:100px;" />
+						<a href="<?php echo isset($thought['url']) ? $thought['url'] : ''; ?>"><img src="<?php echo $thought['image']; ?>" alt="thought image" style="<?php echo isset($thought['image_width']) ? 'width:'.$thought['image_width'].'px;' : ''; ?><?php echo isset($thought['image_height']) ? 'height:'.$thought['image_height'].'px;' : ''; ?>" /></a>
 					<?php } ?>
-					<h2><a href="#"><?php echo $thought['title']; ?></a></h2>
-					<p><?php echo $thought['summary']; ?></p>
+					<h2><a href="<?php echo isset($thought['url']) ? $thought['url'] : ''; ?>"><?php echo isset($thought['title']) ? $thought['title'] : ''; ?></a></h2>
+					<p><?php echo isset($thought['summary']) ? $thought['summary'] : ''; ?></p>
 				</div>
 				<div class="below">
-					<a href="#"> thoughts</a>
 				</div>
 			</div>
 		<?php } // end foreach ?>

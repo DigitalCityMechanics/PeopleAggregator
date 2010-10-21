@@ -23,7 +23,7 @@ require_once "api/Logger/Logger.php";
 
 class UserParticipationModule extends Module {
 
-	public $module_type = 'user|network';
+	public $module_type = 'user|network|group';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
 	
@@ -58,15 +58,13 @@ class UserParticipationModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
-		
-		$this->_conversations = $this->get_conversations_data($this->uid);
-			
-		$this->_issues = $this->get_issues_data($this->uid);
-			
-		$this->_following = $this->get_following_data($this->uid);
 
+		$this->_conversations = $this->get_conversations_data($this->uid);
+		$this->_issues = $this->get_issues_data($this->uid);
+		$this->_following = $this->get_following_data($this->uid);
 		$this->inner_HTML = $this->generate_inner_html ();
 		$content = parent::render();
+
 		return $content;
 	}
 

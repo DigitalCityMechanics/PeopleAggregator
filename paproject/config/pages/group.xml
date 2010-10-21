@@ -13,8 +13,9 @@
       <item>UserContributionsModule</item>
       <item>UserParticipationModule</item>
       <item>GroupActionsModule</item>
-      <item>TypedGroupModule</item>
       <item>ShowContentModule</item>
+      <item>UserParticipationModule</item>
+      <item>UserContributionsModule</item>
     </middle>
     <right>
       <item>GroupStatsModule</item>
