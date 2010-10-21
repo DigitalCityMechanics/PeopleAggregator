@@ -381,20 +381,21 @@ class Navigation {
 		/// children of people 2nd level link
 		//required friend id in some places
 		$friend_id = $this->get_friend_uid();
-		$people_children = array('find_people' => array('caption'=>sprintf(__('Find %s'), __(PA::$people_noun)),
+		/* Parag Jagdale - 10-21-10: not needed for CivicCommons, so removed		  
+		  $people_children = array('find_people' => array('caption'=>sprintf(__('Find %s'), __(PA::$people_noun)),
                                   'url'=>$this->base_url . PA_ROUTE_PEOPLES_PAGE
 		),
                        'my_friends' => array('caption'=>__('My friends'),
                                   'url'=>$this->base_url.'/'.FILE_VIEW_ALL_MEMBERS.'?view_type=relations&amp;uid='.$uid
 		),
-		/* 'people_who_call_me_friend' => array('caption'=>sprintf(__('%s who call me friend'), __(PA::$people_noun)),
+		'people_who_call_me_friend' => array('caption'=>sprintf(__('%s who call me friend'), __(PA::$people_noun)),
 		 'url'=>$this->base_url.'/'.FILE_VIEW_ALL_MEMBERS.'?view_type=in_relations&amp;uid='.$uid
-		 ), */
+		 ),
                        'friends_gallery' => array('caption'=>__('Friends gallery'),
                                   'url'=>$this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . "/uid=$friend_id&view=friends",
 		)
-		);
-		if ( $this->is_anonymous ) {
+		);*/
+		if ( $this->is_anonymous && isset($people_children)) {
 			//these links are not for anonymous
 			unset($people_children);
 		}
