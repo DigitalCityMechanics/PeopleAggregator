@@ -66,14 +66,8 @@ class UserContributionsModule extends Module {
 		}else if($this->mode == self::ORGMODE){
 			$this->_thoughts = $this->get_posts_data($this->uid);
 		}
-		
-		$this->inner_HTML = $this->generate_inner_html ();
-		$content = parent::render();
-
-		$this->_contributions = $this->get_contributions_data($this->uid);
-		$this->_thoughts = $this->get_thoughts_data($this->uid);
-			
-		$this->inner_HTML = $this->generate_inner_html ();
+	
+		$this->inner_HTML = $this->generate_inner_html();
 		$content = parent::render();
 
 		return $content;

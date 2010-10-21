@@ -62,7 +62,7 @@
 		<div class="items">
 		<?php 
 			foreach($thoughts  as $thought){
-			$show = ($thought['show'] == 1) ? "show" : "hide";  
+			$show = ($thought['show'] == 1) ? "show" : "hide";
 	 ?>
 			<div class="item <?php echo $show; ?>">
 				<div class="above">
