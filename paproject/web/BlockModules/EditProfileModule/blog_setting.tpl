@@ -1,4 +1,3 @@
-
 <h2 class="center_module"></span><?= __("Blog Settings") ?></h2>
 <div class="blog-parent">
 <div class="blog">

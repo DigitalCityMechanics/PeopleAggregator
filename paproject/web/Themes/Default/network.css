@@ -659,13 +659,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	text-align: left;
 	padding: 0 12px 0 12px; }
 
-.total_content h1 {
-	font-size: 22px;
-	color: #261E7E;
-	font-weight: bold;
-	text-align: center;
-	margin: 10px 0 0 0; }
-
 .wide_content form fieldset { margin-left: 10px; }
 
 .wide_content_edit_page {

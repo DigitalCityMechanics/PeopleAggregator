@@ -93,5 +93,4 @@ require_once PA::$blockmodule_path . "/EditProfileModule/blog_setting.tpl";
         <div class="button_position">
           <input type="submit" class="button-submit" name="submit" value="<?= __("Apply Changes") ?>" />
         </div>
-
       </form>

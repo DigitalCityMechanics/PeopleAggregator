@@ -78,9 +78,9 @@ class TypedGroupModule extends Module {
 
     if (!$this->is_member) {
       if((!empty($this->group_details) ? $this->group_details->reg_type : NULL) && $this->group_details->reg_type == REG_MODERATED) {
-        $this->join_this_group_string = __('Request to join this group as');
+        $this->join_this_group_string = __('Request to follow this organization as');
       } else {
-        $this->join_this_group_string = __('Join This Group as');
+        $this->join_this_group_string = __('Follow This Org As');
       }
     } else {
     	// get the relationType for this user

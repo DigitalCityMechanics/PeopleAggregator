@@ -76,6 +76,9 @@ class PA {
   public static $group_noun_plural = 'Groups';
   public static $group_cc_type = 1; // GROUP_COLLECTION_TYPE
 
+  public static $org_noun = 'Org';
+  public static $org_noun_plural = 'Orgs';
+
   public static $people_noun = 'People';
   public static $mypage_noun = 'Me';
 
