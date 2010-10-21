@@ -1218,8 +1218,8 @@ class User {
       if(count($array_user_data)) {
         foreach ($array_user_data as $user_data) {
           if (empty($user_data['perm'])) {
-            // If permission is not set then by default it is taking NONE.
-            $user_data['perm'] = 0;
+            // If permission is not set then by default it is taking EVERYONE.
+            $user_data['perm'] = 1;
           }
           $sql = 'INSERT into {user_profile_data}
             (user_id, field_name, field_value, field_type, field_perm, seq)
