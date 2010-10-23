@@ -5,12 +5,10 @@
   <is_configurable>1</is_configurable>
   <data>
     <middle>
-      <item>UserContributionsModule</item>
-      <item>UserParticipationModule</item>
       <item>TypedDirectoryModule</item>
     </middle>
     <right>
-      <item>MyGroupsModule</item>
+      <item>MembersFacewallModule</item>
     </right>
     <javascripts/>
     <page_css/>

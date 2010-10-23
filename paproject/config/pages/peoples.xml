@@ -7,6 +7,7 @@
     </middle>
     <right>
       <item>MembersFacewallModule</item>
+      <item>NewestGroupsModule</item>
     </right>
     <javascripts>
       <item>peoplepage.js</item>

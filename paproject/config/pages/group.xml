@@ -2,22 +2,15 @@
 <page>
   <page_id>8</page_id>
   <data>
-    <left>
-      <item>GroupAccessModule</item>
-      <item>MembersFacewallModule</item>
-      <item>PollModule</item>
-      <item>ImagesModule</item>
-      <item>ActivitiesModule</item>
-    </left>
     <middle>
       <item>UserContributionsModule</item>
       <item>UserParticipationModule</item>
-      <item>GroupActionsModule</item>
       <item>ShowContentModule</item>
     </middle>
     <right>
-      <item>GroupStatsModule</item>
-      <item>RecentPostModule</item>
+	  <item>GroupAccessModule</item>
+      <item>MembersFacewallModule</item>
+      <item>PollModule</item>
     </right>
     <javascripts>
       <item>common.js</item>

@@ -9,8 +9,8 @@
     <right>
       <item>UserPhotoModule</item>
       <item>AboutUserModule</item>
-      <item>MyLinksModule</item>
       <item>MyGroupsModule</item>
+      <item>MyLinksModule</item>
     </right>
     <javascripts>
       <item>inplaced.js</item>
