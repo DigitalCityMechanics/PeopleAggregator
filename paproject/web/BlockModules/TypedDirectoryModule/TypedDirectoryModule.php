@@ -12,6 +12,7 @@
 ?>
 <?php
 require_once 'api/Entity/TypedGroupEntity.php';
+require_once 'web/includes/classes/Pagination.php';
 
 class TypedDirectoryModule extends Module {
   public $module_type = 'group';
