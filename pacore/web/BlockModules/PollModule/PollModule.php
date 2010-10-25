@@ -31,7 +31,7 @@ class PollModule extends Module {
     $this->title = __('Survey');
   }
   function render() {
-	$gid = (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : null;
+	$gid = (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : 0;
     $this->flag = 0 ;
     $obj = new Poll();
     $current = $obj->load_current($gid);
