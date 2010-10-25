@@ -31,18 +31,18 @@ class PollModule extends Module {
     $this->title = __('Survey');
   }
   function render() {
-	$gid = (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : 0;
+	$this->gid = (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : 0;
     $this->flag = 0 ;
     $obj = new Poll();
-    $current = $obj->load_current($gid);
-    $prev_poll = $obj->load_prev_polls($gid);
+    $current = $obj->load_current($this->gid);
+    $prev_poll = $obj->load_prev_polls($this->gid);
     $this->cnt_prev = count($prev_poll);
     if ($current) {
       $user_vate = $obj->load_vote($current[0]->poll_id, PA::$login_uid);
       $total_vote = $obj->load_vote($current[0]->poll_id);
       $this->total_vote_count = count($total_vote);
 
-      $this->topic = $obj->load_poll($current[0]->poll_id, (isset($_GET) && isset($_GET['gid'])) ? $_GET['gid'] : null);
+      $this->topic = $obj->load_poll($current[0]->poll_id, $this->gid);
       $this->options = unserialize($this->topic[0]->options);
       $num_option = count($this->options);
       $cnt = count($total_vote);
@@ -90,6 +90,7 @@ class PollModule extends Module {
     $inner_html_gen->set('total_vote', $this->total_vote_count);
     $inner_html_gen->set('options', $this->options);
     $inner_html_gen->set('cnt_prev', $this->cnt_prev);
+	$inner_html_gen->set('gid', $this->gid);
 
 	$url = isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : '';
 	$query = isset($_SERVER['REDIRECT_QUERY_STRING']) ? $_SERVER['REDIRECT_QUERY_STRING'] : '';

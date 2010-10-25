@@ -45,7 +45,7 @@
   if (!empty($cnt_prev)) {
   	?>
   	<div class="view_all">
-  	<a href="<?=PA::$url.PA_ROUTE_POLL_ARCHIVE?>?gid=<?php echo $_GET['gid'];?>"><?=__("See all recent Surveys")?></a>
+  	<a href="<?=PA::$url.PA_ROUTE_POLL_ARCHIVE?>?gid=<?php echo $gid; ?>"><?=__("See all recent Surveys")?></a>
   	</div>
   	<?php
   }
