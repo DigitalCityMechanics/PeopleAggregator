@@ -44,7 +44,7 @@
              $login_user = PA::$login_user;
              $user_name = $login_user->first_name." ".$login_user->last_name;
       ?>
-		<div id="login-status"  onmouseover="javascript:show_hide_shortcuts.onmouseover('open_close');" onmouseout="javascript:show_hide_shortcuts.onmouseout('open_close');">
+		<div id="login-status">
 			<div class="offset-2">
    				<a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>" title="<?php echo $user_name; ?>">
    				<?php
@@ -59,7 +59,8 @@
 					<?php echo uihelper_resize_mk_user_img($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
-				<a title="logout" href="/logout.php">Logout</a>
+				<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
+				<a title="logout" href="/logout.php" class="user-link">Logout</a>
 			</div>
        		<?php /*include("web/includes/shortcuts_menu.php");*/ ?>
 		</div>

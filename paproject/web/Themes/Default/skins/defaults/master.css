@@ -483,6 +483,12 @@ border-left: 1px solid #ccc;
 border-right: 1px solid #ccc;
 padding: 10px 10px 5px;
 }
+#login-status a.user-link {
+	display: block;
+	font-size: 10px;
+	line-height: 1.4em;
+	text-transform: uppercase;
+}
 div.signed-out div.offset-2 {
 padding-left: 0;
 text-align: center;
