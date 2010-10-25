@@ -49,6 +49,9 @@
 		$this->header->set('use_feature_mast', true);
 		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);
 
+		// variable to show if it's the user's profile or not
+		$module_shared_data['is_my_profile'] = ($uid == PA::$login_uid);
+
       if(PA::$login_uid) {
         $parameter =
           "<script language='javascript' type='text/javascript'>

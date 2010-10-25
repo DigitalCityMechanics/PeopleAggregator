@@ -12,6 +12,14 @@
 <?php global  $login_uid;?>
 
 <div id="tabs-contributions">
+<?php
+	if($is_my_profile) {
+?>
+	<a href="/post_content.php">Create a Post</a><br />
+	<a href="/content_management.php">Manage your Posts</a>
+<?php
+	}
+?>
 	<ul>
 	<?php if($mode == $USERMODE){ ?>
 			<li><a href="#tabs-contributions-1">Contributions</a></li>

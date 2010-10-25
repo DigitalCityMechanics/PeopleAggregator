@@ -84,6 +84,7 @@ class UserContributionsModule extends Module {
 		$inner_html_gen->set('mode', $this->mode);
 		$inner_html_gen->set('USERMODE', self::USERMODE);
 		$inner_html_gen->set('ORGMODE', self::ORGMODE);
+		$inner_html_gen->set('is_my_profile', isset($this->shared_data['is_my_profile']) ? $this->shared_data['is_my_profile'] : false);
 		
 		$inner_html = $inner_html_gen->fetch();
 		return $inner_html;
