@@ -690,7 +690,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	}
 
 .blog {
-       	background-image: url(images/bkpost_blog.jpg); 
+/*	background-image: url(images/bkpost_blog.jpg); */
 	overflow: auto;
 }
 
@@ -2062,7 +2062,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	border: 1px solid #A6A7B0;
 	padding: 10px;
 	background-color: #ffffff;
-	background-image: url(images/bkpost_blog.jpg);
+/*	background-image: url(images/bkpost_blog.jpg); */
 	background-repeat: no-repeat;
 	background-position: top right; }
 
