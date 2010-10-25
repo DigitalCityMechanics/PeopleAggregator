@@ -440,6 +440,7 @@ class Navigation {
 		$gid = $group_id = $this->get_group_id();
 		$group_specific =  array(
 		// these are the links everyone get's to see
+/*
     	'group_home' => array(
     		'caption'=>sprintf(__('%s Home'), __(PA::$org_noun)),
     		'url'=>$this->base_url . PA_ROUTE_GROUP . '/gid='.$group_id
@@ -448,10 +449,12 @@ class Navigation {
     		'caption' => sprintf(__('%s Forum'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_FORUMS . "/network_id=" .$this->network_info->network_id . '&gid='.$group_id
 		),
+*/
     	'group_members' => array(
     		'caption' => sprintf(__('%s Members'), __(PA::$org_noun)),
     		'url' => $this->base_url.'/'.FILE_VIEW_ALL_MEMBERS.'?gid='.$group_id
-		),
+		)
+/*
     	'group_gallery' => array(
     		'caption' => sprintf(__('%s Gallery'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . '/view=groups_media&amp;gid='.$group_id
@@ -460,6 +463,7 @@ class Navigation {
     		'caption' => sprintf(__('%s Events'), __(PA::$org_noun)),
     		'url' => $this->base_url.'/'.FILE_GROUP_CALENDAR.'?gid='.$group_id
 		)
+*/
 		);
 		$group_member = FALSE;
 		$group_may_post = FALSE;
