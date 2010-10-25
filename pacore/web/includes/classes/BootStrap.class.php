@@ -647,10 +647,13 @@ class BootStrap {
 			// TODO: standardise the paerror get variable and put in 
 			//	AppConfig.xml as a new option
 			$referer = $referer . "?paerror=" . $message;
-			header("Location: $referer");
-			throw $ex;	
+			if(!isset($_GET) || !isset($_GET['silent']) || $_GET['silent'] != 'true') {
+				header("Location: $referer");
+			}
+			throw $ex;
 		}
 	}
+
 	return $user;
    }
    
@@ -690,7 +693,7 @@ class BootStrap {
 		    $_SESSION['authToken'] = $authToken;
           }                             
         } catch (Exception $e) {
-          if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED))) {
+          if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED, USER_TOKEN_INVALID, USER_TOKEN_EXPIRED))) {
             throw $e;
           }
           // The currently logged-in user has been deleted; invalidate the session.
