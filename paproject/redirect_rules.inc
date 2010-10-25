@@ -58,7 +58,13 @@ define('CC_ROUTE_ABOUT', 			'/about');
     *
     **/
     "^/organizations/(\w*)$" => "/dynamic.php?page_id=300&type=%s",
-  
+
+	/**
+ 	*
+ 	*  /blog/ -> dynamic.php?page_id=5
+ 	*
+ 	**/
+	"^/blog[\/\?]?(.*)$" => "/dynamic.php?page_id=5&%s",
   );
   
 ?>
