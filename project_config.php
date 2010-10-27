@@ -39,6 +39,9 @@
 //        need raw PHP code in the initialization process
 //
 
+if(isset($_GET) && isset($_GET['debug'])) {
+	set_time_limit(300);
+}
 
 error_reporting(E_ALL | E_STRICT);
 
