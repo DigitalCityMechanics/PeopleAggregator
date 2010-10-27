@@ -5,7 +5,6 @@
     <middle>
       <item>UserContributionsModule</item>
       <item>UserParticipationModule</item>
-      <item>ShowContentModule</item>
     </middle>
     <right>
       <item>ActionsModule</item>
