@@ -449,12 +449,10 @@ class Navigation {
     		'caption' => sprintf(__('%s Forum'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_FORUMS . "/network_id=" .$this->network_info->network_id . '&gid='.$group_id
 		),
-*/
     	'group_members' => array(
     		'caption' => sprintf(__('%s Members'), __(PA::$org_noun)),
     		'url' => $this->base_url.'/'.FILE_VIEW_ALL_MEMBERS.'?gid='.$group_id
 		)
-/*
     	'group_gallery' => array(
     		'caption' => sprintf(__('%s Gallery'), __(PA::$org_noun)),
     		'url' => $this->base_url . PA_ROUTE_MEDIA_GALLEY_IMAGES . '/view=groups_media&amp;gid='.$group_id
@@ -554,7 +552,7 @@ class Navigation {
 				)
 				);
 			}
-
+/*
 			// ads
 			if ($group_manange_ads) {
 				$group_specific = $group_specific + array(
@@ -564,7 +562,7 @@ class Navigation {
 				)
 				);
 			}
-
+*/
 			// the join/unjoin/delete go last
 			if ($group_owner) { // only the owner can delete
 				$group_specific = $group_specific + array(
