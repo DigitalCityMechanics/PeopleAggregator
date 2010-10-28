@@ -47,6 +47,14 @@ class EditProfileModule extends Module {
 	//User object having the user information
 	public $user_info;
 
+	private $_image_sizes = array(
+								    'original'  => null,
+									'large' 	=> array('width' => 185, 'height' => 185),
+									'standard' 	=> array('width' => 70,  'height' => 70),
+									'medium' 	=> array('width' => 40,  'height' => 40),
+									'small' 	=> array('width' => 20,  'height' => 20),									
+	);
+
 	function __construct() {
 			
 		parent::__construct();
@@ -202,26 +210,11 @@ class EditProfileModule extends Module {
 				$zendUploadAdapter->receive();
 			}catch (Zend_File_Transfer_Exception $e){
 				$this->message = $e->getMessage();
-				throw new PAException(FILE_NOT_UPLOADED, $e->getMessage());
-			}
-			$file_path = $zendUploadAdapter->getFileName('userfile', true);
-			$file_name = $zendUploadAdapter->getFileName('userfile', false);
-
-			// Resize image into thumbnails
-			try
-			{
-				$thumb = PhpThumbFactory::create($file_path);
-				$thumb->adaptiveResize(100, 100);
-				//$thumb->save(PA::$upload_path . DIRECTORY_SEPARATOR . "rsz");
-				$imageAsString = $thumb->getImageAsString();
-
-			}
-			catch (Exception $e)
-			{
-				// handle error here however you'd like
-				$this->message = $e->getMessage();
 			}
 
+			if (empty($this->message)){
+
+			}
 			if (empty($this->message)) {//If there is no error message then try saving to amazon s3
 				// save images to amazon s3
 				global $app;
@@ -240,7 +233,7 @@ class EditProfileModule extends Module {
 
 						$bucketCreated = false;
 						$bucketAvailable = $s3->isBucketAvailable('pa-dev');
-						
+
 						if(!$bucketAvailable){
 							if($s3->createBucket('pa-dev')){
 								// new bucket was created
@@ -251,11 +244,39 @@ class EditProfileModule extends Module {
 						}
 
 						if($bucketCreated == true){
-							$s3->putObject(
-							'pa-dev/avatars/1/' . $file_name, 
-							$imageAsString,
-							array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ)
-							);
+
+							$file_path = $zendUploadAdapter->getFileName('userfile', true);
+							$file_name = $zendUploadAdapter->getFileName('userfile', false);
+
+							foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
+								// Resize image into thumbnails
+								$imageAsString = null;
+								try
+								{
+									$thumb = PhpThumbFactory::create($file_path);
+									$objectPath = $this->buildAmazonS3ObjectURL('pa-dev', $imageSizeType, $this->user_info->user_id, $file_name);
+									if(isset($imageDimensions) && !empty($imageDimensions)){
+										// if this is an original size image, the width and height dont need to be set
+										$thumb->adaptiveResize($imageDimensions['width'], $imageDimensions['height']);
+									}
+									$imageAsString = $thumb->getImageAsString();
+									
+									if($imageSizeType == 'large'){
+										$this->user_info->picture =  "http://s3.amazonaws.com/" . $objectPath;
+									}
+								}
+								catch (Exception $e)
+								{
+									// handle error here however you'd like
+									$this->message = $e->getMessage();
+									break;
+								}
+
+								if(isset($imageAsString) && !empty($imageAsString)){
+									// send object to AmazonS3
+									$s3->putObject($objectPath, $imageAsString, array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
+								}
+							}
 						}
 					}
 				}
@@ -341,6 +362,26 @@ class EditProfileModule extends Module {
 		$inner_html = $info->fetch();
 
 		return $inner_html;
+	}
+
+	/**
+	 * Creates an Amazon S3 URL for storing avatar images
+	 * @TODO: make the function more generic and move to a separate class
+	 * @param string $bucket_name
+	 * @param string $image_size_type
+	 * @param integer $user_id
+	 * @param string $file_name
+	 * @return string
+	 */
+	function buildAmazonS3ObjectURL($bucket_name, $image_size_type, $user_id, $file_name){
+		if(isset($file_name) && !empty($file_name)){
+			$file_name = preg_replace("/[^a-z0-9_\-\.]/i","",$file_name);
+		}else{
+			$file_name = intval(rand());
+		}
+		// TODO: make this more generic. Instead of hardcoding "avatars" directory,
+		// make a object_type array and constants to determine folder structure from configuration options
+		return $bucket_name . "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
 	}
 
 }
