@@ -89,7 +89,7 @@ function check_session($login_required=TRUE, $redirect_function=NULL) {
 			if ($redirect_function) {
 				return $redirect_function();
 			}
-			if(!empty($_SERVER['REQUEST_URI']) && strrpos($_SERVER['REQUEST_URI'],"logout.php") != false){
+			if(isset($_SERVER) && !empty($_SERVER['REQUEST_URI']) && strrpos($_SERVER['REQUEST_URI'],"logout.php") != false){
 				$return = null;
 				// Parag Jagdale - 10/14/10
 				// if return url is set in the request then after logout redirect to the location
@@ -97,10 +97,10 @@ function check_session($login_required=TRUE, $redirect_function=NULL) {
 					$return = $_REQUEST['return'];
 				} else {
 					$redirectQueryString = null;
-					if(isset($_GET['redirect'])){
+					if(isset($_GET) && isset($_GET['redirect'])){
 						$redirectQueryString = $_GET['redirect'];
 					}
-					if(isset($redirectQueryString)){
+					if(isset($redirectQueryString) && !empty($redirectQueryString)){
 						//TODO: check if there are security implications to sending this directly
 						//		to header(Location: ), or if there needs to be cleanup of the parameter
 						$return = $redirectQueryString;

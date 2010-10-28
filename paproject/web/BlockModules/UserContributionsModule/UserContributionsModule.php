@@ -15,6 +15,8 @@
 ?>
 <?php
 require_once "web/includes/classes/CurlRequestCreator.php";
+require_once "api/Content/Content.php";
+require_once "api/Group/Group.php";
 require_once "api/Logger/Logger.php";
 
 class UserContributionsModule extends Module {
@@ -62,9 +64,9 @@ class UserContributionsModule extends Module {
 		$this->_contributions = $this->get_contributions_data($this->uid);
 		
 		if($this->mode == self::USERMODE){
-			$this->_thoughts = $this->get_thoughts_data($this->uid);
+			$this->_thoughts = $this->get_user_posts_data($this->uid);
 		}else if($this->mode == self::ORGMODE){
-			$this->_thoughts = $this->get_posts_data($this->uid);
+			$this->_thoughts = $this->get_org_posts_data($this->group->collection_id);
 		}
 	
 		$this->inner_HTML = $this->generate_inner_html();
@@ -124,53 +126,62 @@ class UserContributionsModule extends Module {
 			}
 		}
 		return null;
-	}
+	}	
 
-	/**
-	 * Get thoughts data.
-	 * @param 	$User_id
-	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
-	 */
-	function get_thoughts_data($User_id){		
-		//TODO: throw exceptions and check for bad error codes
-		//TODO: put URL in App_Config.xml
-		// TEMPORARY TEST CODE, REMOVE LATER
-		if(isset($_GET['testuser'])){
-			$User_id = $_GET['testuser'];
-		}
-		if(isset($User_id)){
-//			$url = $this->buildRESTAPIUrl(PA::$url, CC_APPLICATION_URL_TO_API, CC_ROUTE_THOUGHTS, $User_id);
-			$url = 'http://www.peeps.com/api/json.php/civiccommons/thoughts';
-			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$request->setPost(array('user_id' => $User_id));
-			$defaultResult = array('show'=>true, 'parent_title'=>'No thoughts', 'url'=>'#', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'comment'=>'You have not shared any thoughts.', 'participant_count' => 0, 'contribution_count' => 0);
-			$responseStatus = $request->createCurl();
-			if($responseStatus == 200){
-				$jsonResults = $request->getJSONResponse();
-				if(count($jsonResults) == 0){
-					$jsonResults[] = $defaultResult;
-				}else{
-					// only show the first 3 conversations
-					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
-					$jsonResults = $newArray;
-				}
-				return $jsonResults;
-			}else{
-    			Logger::log("UserContributionsModule.get_contributions_data() could not get data from the cURL request. URL: $url | HTTP Response Status: $responseStatus", LOGGER_WARNING);				
-				return array($defaultResult);
-			}
-		}
-		return null;
-	}
-	
-	
+
 	/**
 	 * Get posts data.
 	 * @param 	$User_id
 	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
 	 */
-	function get_posts_data($User_id){		
-		return array(array('show'=>true, 'title'=>'No posts', 'summary'=>'You have not shared in any posts.'));
+	function get_user_posts_data($User_id){
+		$posts = Content::get_user_content($User_id);
+
+		if(isset($posts) && is_array($posts) && count($posts) > 0) {
+			$thoughts = array();
+			foreach($posts as $post) {
+				$post['show'] = true;
+				$post['title'] = $post['title'];
+				$post['image'] = null;
+				$post['image_width'] = null;
+				$post['image_height'] = null;
+				$post['summary'] = $post['body'];
+				$post['url'] = PA::$url.'/content/cid='.$post['content_id'];
+				$thoughts[] = $post;
+			}
+		} else {
+			$thoughts = array(array('show'=>true, 'title'=>'No posts', 'summary'=>'No content published. <a href="/post_content.php">Click here to add content</a>.'));
+		}
+		return $thoughts;
+	}
+
+
+		/**
+	 * Get posts data.
+	 * @param 	$org_id
+	 * @return	an associative array of the response data. If no data is present or there is an error, generic data is returned
+	 */
+	function get_org_posts_data($org_id){
+		$org = new Group();
+		$org->collection_id = $org_id;
+ 		$posts = $org->get_contents_for_collection('all', FALSE, 'ALL', 0, 'created', 'DESC', TRUE);
+
+		if(isset($posts) && is_array($posts) && count($posts) > 0) {
+			$thoughts = array();
+			foreach($posts as $post) {
+				$post['show'] = true;
+				$post['title'] = $post['title'];
+				$post['image'] = null;
+				$post['image_width'] = null;
+				$post['image_height'] = null;
+				$post['summary'] = $post['body'];
+				$post['url'] = PA::$url.'/content/cid='.$post['content_id'];
+				$thoughts[] = $post;
+			}
+		} else {
+			$thoughts = array(array('show'=>true, 'title'=>'No posts', 'summary'=>'No content published. <a href="/post_content.php?ccid='.$org_id.'">Click here to add content</a>.'));
+		}
+		return $thoughts;
 	}
 	
 	
