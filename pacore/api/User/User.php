@@ -596,25 +596,6 @@ class User {
         Logger::log("Throwing exception SAVING_DELETED_USER | Message: Saving a deleted user is not allowed", LOGGER_ERROR);
         throw new PAException(SAVING_DELETED_USER,"Saving a deleted user is not allowed");
       }
-
-      if(!is_valid_web_image_name($this->picture)) { // fix invalid image names
-        $this->picture = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-// Parag Jagdale - add extra image size url to store avatar and avatar_small images    
-      if(!is_valid_web_image_name($this->avatar)) { // fix invalid image names
-        $this->avatar = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-      
-      if(!is_valid_web_image_name($this->avatar_small)) { // fix invalid image names
-        $this->avatar_small = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-// Parag Jagdale --- end
       
       // added to remove unnecessary check whether the word begins or ends with a 'space' character
       $this->first_name = @trim($this->first_name);
@@ -661,7 +642,7 @@ class User {
         $this->last_login = time();
         if($this->api_call == true){
         	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
-        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);
+        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);			
         }else{
         	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->last_login);

@@ -59,6 +59,27 @@
         }
       ?>
     </div>
+    <div class="field">
+      <h4><label for="upload_user_image"><?= __("Upload Photo") ?></label></h4>
+      <input name="userfile" type="file" class="text short" id="upload_user_image"/>
+      <input type="hidden" name="uid" value="<?php echo $uid?>" />
+      <input type="hidden" name="deletepicture" value="false" id="deletepicture" />
+      <input type="hidden" name="profile_type" value="basic" /><br />
+    </div>
+
+    <div class="field_bigger">
+      <h4><?= __("Current Image") ?></h4>
+      <div class="curr_image">
+        <?php print "<a href=\"". PA::$url . PA_ROUTE_USER_PUBLIC . "/$uid\">".uihelper_resize_mk_user_img($user_info->picture, 75, 80, 'alt="Current Image"')."</a>"; ?>
+        <span class="remove_picture">
+          <?php
+            if (!empty($user_info->picture)) {
+              echo '<a onClick=\'javascript:document.getElementById("deletepicture").value="true";this.innerHTML="Press Apply Changes to confirm."\' >'.__("Remove Picture").'</a>';
+            }
+          ?>
+        </span>
+      </div>
+    </div>
 
   <div class="form-block">
     <input type="hidden" name="action" value="SaveProfile" />
