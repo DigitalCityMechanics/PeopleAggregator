@@ -275,6 +275,16 @@ class BootStrap {
     if (file_exists(PA::$project_dir . $fname)) { // check for config data in paproject path
       $proj_conf = new XmlConfig(PA::$project_dir . $fname, 'application');
       $proj_conf = $proj_conf->asArray();
+    }
+    // or try to load default config file
+    // this happens on install etc, so we search for it in the CORE dir
+    else if (file_exists(PA::$project_dir . "{$fname}.distr")) { 
+      $proj_conf = new XmlConfig(PA::$project_dir . "{$fname}.distr", 'application');
+      $proj_conf = $proj_conf->asArray();
+      // but we SAVE it to project_dir!!!
+      $export_config = new XmlConfig(PA::$project_dir . $fname, 'application');  // and create AppConfig.xml
+      $export_config->loadFromArray($proj_conf, $export_config->root_node);
+      $export_config->saveToFile();
     } 
     // or try to load default config file
     // this happens on install etc, so we search for it in the CORE dir

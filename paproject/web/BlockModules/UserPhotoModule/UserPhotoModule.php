@@ -33,6 +33,7 @@ class UserPhotoModule extends Module {
     if(!empty($this->shared_data['user_info'])) {
       $this->user = $this->shared_data['user_info'];
       $this->uid = $this->user->user_id;
+      $this->title = $this->user->display_name;
     } else {
       return 'skip';
     }

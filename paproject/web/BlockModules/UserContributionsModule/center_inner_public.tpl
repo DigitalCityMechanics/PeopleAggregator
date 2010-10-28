@@ -9,7 +9,7 @@
 		$("#tabs-contributions").tabs();
 	});
 </script>
-<?php global  $login_uid;?>
+<?php global $login_uid; ?>
 
 <div id="tabs-contributions">
 <?php
@@ -25,70 +25,17 @@
 			<li><a href="#tabs-contributions-1">Contributions</a></li>
 			<li><a href="#tabs-contributions-2">Thoughts</a></li>
 	<?php }else if($mode == $ORGMODE){ ?>	
-			<li><a href="#tabs-contributions-2">Posts</a></li>
-			<li><a href="#tabs-contributions-1">Contributions</a></li>
+			<li><a href="#tabs-contributions-1">Posts</a></li>
+			<li><a href="#tabs-contributions-2">Contributions</a></li>
 	<?php } ?>
 	</ul>
-<?php if(count($contributions) > 0){ ?>	
-	<div id="tabs-contributions-1">
-		<div class="items">
-		<?php 
-			foreach($contributions  as $contribution){
-				$show = ($contribution['show'] == 1) ? "show" : "hide";  
-		?>
-			<div class="item <?php echo $show; ?>">
-				<div class="above">
-					<?php if(isset($contribution['parent_image'])){ 
-					$width = 100;
-					$height = 100;
-					if(isset($contribution['parent_image_width']) && is_Numeric($contribution['parent_image_width'])){
-						$width = $contribution['parent_image_width'];
-					}
-					if(isset($contribution['parent_image_height']) && is_Numeric($contribution['parent_image_height'])){
-						$height = $contribution['parent_image_height'];
-					}
-				?>
-						<img src="<?php echo $contribution['parent_image']; ?>" alt="contribution image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"/>
-					<?php } ?>
-					<h2><a href="<?php echo $contribution['parent_url'] ?>" title="View"><?php echo $contribution['parent_title']; ?></a></h2>
-					<p><?php echo $contribution['comment']; ?></p>
-				</div>
-				<div class="below">
-					<a href="#"><?php echo $contribution['participant_count']; ?> Participants</a> | <a href="#"><?php echo $contribution['contribution_count']; ?> Contributions</a>
-				</div>
-			</div>
-		<?php } // end foreach ?>
-		</div>
-		<div class="tab-links">
-			<a class="viewButton" href="#">View All</a>
-			<a class="collapseButton" href="#">Collapse</a>
-		</div>
-	</div>
-<?php } // end if ?>	
-<?php if(count($thoughts) > 0){ ?>	
-	<div id="tabs-contributions-2">
-		<div class="items">
-		<?php 
-			foreach($thoughts  as $thought){
-			$show = ($thought['show'] == 1) ? "show" : "hide";
-	 ?>
-			<div class="item <?php echo $show; ?>">
-				<div class="above">
-					<?php if(isset($thought['image'])){ ?>
-						<a href="<?php echo isset($thought['url']) ? $thought['url'] : ''; ?>"><img src="<?php echo $thought['image']; ?>" alt="thought image" style="<?php echo isset($thought['image_width']) ? 'width:'.$thought['image_width'].'px;' : ''; ?><?php echo isset($thought['image_height']) ? 'height:'.$thought['image_height'].'px;' : ''; ?>" /></a>
-					<?php } ?>
-					<h2><a href="<?php echo isset($thought['url']) ? $thought['url'] : ''; ?>"><?php echo isset($thought['title']) ? $thought['title'] : ''; ?></a></h2>
-					<p><?php echo isset($thought['summary']) ? $thought['summary'] : ''; ?></p>
-				</div>
-				<div class="below">
-				</div>
-			</div>
-		<?php } // end foreach ?>
-		</div>
-		<div class="tab-links">
-			<a class="viewButton" href="#">View All</a>
-			<a class="collapseButton" href="#">Collapse</a>
-		</div>
-	</div>
-  </div>
-<?php } // end if ?>	
+<?php
+	if($mode == $USERMODE) {
+		require_once('contributions.tpl');
+		require_once('thoughts.tpl');
+	} else {
+		require_once('thoughts.tpl');
+		require_once('contributions.tpl');
+	}
+?>
+</div>

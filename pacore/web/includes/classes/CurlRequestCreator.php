@@ -152,7 +152,11 @@ class CurlRequestCreator {
 
 		$s = curl_init();
 
-		curl_setopt($s,CURLOPT_VERBOSE,1);
+		if(DEBUG) {
+			curl_setopt($s,CURLOPT_VERBOSE,1);
+		} else {
+			curl_setopt($s,CURLOPT_VERBOSE,0);
+		}
 		curl_setopt($s,CURLOPT_URL,$this->_url);
 		curl_setopt($s,CURLOPT_HTTPHEADER,array('Expect:'));
 		curl_setopt($s,CURLOPT_TIMEOUT,$this->_timeout);

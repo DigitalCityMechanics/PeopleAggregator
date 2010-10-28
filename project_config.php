@@ -40,7 +40,10 @@
 //
 
 if(isset($_GET) && isset($_GET['debug'])) {
+	define('DEBUG', true);
 	set_time_limit(300);
+} else {
+	define('DEBUG', false);
 }
 
 error_reporting(E_ALL | E_STRICT);
