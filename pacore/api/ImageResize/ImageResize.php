@@ -861,7 +861,7 @@ class ImageResize {
 	}else{
 		$attributes = $Extra_attrs;
 	}
-		return '<img src="'.$ImageURL.'" width="'.$Width.'" height="'.$Width.'" '. $attributes.' />';	
+		return '<img src="'.$ImageURL.'" width="'.$Width.'" height="'.$Height.'" '. $attributes.' />';	
   }
 
 }
