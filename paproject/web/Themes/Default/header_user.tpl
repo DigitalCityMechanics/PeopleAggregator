@@ -47,16 +47,19 @@
 		<div id="login-status">
 			<div class="offset-2">
    				<a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>" title="<?php echo $user_name; ?>">
-   				<?php
-   					if(!isset($login_user->avatar_small_dimensions['width']) || $login_user->avatar_small_dimensions['width'] == 0){
-						$aWidth = 40;
+	   				<?php
+	   				$aWidth = 40;
+					$aHeight = 40;
+   				
+   					if(isset($login_user->avatar_small_dimensions['width']) || $login_user->avatar_small_dimensions['width'] != 0){
+						$aWidth = $login_user->avatar_small_dimensions['width'];
 					}
 
-   					if(!isset($login_user->avatar_small_dimensions['height']) || $login_user->avatar_small_dimensions['height'] == 0){
-						$aHeight = 40;
+   					if(isset($login_user->avatar_small_dimensions['height']) || $login_user->avatar_small_dimensions['height'] != 0){
+						$aHeight = $login_user->avatar_small_dimensions['height'];
 					}
-   				?>
-					<?php echo uihelper_resize_mk_user_img($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
+   					?>
+	   				<img src="<?= $login_user->avatar_small ?>" style="width:<?= $aWidth ?>px;height:<?= $aHeight ?>px;" alt="User Picture" class="callout" />
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
 				<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
