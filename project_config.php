@@ -91,5 +91,5 @@ date_default_timezone_set('UTC');
 
 // Civic Commons Constants
 define('NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS', 3);
-
+define('AMAZON_BUCKET_NAME', 'pa-dev');
 ?>
