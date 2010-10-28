@@ -8,6 +8,7 @@
     </middle>
     <right>
       <item>ActionsModule</item>
+      <item>GroupActionsModule</item>
 	  <item>GroupAccessModule</item>
       <item>MembersFacewallModule</item>
       <item>PollModule</item>
