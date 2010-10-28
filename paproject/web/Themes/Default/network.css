@@ -3566,6 +3566,9 @@ table.activities_ranking_list {
    float:right;
    margin-right:1px;
  }
+#poll_module .question {
+  font-weight: bold;
+}
 #poll_module .votes {
   font-size: 12px;
   margin: 0 0 10px 0;
