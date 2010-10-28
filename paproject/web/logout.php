@@ -26,9 +26,12 @@ if (!empty($_REQUEST['return'])) {
 } else {
 	
 	// Parag Jagdale - 10/14/10
-	$redirectQueryString = (isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : null;
 	
-	if($redirectQueryString != null){
+	$redirectQueryString = null;
+	if(isset($_GET) && isset($_GET['redirect'])){
+		$redirectQueryString = $_GET['redirect'];			
+	}
+	if(isset($redirectQueryString) && !empty($redirectQueryString)){
 		//TODO: check if there are security implications to sending this directly
 		//		to header(Location: ), or if there needs to be cleanup of the parameter
 		$return = $redirectQueryString;
