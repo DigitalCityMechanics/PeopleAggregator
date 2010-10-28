@@ -657,9 +657,7 @@ class BootStrap {
 			// TODO: standardise the paerror get variable and put in 
 			//	AppConfig.xml as a new option
 			$referer = $referer . "?paerror=" . $message;
-			if(!isset($_GET) || !isset($_GET['silent']) || $_GET['silent'] != 'true') {
-				header("Location: $referer");
-			}
+			header("Location: $referer");
 			throw $ex;
 		}
 	}
@@ -686,7 +684,7 @@ class BootStrap {
         try {
           $user = new User();
           $user = $this->getUserFromAuthToken($authToken);
-          if($user->user_id){			
+          if($user && $user->user_id){
           	// User is valid so log_in the user
           	// 	Since we know that AuthToken was passed into the URL, we can assume this
           	// 	user was redirected here from a partner web site. We need to log in the user
