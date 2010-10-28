@@ -212,9 +212,6 @@ class EditProfileModule extends Module {
 				$this->message = $e->getMessage();
 			}
 
-			if (empty($this->message)){
-
-			}
 			if (empty($this->message)) {//If there is no error message then try saving to amazon s3
 				// save images to amazon s3
 				global $app;
@@ -232,10 +229,10 @@ class EditProfileModule extends Module {
 					if($s3 != null ){
 
 						$bucketCreated = false;
-						$bucketAvailable = $s3->isBucketAvailable('pa-dev');
+						$bucketAvailable = $s3->isBucketAvailable(AMAZON_BUCKET_NAME);
 
 						if(!$bucketAvailable){
-							if($s3->createBucket('pa-dev')){
+							if($s3->createBucket(AMAZON_BUCKET_NAME)){
 								// new bucket was created
 								$bucketCreated = true;
 							}
@@ -247,27 +244,40 @@ class EditProfileModule extends Module {
 
 							$file_path = $zendUploadAdapter->getFileName('userfile', true);
 							$file_name = $zendUploadAdapter->getFileName('userfile', false);
-
+							// api_call needs to be set to true in order for the User class to update the avatar and avatar_small fields
+							$this->user_info->api_call = true; 
 							foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
 								// Resize image into thumbnails
 								$imageAsString = null;
 								try
 								{
 									$thumb = PhpThumbFactory::create($file_path);
-									$objectPath = $this->buildAmazonS3ObjectURL('pa-dev', $imageSizeType, $this->user_info->user_id, $file_name);
+									$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $this->user_info->user_id, $file_name);
 									if(isset($imageDimensions) && !empty($imageDimensions)){
 										// if this is an original size image, the width and height dont need to be set
 										$thumb->adaptiveResize($imageDimensions['width'], $imageDimensions['height']);
 									}
 									$imageAsString = $thumb->getImageAsString();
-									
-									if($imageSizeType == 'large'){
-										$this->user_info->picture =  "http://s3.amazonaws.com/" . $objectPath;
+									$amazonURL = "http://s3.amazonaws.com/";
+									switch($imageSizeType){
+										case "large":
+											$this->user_info->picture =  $amazonURL . $objectPath;
+											$this->user_info->picture_dimensions = $imageDimensions;
+											break;
+										case "standard":
+											$this->user_info->avatar =  $amazonURL . $objectPath;
+											$this->user_info->avatar_dimensions = $imageDimensions;
+											break;
+										case "medium":
+											$this->user_info->avatar_small =  $amazonURL . $objectPath;
+											$this->user_info->avatar_small_dimensions = $imageDimensions;
+											break;
+										default:
+											break;
 									}
 								}
 								catch (Exception $e)
-								{
-									// handle error here however you'd like
+								{								
 									$this->message = $e->getMessage();
 									break;
 								}
@@ -280,10 +290,7 @@ class EditProfileModule extends Module {
 						}
 					}
 				}
-
-				$this->user_info->picture = $file;
 			}
-
 		}
 
 		if (empty($this->message)) {//If there is no error message then try saving the user information.
