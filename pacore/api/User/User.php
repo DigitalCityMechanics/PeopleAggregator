@@ -691,8 +691,8 @@ class User {
           }
         }
         if($this->api_call == true){
-        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ?, picture_width = ?, picture_height = ?, avatar = ?, avatar_width = ?, avatar_height = ?, avatar_small_width = ?, avatar_small_height = ? WHERE user_id = ?';
-        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->user_id);
+        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ?, picture_width = ?, picture_height = ?, avatar = ?, avatar_width = ?, avatar_height = ?, avatar_small = ?, avatar_small_width = ?, avatar_small_height = ? WHERE user_id = ?';
+        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->user_id);
         }else{
         	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ? WHERE user_id = ?';
         	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->user_id);
