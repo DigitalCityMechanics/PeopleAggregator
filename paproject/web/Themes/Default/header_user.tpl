@@ -59,7 +59,7 @@
 						$aHeight = $login_user->avatar_small_dimensions['height'];
 					}
    					?>
-	   				<img src="<?= $login_user->avatar_small ?>" style="width:<?= $aWidth ?>px;height:<?= $aHeight ?>px;" alt="User Picture" class="callout" />
+   					<?php echo uihelper_resize_mk_user_img($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
 				<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
