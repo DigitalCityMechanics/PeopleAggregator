@@ -658,9 +658,10 @@ class BootStrap {
 			//	AppConfig.xml as a new option
 			$referer = $referer . "?paerror=" . $message;
 			header("Location: $referer");
-			throw $ex;	
+			throw $ex;
 		}
 	}
+
 	return $user;
    }
    
@@ -683,7 +684,7 @@ class BootStrap {
         try {
           $user = new User();
           $user = $this->getUserFromAuthToken($authToken);
-          if($user->user_id){			
+          if($user && $user->user_id){
           	// User is valid so log_in the user
           	// 	Since we know that AuthToken was passed into the URL, we can assume this
           	// 	user was redirected here from a partner web site. We need to log in the user
@@ -700,7 +701,7 @@ class BootStrap {
 		    $_SESSION['authToken'] = $authToken;
           }                             
         } catch (Exception $e) {
-          if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED))) {
+          if(!in_array($e->getCode(), array(USER_NOT_FOUND, USER_ALREADY_DELETED, USER_TOKEN_INVALID, USER_TOKEN_EXPIRED))) {
             throw $e;
           }
           // The currently logged-in user has been deleted; invalidate the session.

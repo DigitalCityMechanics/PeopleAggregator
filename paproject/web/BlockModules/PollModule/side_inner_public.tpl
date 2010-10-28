@@ -1,6 +1,6 @@
 <div>
     <div id="poll_module">
-      <p><?= $topic[0]->title ?></p>
+      <p class="question"><strong><?= $topic[0]->title ?></strong></p>
 		<form method="post" action="<?= PA::$url?>/save_vote.php">
       <p class="votes">(<?= $total_vote?> votes)</p>
 	<div class="general-aside">
@@ -31,10 +31,12 @@
       <input type="hidden" value="<?= $topic[0]->poll_id;?>" name="poll_id" />
       </div>
       <?php 
-      if ($flag == 0) { ?>
+      if ($flag == 0 && PA::$login_uid != null) { ?>
         <div class="form-block" id="poll_button">
-          <input class="submit" type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
+          <input class="submit" type="submit" name="submit" value="<?= __("Submit") ?>" />
         </div>
+     <? } elseif($flag == 0 && PA::$login_uid == null) { ?>
+		<p>Please login to vote.</p>
      <? } else { ?>
 		<?php echo ($show_poll_link != '') ? '<p class="vote_link"><a href="'.$show_poll_link.'">OK, I\'m ready to vote!</a></p>'."\n" : ''; ?>
 	<?php } ?>
@@ -42,7 +44,7 @@
 	  </form>
     </div>
   <?php
-  if (!empty($cnt_prev)) {
+  if (false && !empty($cnt_prev)) {
   	?>
   	<div class="view_all">
   	<a href="<?=PA::$url.PA_ROUTE_POLL_ARCHIVE?>?gid=<?php echo $gid; ?>"><?=__("See all recent Surveys")?></a>

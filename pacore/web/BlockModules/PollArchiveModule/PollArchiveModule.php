@@ -39,7 +39,7 @@ class PollArchiveModule extends Module {
     			$option_votes = $pollObj->load_vote_option($poll->poll_id, $s);
 // echo "<pre>".print_r($option_votes,1)."</pre>";
           $options[$option]['count'] = $option_votes[2]->counter; 
-          $options[$option]['percent'] = round(($option_votes[2]->counter / $poll->total_votes) * 100, 1); 
+          $options[$option]['percent'] = ($poll->total_votes != 0) ? round(($option_votes[2]->counter / $poll->total_votes) * 100, 1) : 0;
     		}
     		$poll->options = $options;
     	}

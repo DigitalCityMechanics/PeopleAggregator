@@ -35,7 +35,7 @@ require_once dirname(__FILE__) . "/../pacore/api/Profiler/PAProfiler.class.php";
 
 // User.php must be included after a new PADispatcher object is created
 // otherwise the installation of PA breaks
-require_once dirname(__FILE__) . "/../pacore/api/User/User.php";
+require_once(getShadowedPath('api/User/User.php'));
  
  $script = $dispatcher->dispatch();
  if(PA::$profiler) PA::$profiler->stopTimer('PADispatcher');
