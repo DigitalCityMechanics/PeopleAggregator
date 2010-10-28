@@ -89,7 +89,7 @@ function check_session($login_required=TRUE, $redirect_function=NULL) {
 			if ($redirect_function) {
 				return $redirect_function();
 			}
-			if(isset($_SERVER) && !empty($_SERVER['REQUEST_URI']) && strrpos($_SERVER['REQUEST_URI'],"logout.php") != false){
+			if(isset($_SERVER) && isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI']) && strrpos($_SERVER['REQUEST_URI'],"logout.php") != false){
 				$return = null;
 				// Parag Jagdale - 10/14/10
 				// if return url is set in the request then after logout redirect to the location
