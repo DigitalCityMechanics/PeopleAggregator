@@ -51,11 +51,11 @@
 	   				$aWidth = 40;
 					$aHeight = 40;
    				
-   					if(isset($login_user->avatar_small_dimensions['width']) || $login_user->avatar_small_dimensions['width'] != 0){
+   					if(isset($login_user->avatar_small_dimensions['width']) && $login_user->avatar_small_dimensions['width'] > 0){
 						$aWidth = $login_user->avatar_small_dimensions['width'];
 					}
 
-   					if(isset($login_user->avatar_small_dimensions['height']) || $login_user->avatar_small_dimensions['height'] != 0){
+   					if(isset($login_user->avatar_small_dimensions['height']) && $login_user->avatar_small_dimensions['height'] > 0){
 						$aHeight = $login_user->avatar_small_dimensions['height'];
 					}
    					?>
