@@ -666,6 +666,12 @@
         <fortythree_api_key category="global" type="string" section="api_keys" readonly="false" description="43(things|people|places).com API key. The following key will work for you, but you should really obtain your own from: http://www.43things.com/account/webservice_setup.">
           <value>9519@Pe3U5HYxrY4rc</value>
         </fortythree_api_key>
+        <amazon_aws_key  category="global" type="string" section="api_keys" readonly="true" description="Amazon AWS Key">
+        	<value></value>
+        </amazon_aws_key>
+        <amazon_aws_secret  category="global" type="string" section="api_keys" readonly="true" description="Amazon AWS Secret Key">
+        	<value></value>
+        </amazon_aws_secret>
       </value>
     </api_keys>
     <database description="Database settings">
