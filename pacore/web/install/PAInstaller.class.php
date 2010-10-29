@@ -407,7 +407,7 @@ class PAInstaller {
 		   $adm_pass  = $form_data['admin_password'];
 		   $adm_mail  = $form_data['admin_email'];
 
-		   $sql  = "INSERT INTO `users` (`user_id`, `login_name`, `password`, `first_name`, `last_name`, `email`, `is_active`, `picture`, `created`, `changed`, `last_login`, `zipcode`) VALUES (1, '$adm_login', '".md5($adm_pass)."', '$adm_first', '$adm_last', '$adm_mail', 1, NULL, ".time().", ".time().", ".time().", NULL);";    
+		   $sql  = "INSERT INTO `users` (`user_id`, `core_id`, `login_name`, `password`, `first_name`, `last_name`, `email`, `is_active`, `picture`, `created`, `changed`, `last_login`, `zipcode`) VALUES (1, 1, '$adm_login', '".md5($adm_pass)."', '$adm_first', '$adm_last', '$adm_mail', 1, NULL, ".time().", ".time().", ".time().", NULL);";    
 		   $sql_link = @mysql_connect($this->config['database']['db_host'], $this->config['database']['db_user'], $this->config['database']['db_password']);
 		   if ($sql_link && @mysql_select_db($this->config['database']['db_name'], $sql_link)) {
 			   if (mysql_query($sql, $sql_link)) {
