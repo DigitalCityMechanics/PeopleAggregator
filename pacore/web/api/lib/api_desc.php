@@ -396,7 +396,7 @@ $api_desc = array('name'=>'APIs built at Wed Apr 28 19:02:48 2010: Example Proje
 		'allow_extra_keys'=>0
 		),
 	'args'=>array(
-		'coreId'=>array('optional'=>TRUE,'type'=>'int'),
+		'id'=>array('optional'=>TRUE,'type'=>'int'),
 		'firstName'=>array('type'=>'string'),
 		'adminPassword'=>array('type'=>'string'),
 		'lastName'=>array('type'=>'string'),

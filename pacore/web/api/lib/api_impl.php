@@ -535,7 +535,7 @@ function peopleaggregator_newUser($args)
 	$profile_avatar_small_dimensions = User::image_dimensions_to_array($args['profileAvatarSmallWidth'], $args['profileAvatarSmallHeight']);
 
 	$newUserData = array(
-		'core_id' =>  $args['coreId'],
+		'core_id' =>  $args['id'],
 		'login_name' => $args['login'],
 		'first_name' => $args['firstName'],
 		'last_name' => $args['lastName'],
