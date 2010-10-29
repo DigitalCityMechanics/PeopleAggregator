@@ -60,6 +60,13 @@ class User {
   public $user_id;
 
   /**
+  * The core id associated with this user to work with the CivicCommons project
+  *
+  * @var integer
+  */
+  public $core_id;
+  
+  /**
   * The login name associated with this user.
   *
   * Login names are unique in the system and can
@@ -300,6 +307,7 @@ class User {
 
     if (!empty($row)) {
       $this->user_id = (int)$row->user_id;
+      $this->core_id = (int)$row->core_id;
       $this->login_name = $row->login_name;
       $this->password = $row->password;
       $this->first_name = $row->first_name;
@@ -514,19 +522,13 @@ class User {
    */
   public static function from_auth_token($token) {
     if (!preg_match("/^(.*?):(\d+):([0-9a-f]+)$/", $token, $m)) {
-      if(!isset($_GET) || !isset($_GET['silent']) || $_GET['silent'] != 'true') {
-        throw new PAException(USER_TOKEN_INVALID, "This token is invalid - bad format");
-      }
-      return null;
+      throw new PAException(USER_TOKEN_INVALID, "This token is invalid - bad format");
     }
     list($_foo, $login, $expires, $sig) = $m;
     // check expiry
     $lifetime = $expires - time();
     if ($lifetime < 0) {
-      if(!isset($_GET) || !isset($_GET['silent']) || $_GET['silent'] != 'true') {
-        throw new PAException(USER_TOKEN_EXPIRED, "The token has already expired ($lifetime seconds ago)");
-      }
-      return null;
+      throw new PAException(USER_TOKEN_EXPIRED, "The token has already expired ($lifetime seconds ago)");
     }
     // load user
     $user = new User();
@@ -534,10 +536,7 @@ class User {
     // validate signature [password]
     $calc_token = User::build_auth_token($login, $user->password, $expires);
     if ($calc_token != $token) {
-      if(!isset($_GET) || !isset($_GET['silent']) || $_GET['silent'] != 'true') {
-        throw new PAException(USER_TOKEN_INVALID, "The token is not valid; the signature is incorrect");
-      }
-      return null;
+      throw new PAException(USER_TOKEN_INVALID, "The token is not valid; the signature is incorrect");
       // removed " (calculated $calc_token, received $token)"
       // from this error message, as it allows anyone to 'try' for a valid token
       // ad actualy BE SHOWN THE RIGHT THING
@@ -605,25 +604,6 @@ class User {
         Logger::log("Throwing exception SAVING_DELETED_USER | Message: Saving a deleted user is not allowed", LOGGER_ERROR);
         throw new PAException(SAVING_DELETED_USER,"Saving a deleted user is not allowed");
       }
-
-      if(!is_valid_web_image_name($this->picture)) { // fix invalid image names
-        $this->picture = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-// Parag Jagdale - add extra image size url to store avatar and avatar_small images    
-      if(!is_valid_web_image_name($this->avatar)) { // fix invalid image names
-        $this->avatar = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-      
-      if(!is_valid_web_image_name($this->avatar_small)) { // fix invalid image names
-        $this->avatar_small = '';
-        Logger::log("Throwing exception INVALID_USER_IMAGE_FORMAT | Message: Invalid user image format", LOGGER_ERROR);
-        throw new PAException(INVALID_FILE,"Invalid image format");
-      }
-// Parag Jagdale --- end
       
       // added to remove unnecessary check whether the word begins or ends with a 'space' character
       $this->first_name = @trim($this->first_name);
@@ -669,8 +649,8 @@ class User {
         $this->changed = $this->created;
         $this->last_login = time();
         if($this->api_call == true){
-        	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
-        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);
+        	$sql = 'INSERT into {users} (user_id, core_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
+        	$data = array($this->user_id, $this->core_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);		
         }else{
         	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->last_login);
@@ -719,8 +699,8 @@ class User {
           }
         }
         if($this->api_call == true){
-        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ?, picture_width = ?, picture_height = ?, avatar = ?, avatar_width = ?, avatar_height = ?, avatar_small_width = ?, avatar_small_height = ? WHERE user_id = ?';
-        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->user_id);
+        	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ?, picture_width = ?, picture_height = ?, avatar = ?, avatar_width = ?, avatar_height = ?, avatar_small = ?, avatar_small_width = ?, avatar_small_height = ? WHERE user_id = ?';
+        	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->user_id);
         }else{
         	$sql = 'UPDATE {users} SET login_name = ?, password = ?, first_name = ?, last_name = ?, email = ?, is_active = ?, changed = ?, picture = ? WHERE user_id = ?';
         	$data = array($this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, 1, time(), $this->picture, $this->user_id);

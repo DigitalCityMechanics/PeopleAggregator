@@ -67,7 +67,7 @@ class User_Registration {
   *  $this->array_of_errors = A bunch of flags to say which error occurred (used by web/register.php).
   */
   function register($params, $network_info=NULL) {
-     
+    $core_id = null;
 	$picture = null;
 	$picture_dimensions = null;
 	$avatar = null;
@@ -104,6 +104,7 @@ class User_Registration {
       $confirm_password = trim($params['confirm_password']);
       
       if($this->api_call == true){
+      	$core_id = $params['core_id'];      	
       	// TODO: validate URL
       	$picture = trim($params['profile_picture_url']);      	
       	$picture_dimensions = $params['profile_picture_dimensions'];
@@ -286,6 +287,8 @@ class User_Registration {
        $this->newuser->created = $date_created;
       }
       if($this->api_call == true){
+      	$this->newuser->core_id = $core_id;
+      	
       	if($picture != null && $picture != ''){
       		$this->newuser->picture = Storage::validateFileId($picture);
       		$this->newuser->picture_dimensions = $picture_dimensions;

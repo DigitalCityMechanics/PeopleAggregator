@@ -60,6 +60,13 @@ class User {
   public $user_id;
 
   /**
+  * The core id associated with this user to work with the CivicCommons project
+  *
+  * @var integer
+  */
+  public $core_id;
+  
+  /**
   * The login name associated with this user.
   *
   * Login names are unique in the system and can
@@ -300,6 +307,7 @@ class User {
 
     if (!empty($row)) {
       $this->user_id = (int)$row->user_id;
+      $this->core_id = (int)$row->core_id;
       $this->login_name = $row->login_name;
       $this->password = $row->password;
       $this->first_name = $row->first_name;
@@ -641,8 +649,8 @@ class User {
         $this->changed = $this->created;
         $this->last_login = time();
         if($this->api_call == true){
-        	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
-        	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);			
+        	$sql = 'INSERT into {users} (user_id, core_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, picture_width, picture_height, avatar, avatar_width, avatar_height, avatar_small, avatar_small_width, avatar_small_height, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? , ?, ?, ?, ?, ?)';
+        	$data = array($this->user_id, $this->core_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->picture_dimensions['width'], $this->picture_dimensions['height'], $this->avatar, $this->avatar_dimensions['width'], $this->avatar_dimensions['height'], $this->avatar_small, $this->avatar_small_dimensions['width'], $this->avatar_small_dimensions['height'], $this->last_login);			
         }else{
         	$sql = 'INSERT into {users} (user_id, login_name, password, first_name, last_name, email, is_active, created, changed, picture, last_login) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         	$data = array($this->user_id, $this->login_name, $this->password, $this->first_name, $this->last_name, $this->email, $this->is_active, $this->created, $this->changed, $this->picture, $this->last_login);
