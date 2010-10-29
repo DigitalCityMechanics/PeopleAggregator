@@ -252,7 +252,10 @@ class EditProfileModule extends Module {
 								try
 								{
 									$thumb = PhpThumbFactory::create($file_path);
-									$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $this->user_info->user_id, $file_name);
+									if(!isset($this->user_info->core_id) && !empty($this->user_info->core_id)){
+										$this->user_info->core_id = 0;
+									}
+									$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $this->user_info->core_id, $file_name);
 									if(isset($imageDimensions) && !empty($imageDimensions)){
 										// if this is an original size image, the width and height dont need to be set
 										$thumb->adaptiveResize($imageDimensions['width'], $imageDimensions['height']);
