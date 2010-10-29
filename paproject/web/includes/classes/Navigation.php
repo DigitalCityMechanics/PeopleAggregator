@@ -303,9 +303,24 @@ class Navigation {
 			
 									)
 		),
-                       'about' => array('caption'=> __('About Us'),
-                                  'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT
-		),
+                       'about' => array('caption'=> __('About Us'), 
+                                  		'sublinks'=>array(
+							                       'about' => array('caption'=> __('About Us'),
+							                                  'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT),
+							                       'blog' => array('caption'=> __('Blog'),
+							                                  'url'=>$this->base_url . '/blog'),
+							                       'help' => array('caption'=> __('Help'),
+							                                  'url'=>CC_APPLICATION_URL . '/help'),
+							                       'principles' => array('caption'=> __('Mission &amp; Principles'),
+							                                  'url'=>CC_APPLICATION_URL . '/principles'),
+							                       'team' => array('caption'=> __('Team'),
+							                                  'url'=>CC_APPLICATION_URL . '/team'),
+							                       'partners' => array('caption'=> __('Partners'),
+							                                  'url'=>CC_APPLICATION_URL . '/partners'),
+							                       'press' => array('caption'=> __('In The News'),
+							                                  'url'=>CC_APPLICATION_URL . '/press'),
+												),
+						)
 		);
 		////END OF These are level 2 links shown in second navigation bar
 
