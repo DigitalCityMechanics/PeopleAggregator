@@ -293,15 +293,7 @@ class Navigation {
                                   'url'=>CC_APPLICATION_URL . CC_ROUTE_ISSUES
 		),
                        'community' => array('caption'=> __('Community'),
-                                  'sublinks'=>array(
-							                       'people' => array('caption'=> __('People'),
-							                                  'url'=>$this->base_url . CC_ROUTE_PEOPLE
-													),
-							                       'organizations' => array('caption'=> __('Organizations'),
-							                                  'url'=>$this->base_url . CC_ROUTE_ORGANIZATIONS
-													),
-			
-									)
+		 						  'url'=>$this->base_url . CC_ROUTE_PEOPLE
 		),
                        'about' => array('caption'=> __('About Us'), 
                                   		'sublinks'=>array(
