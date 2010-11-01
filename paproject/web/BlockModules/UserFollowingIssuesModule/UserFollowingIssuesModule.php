@@ -92,7 +92,7 @@ class UserFollowingIssuesModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_ISSUES, $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('name'=>'No issues followed yet', 'url' => '#');
+			$defaultResult = array('name'=>'No issues followed yet.', 'url' => '#');
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
