@@ -3945,3 +3945,5 @@ div.steps ul {margin:0;}
 /* -- TODO: Spend more time on these later, these were fixed for emergency */
 #accordion {font-size:0.8em;}
 .center_box {font-size:0.8em;}
+
+.clear{clear:both;}

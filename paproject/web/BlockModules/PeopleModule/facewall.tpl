@@ -37,7 +37,6 @@ $query_string = null;
 
 <h1><?= __(PA::$people_noun) ?></h1>
 
-<div class="description"></div>
 <div id="PeopleModule">
 
 
@@ -73,20 +72,9 @@ $query_string = null;
      <?php
 	  }
       ?>
-
-</script>
-<form name="myform_show_mode" action="" method="get">
-  <div style="margin-right:10px; width: 120px; float:right; text-align:right">
-    no photo OK <input type="checkbox" name="no_photo_ok_chbox" id="chbox_no_photo_ok" value="1"
-    <?php if ($no_photo_ok) { echo 'checked="checked"'; }?> />
-  </div>
-  <input type="hidden" name="no_photo_ok" id="no_photo_ok_switch" value="<?=$no_photo_ok?>" />
-</form>
-
 </div>
 
-<form name="myform_search" action="" method="get">
-  <input type="hidden" name="no_photo_ok" id="no_photo_ok_search" value="<?=$no_photo_ok?>" />
+<form name="myform_search" action="" method="get" class="clear">
 
 <fieldset class="center_box">
     <legend><?= __("Search") ?></legend>
@@ -118,99 +106,11 @@ function name_focus(el) {
         <td width="250" id="buttonbar">
           <ul>
           <li><a href="javascript: document.forms['myform_search'].submit();"><?= __("Find Users") ?></a></li>
-          <li id="button_text"><a href="#" id="toggle_text"><?php echo $toggle_text?></a></li>
         </ul>
       </td>
       </tr>
     </table>
 
-    <div id="advance_search_options"<?php echo $style?>>
-      <div class="field">
-        <h4><label><?= __("Gender") ?>:</label></h4>
-        <?php
-          $checked_female = $checked_male = $checked_all = null;
-          if (!empty($_REQUEST['sex'])) {
-            if ($_REQUEST['sex'] == "Male") {
-              $checked_male = "checked=\"checked\"";
-            } else if ($_REQUEST['sex'] == "Female") {
-              $checked_female = "checked=\"checked\"";
-            }
-          } else {
-            $checked_all = "checked=\"checked\"";
-          }
-
-        ?>
-        <input type="radio" id="male" name="sex" value="Male" <?=$checked_male?> /> <?= __("Male") ?>
-        <input type="radio" id="female" name="sex" value="Female" <?=$checked_female?> /> <?= __("Female") ?>
-        <input type="radio" id="all" name="sex" value="" <?=$checked_all?> /> <?= __("Any") ?>
-        <?php echo get_age_options('age', field_value(@$_GET['age'], null));?>
-      </div>
-      <div class="field">
-        <h4><label for="city"><?= __("City") ?>:</label></h4>
-        <input type="text" name="city" id="city" value="<?=htmlspecialchars(field_value(@$_REQUEST['city'], '')) ?>" class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="state"><?= __("State") ?>:</label></h4>
-        <input type="text" name="state" id="state" value="<?=htmlspecialchars(field_value(@$_REQUEST['state'], '')) ?>" class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="company"><?= __("Company Name") ?>:</label></h4>
-        <input type="text" name="company" id="company" value="<?=htmlspecialchars(field_value(@$_REQUEST['company'], '')) ?>" class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="user_tags"><?= __("Interests") ?>:</label></h4>
-        <input type="text" name="user_tags" id="user_tags" value="<?=htmlspecialchars(field_value(@$_REQUEST['user_tags'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="industry"><?= __("Industry") ?>:</label></h4>
-        <input type="text" name="industry" id="industry" value="<?=htmlspecialchars(field_value(@$_REQUEST['industry'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="music"><?= __("Music") ?>:</label></h4>
-        <input type="text" name="music" id="music" value="<?=htmlspecialchars(field_value(@$_REQUEST['music'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="movies"><?= __("Movies") ?>:</label></h4>
-        <input type="text" name="movies" id="movies" value="<?=htmlspecialchars(field_value(@$_REQUEST['movies'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="college"><?= __("College") ?>:</label></h4>
-        <input type="text" name="college" id="college" value="<?=htmlspecialchars(field_value(@$_REQUEST['college'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="passion"><?= __("Passion") ?>:</label></h4>
-        <input type="text" name="passion" id="passion" value="<?=htmlspecialchars(field_value(@$_REQUEST['passion'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="activities"><?= __("Activities") ?>:</label></h4>
-        <input type="text" name="activities" id="activities" value="<?=htmlspecialchars(field_value(@$_REQUEST['activities'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="books"><?= __("Books") ?>:</label></h4>
-        <input type="text" name="books" id="books" value="<?=htmlspecialchars(field_value(@$_REQUEST['books'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="tv_shows"><?= __("TV shows") ?>:</label></h4>
-        <input type="text" name="tv_shows" id="tv_shows" value="<?=htmlspecialchars(field_value(@$_REQUEST['tv_shows'], '')) ?>"  class="text longer" />
-      </div>
-
-      <div class="field">
-        <h4><label for="cusines"><?= __("Cusines") ?>:</label></h4>
-        <input type="text" name="cusines" id="cusines" value="<?=htmlspecialchars(field_value(@$_REQUEST['cusines'], '')) ?>"  class="text longer" />
-      </div>
-
-    </div>
     <input type="hidden" name="submit_search" value="search" />
   </fieldset>
 </form>
