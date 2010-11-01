@@ -36,19 +36,8 @@ $query_string = null;
 </ul>
 
 <h1><?= __(PA::$people_noun) ?></h1>
-<?php
-  if (!empty($search_data)) {
-    $msg = _n(";%d members found
-1;One member found
-0;No members found", $people_count) . (($only_with_photo) ? __(' with picture in profile') :'');
-  } else {
-    $msg = _n(";This network has %d members
-1;This network has only one member
-0;This network has no members", $people_count) . (($only_with_photo) ? __(' with picture in profile') :'');
-  }
-?>
 
-<div class="description"><?php echo $msg?></div>
+<div class="description"></div>
 <div id="PeopleModule">
 
 
@@ -73,21 +62,7 @@ $query_string = null;
    </div>
   <?php }  ?>
 
-  <div class="search_gallery">
-  <?php if ($people_count) { ?>
 
-
-   <select id="rows" name="rows" onchange="javascript: show_rows('<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE?>');">
-    <option  value="100"><?= __("Select rows") ?></option>
-    <?php
-      for($i=1; $i <=$row_count; $i++) {  ?>
-        <option value="<?php echo $i ?>" <?php if (@$_REQUEST['rows'] == $i) {echo 'selected="selected"'; }?>><?php echo $i ?></option>
-    <?php
-       }
-    ?>
-    </select>
-  <?php } ?>
-  </div>
   <?php
     if (isset($aim_api_key))
       { ?>
