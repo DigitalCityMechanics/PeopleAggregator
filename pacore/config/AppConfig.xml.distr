@@ -340,6 +340,9 @@
 		<PAGE_POLL_MODULE category="constant" type="int" readonly="true" section="pages" page_name="page_poll_module" page_type="network">
           <value>739</value>
         </PAGE_POLL_MODULE>
+		<PAGE_VIEW_POLL category="constant" type="int" readonly="true" section="pages" page_name="view_poll" page_type="network">
+          <value>740</value>
+        </PAGE_VIEW_POLL>
       </value>
     </pages>
     <system_strings description="Various strings and messages">
