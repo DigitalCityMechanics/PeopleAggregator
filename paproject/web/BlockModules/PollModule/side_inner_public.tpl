@@ -1,7 +1,7 @@
 <div>
     <div id="poll-module">
       <p class="question"><strong><?= $topic[0]->title ?></strong></p>
-		<form method="post" action="<?= PA::$url?>/save_vote.php">
+		<form method="post" action="<?= PA::$url?>/Widgets/Poll/ajax_save_vote.php">
       <p class="votes">(<?= $total_vote?> votes)</p>
 	<div class="general-aside">
 		<div class="form-block-radio">
