@@ -16,10 +16,25 @@ $use_theme = 'Beta';
 include_once "web/includes/page.php";
 require_once "api/Poll/Poll.php";
 
-if (!empty($_POST['vote'])) {
-  $vote = $_POST['vote'];
+$vote = null;
+if(isset($_GET) && isset($_GET['vote'])) {
+	$vote = $_GET['vote'];
+}
+if(isset($_POST) && isset($_POST['vote'])) {
+	$vote = $_POST['vote'];
+}
+$poll_id = null;
+if(isset($_GET) && isset($_GET['poll_id'])) {
+	$poll_id = $_GET['poll_id'];
+}
+if(isset($_POST) && isset($_POST['poll_id'])) {
+	$poll_id = $_POST['poll_id'];
+}
+
+
+if (isset($vote) && !empty($vote)) {
   $vote = html_entity_decode(stripslashes($vote));
-  $poll_id = $_POST['poll_id'];
+  $poll_id = html_entity_decode(stripslashes($poll_id));
 
   if (PA::$login_uid) {
     $uid = PA::$login_uid;
@@ -36,6 +51,7 @@ if (!empty($_POST['vote'])) {
 }
 
 print_r($_POST);
+print_r($_GET);
 exit();
 
 ?>
