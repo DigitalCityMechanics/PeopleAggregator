@@ -92,11 +92,11 @@ class PollModule extends Module {
     $inner_html_gen->set('cnt_prev', $this->cnt_prev);
 	$inner_html_gen->set('gid', $this->gid);
 	$inner_html_gen->set('i_voted', $this->previous_vote_detected);
-	$query_string = null;
+	$authToken = null;
 	if(isset($_POST) && isset($_POST['authToken'])) {
-		$query_string = '?silent=true&authToken='.$_POST['authToken'];
+		$authToken = $_POST['authToken'];
 	}
-	$inner_html_gen->set('query_string', $query_string);
+	$inner_html_gen->set('authToken', $authToken);
 
 	$url = isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : '';
 	$query = isset($_SERVER['REDIRECT_QUERY_STRING']) ? $_SERVER['REDIRECT_QUERY_STRING'] : '';

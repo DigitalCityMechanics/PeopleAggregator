@@ -1,7 +1,8 @@
 <div>
     <div id="poll-module">
       <p class="question"><strong><?= $topic[0]->title ?></strong></p>
-		<form method="post" action="<?= PA::$url?>/Widgets/Poll/ajax_save_vote.php<?php echo $query_string; ?>">
+		<form method="post" action="<?= PA::$url?>/Widgets/Poll/ajax_save_vote.php">
+			<input name="authToken" type="hidden" value="<?php echo $authToken; ?>" />
       <p class="votes">(<?= $total_vote?> votes)</p>
 	<div class="general-aside">
 		<div class="form-block-radio">
