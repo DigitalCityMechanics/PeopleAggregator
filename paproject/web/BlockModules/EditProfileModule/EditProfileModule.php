@@ -452,9 +452,7 @@ class EditProfileModule extends Module {
 				try{
 				
 					foreach($this->_image_sizes as $imageSizeType => $imageDimensions){				
-						$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $user_id, $file_name);						
-						
-			$this->message = "deleting " . $objectPath;
+						$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $user_id, $file_name);
 						$s3->removeObject($objectPath);	
 					}
 					return true;
