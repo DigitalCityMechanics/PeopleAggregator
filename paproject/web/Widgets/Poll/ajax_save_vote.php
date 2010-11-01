@@ -28,7 +28,7 @@ if (!empty($_POST['vote'])) {
     $obj->vote = $vote;
     $obj->user_id = $uid;
     $obj->is_active = ACTIVE;
-    $obj->save_vote();
+//    $obj->save_vote();
 	echo 'good to go!';
   } else {
 	echo 'please login first...';
