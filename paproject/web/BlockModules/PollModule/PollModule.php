@@ -93,6 +93,9 @@ class PollModule extends Module {
 	$inner_html_gen->set('gid', $this->gid);
 	$inner_html_gen->set('i_voted', $this->previous_vote_detected);
 	$authToken = null;
+	if(isset($_GET) && isset($_GET['authToken'])) {
+		$authToken = $_GET['authToken'];
+	}
 	if(isset($_POST) && isset($_POST['authToken'])) {
 		$authToken = $_POST['authToken'];
 	}
