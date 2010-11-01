@@ -10,7 +10,21 @@
 * @package PeopleAggregator
 */
 ?>
-<?php 
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+if(array_key_exists('HTTP_ACCESS_CONTROL_REQUEST_HEADERS', $_SERVER)) {
+    header('Access-Control-Allow-Headers: '
+           . $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']);
+} else {
+    header('Access-Control-Allow-Headers: *');
+}
+
+if("OPTIONS" == $_SERVER['REQUEST_METHOD']) {
+    exit(0);
+}
+
 $login_required = FALSE;
 $use_theme = 'Beta';
 include_once "web/includes/page.php";
