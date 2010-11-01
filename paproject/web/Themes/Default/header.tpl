@@ -27,16 +27,14 @@
 	<div id="login-status" class="signed-out">
 		<div class="offset-2">
 			<div id="user">
-				<p class="login-link">
-					<a href="<?php echo CC_APPLICATION_URL . "/people/login" ?>">
-					<strong>
-					Login to your account
-					</strong>
+				<p>
+					<a href="<?php echo CC_APPLICATION_URL . "/people/login" ?>" class="button login-link">
+						Login to your account
 					</a>
 				</p>
-				<p class="createacct-link">
-					<a href="<?php echo CC_APPLICATION_URL . "/people/register/new" ?>">Create an account</a>
-				</p>
+				<a href="<?php echo CC_APPLICATION_URL . "/people/register/new" ?>" class="createacct-link">
+					Create an account
+				</a>
 			</div>
 		</div>
 	</div>
@@ -62,8 +60,14 @@
    					<?php echo uihelper_resize_mk_user_img($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
-				<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
-				<a title="logout" href="/logout.php" class="user-link">Logout</a>
+				<div class="login-actions">
+					<p>
+						<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
+					</p>
+					<p>
+						<a title="logout" href="/logout.php" class="user-link">Logout</a>
+					</p>				
+				</div>				
 			</div>
        		<?php /*include("web/includes/shortcuts_menu.php");*/ ?>
 		</div>
@@ -118,11 +122,12 @@
 				<li<?php echo $id2;?> class="<?php echo (isset($sublinks_ul)) ? "drop" : ''; ?>" ><?php echo $link_string . $sublinks_ul; ?></li>
 			<?php } ?>
 		</ul>
-		
-        <form id="search" method="post">
-        	<input type="text" class="textbox placeholder" id="search" name="search" placeholder="Name, Keyword, Date..." />
-        	<input type="submit" class="submit" value="Search" />
-        </form>
+		<div id="search">
+	        <form method="post">
+	        	<input type="text" class="textbox placeholder" id="search" name="search" placeholder="Name, Keyword, Date..." />
+	        </form>
+	        <input type="submit" class="submit" value="Search" />
+        </div>
 	<?php } ?>
 </div></div><!-- /.nav -->
 <?php if(isset($use_feature_mast) && $use_feature_mast){ ?>
