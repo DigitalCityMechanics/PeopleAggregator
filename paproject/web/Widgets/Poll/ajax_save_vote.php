@@ -57,15 +57,9 @@ if (isset($vote) && !empty($vote)) {
     $obj->vote = $vote;
     $obj->user_id = $uid;
     $obj->is_active = ACTIVE;
-//    $obj->save_vote();
-	echo 'good to go!';
+    $obj->save_vote();
   } else {
-	echo 'please login first...';
+	echo 'There was a problem saving your poll.';
   }
 }
-
-print_r($_POST);
-print_r($_GET);
-exit();
-
 ?>
