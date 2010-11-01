@@ -3566,16 +3566,16 @@ table.activities_ranking_list {
    float:right;
    margin-right:1px;
  }
-#poll_module .question {
+#poll-module .question {
   font-weight: bold;
 }
-#poll_module .votes {
+#poll-module .votes {
   font-size: 12px;
   margin: 0 0 10px 0;
   padding: 0;
   text-align: center;
 }
-#poll_module h5 {
+#poll-module h5 {
   margin: 0;
   padding:0px;
   font-size:14px;
@@ -3584,37 +3584,37 @@ table.activities_ranking_list {
   text-align:center;
   text-transform:capitalize;
 }
-#poll_module div {
+#poll-module div {
   float:left;
   width:100%;
   margin-top:5px;
 }
-#poll_module label {
+#poll-module label {
 	display: block;
 	float: none;
 	margin: 0 10px;
 	text-align: left;
 	width: inherit;
 }
-#poll_module .option {
+#poll-module .option {
 	font-weight: bold;
 	margin-bottom: 0;
 	margin-top: 10px;
 }
-#poll_module .vote_link {
+#poll-module .vote_link {
 	margin: 20px 0 0 0;
 }
-#poll_module span.percent {
+#poll-module span.percent {
 	display: inline-block;
 	margin-right: 5px;
 	text-align: left;
 	width: 30px;
 }
-#poll_module span.percent,
-#poll_module span.count {
+#poll-module span.percent,
+#poll-module span.count {
 	font-size: 13px;
 }
-#poll_module span.poll_bar {
+#poll-module span.poll_bar {
   float:left;
   padding-top:3px;
   width:95px;

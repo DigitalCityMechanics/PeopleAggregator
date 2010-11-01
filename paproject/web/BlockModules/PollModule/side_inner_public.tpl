@@ -1,5 +1,5 @@
 <div>
-    <div id="poll_module">
+    <div id="poll-module">
       <p class="question"><strong><?= $topic[0]->title ?></strong></p>
 		<form method="post" action="<?= PA::$url?>/save_vote.php">
       <p class="votes">(<?= $total_vote?> votes)</p>
