@@ -462,7 +462,7 @@ class EditProfileModule extends Module {
 					// will not harm anything. It will just be an unclean directory
 					// take care of cleaning asynchronously by deleting orphan objects
 					// that do not appear in the user's picture/avatar urls
-					$this->message = $e->getMessage();
+					//$this->message = $e->getMessage();
 				}				
 			}else{
 				// no bucket is available
