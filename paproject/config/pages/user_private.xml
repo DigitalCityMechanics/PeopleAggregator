@@ -9,8 +9,9 @@
     <right>
       <item>UserPhotoModule</item>
       <item>AboutUserModule</item>
-      <item>MyGroupsModule</item>
       <item>MyLinksModule</item>
+      <item>UserFollowingIssuesModule</item>
+      <item>UserFollowingConversationsModule</item>
     </right>
     <javascripts>
       <item>calendar.js</item>
