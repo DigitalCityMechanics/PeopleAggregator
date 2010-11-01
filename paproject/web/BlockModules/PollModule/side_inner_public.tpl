@@ -1,7 +1,7 @@
 <div>
     <div id="poll-module">
       <p class="question"><strong><?= $topic[0]->title ?></strong></p>
-		<form method="get" action="<?= PA::$url?>/Widgets/Poll/ajax_save_vote.php">
+		<form method="post" action="<?= PA::$url?>/Widgets/Poll/ajax_save_vote.php?silent=true&authToken=<?php echo $authToken; ?>">
 			<input name="authToken" type="hidden" value="<?php echo $authToken; ?>" />
 			<input name="silent" type="hidden" value="true" />
       <p class="votes">(<?= $total_vote?> votes)</p>
