@@ -2252,6 +2252,8 @@ class User {
     $uids = array();
     $i=0;
     $j=1;
+    
+	$PEARObject = new PEAR();
 
     $order_by = $sort_by . ' ' . $direction;
 
@@ -2376,8 +2378,8 @@ class User {
     $data[] = ACTIVE;
     $data[] = $search_items_count;
     $res = Dal::query($search_string, $data);
-
-    if (PEAR::isError($res)) {
+	
+    if ($PEARObject->isError($res)) {
       Logger::log(" Throwing exception DB_QUERY_FAILED | Message: $res->getMessage()", LOGGER_ERROR);
       throw new PAException(DB_QUERY_FAILED, $res->getMessage());
     }
@@ -2406,7 +2408,7 @@ class User {
     $sql = "Select user_id from {relations} where relation_id = $user_id";
     $res = Dal::query($sql);
 
-    if (PEAR::isError($res)) {
+    if ($PEARObject->isError($res)) {
       Logger::log(" Throwing exception DB_QUERY_FAILED | Message: $res->getMessage()", LOGGER_ERROR);
       throw new PAException(DB_QUERY_FAILED, $res->getMessage());
     }
