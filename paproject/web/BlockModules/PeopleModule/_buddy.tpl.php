@@ -23,7 +23,7 @@
     			$height = $link['avatar_height'];
     		}
     	?>
-      <img id="img_<?= $link['user_id'] ?>" src="<?= $link['avatar'] ?>" alt="" style="width: <?= $width ?>px; height: <?= $height ?>px; border: 4px; border-style:solid; border-color:#E0E0E0; display: block" />
+      <img id="img_<?= $link['user_id'] ?>" src="<?= $link['big_picture'] ?>" alt="" style="width: <?= $width ?>px; height: <?= $height ?>px; border: 4px; border-style:solid; border-color:#E0E0E0; display: block" />
 </a>
 </div>
 

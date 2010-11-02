@@ -303,21 +303,22 @@ class PeopleModule extends Module {
     if ($users_count) {
       $user_profiles = $this->get_profile_data($users['users_data']);
       for($cnt = 0; $cnt < $users_count; $cnt++) {
-        if (empty($users['users_data'][$cnt]['avatar'])) {
+      	
+        if (!isset($user_profiles[$cnt]['avatar']) || empty($user_profiles[$cnt]['avatar'])) {        	
           $users['users_data'][$cnt]['avatar'] = PA::$url . '/files/default.png';
-          $big_img = uihelper_resize_img($users['users_data'][$cnt]['avatar'], 120, 120, NULL, "alt=\"".$users['users_data'][$cnt]['login_name'] ."\"");
+          $big_img['url'] = PA::$url . '/files/default.png';          
           $users['users_data'][$cnt]['big_picture'] = $big_img['url'];
-        } else {
-        	  		                  	          		        	         		        
-        	if (preg_match("|^http://|", $users['users_data'][$cnt]['avatar'])) {
-        		$users['users_data'][$cnt]['big_picture'] = $users['users_data'][$cnt]['avatar'];
+        } else {        		   
+        	if (preg_match("|^http://|", $user_profiles[$cnt]['avatar'])) {        		
+        		$users['users_data'][$cnt]['big_picture'] = $user_profiles[$cnt]['avatar'];
+        		$users['users_data'][$cnt]['big_picture_width'] = $user_profiles[$cnt]['avatar_width'];
+        		$users['users_data'][$cnt]['big_picture_height'] = $user_profiles[$cnt]['avatar_height'];
         	}else{
-        		$big_img = uihelper_resize_img($users['users_data'][$cnt]['avatar'], $users['users_data'][$cnt]['avatar_width'], $users['users_data'][$cnt]['avatar_height'], NULL, "alt=\"".$users['users_data'][$cnt]['login_name']."\"");
+        		$big_img = uihelper_resize_img($user_profiles[$cnt]['avatar'], $user_profiles[$cnt]['avatar_width'], $user_profiles[$cnt]['avatar_height'], NULL, "alt=\"".$user_profiles[$cnt]['login_name']."\"");
         		$users['users_data'][$cnt]['big_picture'] = $big_img['url'];
         	}
-
         }
-        $users['users_data'][$cnt] = array_merge($users['users_data'][$cnt], $user_profiles[$cnt]);
+        $users['users_data'][$cnt] = array_merge($user_profiles[$cnt], $users['users_data'][$cnt]);
       }
       $this->users_data = $users['users_data'];
     }
@@ -344,7 +345,11 @@ class PeopleModule extends Module {
       $out_data[$i]['nickname'] = (strlen($user['login_name']) > $facewall_maxlength) ? substr($user['login_name'], 0, $facewall_trunkwords) . ' ...'
                                                                                        : $user['login_name'];
       $out_data[$i]['location'] = field_value(@$profile_data['city'], ' ');
-
+	  $out_data[$i]['picture'] = $u->picture;
+	  $out_data[$i]['avatar'] = $u->avatar;
+	  $out_data[$i]['avatar_width'] = $u->avatar_dimensions['width'];
+	  $out_data[$i]['avatar_height'] = $u->avatar_dimensions['height'];
+	  $out_data[$i]['avatar_small'] = $u->avatar_small;
       $age = ' ';
       if (!empty($profile_data['dob'])) {
         $age = convert_birthDate2Age($profile_data['dob']);
