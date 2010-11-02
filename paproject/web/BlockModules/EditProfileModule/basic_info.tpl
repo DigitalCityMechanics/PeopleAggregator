@@ -1,19 +1,5 @@
 <h1><?= __("Basic info") ?></h1>
 <form enctype="multipart/form-data" action="" method="post" name="formBasicProfile">
-    <div class="form-block">
-      <label><?= __("Login Name") ?></label>
-      <?php echo $user_info->login_name;?>
-    </div>
-
-    <div class="form-block">
-      <label for="password"> <?= __("Password") ?></label>
-      <input type="password" id="password" name="pass" class="textbox short" value="" />
-    </div>
-
-    <div class="form-block">
-      <label for="confirm-password"> <?= __("Confirm Password") ?></label>
-      <input class="textbox short" id="confirm-password" type="password" name="conpass" value=""/>
-    </div>
 
     <div class="form-block">
       <label for="first-name"> <?= __("First Name") ?></label>
@@ -46,7 +32,7 @@
     </div>
 
     <div class="form-block">
-      <label for="user-email"><?= __("Email") ?></label>
+      <label for="user-email"><?= __("Email Address") ?></label>
       <?php
         if (!empty($request_data['last_name'])) {
       ?>
@@ -59,17 +45,22 @@
         }
       ?>
     </div>
-    <div class="field">
-      <h4><label for="upload_user_image"><?= __("Upload Photo") ?></label></h4>
-      <input name="userfile" type="file" class="text short" id="upload_user_image"/>
+    <?php    
+	    //TODO: sanitize these inputs
+        $dynProf->textfield(__("Zip/Postal Code"), "postal_code", "basic", NULL, FALSE);
+		$dynProf->textarea(__("About Me"), "about", "basic", NULL, FALSE);
+    ?>
+    <div class="form-block">
+      <label for="upload_user_image"><?= __("Upload an Image") ?></label>
+      <input name="userfile" type="file" class="textbox" id="upload_user_image"/>
       <input type="hidden" name="uid" value="<?php echo $uid?>" />
       <input type="hidden" name="deletepicture" value="false" id="deletepicture" />
       <input type="hidden" name="profile_type" value="basic" /><br />
     </div>
 
-    <div class="field_bigger">
-      <h4><?= __("Current Image") ?></h4>
+    <div class="form-block">
       <div class="curr_image">
+      	<span class="title"><?= __("Current Image") ?></span>
         <?php print "<a href=\"". PA::$url . PA_ROUTE_USER_PUBLIC . "/$uid\">".uihelper_resize_mk_user_img($user_info->picture, 75, 80, 'alt="Current Image"')."</a>"; ?>
         <span class="remove_picture">
           <?php
@@ -80,6 +71,16 @@
         </span>
       </div>
     </div>
+    <div class="form-block">
+      <label for="password"> <?= __("Password") ?></label>
+      <input type="password" id="password" name="pass" class="textbox short" value="" />
+    </div>
+
+    <div class="form-block">
+      <label for="confirm-password"> <?= __("Password Again") ?></label>
+      <input class="textbox short" id="confirm-password" type="password" name="conpass" value=""/>
+    </div>
+    
 
   <div class="form-block">
     <input type="hidden" name="action" value="SaveProfile" />

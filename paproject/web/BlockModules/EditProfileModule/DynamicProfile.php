@@ -135,14 +135,12 @@ class DynamicProfile {
     }
     $v = @$f['value'];
   ?>
-      <div class="field">
-        <h4><label for="<?=$fieldname.'[value]'?>"><?=$label?></label></h4>
-        <div class="center">
+      <div class="form-block">
+        <label for="<?=$fieldname.'[value]'?>"><?=$label?></label>
         <input type="text"
           name="<?= $fieldname.'[value]' ?>"
           id="<?= $fieldname.'[value]' ?>"
-          value="<?= $v ?>" />
-        </div>
+          value="<?= $v ?>" class="textbox short" />
         <?php
           if ($show_access_list) {
         ?>
@@ -199,13 +197,13 @@ class DynamicProfile {
     }
     $v = @$f['value'];
   ?>
-      <div class="field">
-        <h4><label for="<?=$fieldname.'[value]'?>"><?=$label?></label></h4>
-        <div class="center">
+      <div class="form-block">
+        <label for="<?=$fieldname.'[value]'?>"><?=$label?></label>
+      
         <textarea rows="3" cols="20"
           name="<?= $fieldname.'[value]' ?>"
-          id="<?= $fieldname.'[value]' ?>"><?= $v ?></textarea>
-        </div>
+          id="<?= $fieldname.'[value]' ?>"
+          class="short" ><?= $v ?></textarea>
         <?php
           if ($show_access_list) {
         ?>

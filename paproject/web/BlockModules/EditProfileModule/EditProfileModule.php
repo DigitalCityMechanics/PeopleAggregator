@@ -197,8 +197,8 @@ class EditProfileModule extends Module {
 			$zendUploadAdapter->setDestination(PA::$upload_path);
 			$zendUploadAdapter->addValidator('Size', false, '1MB')
 			->addValidator('Count', false, 1)
-			->addValidator('FilesSize', false, array('min' => '2kB','max' => '1MB'))
-			->addValidator('Extension', false, array('jpg', 'png', 'gif'))
+			->addValidator('FilesSize', false, array('min' => '1kB','max' => '2MB'))
+			->addValidator('Extension', false, array('jpeg', 'jpg', 'png', 'gif'))
 			->addValidator('ImageSize', false, array('minwidth' => 40,'maxwidth' => 1024, 'minheight' => 40, 'maxheight' => 768));
 
 			if (!$zendUploadAdapter->isValid()) {

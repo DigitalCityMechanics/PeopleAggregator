@@ -1602,9 +1602,9 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 
 .editmainpage form .curr_image {
 	float: left;
-	margin: 0 0 10px 10px;
-	width: 425px; }
-
+	margin: 0 0 10px 164px;
+	width: 589px; }
+.editmainpage form .curr_image span.title{display:block;clear:both;font-weight:bold;margin:5px 0;}
 .editmainpage form .curr_image img { float: left; }
 
 .editmainpage form .normal  { width: 28em; }
@@ -3945,5 +3945,5 @@ div.steps ul {margin:0;}
 /* -- TODO: Spend more time on these later, these were fixed for emergency */
 #accordion {font-size:0.8em;}
 .center_box {font-size:0.8em;}
-
+.form-block textarea{margin:0!important;}
 .clear{clear:both;}
