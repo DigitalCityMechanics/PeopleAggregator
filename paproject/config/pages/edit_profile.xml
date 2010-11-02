@@ -73,5 +73,5 @@
     <page_type>network</page_type>
   </data>
   <is_configurable>1</is_configurable>
-  <page_name>edit_profile</page_name>
+  <page_name>Edit Profile</page_name>
 </page>
