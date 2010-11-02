@@ -4,7 +4,7 @@
 		<form method="post" action="<?= PA::$url?>/save_vote.php?silent=true&authToken=<?php echo $authToken; ?>">
 			<input name="authToken" type="hidden" value="<?php echo $authToken; ?>" />
 			<input name="silent" type="hidden" value="true" />
-      <p class="votes">(<?= $total_vote?> votes)</p>
+      <p class="votes">(<?php echo ($total_vote == 1) ? 'vote' : 'votes'; ?>)</p>
 	<div class="general-aside">
 		<div class="form-block-radio">
       <?php $cnt = count($options);
