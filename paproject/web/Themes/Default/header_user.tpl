@@ -74,7 +74,7 @@
       <? } ?>
 		<div class="important">
 			<p>
-				<a href='<?=CC_APPLICATION_URL ?>/post_content.php?blog_type=Suggestion'>Help build the Commons</a> 
+				<a href='/post_content.php?blog_type=Suggestion'>Help build the Commons</a> 
  			</p>
 		</div>
 	</div><!-- /.header-utility -->
@@ -125,8 +125,8 @@
 		<div id="search">
 	        <form method="post">
 	        	<input type="text" class="textbox placeholder" id="search" name="search" placeholder="Name, Keyword, Date..." />
+	        	<input type="submit" class="submit" value="Search" />
 	        </form>
-	        <input type="submit" class="submit" value="Search" />
         </div>
 	<?php } ?>
 </div></div><!-- /.nav -->
