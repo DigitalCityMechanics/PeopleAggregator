@@ -199,8 +199,8 @@ class DynamicProfile {
   ?>
       <div class="form-block">
         <label for="<?=$fieldname.'[value]'?>"><?=$label?></label>
-      
-        <textarea rows="3" cols="20"
+      <?php //TODO: add max length checking ?>
+        <textarea rows="5" cols="20" maxlength="300"
           name="<?= $fieldname.'[value]' ?>"
           id="<?= $fieldname.'[value]' ?>"
           class="short" ><?= $v ?></textarea>
