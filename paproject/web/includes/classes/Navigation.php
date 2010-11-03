@@ -296,9 +296,8 @@ class Navigation {
 		 						  'url'=>$this->base_url . CC_ROUTE_PEOPLE
 		),
                        'about' => array('caption'=> __('About Us'), 
+                       					'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT,
                                   		'sublinks'=>array(
-							                       'about' => array('caption'=> __('About Us'),
-							                                  'url'=>CC_APPLICATION_URL . CC_ROUTE_ABOUT),
 							                       'blog' => array('caption'=> __('Blog'),
 							                                  'url'=>$this->base_url . '/blog'),
 							                       'help' => array('caption'=> __('Help'),
