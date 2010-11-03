@@ -419,7 +419,7 @@ padding: 10px 10px 0;
 width: 940px;
 }
 .content-container {
-background: url(..images/content_bg.gif) repeat-y 72.18% 0;
+background: url(images/content_bg.gif) repeat-y 72.18% 0;
 margin: 15px 0;
 }
 .content-container.no-bg {background: none;}
@@ -572,7 +572,7 @@ text-transform: uppercase;
 text-shadow: 0 1px 1px rgba(0,0,0,.8);
 }
 #nav-wrapper #main-nav li a:hover, #nav-wrapper li.drop:hover {
-background: #bac872 url(..images/nav_hover.gif) repeat-x top;
+background: #bac872 url(images/nav_hover.gif) repeat-x top;
 color: #444;
 text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
@@ -623,7 +623,7 @@ body#conversations li#conversations-nav,
 body#issues li#issue-nav, 
 body#community li#community-nav, 
 body#about li#about-nav, 
-#nav-wrapper #main-nav li.active a {background: #bac872 url(..images/nav_hover.gif) repeat-x top;}
+#nav-wrapper #main-nav li.active a {background: #bac872 url(images/nav_hover.gif) repeat-x top;}
 
 /* Search Form Styles */
 div#search {
@@ -760,7 +760,7 @@ padding: 3px 0 2px;
 position:relative;
 }
 div.convo-utility.response {
-background: #e6e6e6 url(..images/response_bar_bg.gif) repeat-x top;
+background: #e6e6e6 url(images/response_bar_bg.gif) repeat-x top;
 border: 1px solid #ced1d6;
 padding: 3px 6px 2px;
 -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -798,7 +798,7 @@ height: 1em;
 .rate-form form .button {margin: 0;}
 html.js div.productive, html.js div.response-block {display: none;}
 div.productive {
-background: #d6d6d6 url(..images/productivity_bg.gif) repeat-x top;
+background: #d6d6d6 url(images/productivity_bg.gif) repeat-x top;
 clear: both;
 overflow: hidden;
 padding: 10px;
@@ -1153,7 +1153,7 @@ div#colorbox div.tab-area li {margin-bottom: 10px;}
 -----------------------------------------------*/
 
 div.convo-popup {
-background: #eaeaea url(..images/convo_popup_bg.gif) repeat-x top;
+background: #eaeaea url(images/convo_popup_bg.gif) repeat-x top;
 border: 1px solid #ced1d6;
 width: 620px;
 }
@@ -1163,7 +1163,7 @@ margin: 0;
 padding: 0;
 }
 div.convo-popup li {
-background: #dbdbdb url(..images/convo_popup_li.gif) repeat-x top;
+background: #dbdbdb url(images/convo_popup_li.gif) repeat-x top;
 border-bottom: 1px solid #ced1d6;
 border-right: 1px solid #ced1d6;
 color: #777;

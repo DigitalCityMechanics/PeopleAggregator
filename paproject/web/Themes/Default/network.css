@@ -42,6 +42,7 @@
 	margin: auto auto 10px;
 	padding: 10px 10px 0;
 	width: 940px;
+	font-size:80%!important;
 }
 
 /* 2-3 column content section below header */
@@ -3926,7 +3927,7 @@ div.error {
  }
 
 /* --- BlockModule Customizations --- */
-.aside .mod h3 {font-size:0.9em;}
+.aside .mod h3 {font-size:1.1em;}
 
 /* -- UserParticipationModule and UserContributionsModule customizations --*/
 div.items {overflow:auto;height:545px;}
