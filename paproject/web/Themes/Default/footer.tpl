@@ -19,6 +19,7 @@
 	
 	<ul class='sub-nav'> 
 		<li><a href='<?= PA::$url; ?>/home' title='Blog'>Blog</a></li> 
+		<li><a href="<?php echo CC_APPLICATION_URL; ?>/about">About Us</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/help">Help</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/faq">FAQ</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/principles">Mission &amp; Principles</a></li> 
