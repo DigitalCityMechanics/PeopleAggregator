@@ -92,11 +92,13 @@ class PostContentModule extends Module {
 			break;
 
 		case 'Suggestion':
-			$inner_html_blog->set('message', '<p>Thanks for your suggestion .....  (copy needed)</p>');
+			$inner_html_blog->set('message', '<p>Thanks for taking the time to make us even better.  Most people
+			are content with clicking the next link in Google, but not you!  You have decided to do something, take action, and help make something powerful.</p>');
 			break;
 
 		case 'BlogPost':
-			$inner_html_blog->set('message', '<p>Thanks for your thoughts .....  (copy needed)</p>');
+			$inner_html_blog->set('message', '<p>A penny for your thoughts, but I think in an depth response is worth much, much more.  Thanks
+				for taking the time to leave a thoughtful tidbit of your knowledge in the Civic Commons.  Your peers will thank you.</p>');
 			break;
 
 		default:
@@ -142,6 +144,12 @@ class PostContentModule extends Module {
     $inner_html_gen->set('permission_to_post', $this->permission_to_post);
     $inner_html_gen->set('is_edit', $this->is_edit);
     $inner_html_gen->set('ccid', $this->ccid);
+
+	$post_type_name_singular = $this->blog_type;
+	if($post_type_name_singular == 'BlogPost') {
+		$post_type_name_singular = 'Post';
+	}
+	$inner_html_gen->set('post_type_name_singular', $post_type_name_singular);
     $inner_html = $inner_html_gen->fetch();
     
     return $inner_html;

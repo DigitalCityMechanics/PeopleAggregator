@@ -43,7 +43,7 @@ include $file;
 -->
 <? } ?>
 
-<fieldset id='tags'>
+<fieldset id='tags' style="display: none;">
   <legend><a><b><?= __("Tags") ?></b></a></legend>
   <input type="text" class="textbox long" id="tags"  name="tags" value="<?=stripslashes($tag_entry)?>" style="width:647px;" />
   <p class="fineprint"><?= __("Separate tags with commas") ?></p>
