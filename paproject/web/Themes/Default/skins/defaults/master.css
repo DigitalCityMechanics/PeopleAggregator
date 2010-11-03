@@ -346,19 +346,27 @@ padding: 8px 12px;
 text-decoration: none;
 }
 .pagination span {color: #999;}
-.pagination .prev {
+.pagination .previous_page {
 border-left: 1px solid #ccc;
 -webkit-border-radius: 8px 0 0 8px;
 -moz-border-radius: 8px 0 0 8px;
 border-radius: 8px 0 0 8px;
 }
-.pagination .next {
+.pagination .next_page {
 -webkit-border-radius: 0 8px 8px 0;
 -moz-border-radius: 0 8px 8px 0;
 border-radius: 0 8px 8px 0;
 }
-.pagination .current {background: #fff;}
-.pagination span.current {color: #444;}
+.pagination em {background: #fff;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  display: block;
+  float: left;
+  font-weight: bold;
+  padding: 8px 12px;
+  text-decoration: none;
+}
 
 /*-----------------------------------------------
 =Button and Link Styles
@@ -1222,7 +1230,7 @@ width: 375px;
 div.convo-entry a.button {
 float: right;
 }
-
+.moderate {float: right}
 /*-----------------------------------------------
 =Self Clearing Floats
 -----------------------------------------------*/
@@ -1253,3 +1261,4 @@ visibility: hidden;
 *:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup, *:first-child+html .pagination p {zoom: 1;}
 
 *:first-child+html .group {zoom: 1;}
+
