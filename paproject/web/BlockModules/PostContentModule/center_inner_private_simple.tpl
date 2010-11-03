@@ -35,7 +35,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
           <?php echo $center_content; ?>
         </li>
       </ul>
-	<?php if(!$is_edit && $$post_type_name_singular == 'Post') { 
+	<?php if(!$is_edit && $post_type_name_singular == 'Post') { 
 		// turn off full routing for private groups
 
 		if (!empty(PA::$config->simple['omit_routing'])) { 
