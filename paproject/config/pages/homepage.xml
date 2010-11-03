@@ -6,10 +6,6 @@
       <item>ShowContentModule</item>
     </middle>
     <right>
-      <item>MembersFacewallModule</item>
-      <item>NewestGroupsModule</item>
-      <item>RecentPostModule</item>
-      <item>PollModule</item>
     </right>
     <javascripts>
       <item>common.js</item>
