@@ -25,9 +25,9 @@ require_once "api/Permissions/PermissionsHandler.class.php";
   <div class="steps">
     <ul>
     <?php if ($is_edit) { ?>
-      <li><h1><?= __("Edit Your Post") ?></h1></li>
+      <li><h1><?= __("Edit Your ".$post_type_name_singular) ?></h1></li>
     <? } else { ?>
-      <li><h1><?= __("Create Your Post") ?></h1></li>
+      <li><h1><?= __("Create Your ".$post_type_name_singular) ?></h1></li>
     <? } ?>
     </ul>
     <ul id="create_blog_form">
@@ -35,7 +35,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
           <?php echo $center_content; ?>
         </li>
       </ul>
-	<?php if(!$is_edit) { 
+	<?php if(!$is_edit && $post_type_name_singular == 'Post') { 
 		// turn off full routing for private groups
 
 		if (!empty(PA::$config->simple['omit_routing'])) { 
@@ -183,7 +183,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
         <li>
            <input type="hidden" name="save_publish_post" value="1" id="save_publish_post" />
            <input type="hidden" name="publish" value="<?php echo (!$is_edit) ? 'Publish Post' : 'Update Post'; ?>">
-           <input type="submit" name="publish_post" class="submit" value="<?php echo (!$is_edit) ? 'Publish Post' : 'Update Post'; ?>" />
+           <input type="submit" name="publish_post" class="submit" value="<?php echo (!$is_edit) ? 'Publish '.$post_type_name_singular : 'Update '.$post_type_name_singular; ?>" />
            or <a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE  ?>">cancel</a>
         </li>
       </ul>

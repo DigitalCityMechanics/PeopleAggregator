@@ -31,6 +31,7 @@ require_once "api/Video/Video.php";
 require_once "api/BlogPost/BlogPost.php";
 require_once "api/Login/PA_Login.class.php";
 require_once "web/api/lib/project_api_impl.php";
+require_once "web/api/lib/ixr_xmlrpc.php";
 
 
 // one day we'll move everything inside the API class ...
