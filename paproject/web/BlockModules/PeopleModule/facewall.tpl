@@ -35,7 +35,7 @@ $query_string = null;
     <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>/sort_by=alphabetic<?php echo htmlspecialchars($query_string) ?>"><?= __("Alphabetical") ?></a></li>
 </ul>
 
-<h1><?= __(PA::$people_noun) ?></h1>
+<h1><?= __("Community") ?></h1>
 
 <div id="PeopleModule">
 
