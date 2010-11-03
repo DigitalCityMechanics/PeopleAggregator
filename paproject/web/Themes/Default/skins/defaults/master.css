@@ -48,7 +48,7 @@ padding-top: 15px;
 .conversations.divided .input-with-options li {padding: 0;}
 .conversations.divided .input-with-options li a.button {margin: 5px 10px 5px 0;}
 div#show_conversation {margin-top: -15px;}
-.divided li, .divided div {
+.divided li, div.divided div {
 border-bottom: 1px solid #b1b3b6;
 margin-bottom: 1em;
 padding-bottom: 1.2em;
@@ -94,7 +94,7 @@ font-size: 1.167em;
 line-height: 1.4em;
 margin-bottom: .8em;
 padding-bottom: .5em;
-text-transform: uppercase;
+/* text-transform: uppercase; */
 }
 h4 {
 font-size: 1.084em;
@@ -258,10 +258,6 @@ padding-left: 70px;
 position: relative;
 }
 .conversations .offset-1 {padding-left: 50px;}
-
-
-
-
 .offset-2 {
 padding-left: 50px;
 position: relative;
@@ -331,13 +327,38 @@ padding: 6px 0;
 .data-table tr:last-child td, .data-table tr:last-child th {border-bottom: none;}
 .data-table th {font-weight: bold;}
 .data-table tr:hover {background: #fefefe;}
-.pagination {
-border-top: 1px solid #cdcdcd;
-margin-top: .8em;
-padding-top: .5em;
-}
 .data-table a {text-decoration: none;}
-.pagination .current {font-weight: bold;}
+
+/*-----------------------------------------------
+=Pagination Styles
+-----------------------------------------------*/
+
+.pagination p {padding-top: 1em;}
+.pagination span, .pagination a {
+background: #eee;
+border-bottom: 1px solid #ccc;
+border-right: 1px solid #ccc;
+border-top: 1px solid #ccc;
+display: block;
+float: left;
+font-weight: bold;
+padding: 8px 12px;
+text-decoration: none;
+}
+.pagination span {color: #999;}
+.pagination .prev {
+border-left: 1px solid #ccc;
+-webkit-border-radius: 8px 0 0 8px;
+-moz-border-radius: 8px 0 0 8px;
+border-radius: 8px 0 0 8px;
+}
+.pagination .next {
+-webkit-border-radius: 0 8px 8px 0;
+-moz-border-radius: 0 8px 8px 0;
+border-radius: 0 8px 8px 0;
+}
+.pagination .current {background: #fff;}
+.pagination span.current {color: #444;}
 
 /*-----------------------------------------------
 =Button and Link Styles
@@ -537,6 +558,7 @@ padding: 20px 10px 15px;
 position: relative;
 z-index: 1;
 }
+.important a {font-weight: bold;}
 #login-status h4, .important p {margin-bottom: .1em;}
 #header #header-utility #login-status div.offset-2 {border: none;}
 /*
@@ -548,6 +570,7 @@ z-index: 1;
 #nav-wrapper {background: #4f5561 url(images/nav_wrapper_bg.gif) repeat-x top;}
 #nav-wrapper #nav {
 margin: auto;
+padding: 0 10px;
 width: 940px;
 }
 #main-nav {
@@ -562,7 +585,7 @@ float: left;
 margin: 0;
 position: relative;
 }
-#nav-wrapper #main-nav li a, #nav-wrapper li.drop {
+#nav-wrapper #main-nav li a, #nav-wrapper li.drop a {
 color: #fff;
 display: block;
 /* font-weight: bold; */
@@ -576,11 +599,13 @@ background: #bac872 url(images/nav_hover.gif) repeat-x top;
 color: #444;
 text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
+#nav-wrapper #main-nav li.drop:hover a {
+color: #444;
+text-shadow: 0 1px 1px rgba(255,255,255,.8);
+}
 #nav-wrapper li.drop {
-/* background: url(images/dd_arrow.png) no-repeat 100% 51%; */
 cursor: pointer;
 margin: 0;
-/* padding-right: 16px; */
 }
 #nav-wrapper li.drop ul {
 background: #BAC675;
@@ -638,8 +663,9 @@ background-color: #fff;
 border: 1px solid #333;
 border-left: none;
 border-right: none;
-float: left;
 height: 24px;
+position: relative;
+width: 242px;
 }
 div#search form input.textbox {
 border: none;
@@ -652,11 +678,13 @@ div#search input.submit {
 background: transparent url(images/search-submit.png) no-repeat 0 0;
 border: none;
 display: block;
-float: left;
 height: 26px;
 margin: 0;
+position: absolute;
+right: -24px;
 vertical-align: middle;
 text-indent: -9999px;
+top: -1px;
 width: 24px;
 -webkit-border-radius: 0;
 -moz-border-radius: 0;
@@ -780,14 +808,10 @@ background: url(images/chat-bubble-gray.png) no-repeat 0 50%;
 padding-left: 30px;
 }
 div.convo-utility.response p.respond-link {background-image: url(images/chat-bubble-light.png);}
-div.convo-utility p.rating, div.productive p.rating-buttons {
+div.convo-utility p.respond, div.productive p.rating-buttons {
 float: right;
 text-align: right;
 width: 40%;
-}
-div.convo-utility p.rating span {
-font-weight: bold;
-margin-left: .5em;
 }
 .rate-form-container {padding: 2em 0 1em;}
 .rate-form {
@@ -1203,7 +1227,7 @@ float: right;
 =Self Clearing Floats
 -----------------------------------------------*/
 
-#wrapper:after, #header:after, .feature:after, div.tab-strip ul:after, div.tab-area:after, #nav:after, #header-wrapper:after, .section:after, .content-container:after, .photobank:after, div.three-col:after, div.three-col-sm:after, .form-block:after, .offset-1:after, .offset-2:after, form:after, .convo-utility:after, ul.social-media:after, div.two-col:after, div.two-col-sm:after, .conversations:after, div.convo-popup:after {
+#wrapper:after, #header:after, .feature:after, div.tab-strip ul:after, div.tab-area:after, #nav:after, #header-wrapper:after, .section:after, .content-container:after, .photobank:after, div.three-col:after, div.three-col-sm:after, .form-block:after, .offset-1:after, .offset-2:after, form:after, .convo-utility:after, ul.social-media:after, div.two-col:after, div.two-col-sm:after, .conversations:after, div.convo-popup:after, .pagination p:after {
 content: ".";
 display: block;
 height: 0;
@@ -1221,11 +1245,11 @@ visibility: hidden;
 }
 
 /* IE6 */
-* html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations, * html div.convo-popup {zoom: 1;}
+* html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations, * html div.convo-popup, * html .pagination p {zoom: 1;}
 
 * html .group {zoom: 1;}
 
 /* IE7 */
-*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup {zoom: 1;}
+*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup, *:first-child+html .pagination p {zoom: 1;}
 
 *:first-child+html .group {zoom: 1;}
