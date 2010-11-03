@@ -10,14 +10,6 @@
 
 
 ?>
-<ul id="filters">
-  <li<?php isActiveNav('basic', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=basic" id="show-basic"><?= __("Basic Info") ?></a>
-  </li>
-  <li<?php isActiveNav('general', $type) ?>>
-    <a href="<?=PA::$url.PA_ROUTE_EDIT_PROFILE?>?type=general" id="show-general"><?= __("General Info") ?></a>
-  </li>
-</ul>
 
 <? if ($type == 'basic') { ?>
     <div id="basic-info">
