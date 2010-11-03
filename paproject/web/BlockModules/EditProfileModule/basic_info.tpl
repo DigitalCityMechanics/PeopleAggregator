@@ -2,7 +2,7 @@
 <form enctype="multipart/form-data" action="" method="post" name="formBasicProfile">
 
     <div class="form-block">
-      <label for="first-name"> <?= __("First Name") ?></label>
+      <label for="first-name"> <?= __("First Name:") ?></label>
       <?php
         if (!empty($request_data['first_name'])) {
       ?>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-block">
-      <label for="last-name"> <?= __("Last Name") ?></label>
+      <label for="last-name"> <?= __("Last Name:") ?></label>
       <?php
         if (!empty($request_data['last_name'])) {
       ?>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-block">
-      <label for="user-email"><?= __("Email Address") ?></label>
+      <label for="user-email"><?= __("Email Address:") ?></label>
       <?php
         if (!empty($request_data['last_name'])) {
       ?>
@@ -47,11 +47,11 @@
     </div>
     <?php    
 	    //TODO: sanitize these inputs
-        $dynProf->textfield(__("Zip/Postal Code"), "postal_code", "basic", NULL, FALSE);
-		$dynProf->textarea(__("About Me"), "about", "basic", NULL, FALSE);
+        $dynProf->textfield(__("Zip Code:"), "postal_code", "basic", NULL, FALSE);
+		$dynProf->textarea(__("About Me:"), "about", "basic", NULL, FALSE);
     ?>
     <div class="form-block">
-      <label for="upload_user_image"><?= __("Upload an Image") ?></label>
+      <label for="upload_user_image"><?= __("Upload an Image:") ?></label>
       <input name="userfile" type="file" class="textbox" id="upload_user_image"/>
       <input type="hidden" name="uid" value="<?php echo $uid?>" />
       <input type="hidden" name="deletepicture" value="false" id="deletepicture" />
@@ -60,7 +60,7 @@
 
     <div class="form-block">
       <div class="curr_image">
-      	<span class="title"><?= __("Current Image") ?></span>
+      	<span class="title"><?= __("Current Image:") ?></span>
         <?php print "<a href=\"". PA::$url . PA_ROUTE_USER_PUBLIC . "/$uid\">".uihelper_resize_mk_user_img($user_info->picture, 75, 80, 'alt="Current Image"')."</a>"; ?>
         <span class="remove_picture">
           <?php
@@ -72,12 +72,12 @@
       </div>
     </div>
     <div class="form-block">
-      <label for="password"> <?= __("Password") ?></label>
+      <label for="password"> <?= __("Password:") ?></label>
       <input type="password" id="password" name="pass" class="textbox short" value="" />
     </div>
 
     <div class="form-block">
-      <label for="confirm-password"> <?= __("Password Again") ?></label>
+      <label for="confirm-password"> <?= __("Password Again:") ?></label>
       <input class="textbox short" id="confirm-password" type="password" name="conpass" value=""/>
     </div>
     
