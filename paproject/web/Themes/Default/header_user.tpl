@@ -142,8 +142,13 @@
 				</div>
 			</div>
 			<div class="aside supplementary">
-				<?php echo (isset($aside) && $aside != '') ? $aside : ''; ?>
+<?php
+		if(isset($aside) && $aside === true) {
+?>
 				<a href="<?= PA::$url ?>/post_content.php?blog_type=Contribution" class="button">Write a New Contribution</a>
+<?php
+		}
+?>
 			</div>
 		</div>
 	</div>
