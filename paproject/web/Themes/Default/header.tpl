@@ -74,7 +74,7 @@
       <? } ?>
 		<div class="important">
 			<p>
-				<a href='/post_content.php?blog_type=Suggestion'>Help build the Commons</a> 
+				<a href="<?= PA::$url ?>/post_content.php?blog_type=Suggestion">Help build the Commons</a> 
  			</p>
 		</div>
 	</div><!-- /.header-utility -->
