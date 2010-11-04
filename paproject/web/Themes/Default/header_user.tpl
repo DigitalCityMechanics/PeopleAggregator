@@ -74,7 +74,7 @@
       <? } ?>
 		<div class="important">
 			<p>
-				<a href="<?= PA::$url ?>/post_content.php?blog_type=Suggestion">Help build the Commons</a> 
+				<a href="<?php echo CC_APPLICATION_URL; ?>/build-the-commons">Help build the Commons</a> 
  			</p>
 		</div>
 	</div><!-- /.header-utility -->
