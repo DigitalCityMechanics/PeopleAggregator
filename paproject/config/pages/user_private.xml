@@ -7,7 +7,6 @@
       <item>UserContributionsModule</item>
     </middle>
     <right>
-      <item>UserPhotoModule</item>
       <item>AboutUserModule</item>
       <item>MyLinksModule</item>
       <item>UserFollowingIssuesModule</item>
@@ -48,8 +47,26 @@
 
 		// setup the header to use the feature_mast and show the user's name
 		$this->header->set('use_feature_mast', true);
-		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);
-
+		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);		
+		
+		$avatar = null;
+		$avatar_dimensions = array('width'=>70, 'height'=>70);
+		
+		if(isset($module_shared_data) && is_array($module_shared_data) && isset($module_shared_data['user_info']) && !empty($module_shared_data['user_info'])){
+			if(isset($module_shared_data['user_info']->avatar) && !empty($module_shared_data['user_info']->avatar)){
+				$avatar = $module_shared_data['user_info']->avatar;
+			}
+			if(isset($login_user->avatar_dimensions['width']) && $login_user->avatar_dimensions['width'] > 0){
+				$avatar_dimensions['width'] = $login_user->avatar_dimensions['width'];
+			}
+			if(isset($login_user->avatar_dimensions['height']) && $login_user->avatar_dimensions['height'] > 0){
+				$avatar_dimensions['height'] = $login_user->avatar_dimensions['height'];
+			}
+		}
+				
+		$this->header->set('avatar', $avatar);
+		$this->header->set('avatar_dimensions', $avatar_dimensions);
+		
 		// variable to show if it's the user's profile or not
 		$module_shared_data['is_my_profile'] = ($uid == PA::$login_uid);
 
@@ -127,7 +144,7 @@
       }
       ]]></boot_code>
     <page_template>container_two_column_right.tpl</page_template>
-    <header_template>header.tpl</header_template>
+    <header_template>header_user.tpl</header_template>
     <page_mode>private</page_mode>
     <block_type>Homepage</block_type>
     <page_type>user|network</page_type>

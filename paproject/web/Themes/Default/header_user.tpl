@@ -74,7 +74,7 @@
       <? } ?>
 		<div class="important">
 			<p>
-				<a href='/post_content.php?blog_type=Suggestion'>Help build the Commons</a> 
+				<a href="<?= PA::$url ?>/post_content.php?blog_type=Suggestion">Help build the Commons</a> 
  			</p>
 		</div>
 	</div><!-- /.header-utility -->
@@ -135,11 +135,15 @@
 	<div class="wrapper">
 		<div class="content-container">
 			<div class="main-content">
-				<h1><?php echo (isset($title) && $title != '') ? $title : '(no title set)'; ?></h1>
-				<p class="convo-meta"><?php echo (isset($metadata) && $metadata != '') ? $metadata : ''; ?></p>
+				<div class="offset-1 profile-mast">
+					<?php echo uihelper_resize_mk_user_img($avatar, $avatar_dimensions['width'], $avatar_dimensions['height'], 'alt="User Picture" class="callout"'); ?>
+					<h1><?php echo (isset($title) && $title != '') ? $title : '(no title set)'; ?></h1>
+					<p class="convo-meta"><?php echo (isset($metadata) && $metadata != '') ? $metadata : ''; ?></p>
+				</div>
 			</div>
 			<div class="aside supplementary">
 				<?php echo (isset($aside) && $aside != '') ? $aside : ''; ?>
+				<a href="<?= PA::$url ?>/post_content.php?blog_type=Contribution" class="button">Write a New Contribution</a>
 			</div>
 		</div>
 	</div>
