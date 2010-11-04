@@ -122,12 +122,16 @@
 				<li<?php echo $id2;?> class="<?php echo (isset($sublinks_ul)) ? "drop" : ''; ?>" ><?php echo $link_string . $sublinks_ul; ?></li>
 			<?php } ?>
 		</ul>
+<?php
+/*
 		<div id="search">
 	        <form method="post">
 	        	<input type="text" class="textbox placeholder" id="search" name="search" placeholder="Name, Keyword, Date..." />
 	        	<input type="submit" class="submit" value="Search" />
 	        </form>
         </div>
+*/
+?>
 	<?php } ?>
 </div></div><!-- /.nav -->
 <?php if(isset($use_feature_mast) && $use_feature_mast){ ?>
