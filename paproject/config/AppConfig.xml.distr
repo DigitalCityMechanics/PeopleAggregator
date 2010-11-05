@@ -343,6 +343,9 @@
 		<PAGE_VIEW_POLL category="constant" type="int" readonly="true" section="pages" page_name="view_poll" page_type="network">
           <value>740</value>
         </PAGE_VIEW_POLL>
+		<PAGE_IN_THE_NEWS category="constant" type="int" readonly="true" section="pages" page_name="in_the_news" page_type="network">
+          <value>741</value>
+        </PAGE_IN_THE_NEWS>
       </value>
     </pages>
     <system_strings description="Various strings and messages">
