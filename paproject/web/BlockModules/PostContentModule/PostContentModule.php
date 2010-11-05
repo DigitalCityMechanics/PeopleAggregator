@@ -86,8 +86,7 @@ class PostContentModule extends Module {
 		case 'Contribution':
 			$inner_html_blog->set('message', '<p>Comments are easy to do, but sometimes you need to think about what you\'re writing.
 				So we\'re providing you with a rich text editor, which can have media (video, photos)
-				embedded in the text as well as web links - and you can save off a "draft" of this
-				conversation - just so you get it right.  Thank you BTW for that!  When you\'re done,
+				embedded in the text as well as web links.  When you\'re done,
 				just hit the "Publish Post" button.</p>');
 			break;
 
