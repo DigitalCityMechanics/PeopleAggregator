@@ -19,7 +19,7 @@ install_tinymce('full');
 <fieldset>
   <?php echo isset($message) ? '<div class="message">'.$message.'</div>'."\n" : ''; ?>
   <div class="field" >
-    <label for="title"><span class="required"> * </span><b> <?= __("Title") ?>:</b></label>
+    <label for="title"><b> <?= __("Title") ?>:</b></label>
     <input type="text" name="blog_title" class="textbox long" id="title" value="<?=stripslashes($blog_title)?>"/>
   </div>
   <input name="blog_type" type="hidden" value="<?php echo $blog_type; ?>" />

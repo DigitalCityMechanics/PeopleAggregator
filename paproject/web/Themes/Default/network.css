@@ -3948,3 +3948,5 @@ div.steps ul {margin:0;}
 .center_box {font-size:0.8em;}
 .form-block textarea{margin:0!important;}
 .clear{clear:both;}
+
+#publish_post input.submit { margin-left: 0; }
