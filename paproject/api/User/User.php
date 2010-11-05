@@ -789,7 +789,7 @@ class User {
     }
 
     // Checking last name of the user.
-    if (!Validation::validate_name($this->last_name)) {
+    if (strlen($this->last_name) > 0 && !Validation::validate_name($this->last_name)) {
       Logger::log("Throwing exception USER_INVALID_LOGIN_NAME | Message: The last name is not a valid authentication ID. Name: " . $this->last_name, LOGGER_ERROR);
       throw new PAException(USER_INVALID_NAME,'The last name is not a valid authentication ID. Name: ' . $this->last_name);
     }
