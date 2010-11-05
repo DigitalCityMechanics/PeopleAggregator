@@ -34,7 +34,7 @@ class InTheNews extends Module {
 		} else if(!empty($request_data['cid'])) {
 			$this->content_id = $request_data['cid'];
 		} else {
-			$this->content_id = 6;
+			return 'skip';
 		}
 	}
 

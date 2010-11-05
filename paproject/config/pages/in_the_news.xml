@@ -18,7 +18,6 @@
     <access_permission/>
     <navigation_code/>
     <boot_code><![CDATA[
-	  define('CC_IN_THE_NEWS', 6);
       if($uid = $app->getRequestParam('uid')) {
         $user = new User();
         try {
@@ -48,7 +47,10 @@
       }
 
 	$is_group_content = false;
-      if($cid = CC_IN_THE_NEWS) {
+	if(!($cid = $app->getRequestParam('cid'))) {
+		$cid = CC_IN_THE_NEWS_CONTENT_ID;
+	}
+      if($cid) {
         $module_shared_data['is_group_content'] = $is_group_content = false;
         try {
           $content = Content::load_content((int)$cid, PA::$login_uid);
