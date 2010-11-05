@@ -816,7 +816,11 @@ function peopleaggregator_newOrg($args)
 
 function civiccommons_newOrg($args)
 {
+	$args['firstName'] = $args['groupName'];
+	$args['lastName'] = '';
 	$status_newuser = peopleaggregator_newUser($args);
+	return $status_newuser;
+
 	if($status_newuser['success'] !== true)
 	{
 		return $status_newuser;
