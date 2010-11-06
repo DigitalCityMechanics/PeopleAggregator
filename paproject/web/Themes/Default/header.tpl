@@ -62,7 +62,7 @@
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
 				<div class="login-actions">
 					<p>
-						<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
+						<a href="/myAccount/editProfile" class="user-link">Settings</a>
 					</p>
 					<p>
 						<a title="logout" href="/logout.php" class="user-link">Logout</a>
