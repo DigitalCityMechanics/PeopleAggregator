@@ -19,6 +19,8 @@ require_once 'ext/Zend/Form/Element/File.php';
 require_once 'ext/Zend/File/Transfer/Adapter/Http.php';
 require_once 'ext/Zend/File/Transfer/Exception.php';
 require_once 'ext/Zend/Service/Amazon/S3.php';
+require_once 'ext/Zend/Validate/PostCode.php';
+require_once 'ext/Zend/Validate/StringLength.php';
 require_once 'ext/PHPThumb/src/ThumbLib.inc.php';
 require_once 'web/includes/classes/file_uploader.php';
 require_once PA::$blockmodule_path.'/EditProfileModule/DynamicProfile.php';
@@ -164,7 +166,6 @@ class EditProfileModule extends Module {
 	public function basicProfileSave($request_data) {
 		global $error_msg;
 		$this->isError = TRUE;
-
 		if (empty($request_data['first_name'])) {
 			$this->message = __('Fields marked with * can not be empty, First name can not be empty.');
 		} else if (empty($request_data['email_address'])) {
@@ -182,7 +183,27 @@ class EditProfileModule extends Module {
 				// all is good
 				$new_password_ok = true;
 			}
+		} 
+		
+		if(isset($request_data['postal_code']) && isset($request_data['postal_code']['value']) && !empty($request_data['postal_code']['value'])){
+			$zipCode = trim($request_data['postal_code']['value']);
+			
+			$validator = new Zend_Validate_PostCode("en_US");
+			if (!$validator->isValid($zipCode)) {
+				$this->message = "The zip code is invalid.";
+			}else{
+				$request_data['postal_code']['value'] = $zipCode;				
+			}
 		}
+		
+		if(isset($request_data['about']) && isset($request_data['about']['value']) && !empty($request_data['about']['value'])){
+			$about = trim($request_data['about']['value']);
+			$validator = new Zend_Validate_StringLength(array('max'=>500));
+			if (!$validator->isValid($about)) {
+				$this->message = "The about section is limited to 500 characters. There are " . strlen($about) . " characters in your about field";
+			}
+		}
+		
 		if ($request_data['deletepicture'] == "true") {
 			$this->handleDeleteUserPic($request_data);
 		}
