@@ -13,6 +13,7 @@
  */
 ?>
 <?php
+require_once "web/includes/classes/CurlRequestCreator.php";
 require_once 'ext/Zend/Exception.php';
 require_once 'ext/Zend/Form.php';
 require_once 'ext/Zend/Form/Element/File.php';
@@ -165,6 +166,12 @@ class EditProfileModule extends Module {
 	 */
 	public function basicProfileSave($request_data) {
 		global $error_msg;
+		$thumb = null;
+		$file_name = null;
+		$file_mime_type = null;
+		$file_size = null;
+		$apiDataArray = array('person'=>null);
+
 		$this->isError = TRUE;
 		if (empty($request_data['first_name'])) {
 			$this->message = __('Fields marked with * can not be empty, First name can not be empty.');
@@ -183,19 +190,20 @@ class EditProfileModule extends Module {
 				// all is good
 				$new_password_ok = true;
 			}
-		} 
-		
+		}
+
 		if(isset($request_data['postal_code']) && isset($request_data['postal_code']['value']) && !empty($request_data['postal_code']['value'])){
 			$zipCode = trim($request_data['postal_code']['value']);
-			
+
 			$validator = new Zend_Validate_PostCode("en_US");
 			if (!$validator->isValid($zipCode)) {
 				$this->message = "The zip code is invalid.";
 			}else{
-				$request_data['postal_code']['value'] = $zipCode;				
+				$request_data['postal_code']['value'] = $zipCode;
+				$apiDataArray['person']['zip_code'] = $zipCode;
 			}
 		}
-		
+
 		if(isset($request_data['about']) && isset($request_data['about']['value']) && !empty($request_data['about']['value'])){
 			$about = trim($request_data['about']['value']);
 			$validator = new Zend_Validate_StringLength(array('max'=>500));
@@ -203,14 +211,13 @@ class EditProfileModule extends Module {
 				$this->message = "The about section is limited to 500 characters. There are " . strlen($about) . " characters in your about field";
 			}
 		}
-		
+
 		if ($request_data['deletepicture'] == "true") {
 			$this->handleDeleteUserPic($request_data);
 		}
 
 		/* Parag Jagdale - 10/27/2010: Upload files with Zend library, Resize files and upload to AmazonS3 */
 		if (empty($this->message) && !empty($_FILES['userfile']['name'])) {
-			$thumb = null;
 			$file = null;
 
 			// Recieve uploaded file
@@ -265,8 +272,22 @@ class EditProfileModule extends Module {
 
 							$file_path = $zendUploadAdapter->getFileName('userfile', true);
 							$file_name = $zendUploadAdapter->getFileName('userfile', false);
+							$file_size = $zendUploadAdapter->getFileSize('userfile');
+							
+							$file_info = getimagesize($file_path);
+							
+							$file_mime_type = (isset($file_info) && isset($file_info['mime']) && !empty($file_info['mime'])) ? $file_info['mime'] : null; 
+
+							$apiDataArray['person'] = array(
+														'avatar' => array(
+																	'file_name' => $file_name,
+																	'content_type' => $file_mime_type,
+																	'file_size' => $file_size
+																)
+														);
+
 							// api_call needs to be set to true in order for the User class to update the avatar and avatar_small fields
-							$this->user_info->api_call = true; 
+							$this->user_info->api_call = true;
 							foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
 								// Resize image into thumbnails
 								$imageAsString = null;
@@ -301,7 +322,7 @@ class EditProfileModule extends Module {
 									}
 								}
 								catch (Exception $e)
-								{								
+								{
 									$this->message = $e->getMessage();
 									break;
 								}
@@ -317,12 +338,31 @@ class EditProfileModule extends Module {
 			}
 		}
 
-		if (empty($this->message)) {//If there is no error message then try saving the user information.
+		if (empty($this->message)) {
+
+			// Add first name and last name if they have been changed to the api update data array
+			if($this->user_info->first_name != $request_data['first_name'] || $this->user_info->last_name != $request_data['last_name']){
+				$apiDataArray['person']['name'] = $request_data['first_name'] . ' ' . $request_data['last_name'];
+			}
+
+			// Add email address to api data update array only if it was chagned
+			if($this->user_info->email != $request_data['email_address']){
+				$apiDataArray['person']['email'] = $request_data['email_address'];
+			}
+
+			//If there is no error message then try saving the user information.
 			$this->user_info->first_name = $request_data['first_name'];
 			$this->user_info->last_name = $request_data['last_name'];
 			$this->user_info->email = $request_data['email_address'];
 			if (!empty($request_data['pass'])) $this->user_info->password = md5($request_data['pass']);
-			try {
+
+			try
+			{
+				if (CRYPT_BLOWFISH == 1) {
+					//if (!empty($request_data['pass'])){
+					//	crypt($request_data['pass'], '$2a$07$f5e3fd131040faf20bf2b86f363dcf115cd267d468d403b9bbac37b731fa125db7857b63efa6f322339b5e5deae3b2c4c7677c0f8a1f8ed43653d107dc1a20fb$') . "\n";
+					//}
+				}
 				$this->user_info->save();
 				$dynProf = new DynamicProfile(PA::$login_user);
 				$dynProf->processPOST('basic');
@@ -330,6 +370,14 @@ class EditProfileModule extends Module {
 				$this->message = __('Profile updated successfully.');
 				//        $this->redirect2 = PA_ROUTE_EDIT_PROFILE;
 				//        $this->queryString = '?type='.$this->profile_type;
+
+				
+				//TODO: change URL after the contributions activity stream URLs have been changed
+				$url = CC_APPLICATION_URL.CC_APPLICATION_URL_TO_API .'/people-aggregator/person/62';// . $this->user_info->user_id;
+				
+				// Try to send updated data to Core (Ruby)
+				$this->sendUserDataToCivicCommons($url ,$apiDataArray);
+
 				$this->isError = FALSE;
 			} catch (PAException $e) {
 				$this->message = $e->message;
@@ -339,26 +387,26 @@ class EditProfileModule extends Module {
 	}
 
 	public function handleDeleteUserPic($request_data) {
-		
+
 		/* Parag Jagdale - 10-31-10: Modified to clear extra picture urls as well as picture */
 		// First delete objects from amazon s3 bucket, then clear the database
 		// TODO: make this asynchronous later
-		
+
 		$objectToDelete = null;
 		$objectFileName = null;
-		
+
 		if(isset($this->user_info->picture) && !empty($this->user_info->picture)){
-			$objectToDelete = $this->user_info->picture; 
+			$objectToDelete = $this->user_info->picture;
 		}else if(isset($this->user_info->avatar) && !empty($this->user_info->avatar)){
 			$objectToDelete = $this->user_info->avatar;
 		}else if(isset($this->user_info->avatar_small) && !empty($this->user_info->avatar_small)){
 			$objectToDelete = $this->user_info->avatar_small;
 		}
-		
+
 		if(isset($objectToDelete)){
 			$objectFileName = basename($objectToDelete);
 		}
-		
+
 		if(isset($objectFileName)){
 			$this->removeAmazonS3Object($this->user_info->core_id, $objectFileName);
 		}
@@ -376,7 +424,7 @@ class EditProfileModule extends Module {
 		$this->isError = FALSE;
 		//        $this->setWebPageMessage();
 	}
-	
+
 	/** !!
 	 * Takes the HTML generated by {@see generate_inner_html()} and passes it for display.
 	 *
@@ -445,7 +493,7 @@ class EditProfileModule extends Module {
 		return $bucket_name . "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
 	}
 
-	
+
 	/**
 	 * Removes the object specified by the file name and user id
 	 * @param unknown_type $user_id
@@ -454,7 +502,7 @@ class EditProfileModule extends Module {
 	 */
 	private function removeAmazonS3Object($user_id, $file_name){
 		// TODO: make this asynchronous later
-		
+
 		global $app;
 		$objectURL = null;
 		$aws_key = null;
@@ -471,10 +519,10 @@ class EditProfileModule extends Module {
 			if($bucketAvailable){
 				// bucket is available so try to delete the object
 				try{
-				
-					foreach($this->_image_sizes as $imageSizeType => $imageDimensions){				
+
+					foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
 						$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $user_id, $file_name);
-						$s3->removeObject($objectPath);	
+						$s3->removeObject($objectPath);
 					}
 					return true;
 				}
@@ -484,13 +532,49 @@ class EditProfileModule extends Module {
 					// take care of cleaning asynchronously by deleting orphan objects
 					// that do not appear in the user's picture/avatar urls
 					//$this->message = $e->getMessage();
-				}				
+				}
 			}else{
 				// no bucket is available
 				return false;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Creates a REST API call to CivicCommons API to modify the user data
+	 * TODO: Move this to a CivicCommons specific file
+	 */
+	private function sendUserDataToCivicCommons($URL, $DataArray){
+		$jsonString = null;
+		if(!isset($URL) || !empty($url)){
+			return false;
+		}
+		
+		if(count($DataArray['person']) == 0){
+			return false;
+		}
+		
+		$jsonString = json_encode($DataArray);
+
+		try{
+			$request = new CurlRequestCreator($URL, true, 30, 4, false, true, false);
+			$request->setPut($jsonString);
+			$request->setContentType("Content-type: application/json");
+
+			$responseStatus = $request->createCurl();
+			if($responseStatus == 200){
+				return true;
+			}else{
+				Logger::log('sendUserDataToCivicCommons() could not PUT data to ' . $URL . ' Returned with: ' . $request->getResponseHeader(), LOGGER_WARNING);
+				return false;
+			}
+		}
+		catch(Exception $ex){
+			
+			Logger::log('sendUserDataToCivicCommons() could not PUT data to ' . $URL . ' Exception: ' . $ex->getMessage(), LOGGER_WARNING);
+			
+		}
 	}
 }
 ?>
