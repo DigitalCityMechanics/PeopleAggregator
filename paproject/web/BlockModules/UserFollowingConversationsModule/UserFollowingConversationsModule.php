@@ -8,7 +8,7 @@
  *
  * 10/31/10	Parag Jagdale	Created Initial Module
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * @author Tom Dooner
+ * @author Parag Jagdale
  * @license http://bit.ly/aVWqRV PayAsYouGo License
  * @copyright Copyright (c) 2010 Broadband Mechanics
  * @package PeopleAggregator
