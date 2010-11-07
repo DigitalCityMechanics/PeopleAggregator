@@ -6,6 +6,7 @@
   <ul class="members">
     <li>
     <span>
+	<?php if(!empty($user_data_general['about'])) { echo $user_data_general['about'] . "<br />"; } ?>
       <?php if (!empty($user_data_general['city'])) { echo $user_data_general['city'] . "<br />";}?>
       <?php if (!empty($user_data_general['country'])) { echo $user_data_general['country']; }?>
     </span>
