@@ -36,6 +36,11 @@ margin-left: 0;
 border-bottom: none;
 padding-bottom: 0;
 }
+.contribution-person-name {
+font-weight: bold;
+margin-right: 10px;
+float: left;
+}
 .conversations {margin: 0;}
 /* .conversations li .conversations {margin-top: 1em;} */
 .conversations.divided li {
@@ -135,6 +140,12 @@ background: #fff;
 padding: 5px;
 width: 448px;
 }
+input[type="file"] {
+background: none;
+border: none;
+}
+input.checkbox { margin-left:160px; }
+label.checkbox { float:none; display:inline; width:auto; }
 .conversation-input-container input.textbox {width: 400px;}
 .aside label, div.call-out label {width: 70px;}
 .aside input.textbox, div.call-out input.textbox, .aside textarea, div.call-out textarea {width: 176px;}
@@ -186,6 +197,10 @@ height: 25px;
 padding: 10px;
 text-align: left;
 width: 97%;
+}
+.input-with-options label a {
+color: #fff;
+font-size: 12px;
 }
 .input-with-options label input.link {padding: 3px;}
 .input-with-options textarea {height: 100px;}
@@ -268,8 +283,8 @@ position: relative;
 }
 .feature-mast .offset-1 {padding-left: 100px;}
 .feature-mast .offset-1.profile-mast {
-min-height: 80px;
-padding-left: 80px;
+min-height: 70px;
+padding-left: 70px;
 }
 .offset-1 .callout, .offset-2 .callout, .offset-3 .callout {
 left: 0;
@@ -334,7 +349,7 @@ padding: 6px 0;
 -----------------------------------------------*/
 
 .pagination p {padding-top: 1em;}
-.pagination span, .pagination a {
+.pagination span, .pagination a, .pagination em {
 background: #eee;
 border-bottom: 1px solid #ccc;
 border-right: 1px solid #ccc;
@@ -357,15 +372,9 @@ border-radius: 8px 0 0 8px;
 -moz-border-radius: 0 8px 8px 0;
 border-radius: 0 8px 8px 0;
 }
-.pagination em {background: #fff;
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  display: block;
-  float: left;
-  font-weight: bold;
-  padding: 8px 12px;
-  text-decoration: none;
+.pagination em {
+background: #fff;
+font-style: normal;
 }
 
 /*-----------------------------------------------
@@ -447,10 +456,7 @@ margin: auto auto 10px;
 padding: 10px 10px 0;
 width: 940px;
 }
-.content-container {
-background: url(images/content_bg.gif) repeat-y 72.18% 0;
-margin: 15px 0;
-}
+.content-container {margin: 15px 0;}
 .content-container.no-bg {background: none;}
 .full-width-content {width: 940px;}
 .main-content {
@@ -739,34 +745,41 @@ width: 100%;
 -----------------------------------------------*/
 
 /* Tabs */
+div.tab-strip-options, div.tab-strip div.panels {
+float: left;
+}
 div.tab-strip ul {
 list-style-type: none;
 margin-bottom: 0;
 margin-left: 0;
+border-bottom: solid 1px #ccc;
 }
 div.tab-strip ul li {
-float: left;
-margin-bottom: -1px;
-text-align: center;
+margin: 0;
 }
-.divided div.tab-strip ul li {border-bottom: none;}
+.divided div.tab-strip ul li {
+border-bottom: none;
+}
 div.tab-strip ul li a {
 display: block;
 padding: 5px 9px;
 text-decoration: none;
+background: #ddd;
+border: solid 1px #ccc;
+border-bottom: none;
 }
-/*
-div.tab-area, div.tab-strip ul li a.tab-active {
-background-color: #fff;
-border: 1px solid #ccc;
+div.tab-strip ul li a.tab-active {
+border-bottom: none;
+background: #fff;
 }
-*/
-div.tab-strip ul li a.tab-active {border-bottom: none;}
-textarea.comment_text {
+div.tab-strip textarea {
+width: 97%; /* This gets modified in the show.js easytabs:after binding, so it doesn't matter for now */
+margin: 0;
+}
+div.tab-strip input[type=text] {
 width: 97%;
-margin-bottom: 8px;
-border: 0;
 }
+
 /* p.convo-meta {margin-bottom: 2em;} */
 
 /* Conversation Divider */
@@ -1176,10 +1189,6 @@ padding-top: 15px;
 margin-top: -10px;
 }
 
-/* Buttons for Colorbox Modal Window */
-div#colorbox div.tab-area {padding: 10px;}
-div#colorbox div.tab-area li {margin-bottom: 10px;}
-
 /*-----------------------------------------------
 =Styles for Convo Modal Popup
 -----------------------------------------------*/
@@ -1227,10 +1236,11 @@ div.convo-entry input.textbox, div.convo-entry p.help-text {
 float: left;
 width: 375px;
 }
-div.convo-entry a.button {
-float: right;
-}
+div.convo-entry a.button {float: right;}
 .moderate {float: right}
+a.button.moderate, input.submit.moderate {background-color: #e74d4d;}
+a.button.moderate:hover, input.submit.moderate:hover {background-color: #d83535;}
+
 /*-----------------------------------------------
 =Self Clearing Floats
 -----------------------------------------------*/
