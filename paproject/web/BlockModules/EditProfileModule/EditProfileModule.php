@@ -305,7 +305,7 @@ class EditProfileModule extends Module {
 				$this->user_info->save();
 				$dynProf = new DynamicProfile(PA::$login_user);
 				$dynProf->processPOST('basic');
-				$dynProf->save('basic');
+				$dynProf->save('basic', GENERAL);
 				$this->message = __('Profile updated successfully.');
 				//        $this->redirect2 = PA_ROUTE_EDIT_PROFILE;
 				//        $this->queryString = '?type='.$this->profile_type;
