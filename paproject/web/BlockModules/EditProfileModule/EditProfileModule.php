@@ -208,7 +208,7 @@ class EditProfileModule extends Module {
 			$about = trim($request_data['about']['value']);
 			$validator = new Zend_Validate_StringLength(array('max'=>500));
 			if (!$validator->isValid($about)) {
-				$this->message = "The about section is limited to 500 characters. There are " . strlen($about) . " characters in your about field";
+				$this->message = "The about field is limited to 500 characters. There are " . strlen($about) . " characters in the about field";
 			}
 		}
 
