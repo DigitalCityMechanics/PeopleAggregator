@@ -62,7 +62,7 @@
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
 				<div class="login-actions">
 					<p>
-						<a href="/myAccount/editProfile" class="user-link">Edit My Account</a>
+						<a href="/myAccount/editProfile" class="user-link">Settings</a>
 					</p>
 					<p>
 						<a title="logout" href="/logout.php" class="user-link">Logout</a>
@@ -74,7 +74,7 @@
       <? } ?>
 		<div class="important">
 			<p>
-				<a href="<?= PA::$url ?>/post_content.php?blog_type=Suggestion">Help build the Commons</a> 
+				<a href="<?php echo CC_APPLICATION_URL; ?>/build-the-commons">Help build the Commons</a> 
  			</p>
 		</div>
 	</div><!-- /.header-utility -->
@@ -122,12 +122,16 @@
 				<li<?php echo $id2;?> class="<?php echo (isset($sublinks_ul)) ? "drop" : ''; ?>" ><?php echo $link_string . $sublinks_ul; ?></li>
 			<?php } ?>
 		</ul>
+<?php
+/*
 		<div id="search">
 	        <form method="post">
 	        	<input type="text" class="textbox placeholder" id="search" name="search" placeholder="Name, Keyword, Date..." />
 	        	<input type="submit" class="submit" value="Search" />
 	        </form>
         </div>
+*/
+?>
 	<?php } ?>
 </div></div><!-- /.nav -->
 <?php if(isset($use_feature_mast) && $use_feature_mast){ ?>

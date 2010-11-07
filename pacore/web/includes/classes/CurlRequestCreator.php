@@ -31,6 +31,8 @@ class CurlRequestCreator {
 	protected $_postFields;
 	protected $_get;
 	protected $_getFields;
+	protected $_put;
+	protected $_putData;
 	protected $_referer ="http://www.google.com";
 
 	protected $_session;
@@ -47,6 +49,8 @@ class CurlRequestCreator {
 	private $response_header_array;
 	private $_body;
 	private $_header;
+	
+	private $_contentType;
 
 	private $debugMode = false;
 
@@ -83,6 +87,14 @@ class CurlRequestCreator {
 	}
 	public function setPass($pass){
 		$this->auth_pass = $pass;
+	}
+	
+	public function setContentType($contentType){
+		if(isset($this->_contentType)){
+			$this->_contentType[] = $contentType;
+		}else{
+			$this->_contentType = array($contentType);
+		}
 	}
 
 	/**
@@ -139,6 +151,17 @@ class CurlRequestCreator {
 		$this->_getFields = http_build_query($getFields);
 	}
 
+
+	/**
+	 * Sets the put data to send in the request
+	 * @param string putData
+	 */
+	public function setPut ($putData)
+	{
+		$this->_put = true;
+		$this->_putData = $putData;
+	}
+	
 	public function setUserAgent($userAgent)
 	{
 		$this->_useragent = $userAgent;
@@ -158,6 +181,7 @@ class CurlRequestCreator {
 			curl_setopt($s,CURLOPT_VERBOSE,0);
 		}
 		curl_setopt($s,CURLOPT_URL,$this->_url);
+		
 		curl_setopt($s,CURLOPT_HTTPHEADER,array('Expect:'));
 		curl_setopt($s,CURLOPT_TIMEOUT,$this->_timeout);
 		curl_setopt($s,CURLOPT_MAXREDIRS,$this->_maxRedirects);
@@ -165,6 +189,11 @@ class CurlRequestCreator {
 		curl_setopt($s,CURLOPT_FOLLOWLOCATION,$this->_followlocation);
 		curl_setopt($s,CURLOPT_COOKIEJAR,$this->_cookieFileLocation);
 		curl_setopt($s,CURLOPT_COOKIEFILE,$this->_cookieFileLocation);
+		
+		if(isset($this->_contentType)){
+			curl_setopt($s, CURLOPT_HTTPHEADER, $this->_contentType);
+		}
+		
 		/*
 		 //register a callback function which will process the headers
 		 //this assumes your code is into a class method, and uses $this->readHeader as the callback //function
@@ -179,6 +208,19 @@ class CurlRequestCreator {
 			curl_setopt($s,CURLOPT_POSTFIELDS,$this->_postFields);
 		}
 
+		if($this->_put)
+		{
+			// Prepare the data for HTTP PUT. */
+			
+			$putData = tmpfile();
+			fwrite($putData, $this->_putData);
+			fseek($putData, 0); 
+
+			curl_setopt($s, CURLOPT_PUT, 1); 			
+			curl_setopt($s, CURLOPT_INFILE, $putData);
+			curl_setopt($s, CURLOPT_INFILESIZE, strlen($this->_putData)); 
+		}
+		
 		if($this->_get){
 			$parsedURL = parse_url($this->_url);
 			//TODO: this doesnt account for fragments ('#')

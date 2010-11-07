@@ -12,6 +12,7 @@ define('CC_ROUTE_PEOPLE', 			'/people');
 define('CC_ROUTE_ORGANIZATIONS', 	'/organizations');
 define('CC_ROUTE_ISSUES', 			'/issues');
 define('CC_ROUTE_ABOUT', 			'/about');
+define('CC_IN_THE_NEWS_CONTENT_ID',	6);
 
 // Routing rewrites:
 
@@ -58,6 +59,13 @@ define('CC_ROUTE_ABOUT', 			'/about');
  	*
  	**/
 	"^/blog[\/\?]?(.*)$" => "/dynamic.php?page_id=5&%s",
+
+	/**
+ 	*
+ 	*  /in-the-news/ -> in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID
+ 	*
+ 	**/
+	"^/in-the-news(.*)$" => "/in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID,
   );
   
 ?>

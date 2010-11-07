@@ -26,8 +26,7 @@
 		    "user_blog", array("login" => urlencode($links['users_data'][$counter]['user_id']))) ?>
         <span>
           <b><?= link_to($links['users_data'][$counter]['display_name'],
-			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['user_id']))) ?></b><br/>
-          <?= sprintf(__("(%d friends)"), $links['users_data'][$counter]['no_of_relations']) ?>
+			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['user_id']))) ?></b>
         </span>
         <div class="clear"></div>
       </li>

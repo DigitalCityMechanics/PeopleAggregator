@@ -10,6 +10,7 @@
       <item>MyLinksModule</item>
       <item>UserFollowingIssuesModule</item>
       <item>UserFollowingConversationsModule</item>
+      <item>ThoughtsListModule</item>
     </right>
     <javascripts>
       <item>inplaced.js</item>
@@ -109,7 +110,8 @@
 
 		// setup the header to use the feature_mast and show the user's name
 		$this->header->set('use_feature_mast', true);
-		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);		
+		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);
+		$this->header->set('aside', false);
 		
 		$avatar = null;
 		$avatar_dimensions = array('width'=>70, 'height'=>70);

@@ -36,10 +36,9 @@
     </a>
         <span>
           <b><?= link_to($links['users_data'][$counter]['display_name'],
-			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b><br/>
-          <?= sprintf(__("(%d %ss)"), $links['users_data'][$counter]['no_of_relations'],
-          $rel_term) ?>
+			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b>
         </span>
+        <div class="clear"></div>
   </li>
   <?php 
     }

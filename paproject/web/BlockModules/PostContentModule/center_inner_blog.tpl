@@ -19,13 +19,13 @@ install_tinymce('full');
 <fieldset>
   <?php echo isset($message) ? '<div class="message">'.$message.'</div>'."\n" : ''; ?>
   <div class="field" >
-    <label for="title"><span class="required"> * </span><b> <?= __("Title") ?>:</b></label>
-    <input type="text" name="blog_title" class="textbox long" id="title" style="width:647px;" value="<?=stripslashes($blog_title)?>"/>
+    <label for="title"><b> <?= __("Title") ?>:</b></label>
+    <input type="text" name="blog_title" class="textbox long" id="title" value="<?=stripslashes($blog_title)?>"/>
   </div>
   <input name="blog_type" type="hidden" value="<?php echo $blog_type; ?>" />
   <input name="redirect" type="hidden" value="<?php echo urldecode(stripslashes($redirect)); ?>" />
   <div class="field">
-    <textarea name="description" id="description" class="long" cols="89" rows="30"><?php echo htmlspecialchars($body) ?></textarea>
+    <textarea name="description" id="description" class="long" cols="80" rows="30" style="width: 615px"><?php echo htmlspecialchars($body) ?></textarea>
   </div>
 </fieldset>    
 <br clear="all" />
@@ -45,7 +45,7 @@ include $file;
 
 <fieldset id='tags' style="display: none;">
   <legend><a><b><?= __("Tags") ?></b></a></legend>
-  <input type="text" class="textbox long" id="tags"  name="tags" value="<?=stripslashes($tag_entry)?>" style="width:647px;" />
+  <input type="text" class="textbox long" id="tags"  name="tags" value="<?=stripslashes($tag_entry)?>" />
   <p class="fineprint"><?= __("Separate tags with commas") ?></p>
 </fieldset>
   <input type="hidden" name="cid" value="<?php echo $cid ?>"/> 

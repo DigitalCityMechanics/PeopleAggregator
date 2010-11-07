@@ -32,6 +32,6 @@
 		<li><a href='http://www.facebook.com/pages/Civic-Commons/143930632284131' id='facebook'>Facebook</a></li> 
 		<li><a href='http://twitter.com/civiccommons' id='twitter'>Twitter</a></li> 
 		<li><a href='http://www.youtube.com/user/neociviccommons' id='youtube'>YouTube</a></li> 
-		<li><a href='#' id='rss'>RSS</a></li> 
+		<li><a href='<?php echo PA::$url; ?>/feed.php?type=all' id='rss'>RSS</a></li> 
 	</ul>
 </div></div><!-- /.footer -->
