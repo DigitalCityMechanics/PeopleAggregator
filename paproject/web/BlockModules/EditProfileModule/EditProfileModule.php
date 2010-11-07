@@ -84,9 +84,15 @@ class EditProfileModule extends Module {
 		if (!empty($request_data['type']) && in_array($request_data['type'], $this->valid_profile_types)) {
 			$this->profile_type = $request_data['type'];
 		}
-
-		$this->section_info = $this->loadSection($this->profile_type, $this->uid);
-		$this->section_info = $this->santitizeSectionInfo($this->section_info);
+		// Load data for the requested section
+		$givenSectionData = $this->loadSection($this->profile_type, $this->uid);
+		$givenSectionDataSanitized = $this->santitizeSectionInfo($givenSectionData);
+		
+		// Load and add GENERAL section data
+		$generalSectionData = $this->loadSection('general', $this->uid);
+		$generalSectionDataSanitized = $this->santitizeSectionInfo($generalSectionData);
+		// Merge requested section data and general section data
+		$this->section_info = array_merge($givenSectionDataSanitized, $generalSectionDataSanitized);
 		$this->request_data = $request_data;
 	}
 	/** !!
@@ -359,9 +365,9 @@ class EditProfileModule extends Module {
 			try
 			{
 				if (CRYPT_BLOWFISH == 1) {
-					//if (!empty($request_data['pass'])){
-					//	crypt($request_data['pass'], '$2a$07$f5e3fd131040faf20bf2b86f363dcf115cd267d468d403b9bbac37b731fa125db7857b63efa6f322339b5e5deae3b2c4c7677c0f8a1f8ed43653d107dc1a20fb$') . "\n";
-					//}
+					if (!empty($request_data['pass'])){
+						$this->user_info->password = crypt($request_data['pass'], '$2a$10$f5e3fd131040faf20bf2b86f363dcf115cd267d468d403b9bbac37b731fa125db7857b63efa6f322339b5e5deae3b2c4c7677c0f8a1f8ed43653d107dc1a20fb$') . "\n";
+					}
 				}
 				$this->user_info->save();
 				$dynProf = new DynamicProfile(PA::$login_user);
@@ -373,7 +379,7 @@ class EditProfileModule extends Module {
 
 				
 				//TODO: change URL after the contributions activity stream URLs have been changed
-				$url = CC_APPLICATION_URL.CC_APPLICATION_URL_TO_API .'/people-aggregator/person/' . $this->user_info->user_id;
+				$url = CC_APPLICATION_URL . CC_APPLICATION_URL_TO_API .'/people-aggregator/person/' . $this->user_info->user_id;
 				
 				// Try to send updated data to Core (Ruby)
 				$this->sendUserDataToCivicCommons($url ,$apiDataArray);

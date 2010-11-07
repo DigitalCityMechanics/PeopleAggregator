@@ -47,8 +47,8 @@
     </div>
     <?php    
 	    //TODO: sanitize these inputs
-        $dynProf->textfield(__("Zip Code:"), "postal_code", "basic", NULL, FALSE);
-		$dynProf->textarea(__("About Me:"), "about", "basic", NULL, FALSE);
+        $dynProf->textfield(__("Zip Code:"), "postal_code", "general", NULL, FALSE);
+		$dynProf->textarea(__("About Me:"), "about", "general", NULL, FALSE);
     ?>
     <div class="form-block">
       <label for="upload_user_image"><?= __("Upload an Image:") ?></label>
