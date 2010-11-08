@@ -30,17 +30,17 @@ $query_string = null;
 
 ?>
 
-<ul id="filters">
+<h1><?= __("Community") ?></h1>
+
+<ul id="filters" style="display: none">
     <li<?php echo (empty($_REQUEST['sort_by']) || (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'recent_users') ) ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>/sort_by=recent_users<?php echo htmlspecialchars($query_string) ?>"><?= __("Recent Users") ?></a></li>
     <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>/sort_by=alphabetic<?php echo htmlspecialchars($query_string) ?>"><?= __("Alphabetical") ?></a></li>
 </ul>
 
-<h1><?= __("Community") ?></h1>
-
 <div id="PeopleModule">
 
 
-  <div style="padding-left: 18px; clear: both; float: left; width:540px">
+  <div style="clear: both;">
   <?php foreach($links as $link) {
    include "_buddy.tpl.php";
   } ?>
@@ -65,7 +65,7 @@ $query_string = null;
       ?>
 </div>
 
-<form name="myform_search" action="" method="get" class="clear">
+<form name="myform_search" action="" method="get" class="clear" style="display: none;">
 
 <fieldset class="center_box">
     <legend><?= __("Search") ?></legend>

@@ -3916,3 +3916,23 @@ div.steps ul {margin:0;}
 .clear{clear:both;}
 
 #publish_post input.submit { margin-left: 0; }
+.pagination { clear: both; }
+
+.buddyimg {
+	float: left;
+	margin: 0 0 20px 0;
+	padding: 0;
+	width: 50%;
+}
+
+.buddyimg .img-container {
+	float: left;
+	height: 78px;
+	overflow: hidden;
+	width: 78px;
+}
+
+.buddyimg .text-container {
+	margin-left: 78px;
+	padding: 0 10px;
+}
