@@ -309,7 +309,7 @@ class Navigation {
 							                       'partners' => array('caption'=> __('Partners'),
 							                                  'url'=>CC_APPLICATION_URL . '/partners'),
 							                       'press' => array('caption'=> __('In The News'),
-							                                  'url'=>CC_APPLICATION_URL . '/press'),
+							                                  'url'=>PA::$url . '/press'),
 												),
 						)
 		);

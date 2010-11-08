@@ -25,7 +25,7 @@
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/principles">Mission &amp; Principles</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/team">Team</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/partners">Partners</a></li> 
-		<li><a href="<?php echo CC_APPLICATION_URL; ?>/press">In The News</a></li> 
+		<li><a href="<?php echo PA::$url; ?>/press">In The News</a></li> 
 	</ul> 
 <?php
 /*
