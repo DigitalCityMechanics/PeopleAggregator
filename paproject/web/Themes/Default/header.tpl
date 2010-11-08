@@ -29,11 +29,11 @@
 			<div id="user">
 				<p>
 					<a href="<?php echo CC_APPLICATION_URL . "/people/login" ?>" class="button login-link">
-						Login to your account
+						Log in to your account
 					</a>
 				</p>
 				<a href="<?php echo CC_APPLICATION_URL . "/people/register/new" ?>" class="createacct-link">
-					Create an account
+					Sign up
 				</a>
 			</div>
 		</div>

@@ -72,6 +72,13 @@ class EditProfileModule extends Module {
 		$this->profile_type = 'basic';
 		$this->uid = PA::$login_uid;
 		$this->user_info = PA::$login_user;
+
+		// if a userID is specified and the logged in user can manage the network, let them edit
+		if(isset($_GET) && isset($_GET['uid']) && PermissionsHandler::can_user(PA::$login_uid, array('permissions' => 'manage_settings'))) {
+			$this->uid = intval($_GET['uid']);
+			$this->user_info = new User();
+			$this->user_info->load($this->uid);
+		}
 	}
 	/** !!
 	 * Initalizes some things, shuffles data from $request_data to $this
@@ -370,7 +377,7 @@ class EditProfileModule extends Module {
 					}
 				}
 				$this->user_info->save();
-				$dynProf = new DynamicProfile(PA::$login_user);
+				$dynProf = new DynamicProfile($this->user_info);
 				$dynProf->processPOST('basic');
 				$dynProf->save('basic', GENERAL);
 				$this->message = __('Profile updated successfully.');

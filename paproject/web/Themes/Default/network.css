@@ -678,23 +678,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 
 .wide_content_edit_page ul li { display: inline; }
 
-.blog, .events, .reviews, .peopleshowcase, .video, .audio, .image, .groupshowcase {
-	width: 536px;
-	margin: 5px 0 0 9px;
-	border: 1px solid #A6A7B0;
-	text-align: left;
-	padding: 10px;
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: top right;
-	clear: both;
-	}
-
-.blog {
-/*	background-image: url(images/bkpost_blog.jpg); */
-	overflow: auto;
-}
-
 .events { background-image: url(images/bkpost_event.jpg); }
 
 .reviews { background-image: url(images/bkpost_review.jpg); }
@@ -758,15 +741,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 .post_info {
 	margin-top: 20px;
 	color: #7B7B7B; }
-
-.post_info a:link,
-.post_info a:visited {
-	color: #7B7B7B;
-	text-decoration: none; }
-
-.post_info a:hover {
-	color: #7B7B7B;
-	text-decoration: underline; }
 
 .module_tabbed_image_list ul {
 	padding: 0;
@@ -2083,9 +2057,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 .thread .message p.message_start,
 .single_post .message p.message_start { margin-top: -5px; margin-left: 5px; }
 
-.thread .message p.message_start:first-letter,
-.single_post .message p.message_start:first-letter { font-size: 200%; }
-
 .thread .metadata,
 .single_post .metadata { background-color: #999; }
 
@@ -2098,11 +2069,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 .single_post .message { padding-top: 5px; }
 
 .single_post { margin: 30px 0 0 0; }
-
-.single_post h1 {
-	text-align: center;
-	margin: 0 0 5px 0;
-	color: #261E7E; }
 
 .single_post .author a { color: #000; }
 
@@ -3950,3 +3916,23 @@ div.steps ul {margin:0;}
 .clear{clear:both;}
 
 #publish_post input.submit { margin-left: 0; }
+.pagination { clear: both; }
+
+.buddyimg {
+	float: left;
+	margin: 0 0 20px 0;
+	padding: 0;
+	width: 50%;
+}
+
+.buddyimg .img-container {
+	float: left;
+	height: 78px;
+	overflow: hidden;
+	width: 78px;
+}
+
+.buddyimg .text-container {
+	margin-left: 78px;
+	padding: 0 10px;
+}

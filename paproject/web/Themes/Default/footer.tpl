@@ -27,7 +27,11 @@
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/partners">Partners</a></li> 
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/press">In The News</a></li> 
 	</ul> 
-	<p>The Civic Commons is <?= sprintf(__("&copy; Copyright %s"), date('Y')) ?> by the Legal Entity.  Content is licensed under License. [<?= get_svn_version() ?>]</p>	
+<?php
+/*
+	<p>The Civic Commons is <?= sprintf(__("&copy; Copyright %s"), date('Y')) ?> by the Legal Entity.  Content is licensed under License. [<?= get_svn_version() ?>]</p>
+*/
+?>
 	<ul class='social-media'> 
 		<li><a href='http://www.facebook.com/pages/Civic-Commons/143930632284131' id='facebook'>Facebook</a></li> 
 		<li><a href='http://twitter.com/civiccommons' id='twitter'>Twitter</a></li> 
