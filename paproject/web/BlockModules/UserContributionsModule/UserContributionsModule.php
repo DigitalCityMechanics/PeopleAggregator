@@ -106,7 +106,7 @@ class UserContributionsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, "/api/people-aggregator/person", CC_ROUTE_CONTRIBUTIONS, $User_id);
 			//$url = "http://www.peeps.com/sample_contributions_json.html";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$defaultResult = array('show'=>true, 'parent_title'=>'No contributions', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => null, 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
