@@ -535,7 +535,7 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	background-repeat: repeat-x;
 	height: 21px;
 	float: left;
-	width: 578px;
+	width: 100%;
 	font-weight: bold;
 	font-size: 10px; }
 
@@ -3935,6 +3935,7 @@ fieldset.search {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	margin-bottom: 20px;
 	padding: 8px 10px;
 }
 

@@ -25,10 +25,34 @@ $query_args = array();
 
 <h1><?= __("Community") ?></h1>
 
-<ul id="filters" style="display: none;">
+<ul id="filters">
     <li<?php echo (empty($_REQUEST['sort_by']) || (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'recent_users') ) ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'recent_users'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Recent Users") ?></a></li>
     <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'alphabetic'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Alphabetical") ?></a></li>
 </ul>
+
+<form name="myform_search" action="" method="get" class="clear">
+
+<fieldset class="search">
+    <legend><?= __("Search") ?></legend>
+<script type="text/javascript">
+var _names_cleared = false;
+function name_focus(el) {
+  if (_names_cleared) return;
+  document.getElementById("allnames").value = '';
+  _names_cleared = true;
+}
+</script>
+	<input id="allnames" type="text" name="allnames" class="text normal" <?php
+        if (!empty($_REQUEST['allnames']) || !empty($_REQUEST['allnames']) || $show_advance_search_options) {
+          ?>value="<?php echo htmlspecialchars(@$_REQUEST['allnames']) ?>"<?php
+        } else {
+          ?>value="<?= __("Name") ?>" onfocus='name_focus()'<?php
+        }?> />
+	<a class="button" href="javascript: document.forms['myform_search'].submit();"><?= __("Find Users") ?></a>
+
+    <input type="hidden" name="submit_search" value="search" />
+  </fieldset>
+</form>
 
 <div id="PeopleModule">
 
@@ -57,27 +81,3 @@ $query_args = array();
 	  }
       ?>
 </div>
-
-<form name="myform_search" action="" method="get" class="clear">
-
-<fieldset class="search" style="display: none;">
-    <legend><?= __("Search") ?></legend>
-<script type="text/javascript">
-var _names_cleared = false;
-function name_focus(el) {
-  if (_names_cleared) return;
-  document.getElementById("allnames").value = '';
-  _names_cleared = true;
-}
-</script>
-	<input id="allnames" type="text" name="allnames" class="text normal" <?php
-        if (!empty($_REQUEST['allnames']) || !empty($_REQUEST['allnames']) || $show_advance_search_options) {
-          ?>value="<?php echo htmlspecialchars(@$_REQUEST['allnames']) ?>"<?php
-        } else {
-          ?>value="<?= __("Name") ?>" onfocus='name_focus()'<?php
-        }?> />
-	<a class="button" href="javascript: document.forms['myform_search'].submit();"><?= __("Find Users") ?></a>
-
-    <input type="hidden" name="submit_search" value="search" />
-  </fieldset>
-</form>
