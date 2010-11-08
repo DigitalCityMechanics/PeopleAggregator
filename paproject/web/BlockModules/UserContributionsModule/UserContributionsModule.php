@@ -109,17 +109,13 @@ class UserContributionsModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, "/api/people-aggregator/person", CC_ROUTE_CONTRIBUTIONS, $User_id);
 			//$url = "http://www.peeps.com/sample_contributions_json.html";
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$defaultResult = array('show'=>true, 'parent_title'=>'No contributions', 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => null, 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
+			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => "No contributions yet", 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
 			$responseStatus = $request->createCurl();
 			$responseStatus = 200;
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
 					$jsonResults[] = $defaultResult;
-				}else{
-					// only show the first 3 conversations
-					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
-					$jsonResults = $newArray;
 				}
 				return $jsonResults;
 			}else{
@@ -200,26 +196,5 @@ class UserContributionsModule extends Module {
 		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
 		return $url;
 	}
-	
-	/**
-	 * Changes array to show certain items
-	 * @param $ArrayToChange
-	 * @param $NumberOfItemsToShow
-	 */
-	function setItemsToShow($ArrayToChange, $NumberOfItemsToShow){	
-		$i = 0;
-		foreach($ArrayToChange as $arrayItem){
-			
-			if($i < $NumberOfItemsToShow){
-				$arrayItem['show'] = true;
-			}else{
-				$arrayItem['show'] = false;
-			}
-			$ArrayToChange[$i] = $arrayItem;
-			$i++;
-		}
-		return $ArrayToChange;
-	}
-	
 }
 ?>
