@@ -40,26 +40,17 @@ $query_string = null;
 <div id="PeopleModule">
 
 
-  <?php if( $page_links ) { ?>
-   <div class="prev_next">
-     <?php if ($page_first) { echo $page_first; }?>
-     <?php echo $page_links?>
-     <?php if ($page_last) { echo $page_last;}?>
-   </div>
-  <?php }  ?>
   <div style="padding-left: 18px; clear: both; float: left; width:540px">
   <?php foreach($links as $link) {
    include "_buddy.tpl.php";
   } ?>
   </div>
 
-  <?php if( $page_links ) {?>
-   <div class="prev_next" id="page_next">
-     <?php if ($page_first) { echo $page_first; }?>
-     <?php echo $page_links?>
-     <?php if ($page_last) { echo $page_last;}?>
-   </div>
-  <?php }  ?>
+<?php if( $page_links ) { ?>
+	<div class="pagination">
+		<?php echo $page_links; ?>
+	</div>
+<?php }  ?>
 
 
   <?php
