@@ -10,9 +10,10 @@
       $author = $links[$i]['name'];
       $author_id = $links[$i]['user_id'];
       $comment = str_replace('<br />',' ',$comment);
+      $avatar = isset($links[$i]['picture']) ? $links[$i]['picture'] : '/files/default.png';
 ?>
 <li class="offset-1">
-      <img src="/files/default.png" class="callout" height="40" width="40" />
+      <img src="<?php echo $avatar; ?>" class="callout" height="40" width="40" />
        <p><strong><a href="<?= PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $author_id ?>"><?= $author ?></a></strong></p>
        <p><?php echo $comment;?></p>
 </li>
