@@ -74,14 +74,13 @@ class ThoughtsListModule extends Module {
              
 		$inner_html_gen = new Template($tmp_file);
 		$inner_html_gen->set('thoughts', $this->_thoughts);
-	
-		// TODO: find a better way to see if a user is logged in and the user is on their
-		if(isset($_SESSION['user'])) {
-			$login_user = PA::$login_user;
-             if($login_user->user_id == $this->uid){
+		
+		if(isset($this->shared_data) && isset($this->shared_data['is_my_profile']) && !empty($this->shared_data['is_my_profile'])){
+			if($this->shared_data['is_my_profile'] == true){
 				$inner_html_gen->set('manage_thoughts_url', PA::$url . "/content_management.php");
-             }
+			}
 		}
+		
 
 		$inner_html = $inner_html_gen->fetch();
 		return $inner_html;
