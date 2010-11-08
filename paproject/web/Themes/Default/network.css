@@ -493,11 +493,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	height: 725px;
 	margin-top: 0; }
 
-.wide_content fieldset {
-	width: 540px;
-	border: 1px solid #cdcdcd;
-	margin: 10px 0 0 10px; }
-
 .wide_content fieldset legend {
 	font-size: 12px;
 	font-weight: bold;
@@ -659,8 +654,6 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 .wide_content .register {
 	text-align: left;
 	padding: 0 12px 0 12px; }
-
-.wide_content form fieldset { margin-left: 10px; }
 
 .wide_content_edit_page {
 	width: 793px;
@@ -3935,4 +3928,16 @@ div.steps ul {margin:0;}
 .buddyimg .text-container {
 	margin-left: 78px;
 	padding: 0 10px;
+}
+
+fieldset.search {
+	border: 1px solid #cdcdcd;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 8px 10px;
+}
+
+fieldset.search a {
+	font-size: 0.8em;
 }

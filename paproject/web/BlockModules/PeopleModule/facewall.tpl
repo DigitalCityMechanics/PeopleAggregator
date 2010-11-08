@@ -1,7 +1,7 @@
 <?php
 
 global $aim_api_key, $aim_presence_key;
-$query_string = null;
+$query_args = array();
   if (!empty($_REQUEST)) {
   // code for appending the GET string in filters
     $query_string_array = $_REQUEST;
@@ -9,15 +9,10 @@ $query_string = null;
       unset($query_string_array['sort_by']);
     }
 
-    $query_string = null;
-    foreach ($query_string_array as $key => $value) {
-      if($key <> 'PHPSESSID') {
-        $query_string .= '&'.$key.'='.$value;
-      }
-    }
-    if(!empty($show_people_with_photo)) {
-      $query_string .= "&show_people_with_photo=$show_people_with_photo";
-    }
+	parse_str($_SERVER['QUERY_STRING'], $query_args);
+	if(!empty($show_people_with_photo)) {
+		$query_args['show_people_with_photo'] = $show_people_with_photo;
+	}
   }
 
   $style = 'style="display:none;"';
@@ -26,15 +21,13 @@ $query_string = null;
     $style = null;
     $toggle_text = __('Simple Search');
   }
-
-
 ?>
 
 <h1><?= __("Community") ?></h1>
 
-<ul id="filters" style="display: none">
-    <li<?php echo (empty($_REQUEST['sort_by']) || (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'recent_users') ) ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>/sort_by=recent_users<?php echo htmlspecialchars($query_string) ?>"><?= __("Recent Users") ?></a></li>
-    <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>/sort_by=alphabetic<?php echo htmlspecialchars($query_string) ?>"><?= __("Alphabetical") ?></a></li>
+<ul id="filters" style="display: none;">
+    <li<?php echo (empty($_REQUEST['sort_by']) || (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'recent_users') ) ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'recent_users'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Recent Users") ?></a></li>
+    <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'alphabetic'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Alphabetical") ?></a></li>
 </ul>
 
 <div id="PeopleModule">
@@ -65,42 +58,25 @@ $query_string = null;
       ?>
 </div>
 
-<form name="myform_search" action="" method="get" class="clear" style="display: none;">
+<form name="myform_search" action="" method="get" class="clear">
 
-<fieldset class="center_box">
+<fieldset class="search" style="display: none;">
     <legend><?= __("Search") ?></legend>
 <script type="text/javascript">
 var _names_cleared = false;
 function name_focus(el) {
   if (_names_cleared) return;
-  document.getElementById("allnames").value = document.getElementById("last_name").value = "";
+  document.getElementById("allnames").value = '';
   _names_cleared = true;
 }
 </script>
-
-    <table cellpadding="0" cellspacing="0" class="search_user">
-      <tr>
-        <td width="150">
-        <input id="allnames" type="text" name="allnames" class="text normal" <?php
+	<input id="allnames" type="text" name="allnames" class="text normal" <?php
         if (!empty($_REQUEST['allnames']) || !empty($_REQUEST['allnames']) || $show_advance_search_options) {
           ?>value="<?php echo htmlspecialchars(@$_REQUEST['allnames']) ?>"<?php
         } else {
-          ?>value="<?= __("First name") ?>" onfocus='name_focus()'<?php
-        }?> /></td>
-        <td width="150">
-        <input id="last_name" type="text" name="last_name" class="text normal" <?php
-        if (!empty($_GET['first_name']) || !empty($_GET['last_name']) || $show_advance_search_options) {
-          ?>value="<?php echo htmlspecialchars(@$_GET['last_name']) ?>"<?php
-        } else {
-          ?>value="<?= __("Last name") ?>" onfocus='name_focus()'<?
-        } ?> /></td>
-        <td width="250" id="buttonbar">
-          <ul>
-          <li><a href="javascript: document.forms['myform_search'].submit();"><?= __("Find Users") ?></a></li>
-        </ul>
-      </td>
-      </tr>
-    </table>
+          ?>value="<?= __("Name") ?>" onfocus='name_focus()'<?php
+        }?> />
+	<a class="button" href="javascript: document.forms['myform_search'].submit();"><?= __("Find Users") ?></a>
 
     <input type="hidden" name="submit_search" value="search" />
   </fieldset>

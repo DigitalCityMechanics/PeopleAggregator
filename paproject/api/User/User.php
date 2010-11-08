@@ -2266,7 +2266,7 @@ class User {
 
     // ---- fix by Z.Hron: We don't need to read all data to count rows! Use MySQL function COUNT() in future!
 
-    $search_string = "SELECT (U.user_id) as uid, U.first_name as first_name, U.login_name as login_name, U.picture as picture, UP.field_perm as field_perm, count(U.user_id) as counts";
+    $search_string = "SELECT (U.user_id) as uid, U.first_name as first_name, U.login_name as login_name, U.picture as picture, UP.field_perm as field_perm, count(U.user_id) as counts, U.created";
     if($cnt) {
       $search_string = "SELECT count(U.user_id) as counts, (U.user_id) as uid";
     }
@@ -2400,6 +2400,7 @@ class User {
         $uid_array[$i]['picture'] = $row->picture;
         $uid_array[$i]['first_name'] = $row->first_name;
         $uid_array[$i]['field_perm'] = $row->field_perm;
+        $uid_array[$i]['created'] = $row->created;
         $i++;
       }
     }
@@ -2429,6 +2430,7 @@ class User {
             $user_ids[$j]['login_name'] = $uid_array[$i]['login_name'];
             $user_ids[$j]['first_name'] = $uid_array[$i]['first_name'];
             $user_ids[$j]['picture'] = $uid_array[$i]['picture'];
+            $user_ids[$j]['created'] = $uid_array[$i]['created'];
             $j++;
           }
         }
@@ -2438,6 +2440,7 @@ class User {
         $user_ids[$j]['login_name'] = $uid_array[$i]['login_name'];
         $user_ids[$j]['first_name'] = $uid_array[$i]['first_name'];
         $user_ids[$j]['picture'] = $uid_array[$i]['picture'];
+        $user_ids[$j]['created'] = $uid_array[$i]['created'];
         $j++;
 
       } else {
@@ -2445,6 +2448,7 @@ class User {
         $user_ids[$j]['login_name'] = $uid_array[$i]['login_name'];
         $user_ids[$j]['first_name'] = $uid_array[$i]['first_name'];
         $user_ids[$j]['picture'] = $uid_array[$i]['picture'];
+        $user_ids[$j]['created'] = $uid_array[$i]['created'];
         $j++;
       }
     }
