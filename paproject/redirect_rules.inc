@@ -65,6 +65,7 @@ define('CC_IN_THE_NEWS_CONTENT_ID',	6);
  	*  /in-the-news/ -> in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID
  	*
  	**/
+	"^/press(.*)$" => "/in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID,
 	"^/in-the-news(.*)$" => "/in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID,
   );
   
