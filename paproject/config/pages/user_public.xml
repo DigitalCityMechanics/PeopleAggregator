@@ -24,6 +24,11 @@
     <access_permission>view_content</access_permission>
     <navigation_code/>
     <boot_code><![CDATA[
+
+	class SomeObject {
+		public $field_value = 0;
+	}
+
       if($login = $app->getRequestParam('login')) {
         $user = new User();
         if(is_numeric($login)) {
@@ -70,7 +75,8 @@
           $profile_viewer = new User();
           $params = array('field_name'=>'profile_visitor_count', 'user_id' => PA::$page_uid);
           $data = User::get_profile_data($params);
-          if(empty($data[0]->field_value)) {
+         	if(count($data) == 0) {
+            $data[0] = new SomeObject();
             $data[0]->field_value = 0;
           }
           $data[0]->field_value = $data[0]->field_value + 1;
@@ -84,7 +90,8 @@
           if(!empty(PA::$login_uid)) {
             $param = array('field_name'=>'profile_visited_count', 'user_id' => PA::$login_uid);
             $data = User::get_profile_data($param);
-            if(empty($data[0]->field_value)) {
+            if(count($data) == 0) {
+              $data[0] = new SomeObject();
               $data[0]->field_value = 0;
             }
             $data[0]->field_value = $data[0]->field_value + 1;
