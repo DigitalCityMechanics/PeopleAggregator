@@ -3,7 +3,6 @@
   <page_id>2</page_id>
   <data>
     <middle>
-      <item>UserParticipationModule</item>
       <item>UserContributionsModule</item>
     </middle>
     <right>
