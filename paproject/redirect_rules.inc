@@ -1,8 +1,8 @@
 <?php
 
 // Civic Commons Application URL
-define('CC_APPLICATION_URL', 		'http://staging.theciviccommons.com');
-define('CC_APPLICATION_URL_TO_API', '/api');
+define('CC_APPLICATION_URL', 		'http://integration.theciviccommons.com');
+define('CC_APPLICATION_URL_TO_API', '/api/people-aggregator/person/');
 define('CC_ROUTE_HOME_PAGE', 		'/');
 define('CC_ROUTE_CONVERSATIONS', 	'/conversations');
 define('CC_ROUTE_CONTRIBUTIONS', 	'/contributions');

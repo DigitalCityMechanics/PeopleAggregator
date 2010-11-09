@@ -30,7 +30,7 @@ if(count($contributions) > 0):
 						case "image":
 						?>						
 						<?php if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
-							<img src="<?= $contribution['attachment_url'] ?>" class="callout" style="width:70px;height70px;">
+							<img src="<?= $contribution['attachment_url'] ?>" class="callout">
 						<?php endif;
 						
 							break;
