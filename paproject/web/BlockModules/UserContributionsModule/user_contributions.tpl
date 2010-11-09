@@ -1,3 +1,4 @@
+<div class="divided">
 <?php 
 if(count($contributions) > 0): 
 
@@ -17,7 +18,7 @@ if(count($contributions) > 0):
 		 
 		
 		?>
-			<div class="divided <?= $dividedClass ?>">
+			<div class="<?= $dividedClass ?>">
 				<div class="<?= $class ?>">
 				<?php 
 				if(isset($contribution['type']) && !empty($contribution['type'])):	
@@ -89,3 +90,4 @@ if(count($contributions) > 0):
 		</div> -->
 	<?php endif; ?>
 <?php endif; ?>
+</div>
