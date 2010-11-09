@@ -286,7 +286,8 @@ class EditProfileModule extends Module {
 							$file_path = $zendUploadAdapter->getFileName('userfile', true);
 							$file_name = $zendUploadAdapter->getFileName('userfile', false);
 							$file_size = $zendUploadAdapter->getFileSize('userfile');
-
+							$file_name = $this->cleanupFileName($file_name);
+							
 							$file_info = getimagesize($file_path);
 
 							$file_mime_type = (isset($file_info) && isset($file_info['mime']) && !empty($file_info['mime'])) ? $file_info['mime'] : null;
@@ -511,14 +512,22 @@ class EditProfileModule extends Module {
 	 * @return string
 	 */
 	function buildAmazonS3ObjectURL($bucket_name, $image_size_type, $user_id, $file_name){
+		// TODO: make this more generic. Instead of hardcoding "avatars" directory,
+		// make a object_type array and constants to determine folder structure from configuration options
+		return $bucket_name . "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
+	}
+	
+	/**
+	 * Cleans up the file name by replacing non-alphanumeric characters with the empty string 
+	 * @param unknown_type $file_name
+	 */
+	function cleanupFileName($file_name){
 		if(isset($file_name) && !empty($file_name)){
 			$file_name = preg_replace("/[^a-z0-9_\-\.]/i","",$file_name);
 		}else{
 			$file_name = intval(rand());
 		}
-		// TODO: make this more generic. Instead of hardcoding "avatars" directory,
-		// make a object_type array and constants to determine folder structure from configuration options
-		return $bucket_name . "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
+		return $file_name;
 	}
 
 
