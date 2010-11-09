@@ -94,7 +94,7 @@ class EditProfileModule extends Module {
 		// Load data for the requested section
 		$givenSectionData = $this->loadSection($this->profile_type, $this->uid);
 		$givenSectionDataSanitized = $this->santitizeSectionInfo($givenSectionData);
-		
+
 		// Load and add GENERAL section data
 		$generalSectionData = $this->loadSection('general', $this->uid);
 		$generalSectionDataSanitized = $this->santitizeSectionInfo($generalSectionData);
@@ -286,18 +286,18 @@ class EditProfileModule extends Module {
 							$file_path = $zendUploadAdapter->getFileName('userfile', true);
 							$file_name = $zendUploadAdapter->getFileName('userfile', false);
 							$file_size = $zendUploadAdapter->getFileSize('userfile');
-							
+
 							$file_info = getimagesize($file_path);
-							
-							$file_mime_type = (isset($file_info) && isset($file_info['mime']) && !empty($file_info['mime'])) ? $file_info['mime'] : null; 
+
+							$file_mime_type = (isset($file_info) && isset($file_info['mime']) && !empty($file_info['mime'])) ? $file_info['mime'] : null;
 
 							$apiDataArray['person'] = array(
 														'avatar' => array(
 																	'file_name' => $file_name,
 																	'content_type' => $file_mime_type,
 																	'file_size' => $file_size
-																)
-														);
+							)
+							);
 
 							// api_call needs to be set to true in order for the User class to update the avatar and avatar_small fields
 							$this->user_info->api_call = true;
@@ -367,15 +367,30 @@ class EditProfileModule extends Module {
 			$this->user_info->first_name = $request_data['first_name'];
 			$this->user_info->last_name = $request_data['last_name'];
 			$this->user_info->email = $request_data['email_address'];
-			if (!empty($request_data['pass'])) $this->user_info->password = md5($request_data['pass']);
-
-			try
-			{
-				if (CRYPT_BLOWFISH == 1) {
-					if (!empty($request_data['pass'])){
-						$this->user_info->password = crypt($request_data['pass'], '$2a$10$f5e3fd131040faf20bf2b86f363dcf115cd267d468d403b9bbac37b731fa125db7857b63efa6f322339b5e5deae3b2c4c7677c0f8a1f8ed43653d107dc1a20fb$') . "\n";
+				
+			try{
+				if (!empty($request_data['pass'])){
+					$passwordSaltArray = $this->EncryptPassword($request_data['pass']);
+					if(isset($passwordSaltArray)){
+						list($encryptedPassword, $salt) = $passwordSaltArray;
+						$this->user_info->password = $encryptedPassword;
+						$apiDataArray['person']['encrypted_password'] = $encryptedPassword;
+						// remove last $ from salt because ruby doesn't like it
+						$salt = rtrim($salt,'$');
+						$apiDataArray['person']['password_salt'] = $salt;
+					}else{
+						$this->message = "Your password could not be changed, please contact the administrator.";		
 					}
 				}
+			}
+			catch(Exception $e){
+				$this->message = $e->getMessage();
+			}
+		}
+
+		if (empty($this->message)) {									
+			try
+			{
 				$this->user_info->save();
 				$dynProf = new DynamicProfile($this->user_info);
 				$dynProf->processPOST('basic');
@@ -384,10 +399,10 @@ class EditProfileModule extends Module {
 				//        $this->redirect2 = PA_ROUTE_EDIT_PROFILE;
 				//        $this->queryString = '?type='.$this->profile_type;
 
-				
+
 				//TODO: change URL after the contributions activity stream URLs have been changed
-				$url = CC_APPLICATION_URL . CC_APPLICATION_URL_TO_API .'/people-aggregator/person/' . $this->user_info->user_id;
-				
+				$url = CC_APPLICATION_URL . CC_APPLICATION_URL_TO_API . '24';//$this->user_info->user_id;
+
 				// Try to send updated data to Core (Ruby)
 				$this->sendUserDataToCivicCommons($url ,$apiDataArray);
 
@@ -563,11 +578,11 @@ class EditProfileModule extends Module {
 		if(!isset($URL) || !empty($url)){
 			return false;
 		}
-		
+
 		if(count($DataArray['person']) == 0){
 			return false;
 		}
-		
+
 		$jsonString = json_encode($DataArray);
 
 		try{
@@ -584,10 +599,50 @@ class EditProfileModule extends Module {
 			}
 		}
 		catch(Exception $ex){
-			
+
 			Logger::log('sendUserDataToCivicCommons() could not PUT data to ' . $URL . ' Exception: ' . $ex->getMessage(), LOGGER_WARNING);
-			
+
 		}
 	}
+
+
+	/**
+	 * Returns an encrypted password and the salt used to encrypt the password
+	 * @param unknown_type $PasswordToEncrypt
+	 */
+	function EncryptPassword($PasswordToEncrypt){
+
+		global $app;
+		if(!isset($PasswordToEncrypt) || empty($PasswordToEncrypt)){
+			return null;
+		}
+
+		if (CRYPT_BLOWFISH == 1) {
+			$encryptedPassword = null;
+			$salt = null;
+
+			$pepper = PASSWORD_PEPPER;
+			$cost = PASSWORD_COST;
+
+			// 1. Generate a random pre-salt with OpenSSL Random
+			$preSalt = bin2hex(openssl_random_pseudo_bytes(21));
+				
+			if(isset($preSalt) && !empty($preSalt)){
+
+				// 2. use salt and pepper to create password
+				$salt = substr($preSalt, 0, 22);
+				$salt = '$2a$'.$cost.'$'.$salt . '$';
+				$encryptedPassword = crypt($PasswordToEncrypt.$pepper, $salt);
+
+				// 3. return encrypted password and salt
+				return array($encryptedPassword, $salt);
+			}else{
+				return null;
+			}
+		}else{
+			return null;
+		}
+	}
+
 }
 ?>
