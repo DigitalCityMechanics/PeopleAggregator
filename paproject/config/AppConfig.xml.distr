@@ -764,6 +764,12 @@
         <MAX_PASSWORD_LENGTH category="constant" type="int" readonly="false" section="site_related" description="The maximum allowed length of a password during registration.">
           <value>15</value>
         </MAX_PASSWORD_LENGTH>
+        <PASSWORD_PEPPER category="constant" type="string" readonly="false" section="site_related" description="The pepper used to append onto the end of the password to make a more secure password">
+          <value></value>
+        </PASSWORD_PEPPER>
+        <PASSWORD_COST category="constant" type="string" readonly="false" section="site_related" description="The cost used in password creation. See PHP crypt() function. Requires PHP 5 and above.">
+          <value>10</value>
+        </PASSWORD_COST>
         <FANCY_URL category="constant" type="bool" readonly="false" section="site_related" description="Set '1' to use Fancy URL's for blog posts." note="This option is obsolete - PA already using Fancy URL's.">
           <value>1</value>
         </FANCY_URL>
