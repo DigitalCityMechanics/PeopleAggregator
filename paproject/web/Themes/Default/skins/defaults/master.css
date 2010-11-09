@@ -292,8 +292,8 @@ position: relative;
 }
 .feature-mast .offset-1 {padding-left: 100px;}
 .feature-mast .offset-1.profile-mast {
-min-height: 70px;
-padding-left: 70px;
+min-height: 80px;
+padding-left: 80px;
 }
 .offset-1 .callout, .offset-2 .callout, .offset-3 .callout {
 left: 0;
