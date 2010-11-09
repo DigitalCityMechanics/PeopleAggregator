@@ -61,12 +61,10 @@ class UserContributionsModule extends Module {
 		global $login_uid, $page_uid;
 		$content = null;
 		
-		$this->_contributions = $this->get_contributions_data($this->uid);
-		
 		if($this->mode == self::USERMODE){
-			$this->_thoughts = $this->get_user_posts_data($this->uid);
+			$this->_contributions = $this->get_contributions_data($this->uid);
 		}else if($this->mode == self::ORGMODE){
-			$this->_thoughts = $this->get_org_posts_data($this->group->collection_id);
+			$this->_contributions = array();
 		}
 	
 		$this->inner_HTML = $this->generate_inner_html();
@@ -125,63 +123,6 @@ class UserContributionsModule extends Module {
 		}
 		return null;
 	}	
-
-
-	/**
-	 * Get posts data.
-	 * @param 	$User_id
-	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
-	 */
-	function get_user_posts_data($User_id){
-		$posts = Content::get_user_content($User_id);
-
-		if(isset($posts) && is_array($posts) && count($posts) > 0) {
-			$thoughts = array();
-			foreach($posts as $post) {
-				$post['show'] = true;
-				$post['title'] = $post['title'];
-				$post['image'] = null;
-				$post['image_width'] = null;
-				$post['image_height'] = null;
-				$post['summary'] = $post['body'];
-				$post['url'] = PA::$url.'/content/cid='.$post['content_id'];
-				$thoughts[] = $post;
-			}
-		} else {
-			$thoughts = array(array('show'=>true, 'title'=>'No posts', 'summary'=>'No content published. <a href="/post_content.php">Click here to add content</a>.'));
-		}
-		return $thoughts;
-	}
-
-
-		/**
-	 * Get posts data.
-	 * @param 	$org_id
-	 * @return	an associative array of the response data. If no data is present or there is an error, generic data is returned
-	 */
-	function get_org_posts_data($org_id){
-		$org = new Group();
-		$org->collection_id = $org_id;
- 		$posts = $org->get_contents_for_collection('all', FALSE, 'ALL', 0, 'created', 'DESC', TRUE);
-
-		if(isset($posts) && is_array($posts) && count($posts) > 0) {
-			$thoughts = array();
-			foreach($posts as $post) {
-				$post['show'] = true;
-				$post['title'] = $post['title'];
-				$post['image'] = null;
-				$post['image_width'] = null;
-				$post['image_height'] = null;
-				$post['summary'] = $post['body'];
-				$post['url'] = PA::$url.'/content/cid='.$post['content_id'];
-				$thoughts[] = $post;
-			}
-		} else {
-			$thoughts = array(array('show'=>true, 'title'=>'No posts', 'summary'=>'No content published. <a href="/post_content.php?ccid='.$org_id.'">Click here to add content</a>.'));
-		}
-		return $thoughts;
-	}
-	
 	
 	/**
 	 * Creates a URL from the given parts into a usable REST URL
