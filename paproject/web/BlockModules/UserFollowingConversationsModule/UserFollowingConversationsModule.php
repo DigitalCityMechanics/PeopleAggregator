@@ -89,10 +89,10 @@ class UserFollowingConversationsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_FOLLOWING, $User_id);
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, "conversation", $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('parent_title'=>'No conversations followed yet.', 'parent_url' => '#');
+			$defaultResult = array('title'=>'No conversations followed yet.', 'url' => '#');
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
@@ -107,6 +107,7 @@ class UserFollowingConversationsModule extends Module {
 		return null;
 	}
 	
+
 	/**
 	 * Creates a URL from the given parts into a usable REST URL
 	 * Note: this function is customized for the CivicCommons project URLs (ie. http://www.example.com/$APIFolder/$ObjectIdentifier/$ObjectType
@@ -117,9 +118,8 @@ class UserFollowingConversationsModule extends Module {
 	 */
 	function buildRESTAPIUrl($SiteURL, $APILink, $ObjectType, $ObjectIdentifier){
 		//TODO: add ability to remove double slashes
-		$url = $SiteURL . $APILink . "/" . $ObjectIdentifier . $ObjectType;
+		$url = $SiteURL . $APILink . $ObjectIdentifier . '/subscriptions?type=' . $ObjectType;
 		return $url;
 	}
-	
 }
 ?>
