@@ -401,7 +401,7 @@ class EditProfileModule extends Module {
 
 
 				//TODO: change URL after the contributions activity stream URLs have been changed
-				$url = CC_APPLICATION_URL . CC_APPLICATION_URL_TO_API . '24';//$this->user_info->user_id;
+				$url = CC_APPLICATION_URL . CC_APPLICATION_URL_TO_API . $this->user_info->user_id;
 
 				// Try to send updated data to Core (Ruby)
 				$this->sendUserDataToCivicCommons($url ,$apiDataArray);
