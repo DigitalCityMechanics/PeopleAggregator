@@ -1,4 +1,4 @@
-<h1><?= __("Basic info") ?></h1>
+<h1><?= __("Settings") ?></h1>
 <form enctype="multipart/form-data" action="" method="post" name="formBasicProfile">
 
     <div class="form-block">
