@@ -25,14 +25,14 @@ $query_args = array();
 
 <h1><?= __("Community") ?></h1>
 
-<ul id="filters">
+<ul id="filters" style="display: none;">
     <li<?php echo (empty($_REQUEST['sort_by']) || (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'recent_users') ) ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'recent_users'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Recent Users") ?></a></li>
     <li<?php echo (!empty($_REQUEST['sort_by']) && $_REQUEST['sort_by'] == 'alphabetic') ? ' class="active"' : '';?>><a href="<?php echo PA::$url . PA_ROUTE_PEOPLES_PAGE;?>?<?php $query_args['sort_by'] = 'alphabetic'; echo htmlspecialchars(http_build_query($query_args)); ?>"><?= __("Alphabetical") ?></a></li>
 </ul>
 
 <form name="myform_search" action="" method="get" class="clear">
 
-<fieldset class="search">
+<fieldset class="search" style="display: none;">
     <legend><?= __("Search") ?></legend>
 <script type="text/javascript">
 var _names_cleared = false;

@@ -300,8 +300,8 @@ class Navigation {
                                   		'sublinks'=>array(
 							                       'blog' => array('caption'=> __('Blog'),
 							                                  'url'=>$this->base_url . '/blog'),
-							                       'help' => array('caption'=> __('Help'),
-							                                  'url'=>CC_APPLICATION_URL . '/help'),
+							                       'faq' => array('caption'=> __('FAQ'),
+							                                  'url'=>CC_APPLICATION_URL . '/faq'),
 							                       'principles' => array('caption'=> __('Mission &amp; Principles'),
 							                                  'url'=>CC_APPLICATION_URL . '/principles'),
 							                       'team' => array('caption'=> __('Team'),
@@ -310,6 +310,8 @@ class Navigation {
 							                                  'url'=>CC_APPLICATION_URL . '/partners'),
 							                       'press' => array('caption'=> __('In The News'),
 							                                  'url'=>PA::$url . '/press'),
+							                       'contact-us' => array('caption'=> __('Contact us'),
+							                                  'url'=>CC_APPLICATION_URL . '/contact-us'),
 												),
 						)
 		);

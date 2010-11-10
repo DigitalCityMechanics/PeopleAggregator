@@ -89,8 +89,7 @@ body {}
 
 a:link,
 a:visited {
-	color: #000000;
-	text-decoration: none; }
+}
 
 a:hover {
 	color: #000000;
@@ -728,12 +727,12 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 
 .blog_inner{
 	padding: 0px 0px 0px 40px;
-	margin-bottom: -20px;
 }
 
 .post_info {
 	margin-top: 20px;
-	color: #7B7B7B; }
+	color: #7B7B7B;
+}
 
 .module_tabbed_image_list ul {
 	padding: 0;
