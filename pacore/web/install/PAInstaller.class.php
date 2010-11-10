@@ -339,7 +339,10 @@ class PAInstaller {
 	  $form->addHtml("<p class='inst_info' style='clear:both'>Add API keys for Amazon S3.</p>");
 	  $form->addInputField('text', __('Amazon AWS API Key'), array('id' => 'amazon_key', 'required' => false));
 	  $form->addInputField('text', __('Amazon AWS API Secret'), array('id' => 'amazon_secret', 'required' => false));
-          $html = $form->getHtml();
+	  $form->addInputField('text', __('Amazon S3 Bucket Name'), array('id' => 'amazon_bucket', 'required' => false));
+	  $form->addHtml("<p class='inst_info' style='clear:both'>Civic Commons Settings</p>");
+	  $form->addInputField('text', __('Civic Commons Ruby Application URL'), array('id' => 'cc_application_url', 'required' => false));
+      $html = $form->getHtml();
       }
       else{
 	      //@todo Should we add a printout of the information here? At the moment it just confirms that the data has been entered and moves on.
@@ -367,7 +370,7 @@ class PAInstaller {
 	   $this->allow_network_spawning = (isset($form_data['network_spawning']) && $form_data['network_spawning'] == 'checked') ? 1 : 0;
 	   $domain = explode(".", $_SERVER['SERVER_NAME']);
 	   $this->subdomain = (isset($form_data['domain_prefix'])) ? $form_data['domain_prefix'] : $domain[0];
-	   $this->keys = array('key'=>$form_data['fb_key'],'secret'=>$form_data['fb_secret'], 'amazon_key'=>$form_data['amazon_key'],'amazon_secret'=>$form_data['amazon_secret']);
+	   $this->keys = array('key'=>$form_data['fb_key'],'secret'=>$form_data['fb_secret'], 'amazon_key'=>$form_data['amazon_key'],'amazon_secret'=>$form_data['amazon_secret'],'amazon_bucket'=>$form_data['amazon_bucket'],'cc_application_url'=>$form_data['cc_application_url']);
 
 	   if (!$this->admin_exists) { 
 		   $error = false;
@@ -488,6 +491,8 @@ class PAInstaller {
        $app->configData['configuration']['api_keys']['value']['facebook_api_secret']['value'] = $this->keys['secret'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_key']['value'] = $this->keys['amazon_key'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'] = $this->keys['amazon_secret'];
+       $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'] = $this->keys['amazon_bucket'];
+       $app->configData['configuration']['civic_commons_settings']['value']['CC_APPLICATION_URL']['value'] = $this->keys['cc_application_url'];
 
        unlink(PA::$project_dir . APPLICATION_CONFIG_FILE);
        $confObj  = new XmlConfig(null, 'application');

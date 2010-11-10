@@ -26,7 +26,7 @@ class UserParticipationModule extends Module {
 	public $module_type = 'user|network|group';
 	public $module_placement = 'middle';
 	public $outer_template = 'outer_public_center_module.tpl';
-	
+	private $_number_of_items_to_show;
 	private $uid;
 	private $_conversations;
 	private $_issues;
@@ -35,6 +35,7 @@ class UserParticipationModule extends Module {
 	function __construct() {
 		parent::__construct();
 		$this->html_block_id = 'UserParticipationModule';
+		$this->_number_of_items_to_show = 3;
 	}
 
 
@@ -104,7 +105,7 @@ class UserParticipationModule extends Module {
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
+					$newArray = $this->setItemsToShow($jsonResults, $this->_number_of_items_to_show);
 					$jsonResults = $newArray;
 				}				
 				return $jsonResults;
@@ -139,7 +140,7 @@ class UserParticipationModule extends Module {
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
+					$newArray = $this->setItemsToShow($jsonResults, $this->_number_of_items_to_show);
 					$jsonResults = $newArray;
 				}				
 				return $jsonResults;
@@ -174,7 +175,7 @@ class UserParticipationModule extends Module {
 					$jsonResults[] = $defaultResult;
 				}else{
 					// only show the first 3 conversations
-					$newArray = $this->setItemsToShow($jsonResults, NUM_OF_ITEMS_TO_SHOW_PARTICIPATION_CONTRIBUTIONS);
+					$newArray = $this->setItemsToShow($jsonResults, $this->_number_of_items_to_show);
 					$jsonResults = $newArray;
 				}
 				return $jsonResults;

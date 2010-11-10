@@ -260,7 +260,8 @@ class EditProfileModule extends Module {
 				$aws_secret_key = null;
 				$aws_key = $app->configData['configuration']['api_keys']['value']['amazon_aws_key']['value'];
 				$aws_secret_key = $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'];
-
+				$amazon_bucket_name = $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'];
+				
 				if(isset($aws_key) && isset($aws_secret_key)){
 					$s3 = null;
 					$bucketAvailable = false;
@@ -270,10 +271,10 @@ class EditProfileModule extends Module {
 					if(isset($s3)){
 
 						$bucketCreated = false;
-						$bucketAvailable = $s3->isBucketAvailable(AMAZON_BUCKET_NAME);
+						$bucketAvailable = $s3->isBucketAvailable($amazon_bucket_name);
 
 						if(!$bucketAvailable){
-							if($s3->createBucket(AMAZON_BUCKET_NAME)){
+							if($s3->createBucket($amazon_bucket_name)){
 								// new bucket was created
 								$bucketCreated = true;
 							}
@@ -282,6 +283,9 @@ class EditProfileModule extends Module {
 						}
 
 						if($bucketCreated == true){
+							
+							// delete old amazon s3 pictures							
+							$this->handleDeleteUserPic($request_data);
 
 							$file_path = $zendUploadAdapter->getFileName('userfile', true);
 							$file_name = $zendUploadAdapter->getFileName('userfile', false);
@@ -311,7 +315,7 @@ class EditProfileModule extends Module {
 									if(!isset($this->user_info->core_id) && !empty($this->user_info->core_id)){
 										$this->user_info->core_id = 0;
 									}
-									$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $this->user_info->core_id, $file_name);
+									$objectPath = $this->buildAmazonS3ObjectURL($amazon_bucket_name, $imageSizeType, $this->user_info->core_id, $file_name);
 									if(isset($imageDimensions) && !empty($imageDimensions)){
 										// if this is an original size image, the width and height dont need to be set
 										$thumb->adaptiveResize($imageDimensions['width'], $imageDimensions['height']);
@@ -546,19 +550,20 @@ class EditProfileModule extends Module {
 		$aws_secret_key = null;
 		$aws_key = $app->configData['configuration']['api_keys']['value']['amazon_aws_key']['value'];
 		$aws_secret_key = $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'];
+		$amazon_bucket_name = $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'];
 
 		if(isset($aws_key) && isset($aws_secret_key)){
 			$s3 = null;
 			$bucketAvailable = false;
 			$s3 = new Zend_Service_Amazon_S3($aws_key, $aws_secret_key);
-			$bucketAvailable = $s3->isBucketAvailable(AMAZON_BUCKET_NAME);
+			$bucketAvailable = $s3->isBucketAvailable($amazon_bucket_name);
 
 			if($bucketAvailable){
 				// bucket is available so try to delete the object
 				try{
 
 					foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
-						$objectPath = $this->buildAmazonS3ObjectURL(AMAZON_BUCKET_NAME, $imageSizeType, $user_id, $file_name);
+						$objectPath = $this->buildAmazonS3ObjectURL($amazon_bucket_name, $imageSizeType, $user_id, $file_name);
 						$s3->removeObject($objectPath);
 					}
 					return true;
