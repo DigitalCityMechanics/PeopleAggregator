@@ -69,12 +69,12 @@ if(count($contributions) > 0):
 				?>
 				<p><?= $contribution['content'] ?></p>
 
-				<p>
+				<p class="profile-meta">
 					Contributed to <a href="<?= $contribution['parent_url'] ?>"><?= $contribution['parent_title'] ?></a>
 					<?php if(isset($contribution['created_at']) && !empty($contribution['created_at'])){
 							$parsedDate = null;
 							if($parsedDate = strtotime($contribution['created_at'])){ 		        
-								echo "on " . (date("F j, Y g:ia", $parsedDate));
+								echo "on " . (date("F j, Y", $parsedDate));
 							}else{
 								$parsedDate = null;
 							}
