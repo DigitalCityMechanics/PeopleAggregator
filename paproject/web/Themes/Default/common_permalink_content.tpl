@@ -3,9 +3,6 @@ require_once "api/Permissions/PermissionsHandler.class.php";
   $param_array = array('permissions' => 'view_abuse_report_form');
 ?>
 <div class="post_info form-block">
-<?php
-      if( $contents->tag_entry )  echo $contents->tag_entry.'<br />';
-    ?>
       <?php
         if( $edit_link ) {
       ?>
