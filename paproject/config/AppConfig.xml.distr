@@ -678,6 +678,9 @@
         <amazon_aws_secret  category="global" type="string" section="api_keys" readonly="true" description="Amazon AWS Secret Key">
         	<value></value>
         </amazon_aws_secret>
+        <amazon_s3_bucket category="global" type="string" section="api_keys" readonly="true" description="Amazon AWS S3 Bucket Name">
+        	<value></value>
+        </amazon_s3_bucket>
       </value>
     </api_keys>
     <database description="Database settings">
@@ -1465,5 +1468,12 @@
         </network_skin>
       </value>
     </network_defaults>
+    <civic_commons_settings description="CivicCommons specific settings">
+		<value>
+			<CC_APPLICATION_URL category="constant" type="string" readonly="false" section="civic_commons_settings" descr="The URL to the URL where the CivicCommons Ruby application exists">
+				<value></value>
+			</CC_APPLICATION_URL>
+		 </value>
+    </civic_commons_settings>
   </configuration>
 </application>
