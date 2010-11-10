@@ -1464,6 +1464,9 @@
 			<CC_APPLICATION_URL category="constant" type="string" readonly="false" section="civic_commons_settings" descr="The URL to the URL where the CivicCommons Ruby application exists">
 				<value></value>
 			</CC_APPLICATION_URL>
+			<CC_IN_THE_NEWS_CONTENT_ID category="constant" type="int" readonly="false" section="civic_commons_settings" descr="Content ID for in the news">
+				<value></value>
+			</CC_IN_THE_NEWS_CONTENT_ID>
 		 </value>
     </civic_commons_settings>
   </configuration>

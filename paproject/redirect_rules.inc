@@ -1,7 +1,6 @@
 <?php
 
 // Civic Commons Application URL
-define('CC_APPLICATION_URL', 		'http://integration.theciviccommons.com');
 define('CC_APPLICATION_URL_TO_API', '/api/people-aggregator/person/');
 define('CC_ROUTE_HOME_PAGE', 		'/');
 define('CC_ROUTE_CONVERSATIONS', 	'/conversations');
@@ -12,7 +11,10 @@ define('CC_ROUTE_PEOPLE', 			'/people');
 define('CC_ROUTE_ORGANIZATIONS', 	'/organizations');
 define('CC_ROUTE_ISSUES', 			'/issues');
 define('CC_ROUTE_ABOUT', 			'/about');
-define('CC_IN_THE_NEWS_CONTENT_ID',	6);
+
+if(!defined('CC_IN_THE_NEWS_CONTENT_ID')){
+	define('CC_IN_THE_NEWS_CONTENT_ID',	6); // TODO: remove this whole check later
+}
 
 // Routing rewrites:
 
