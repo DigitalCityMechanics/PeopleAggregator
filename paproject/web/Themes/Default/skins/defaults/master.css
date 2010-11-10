@@ -56,11 +56,20 @@ div#show_conversation {margin-top: -15px;}
 .divided li, div.divided div {
 border-bottom: 1px solid #b1b3b6;
 margin-bottom: 1em;
-padding-bottom: 1.2em;
 }
 .divided li:last-child, .divided div:last-child {
 border-bottom: none;
 padding-bottom: 0;
+}
+.divided a:link, .divided a:hover, .divided a:active, .divided a:visited {
+color:#2C87B7;
+text-decoration:underline;
+}
+p.profile-meta { 
+margin-bottom:0;
+font-size:0.9em;
+font-style:italic;
+color:#666;
 }
 /* ul.link-list a, ol.link-list a, .module_actions ul a {text-decoration: none;} */
 ul li, ol li, dl dd {
@@ -156,7 +165,7 @@ label.checkbox { float:none; display:inline; width:auto; }
 .aside label, div.call-out label {width: 70px;}
 .aside input.textbox, div.call-out input.textbox, .aside textarea, div.call-out textarea {width: 176px;}
 .mod input.textbox, .mod textarea {width: 156px;}
-input.submit, input#contribution_submit {
+button.cancel, input.submit, input#contribution_submit {
 background: #cbe27c url(images/glass_btn.png) repeat-x 0 50%;
 border: 1px solid #999;
 color: #444;
@@ -175,6 +184,8 @@ border-radius: 8px;
 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
+button.cancel { margin-left: 2px; cursor: pointer; }
+.contribution-form { padding-bottom: 5px; }
 input.submit.no-tab{
 margin-left:0;
 }
@@ -491,11 +502,11 @@ margin-left: 20px;
 div.two-col div.cols {width: 300px;}
 
 /* Three Column Structure */
-div.three-col {margin: 0 0 0 -20px;}
-div.three-col-sm {margin: 0 0 0 -10px;}
+div.three-col {margin: 0 0 20px -20px;}
+div.three-col-sm {margin: 0 0 20px -10px;}
 div.three-col div.cols, div.three-col-sm div.cols {
 float: left;
-margin-bottom: 20px;
+/* margin-bottom: 20px; */
 margin-left: 20px;
 }
 div.three-col-sm div.cols {margin-left: 10px;}
@@ -562,6 +573,7 @@ padding-left: 0;
 text-align: center;
 }
 div#user p {margin-bottom: .7em;}
+*:first-child+html div.signed-out div#user {display: inline;}
 a.createacct-link {
 background: url(images/add.png) no-repeat 0 2px;
 padding-left: 18px;
@@ -700,6 +712,7 @@ div#search form input.textbox:focus {outline: 0 none;}
 div#search input.submit {
 background: transparent url(images/search-submit.png) no-repeat 0 0;
 border: none;
+color: transparent; /* Hack to make the value of the submit input invisible to IE */
 display: block;
 height: 26px;
 margin: 0;
@@ -707,6 +720,7 @@ position: absolute;
 right: -24px;
 vertical-align: middle;
 text-indent: -9999px;
+text-transform: uppercase; /* Hack to make the value of the submit input invisible to IE */
 top: -1px;
 width: 24px;
 -webkit-border-radius: 0;
@@ -1272,12 +1286,12 @@ visibility: hidden;
 }
 
 /* IE6 */
-* html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations, * html div.convo-popup, * html .pagination p {zoom: 1;}
+* html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations, * html div.convo-popup, * html .pagination p, * html #header-utility {zoom: 1;}
 
 * html .group {zoom: 1;}
 
 /* IE7 */
-*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup, *:first-child+html .pagination p {zoom: 1;}
+*:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup, *:first-child+html .pagination p, *:first-child+html #header-utility {zoom: 1;}
 
 *:first-child+html .group {zoom: 1;}
 
