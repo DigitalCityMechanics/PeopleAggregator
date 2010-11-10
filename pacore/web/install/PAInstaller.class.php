@@ -491,7 +491,7 @@ class PAInstaller {
        $app->configData['configuration']['api_keys']['value']['facebook_api_secret']['value'] = $this->keys['secret'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_key']['value'] = $this->keys['amazon_key'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'] = $this->keys['amazon_secret'];
-       $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'] = $this->keys['amazon_bucket'];
+       $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'] = $this->keys['amazon_bucket'];
        $app->configData['configuration']['civic_commons_settings']['value']['CC_APPLICATION_URL']['value'] = $this->keys['cc_application_url'];
 
        unlink(PA::$project_dir . APPLICATION_CONFIG_FILE);
