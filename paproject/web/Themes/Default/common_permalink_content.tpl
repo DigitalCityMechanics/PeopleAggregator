@@ -6,28 +6,28 @@ require_once "api/Permissions/PermissionsHandler.class.php";
       <?php
         if( $edit_link ) {
       ?>
-      <a href="<?php echo $edit_link?>" class="button">edit</a>
+      <a href="<?php echo $edit_link?>">edit</a>
       <?php
         }
       ?>
       <?php
         if( $delete_link) {
       ?>
-        <a href="<?php echo $delete_link?>" onclick="javascript: return delete_content1();" class="button">delete</a>
+        <a href="<?php echo $delete_link?>" onclick="javascript: return delete_content1();">delete</a>
       <?php
         }
      ?>
       <?php
         if( $approval_link) {
       ?>
-        <a href="<?php echo $approval_link?>" class="button">approve</a>
+        <a href="<?php echo $approval_link?>">approve</a>
       <?php
         }
       ?>
       <?php
         if( $denial_link) {
       ?>
-        <a href="<?php echo $denial_link?>" class="button">deny</a>
+        <a href="<?php echo $denial_link?>">deny</a>
       <?php
         }
       ?>
