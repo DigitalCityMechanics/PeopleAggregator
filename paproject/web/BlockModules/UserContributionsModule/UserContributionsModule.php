@@ -157,7 +157,7 @@ class UserContributionsModule extends Module {
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => "No contributions yet", 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
 			$responseStatus = $request->createCurl();
-			$responseStatus = 200;
+
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
