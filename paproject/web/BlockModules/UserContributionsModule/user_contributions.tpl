@@ -8,24 +8,24 @@ if(count($contributions) > 0):
 	<?php			
 	else:
 		foreach($contributions  as $contribution):
-			$typeClass = "dnld "; 
+			$typeClass = " "; 
 			if((isset($contribution['type']))){
 				$classToSet = "";
 				switch ($contribution['type']){
 					case "attached_file":
-						$classToSet = "document";
+						$classToSet = "dnld document";
 						break;
 					case "video":
-						$classToSet = "video";
+						$classToSet = "dnld video";
 						break;
 					case "link":
-						$classToSet = "link";
+						$classToSet = "dnld link";
 						break;
 					case "image":
-						$classToSet = "image";
+						$classToSet = "dnld image";
 						break;
 					case "link":
-						$classToSet = "link";
+						$classToSet = "dnld link";
 						break;
 					default:
 						break;
@@ -42,11 +42,14 @@ if(count($contributions) > 0):
 						case "comment":
 							break;
 						case "image":
-						?>						
-						<?php if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
+							if(isset($contribution['attachment_url'])):
+								$linkText = (isset($contribution['link_text']) && !empty($contribution['link_text'])) ? $contribution['link_text'] : "View Image";
+							?>
+								<a href="<?= $contribution['attachment_url']?>"><?= $linkText ?></a>
+							<?php endif; ?>	
+						<?php /* if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
 							<img src="<?= $contribution['attachment_url'] ?>" class="callout">
-						<?php endif;
-						
+						<?php endif;*/
 							break;
 						case "link":
 						case "ppl_agg_contribution":
