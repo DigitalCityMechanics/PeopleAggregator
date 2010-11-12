@@ -82,7 +82,11 @@ class UserContributionsModule extends Module {
 				$contributionsList = $contributionsArray[0]['contributions'];
 			}else if(isset($contributionsArray) && isset($contributionsArray['total']) && isset($contributionsArray['contributions'])){
 				$totalContributions = $contributionsArray['total'];
-				$contributionsList = $contributionsArray['contributions'];			
+				if($totalContributions > 0){
+					$contributionsList = $contributionsArray['contributions'];
+				}else{
+					$contributionsList = $contributionsArray;
+				}		
 			}else if(isset($contributionsArray['contributions']) && !empty($contributionsArray['contributions'])){
 				$contributionsList = $contributionsArray['contributions'];
 			}else{
@@ -157,6 +161,8 @@ class UserContributionsModule extends Module {
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
+					$jsonResults[] = $defaultResult;
+				}else if($jsonResults['total'] == 0){
 					$jsonResults[] = $defaultResult;
 				}
 				return $jsonResults;
