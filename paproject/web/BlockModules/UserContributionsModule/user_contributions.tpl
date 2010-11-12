@@ -7,20 +7,33 @@ if(count($contributions) > 0):
 		
 	<?php			
 	else:
-		foreach($contributions  as $contribution): 
-			$typeClass = (isset($contribution['type'])) ? $contribution['type'] : "" ;
-			$class = (isset($contribution['type']) 
-								 && (	   $contribution['type'] != "link" 
-										&& $contribution['type'] != "question" 
-										&& $contribution['type'] != "suggestion"  
-										&& $contribution['type'] != "ppl_agg_contribution"
-										&& $contribution['type'] != "attached_file"												
-										&& $contribution['type'] != "comment")) ? "offset-3" : "";
-		 
-		
+		foreach($contributions  as $contribution):
+			$typeClass = "dnld "; 
+			if((isset($contribution['type']))){
+				$classToSet = "";
+				switch ($contribution['type']){
+					case "attached_file":
+						$classToSet = "document";
+						break;
+					case "video":
+						$classToSet = "video";
+						break;
+					case "link":
+						$classToSet = "link";
+						break;
+					case "image":
+						$classToSet = "image";
+						break;
+					case "link":
+						$classToSet = "link";
+						break;
+					default:
+						break;
+				}
+				$typeClass .= $classToSet;
+			}
 		?>
 			<div class="<?= $typeClass ?>">
-				<div class="<?= $class ?>">
 				<?php 
 				if(isset($contribution['type']) && !empty($contribution['type'])):	
 					switch ($contribution['type']){
@@ -48,12 +61,16 @@ if(count($contributions) > 0):
 						case "question":
 							break;
 						case "video":
+							if(isset($contribution['link_url'])):
+								$linkText = (isset($contribution['link_text']) && !empty($contribution['link_text'])) ? $contribution['link_text'] : "Visit Link";
+							?>
+								<a href="<?= $contribution['link_url']?>"><?= $linkText ?></a>
+							<?php endif;
 							 if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
 								<?= $contribution['attachment_url'] ?>
 							<?php endif; 
 						break;
 						case "top_level_contribution":
-							//echo "top_level_contribution";
 							break;
 						case "attached_file":
 						?>						
@@ -81,8 +98,7 @@ if(count($contributions) > 0):
 							}
 						}
 					?>							
-				</p>		
-				</div>
+				</p>	
 			</div>
 
 		<?php endforeach; ?>		
