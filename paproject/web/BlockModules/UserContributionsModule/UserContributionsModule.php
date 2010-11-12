@@ -14,6 +14,7 @@
  */
 ?>
 <?php
+require_once "web/includes/classes/Pagination.php";
 require_once "web/includes/classes/CurlRequestCreator.php";
 require_once "api/Content/Content.php";
 require_once "api/Group/Group.php";
@@ -33,10 +34,12 @@ class UserContributionsModule extends Module {
 	private $uid;
 	private $_contributions;
 	private $_thoughts;
+	private $_numberOfPages;	
 
 	function __construct() {
 		parent::__construct();
 		$this->html_block_id = 'UserContributionsModule';
+		$this->_numberOfPages = 0;
 	}
 
 	public function initializeModule($request_method, $request_data)  {
@@ -60,13 +63,51 @@ class UserContributionsModule extends Module {
 	function render() {
 		global $login_uid, $page_uid;
 		$content = null;
+		$totalContributions = -1;
+		$contributionsPerPage = 6; // contributions to show per page
+		if(isset($_GET['page']) && !empty($_GET['page'])){
+			$currentPage = $_GET['page'];	
+			if(!is_numeric($currentPage)){
+				$currentPage = 1;
+			}					
+		}else{
+			$currentPage = 1;
+		}
 		
 		if($this->mode == self::USERMODE){
-			$this->_contributions = $this->get_contributions_data($this->uid);
+			$contributionsArray = $this->get_contributions_data($this->uid,$contributionsPerPage, $currentPage);
+
+			if(isset($contributionsArray) && isset($contributionsArray[0]['total']) && isset($contributionsArray[0]['contributions'])){
+				$totalContributions = $contributionsArray[0]['total'];
+				$contributionsList = $contributionsArray[0]['contributions'];
+			}else if(isset($contributionsArray) && isset($contributionsArray['total']) && isset($contributionsArray['contributions'])){
+				$totalContributions = $contributionsArray['total'];
+				$contributionsList = $contributionsArray['contributions'];			
+			}else if(isset($contributionsArray['contributions']) && !empty($contributionsArray['contributions'])){
+				$contributionsList = $contributionsArray['contributions'];
+			}else{
+				$contributionsList = $contributionsArray;
+			}
+			$this->_contributions = $contributionsList;
+
+			if($totalContributions > 0){
+				$this->_numberOfPages = $totalContributions/$contributionsPerPage;				
+				$this->_numberOfPages = (int)ceil($this->_numberOfPages);				
+			}
+			
+			
+				
+		    $Pagination = new Pagination;
+		    $pagingSettings["page"] = $currentPage;   
+		    $pagingSettings["show"] = $contributionsPerPage;
+		    $pagingSettings["count"] = $totalContributions;
+		    $Pagination->setPaging($pagingSettings);
+		    $this->page_links = $Pagination->getPageLinks();
+				
 		}else if($this->mode == self::ORGMODE){
 			$this->_contributions = array();
 		}
-	
+
 		$this->inner_HTML = $this->generate_inner_html();
 		$content = parent::render();
 
@@ -79,8 +120,9 @@ class UserContributionsModule extends Module {
 		$tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/center_inner_public.tpl';
 
 		$inner_html_gen = new Template($tmp_file);
-		$inner_html_gen->set('contributions', $this->_contributions);
-		$inner_html_gen->set('thoughts', $this->_thoughts);
+		$inner_html_gen->set('contributions', $this->_contributions);	
+		$inner_html_gen->set('page_links', $this->page_links);
+		
 		$inner_html_gen->set('mode', $this->mode);
 		$inner_html_gen->set('USERMODE', self::USERMODE);
 		$inner_html_gen->set('ORGMODE', self::ORGMODE);
@@ -90,13 +132,14 @@ class UserContributionsModule extends Module {
 		return $inner_html;
 	}
 
-
 	/**
-	 * Get contributions data.
-	 * @param 	$User_id
-	 * @return	an associative array of the response data. If no data is present or there is an error, no data is returned
+	 * Get contributions data for the given user and the number of contributions to return and the requested page for paging
+	 * @param int $User_id
+	 * @param int $ContributionsPerPage
+	 * @param int $RequestedPage
+	 * @return an associative array of the response data. If no data is present or there is an error, no data is returned
 	 */
-	function get_contributions_data($User_id){
+	function get_contributions_data($User_id, $ContributionsPerPage, $RequestedPage){
 		//TODO: throw exceptions and check for bad error codes
 		//TODO: put URL in App_Config.xml
 		// TEMPORARY TEST CODE, REMOVE LATER
@@ -104,8 +147,9 @@ class UserContributionsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
-			//$url = "http://www.peeps.com/sample_contributions_json.html";
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);			
+			//$url = "http://www.peeps.com/contributions.html";
+			$url = $url . "?per_page=" . $ContributionsPerPage . "&page=" . $RequestedPage;			
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => "No contributions yet", 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
 			$responseStatus = $request->createCurl();

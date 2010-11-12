@@ -8,17 +8,18 @@ if(count($contributions) > 0):
 	<?php			
 	else:
 		foreach($contributions  as $contribution): 
-			$dividedClass = (isset($contribution['type'])) ? $contribution['type'] : "" ;
+			$typeClass = (isset($contribution['type'])) ? $contribution['type'] : "" ;
 			$class = (isset($contribution['type']) 
-								 && ($contribution['type'] != "link" 
+								 && (	   $contribution['type'] != "link" 
 										&& $contribution['type'] != "question" 
 										&& $contribution['type'] != "suggestion"  
-										&& $contribution['type'] != "video" 
+										&& $contribution['type'] != "ppl_agg_contribution"
+										&& $contribution['type'] != "attached_file"												
 										&& $contribution['type'] != "comment")) ? "offset-3" : "";
 		 
 		
 		?>
-			<div class="<?= $dividedClass ?>">
+			<div class="<?= $typeClass ?>">
 				<div class="<?= $class ?>">
 				<?php 
 				if(isset($contribution['type']) && !empty($contribution['type'])):	
@@ -35,6 +36,7 @@ if(count($contributions) > 0):
 						
 							break;
 						case "link":
+						case "ppl_agg_contribution":
 							if(isset($contribution['link_url'])):
 								$linkText = (isset($contribution['link_text']) && !empty($contribution['link_text'])) ? $contribution['link_text'] : "Visit Link";
 							?>
@@ -46,21 +48,20 @@ if(count($contributions) > 0):
 						case "question":
 							break;
 						case "video":
-							 if(isset($contribution['embed_code']) && !empty($contribution['embed_code'])): ?>
-								<?= $contribution['embed_code'] ?>
+							 if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
+								<?= $contribution['attachment_url'] ?>
 							<?php endif; 
 						break;
 						case "top_level_contribution":
 							//echo "top_level_contribution";
 							break;
-						case "ppl_agg_contribution":
-							//echo "ppl_agg_contribution";
-							break;
-						case "suggested_action":
-							//echo "suggested_action";
-							break;
 						case "attached_file":
-							//echo "attached_file";
+						?>						
+						<?php if(isset($contribution['attachment_url']) && !empty($contribution['attachment_url'])): ?>
+							<a href="<?= $contribution['attachment_url'] ?>">
+								<?php echo (isset($contribution['link_text']) && !empty($contribution['link_text'])) ? $contribution['link_text'] : "View File";  ?>
+							</a>
+						<?php endif;						
 							break;
 						default:
 							break;
@@ -84,10 +85,14 @@ if(count($contributions) > 0):
 				</div>
 			</div>
 
-		<?php endforeach; ?>
-		<!-- <div class="pagination">
-		<p><span class="prev">Prev</span><a class="current" href="#">1</a><a href="#">2</a> <a href="#">3</a><a href="#">4</a><a class="next" href="#">Next</a></p>
-		</div> -->
+		<?php endforeach; ?>		
 	<?php endif; ?>
 <?php endif; ?>
 </div>
+<div class="pagination">
+	<?php if( $page_links ) { ?>
+		<div class="pagination">
+			<?php echo $page_links; ?>
+		</div>
+	<?php }  ?>
+</div> 
