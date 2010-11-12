@@ -255,7 +255,9 @@ class CurlRequestCreator {
 			$this->_response = curl_exec($s);
 			$this->_status = curl_getinfo($s,CURLINFO_HTTP_CODE);
 
-			list($this->_header, $this->_body) = explode("\r\n\r\n", $this->_response, 2);
+			if(isset($this->_response) && !empty($this->_response)){
+				list($this->_header, $this->_body) = explode("\r\n\r\n", $this->_response, 2);
+			}
 
 			//get the default response headers
 			$this->response_header_array = curl_getinfo($s);
