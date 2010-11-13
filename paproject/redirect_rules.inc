@@ -12,10 +12,6 @@ define('CC_ROUTE_ORGANIZATIONS', 	'/organizations');
 define('CC_ROUTE_ISSUES', 			'/issues');
 define('CC_ROUTE_ABOUT', 			'/about');
 
-if(!defined('CC_IN_THE_NEWS_CONTENT_ID')){
-	define('CC_IN_THE_NEWS_CONTENT_ID',	6); // TODO: remove this whole check later
-}
-
 // Routing rewrites:
 
   $project_routes = array (
@@ -67,8 +63,8 @@ if(!defined('CC_IN_THE_NEWS_CONTENT_ID')){
  	*  /in-the-news/ -> in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID
  	*
  	**/
-	"^/press(.*)$" => "/in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID,
-	"^/in-the-news(.*)$" => "/in-the-news.php?cid=".CC_IN_THE_NEWS_CONTENT_ID,
+	"^/press(.*)$" => "/in-the-news.php?cid=".$app->configData['configuration']['civic_commons_settings']['value']['CC_IN_THE_NEWS_CONTENT_ID']['value'],
+	"^/in-the-news(.*)$" => "/in-the-news.php?cid=".$app->configData['configuration']['civic_commons_settings']['value']['CC_IN_THE_NEWS_CONTENT_ID']['value'],
   );
   
 ?>
