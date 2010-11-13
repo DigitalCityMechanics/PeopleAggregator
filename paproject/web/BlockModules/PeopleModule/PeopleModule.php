@@ -261,8 +261,8 @@ class PeopleModule extends Module {
       $this->sort_by = 'login_name';
       $sorting_direction = 'ASC';
     } else {
-      $this->sort_by = 'created';
-      $sorting_direction = 'DESC';
+      $this->sort_by = 'display_name';
+      $sorting_direction = 'ASC';
     }
 
     $this->only_with_photo = !$this->no_photo_ok;
