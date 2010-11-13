@@ -488,7 +488,7 @@ class Network {
     // used by install at a time when NU.created may not yet exist
     // -Martin
     $sort_by = ( @$params['sort_by'] ) ? $params['sort_by'] : 'U.created';
-    $direction = ( @$params['direction'] ) ? $params['direction'] : 'DESC';
+    $direction = ( @$params['direction'] ) ? $params['direction'] : 'ASC';
     $order_by = ' ORDER BY '.$sort_by.' '.$direction;
     if ( @$params['page'] && @$params['show'] && !@$params['cnt']) {
       $start = ($params['page'] -1) * $params['show'];
