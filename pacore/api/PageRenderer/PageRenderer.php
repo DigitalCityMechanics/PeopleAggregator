@@ -764,8 +764,22 @@ class PageRenderer {
             . "</style>\n";
         }
 
-
         $extra_head_html .= $this->extra_head_html;
+
+		// add google analytics code
+		$extra_head_html .= '<script type="text/javascript">'."\n"
+			.' var _gaq = _gaq || [];'."\n"
+			.' _gaq.push([\'_setAccount\', \''
+			.GOOGLE_ANALYTICS_KEY
+			.'\']);'."\n"
+			.' _gaq.push([\'_setDomainName\', \'.theciviccommons.com\']);'."\n"
+			.'  _gaq.push([\'_trackPageview\']);'."\n"
+			.' (function() {'."\n"
+			.'   var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;'."\n"
+			.'   ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';'."\n"
+			.'   var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);'."\n"
+			.' })();'."\n"
+			.'</script>'."\n";
 
         return $extra_head_html;
     }
