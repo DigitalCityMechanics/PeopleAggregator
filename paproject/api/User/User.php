@@ -273,9 +273,8 @@ class User {
     }
 
     if (!$key_column) {
-      $key_column = is_int($user_id_or_login_name) ? "user_id" : "login_name";
+      $key_column = is_numeric($user_id_or_login_name) ? "user_id" : "login_name";
     }
-
     if (!in_array($key_column, array("user_id", "login_name", "email"))) {
       throw new PAException(VALIDATION_INCORRECT_TYPE, "Invalid user id type '$key_column'; must be either 'user_id', 'login_name' or 'email'");
     }
@@ -511,7 +510,7 @@ class User {
   public function get_auth_token($lifetime) {
     // FIXME: generate a more opaque token - this method probably isn't secure
     $expires = time() + $lifetime;
-    return User::build_auth_token($this->login_name, $this->password, $expires);
+    return User::build_auth_token($this->user_id, $this->password, $expires);
   }
 
   /**
