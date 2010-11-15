@@ -332,6 +332,12 @@ class PAInstaller {
           $form->addHtml('</div>');
 	  $form->closeTag('fieldset');
 	  $form->openTag('fieldset');
+	  $form->openTag('fieldset');
+	  $form->addContentTag('legend', array('value' => 'Site Settings'));	  
+	  $form->addHtml("<p class='inst_info'>Specify a password pepper. Bcrypt is used to encrypt the password.</p>");
+	  $form->addInputField('text', __('Password Pepper'), array('id' => 'pw_pepper', 'required' => true));
+	  
+	  $form->closeTag('fieldset');
 	  $form->addContentTag('legend', array('value' => 'Service Hooks'));
 	  $form->addHtml("<p class='inst_info'>Add API keys to your PeopleAggregator install so that users can invite Facebook contacts into your service.</p>");
 	  $form->addInputField('text', __('Facebook API Key'), array('id' => 'fb_key', 'required' => false));
@@ -370,7 +376,7 @@ class PAInstaller {
 	   $this->allow_network_spawning = (isset($form_data['network_spawning']) && $form_data['network_spawning'] == 'checked') ? 1 : 0;
 	   $domain = explode(".", $_SERVER['SERVER_NAME']);
 	   $this->subdomain = (isset($form_data['domain_prefix'])) ? $form_data['domain_prefix'] : $domain[0];
-	   $this->keys = array('key'=>$form_data['fb_key'],'secret'=>$form_data['fb_secret'], 'amazon_key'=>$form_data['amazon_key'],'amazon_secret'=>$form_data['amazon_secret'],'amazon_bucket'=>$form_data['amazon_bucket'],'cc_application_url'=>$form_data['cc_application_url']);
+	   $this->keys = array('key'=>$form_data['fb_key'],'secret'=>$form_data['fb_secret'], 'amazon_key'=>$form_data['amazon_key'],'amazon_secret'=>$form_data['amazon_secret'],'amazon_bucket'=>$form_data['amazon_bucket'],'cc_application_url'=>$form_data['cc_application_url'], 'pw_pepper'=>$form_data['pw_pepper']);
 
 	   if (!$this->admin_exists) { 
 		   $error = false;
@@ -493,6 +499,7 @@ class PAInstaller {
        $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'] = $this->keys['amazon_secret'];
        $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'] = $this->keys['amazon_bucket'];
        $app->configData['configuration']['civic_commons_settings']['value']['CC_APPLICATION_URL']['value'] = $this->keys['cc_application_url'];
+       $app->configData['configuration']['site_related']['value']['PASSWORD_PEPPER']['value'] = $this->keys['pw_pepper'];
 
        unlink(PA::$project_dir . APPLICATION_CONFIG_FILE);
        $confObj  = new XmlConfig(null, 'application');
