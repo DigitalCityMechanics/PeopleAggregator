@@ -896,6 +896,9 @@
             <bulletin_body>1</bulletin_body>
           </value>
         </tags_allowed_in_fields>
+        <GOOGLE_ANALYTICS_KEY category="constant" type="string" readonly="true" section="site_related" description="The Google Analytic key value to use for stat tracking.">
+          <value></value>
+        </GOOGLE_ANALYTICS_KEY>
       </value>
     </site_related>
     <basic_network_settings description="Basic network settings.">

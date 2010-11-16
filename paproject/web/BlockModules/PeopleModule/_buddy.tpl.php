@@ -29,6 +29,5 @@
 
   <div class="text-container" id="label_<?= $link['user_id'] ?>">
     <h4><a href="<?= $link['user_url'] ?>"><?= $link['display_name'] ?></a></h4>
-    <p>Member since <?php echo date('M j, Y', intval($link['created'])); ?></p>
   </div>
 </div>
