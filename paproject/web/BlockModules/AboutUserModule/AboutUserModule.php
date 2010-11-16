@@ -52,7 +52,7 @@ class AboutUserModule extends Module {
 				if(!empty(PA::$login_uid)){
 					$this->login_uid = PA::$login_uid;
 				}
-				$this->title = __("About") . " " . abbreviate_text((ucfirst(PA::$page_user->display_name)), 18, 10);
+				$this->title = __("About") . " " . ucfirst(PA::$page_user->display_name);
 		}
 
 		$user_generaldata = User::load_user_profile((int)$this->uid, $this->login_uid, GENERAL);
