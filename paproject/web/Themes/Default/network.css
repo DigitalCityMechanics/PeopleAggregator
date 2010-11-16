@@ -3939,3 +3939,7 @@ fieldset.search {
 fieldset.search a {
 	font-size: 0.8em;
 }
+
+#MyLinksModule .module_browse_groups li {
+	border-bottom: none;
+}
