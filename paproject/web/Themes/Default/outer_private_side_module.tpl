@@ -10,14 +10,14 @@
 	  <?php 
 	    if ($view_all_url) {
   	?>   
-	      <div class="view_all"><a class="button" href="<?php echo $view_all_url?>">view all</a></div>
+	      <div class="view_all"><a href="<?php echo $view_all_url?>">view all</a></div>
 	  <?php 
 	    }
   	?>
 	  <?php 
 	    if ($manage_links_url) {
   	?>   
-	      <div class="view_all"><a class="button" href="<?php echo $manage_links_url?>">Manage Links</a></div>
+	      <div class="view_all"><a href="<?php echo $manage_links_url?>">Manage Links</a></div>
 	  <?php 
 	    }
  	 ?>

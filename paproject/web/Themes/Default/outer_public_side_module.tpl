@@ -11,7 +11,7 @@
 	  <?php 
 	    if ($view_all_url) {
   	?>   
-	      <div class="view_all"><a class="button" href="<?php echo $view_all_url?>"><?= __("view all") ?></a></div>
+	      <div class="view_all"><a href="<?php echo $view_all_url?>"><?= __("view all") ?></a></div>
 	  <?php 
 	    }
   	?>

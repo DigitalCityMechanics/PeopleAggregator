@@ -858,9 +858,11 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	background: url(images/bg_photo.gif) no-repeat 0 0; }
 
 .view_all {
-	padding-bottom: 10px;
+	border: 1px solid #CCCCCC;
+	margin: 5px 70px 5px 70px;
+	padding: 3px;
 	text-align: center;
-}
+	background-color: #EEEEEE; }
 
 .module_browse_groups ul,
 .module_more_info ul {
@@ -3938,8 +3940,4 @@ fieldset.search {
 
 fieldset.search a {
 	font-size: 0.8em;
-}
-
-#MyLinksModule .module_browse_groups li {
-	border-bottom: none;
 }
