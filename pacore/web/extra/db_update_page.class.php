@@ -83,13 +83,15 @@ class db_update_page
                                  "INSERT IGNORE INTO {tasks_roles} (`task_id`, `role_id`) VALUES (".$task_id.", ".$child_role['id'].");"
                                 );
        }
-/*
-		require_once('api/Suggestion/Suggestion.php');
-		$this->qup(
-			'2010-09-14, by: Jonathan Knapp - adding Suggestion content_type',
-			'INSERT INTO {content_types} (type_id, name, description) VALUES ('.Suggestion::TYPE_ID.', "'.Suggestion::TYPE_NAME.'", "'.Suggestion::TYPE_DESCRIPTION.'")'
-		);
-*/
+
+		require_once('api/Contribution/Contribution.php');
+		if(!Contribution::table_exists()) {
+			$this->qup(
+				'2010-11-17, by: Jonathan Knapp - adding cc_contributions table to database',
+				"CREATE  TABLE `cc_contributions` ( `content_id` INT NOT NULL , `url` TEXT NOT NULL , PRIMARY KEY (`content_id`) );"
+			);
+		}
+
         $this->run_xml_updates();
         run_net_extra();
     }//__endof__ do_updates
