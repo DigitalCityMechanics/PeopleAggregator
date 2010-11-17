@@ -104,8 +104,18 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
           $r = Contribution::save_contribution($cid, PA::$login_uid, $_POST["blog_title"], $_POST["description"], $track, $terms, -1, $is_active);
 		  if($type == 'Contribution' && $redirect != '') {
             $url_parts = parse_url($redirect);
-
             parse_str($url_parts['query'], $query_args);
+
+			// save a url to the conversation or issue created from CC
+			$cc_url = '';
+			if(isset($query_args['conversation_id'])) {
+				$cc_url = CC_APPLICATION_URL.'/contributions/'.$query_args['conversation_id'];
+			}
+			if(isset($query_args['issue_id'])) {
+				$cc_url = CC_APPLICATION_URL.'/issues/'.$query_args['issue_id'];
+			}
+			$res = Dal::query("INSERT INTO {cc_contributions} (content_id, url) VALUES (?, ?)", array(intval($r['cid']), $cc_url));
+
             if(!isset($query_args['title'])) {
               $query_args['title'] = $_POST["blog_title"];
             }
