@@ -32,6 +32,16 @@ class Contribution extends BlogPost {
 		$this->type = self::TYPE_ID;
 	}
 
+	public static function get_original_content_url($content_id) {
+		$res = Dal::query("SELECT url FROM {cc_contributions} WHERE content_id = ?", array($content_id));
+		if ($res->numRows()) {
+			while($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
+				return $row->url;
+			}
+		}
+		return '';
+	}
+
 	public static function table_exists() {
 		$res = Dal::query("SHOW TABLES LIKE 'cc_contributions'");
 		return ($res->numRows() > 0) ? true : false;

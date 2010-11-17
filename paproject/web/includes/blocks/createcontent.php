@@ -217,20 +217,30 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 
 		case 'Contribution':
 			$post_saved = Contribution::save_contribution(0, PA::$login_uid, $_POST["blog_title"], $_POST["description"], NULL, $terms, $ccid, 1, $display_on_homepage);
-			if($type == 'Contribution' && $redirect != '') {
-	          $url_parts = parse_url($redirect);
+		  if($type == 'Contribution' && $redirect != '') {
+            $url_parts = parse_url($redirect);
+            parse_str($url_parts['query'], $query_args);
 
-	          parse_str($url_parts['query'], $query_args);
-	          if(!isset($query_args['title'])) {
-	            $query_args['title'] = $_POST["blog_title"];
-	          }
-	          if(!isset($query_args['link'])) {
+			// save a url to the conversation or issue created from CC
+			$cc_url = '';
+			if(isset($query_args['conversation_id'])) {
+				$cc_url = CC_APPLICATION_URL.'/contributions/'.$query_args['conversation_id'];
+			}
+			if(isset($query_args['issue_id'])) {
+				$cc_url = CC_APPLICATION_URL.'/issues/'.$query_args['issue_id'];
+			}
+			$res = Dal::query("INSERT INTO {cc_contributions} (content_id, url) VALUES (?, ?)", array(intval($post_saved['cid']), $cc_url));
+
+            if(!isset($query_args['title'])) {
+              $query_args['title'] = $_POST["blog_title"];
+            }
+            if(!isset($query_args['link'])) {
               $query_args['link'] = PA::$url.'/content/cid='.$post_saved['cid'];
-	          }
-	          $redirect = $url_parts['scheme'].'://'.$url_parts['host'];
-			  $redirect .= (isset($url_parts['port']) && $url_parts['port'] != '' && $url_parts['port'] != '80') ? ':'.$url_parts['port'] : '';
-			  $redirect .= $url_parts['path'].'?'.http_build_query($query_args);
-		    }
+            }
+            $redirect = $url_parts['scheme'].'://'.$url_parts['host'];
+			$redirect .= (isset($url_parts['port']) && $url_parts['port'] != '' && $url_parts['port'] != '80') ? ':'.$url_parts['port'] : '';
+			$redirect .= $url_parts['path'].'?'.http_build_query($query_args);
+		  }
 		    break;
 
 		case 'Suggestion':
