@@ -224,7 +224,7 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
 			// save a url to the conversation or issue created from CC
 			$cc_url = '';
 			if(isset($query_args['conversation_id'])) {
-				$cc_url = CC_APPLICATION_URL.'/contributions/'.$query_args['conversation_id'];
+				$cc_url = CC_APPLICATION_URL.'/conversations/'.$query_args['conversation_id'];
 			}
 			if(isset($query_args['issue_id'])) {
 				$cc_url = CC_APPLICATION_URL.'/issues/'.$query_args['issue_id'];
