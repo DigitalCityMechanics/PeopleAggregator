@@ -33,7 +33,7 @@
 					</a>
 				</p>
 				<a href="<?php echo CC_APPLICATION_URL . "/people/register/new" ?>" class="createacct-link">
-					Sign up
+					Sign Up
 				</a>
 			</div>
 		</div>
