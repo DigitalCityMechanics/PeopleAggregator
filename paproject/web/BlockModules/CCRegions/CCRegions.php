@@ -28,7 +28,7 @@ class CCRegions extends Module {
   
   function __construct() {
     parent::__construct();
-    $this->title = __('Regions');
+    $this->title = __('Northeast Ohio Counties');
   }
   function render() {
     $this->inner_HTML = $this->generate_inner_html();
