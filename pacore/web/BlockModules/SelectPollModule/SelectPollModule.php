@@ -37,6 +37,8 @@ class SelectPollModule extends Module {
     $this->poll_id = array();
     $this->content_id = array();
     $this->options = array();
+    $this->gid = (isset($_GET) && isset($_GET['gid']) && is_numeric($_GET['gid'])) ? intval($_GET['gid']) : 0;
+    $this->gid = (isset($_POST) && isset($_POST['gid']) && is_numeric($_POST['gid'])) ? intval($_POST['gid']) : $this->gid;
   }
 
   public function initializeModule($request_method, $request_data) {
@@ -51,9 +53,9 @@ class SelectPollModule extends Module {
       $obj->delete_poll($p_id, $c_id);
       $this->message = __('Poll has been deleted successfully.');
 	  $this->queryString = '?page_id='.PAGE_POLL.'&type=select';
-        if ($request_data['gid'] != 0) {
-			$this->redirect2 = PA::$url."/group_poll.php?gid=".((int)$request_data['gid'])."&type=select";
-			$this->queryString .= "&gid=".((int)$request_data['gid']);	
+        if ($this->gid != 0) {
+			$this->redirect2 = PA::$url."/group_poll.php?gid=".$this->gid."&type=select";
+			$this->queryString .= "&gid=".$this->gid;	
 	}else{
 	      $this->redirect2 = PA::$url."/".FILE_DYNAMIC;
 	}
@@ -84,8 +86,8 @@ class SelectPollModule extends Module {
       $obj->prev_poll_id = $request_data['prev_poll_id'];
       $obj->save_current();
 	  $this->message = __('Poll has been saved successfully.');
-	  if ($request_data['gid'] != 0) {
-		  $this->redirect2 = PA::$url."/group_poll.php?gid=".((int)$request_data['gid'])."&type=select"; 
+	  if ($this->gid != 0) {
+		  $this->redirect2 = PA::$url."/group_poll.php?gid=".$this->gid."&type=select"; 
 	  } else {
 		  $this->redirect2 = NULL;
 	  }
@@ -108,11 +110,8 @@ class SelectPollModule extends Module {
       $obj->title = $poll_topic;
       $obj->body = $option;
       $obj->parent_collection_id = 0;
-	  $obj->user_id = PA::$login_uid;
-		$obj->group_id = 0;
-		if ($request_data['gid'] != NULL) {
-			$obj->group_id = (int)$request_data['gid'];
-		}
+      $obj->user_id = PA::$login_uid;
+      $obj->group_id = $this->gid;
       $obj->options = $option;
       $obj->is_active = INACTIVE;
       $obj->save_poll();
@@ -130,7 +129,7 @@ class SelectPollModule extends Module {
 
   public function render() {
     $obj = new Poll();
-    $topic = $obj->load_poll(0,$_GET['gid']);
+    $topic = $obj->load_poll(0, $this->gid);
     foreach($topic as $t) {
       if(is_object($t)) {
         $this->poll_id[] = $t->poll_id;
@@ -139,7 +138,7 @@ class SelectPollModule extends Module {
       } 
     }
     $this->topic = $topic;
-    $this->current_poll = $obj->load_current($_GET['gid']);
+    $this->current_poll = $obj->load_current($this->gid);
     $this->inner_HTML = $this->generate_inner_html();
     $content = parent::render();
     return $content;
@@ -162,6 +161,7 @@ class SelectPollModule extends Module {
     $inner_html_gen->set('content_id',$this->content_id);
     $inner_html_gen->set('current_poll',$this->current_poll);
     $inner_html_gen->set('options',$this->options);
+    $inner_html_gen->set('gid', $this->gid);
     $inner_html = $inner_html_gen->fetch();
     return $inner_html;
   }

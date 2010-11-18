@@ -67,13 +67,12 @@ class PollModule extends Module {
       }
       if (!empty($vote)) {
         for ($i=0; $i<count($vote); $i++){
-          $this->option_precent[] = round(($vote[$i][2]->counter / $this->total_vote_count) * 100, 1); 
-          $this->option_vote_count[] = $vote[$i][2]->counter; 
+          $this->option_precent[] = round(($vote[$i][2]->counter / $this->total_vote_count) * 100, 1);
+          $this->option_vote_count[] = $vote[$i][2]->counter;
         }
       }
       $this->inner_HTML = $this->generate_inner_html();
-      $content = parent::render();
-      return $content;
+      return $this->inner_HTML;
     } else {
       $this->do_skip = TRUE;
       return 'skip';
