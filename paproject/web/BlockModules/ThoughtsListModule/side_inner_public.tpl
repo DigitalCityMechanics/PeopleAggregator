@@ -6,6 +6,6 @@
 		<?php } // end foreach ?>
 	</ul>
 	<?php if(isset($manage_thoughts_url)): ?>
-		<div class="view_all"><a href="<?= $manage_thoughts_url ?>">Manage Thoughts</a></div>
+		<div class="view_all"><a href="<?= $manage_thoughts_url ?>">Manage "On My Mind"</a></div>
 	<?php endif; ?>
 <?php } // end count check ?>
