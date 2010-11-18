@@ -570,6 +570,62 @@ function peopleaggregator_newUser($args)
 }
 
 
+function peopleaggregator_editUser($args)
+{
+	// check admin password
+	global $admin_password;
+	if (!$admin_password){
+		header('HTTP/1.1 412 Precondition Failed');
+		throw new PAException(OPERATION_NOT_PERMITTED, "editUser API method may not be called without an admin password defined in the Application Configuration File");
+	}else if(!isset($args['adminPassword']) || !$args['adminPassword']){
+		header('HTTP/1.1 412 Precondition Failed');
+		throw new PAException(OPERATION_NOT_PERMITTED, "editUser API method may not be called without an admin password");
+	}else if ($admin_password != $args['adminPassword']){
+		header('HTTP/1.1 401 Unauthorized');
+		throw new PAException(USER_INVALID_PASSWORD, "adminPassword incorrect");
+	}
+	// fetch network info
+	$home_network = Network::get_network_by_address($args['homeNetwork']);
+	
+	if (!$home_network){
+		//TODO: read this from AppConfig.xml
+		$home_network = "default";
+	}
+
+	if(isset($args['id']) && !empty($args['id'])){
+		$user_id = $args['id']; 
+		$user = new User();
+		$user->load($user_id);
+		$user->api_call = true;    // api_call indicates that this is a PeopleAggregator API request
+		$user->password = (isset($args['password']) && !empty($args['password'])) ? $args['password'] : $user->password;
+		$user->first_name = (isset($args['firstName']) && !empty($args['firstName'])) ? $args['firstName'] : $user->first_name;
+		$user->last_name = (isset($args['lastName']) && !empty($args['lastName'])) ? $args['lastName'] : $user->last_name;
+		$user->login_name = (isset($args['login']) && !empty($args['login'])) ? $args['login'] : $user->login_name;
+		$user->email = (isset($args['email']) && !empty($args['email'])) ? $args['email'] : $user->email;
+		$user->changed = time();
+		
+		try{
+			$user->save(false); // dont check if email already exists because the system calling this function should check
+			return array(
+				'success' => TRUE,
+				'msg' => "Modified user successfully"		
+			);
+		}catch (Exception $e){
+			echo $e->msg;
+			return array(
+				'success' => FALSE,
+				'msg' => $e->msg
+			);
+		}
+		
+	}else{
+		header('HTTP/1.1 412 Precondition Failed');
+		throw new PAException(OPERATION_NOT_PERMITTED, "editUser API method may not be called without a user id");
+		// no user id was specified, so this is an error condition		
+	}	
+}
+
+
 function peopleaggregator_deleteUser($args)
 {
 	$errorMessage = null;
