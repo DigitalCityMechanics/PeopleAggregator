@@ -92,7 +92,11 @@ class UserFollowingConversationsModule extends Module {
 			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, "conversation", $User_id);
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
 			$responseStatus = $request->createCurl();
-			$defaultResult = array('title'=>'No conversations followed yet.', 'url' => '#');
+			$empty_message = 'Not following any conversations:<br />';
+			$empty_message .= (isset(PA::$page_user) && isset(PA::$page_user->display_name))
+				? PA::$page_user->display_name.' is just getting started.'
+				: 'You seem to be just getting started.';
+			$defaultResult = array('title'=>$empty_message, 'url' => '#');
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){

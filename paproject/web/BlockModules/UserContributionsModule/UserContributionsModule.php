@@ -151,11 +151,15 @@ class UserContributionsModule extends Module {
 			$User_id = $_GET['testuser'];
 		}
 		if(isset($User_id)){
-			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);			
+			$url = $this->buildRESTAPIUrl(CC_APPLICATION_URL, CC_APPLICATION_URL_TO_API, CC_ROUTE_CONTRIBUTIONS, $User_id);
 			//$url = "http://www.peeps.com/contributions.html";
-			$url = $url . "?per_page=" . $ContributionsPerPage . "&page=" . $RequestedPage;			
+			$url = $url . "?per_page=" . $ContributionsPerPage . "&page=" . $RequestedPage;
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => "No contributions yet", 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
+			$empty_message = 'You are not participating in any conversations or issues yet: ';
+			$empty_message .= (isset(PA::$page_user) && isset(PA::$page_user->display_name))
+				? PA::$page_user->display_name.' is just getting started.'
+				: 'You seem to be just getting started.';
+			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => $empty_message, 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
 			$responseStatus = $request->createCurl();
 
 			if($responseStatus == 200){

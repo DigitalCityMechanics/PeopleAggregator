@@ -34,6 +34,10 @@ class MyLinksModule extends Module {
       $this->outer_template = 'outer_private_side_module.tpl';
     } else {
       $this->outer_template = 'outer_public_side_module.tpl';
+      $links_data_array = $this->get_user_links();
+      if(count($links_data_array) == 0) {
+        return 'skip';
+      }
     }
     switch ($this->page_id) {
       case PAGE_USER_PRIVATE:
