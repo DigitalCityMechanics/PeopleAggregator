@@ -87,8 +87,8 @@ class db_update_page
 		require_once('api/Contribution/Contribution.php');
 		if(!Contribution::table_exists()) {
 			$this->qup(
-				'2010-11-17, by: Jonathan Knapp - adding cc_contributions table to database',
-				"CREATE  TABLE `cc_contributions` ( `content_id` INT NOT NULL , `url` TEXT NOT NULL , PRIMARY KEY (`content_id`) );"
+				'2010-11-19, by: Jonathan Knapp - adding cc_contributions table to database',
+				"CREATE  TABLE `cc_contributions` ( `content_id` INT NOT NULL , `contribution_id` INT NOT NULL , `type` ENUM('issue','conversation') NOT NULL , `title` TEXT , PRIMARY KEY (`content_id`) );"
 			);
 		}
 
