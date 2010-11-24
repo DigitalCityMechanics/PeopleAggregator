@@ -155,10 +155,10 @@ class UserContributionsModule extends Module {
 			//$url = "http://www.peeps.com/contributions.html";
 			$url = $url . "?per_page=" . $ContributionsPerPage . "&page=" . $RequestedPage;
 			$request = new CurlRequestCreator($url, true, 30, 4, false, true, false);
-			$empty_message = 'You are not participating in any conversations or issues yet: ';
-			$empty_message .= (isset(PA::$page_user) && isset(PA::$page_user->display_name))
-				? PA::$page_user->display_name.' is just getting started.'
-				: 'You seem to be just getting started.';
+
+			$empty_message = (isset(PA::$page_user) && isset(PA::$page_user->first_name))
+				? PA::$page_user->first_name.' is just getting started.'
+				: 'This user is just getting started.';
 			$defaultResult = array('default'=>true, 'parent_title'=>null, 'parent_url'=> CC_APPLICATION_URL . CC_ROUTE_CONVERSATIONS, 'created_at'=> null, 'content' => $empty_message, 'attachment_url' => null, 'embed_code' => null, 'type' => null, 'link_text' => null, 'link_url' => null);
 			$responseStatus = $request->createCurl();
 
