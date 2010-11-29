@@ -54,7 +54,7 @@ class Contribution extends BlogPost {
 						break;
 
 					case 'conversation':
-						$url = CC_APPLICATION_URL.'/contributions/'.$row->contribution_id;
+						$url = CC_APPLICATION_URL.'/conversations/'.$row->contribution_id;
 						break;
 				}
 				return $url;
