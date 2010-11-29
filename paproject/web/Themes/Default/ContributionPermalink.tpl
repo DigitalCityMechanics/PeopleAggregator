@@ -1,5 +1,6 @@
 <?php
   $show_comments = false;
+  $delete_link = false;
   $original_content_url = Contribution::get_original_content_url($contents->content_id);
   $original_content_title = Contribution::get_original_content_title($contents->content_id);
 ?>
