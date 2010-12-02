@@ -493,13 +493,13 @@ abstract class Content {
     Logger::log("Enter: Content::get_user_content() | Args: \$user+id = $user_id");
     // If error occurs then throw exception
 
-    $res = Dal::query("SELECT content_id, title, body, changed, is_active FROM {contents} WHERE collection_id < 0 AND author_id = ? AND is_active = ? ORDER BY created DESC", array($user_id, 1));
+    $res = Dal::query("SELECT content_id, title, body, changed, is_active, type FROM {contents} WHERE collection_id < 0 AND author_id = ? AND is_active = ? ORDER BY created DESC", array($user_id, 1));
 
     $output = "";
     if ($res->numRows()) {
       $contents = array();
       while ($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
-        $contents[] = array('content_id' => $row->content_id, 'title' => $row->title, 'body' => $row->body, 'author_id' => $user_id, 'changed' => $row->changed, 'is_active' => $row->is_active);
+        $contents[] = array('content_id' => $row->content_id, 'title' => $row->title, 'body' => $row->body, 'author_id' => $user_id, 'changed' => $row->changed, 'is_active' => $row->is_active, 'type' => $row->type);
       }
       Logger::log("Exit: Content::get_user_content() | Returning ".$contents);
       return $contents;

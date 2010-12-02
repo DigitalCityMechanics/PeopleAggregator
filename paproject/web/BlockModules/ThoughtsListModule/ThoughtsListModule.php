@@ -97,14 +97,16 @@ class ThoughtsListModule extends Module {
 		$thoughts = Content::get_user_content($User_id);
 		if(isset($thoughts) && is_array($thoughts) && count($thoughts) > 0) {
 			foreach($thoughts as $thought) {
-				$thought['show'] = true;
-				$thought['title'] = $thought['title'];
-				$thought['image'] = null;
-				$thought['image_width'] = null;
-				$thought['image_height'] = null;
-				$thought['summary'] = $thought['body'];
-				$thought['url'] = PA::$url.'/content/cid='.$thought['content_id'];
-				$thoughtsToReturn[] = $thought;
+				if($thought['type'] != CONTRIBUTION){
+					$thought['show'] = true;
+					$thought['title'] = $thought['title'];
+					$thought['image'] = null;
+					$thought['image_width'] = null;
+					$thought['image_height'] = null;
+					$thought['summary'] = $thought['body'];
+					$thought['url'] = PA::$url.'/content/cid='.$thought['content_id'];
+					$thoughtsToReturn[] = $thought;
+				}
 			}
 		} else {
 			$thoughtsToReturn = array(array('default'=>true, 'show'=>true, 'title'=>'No thoughts', 'summary'=>'No content published. <a href="/thought_content.php">Click here to add content</a>.'));
