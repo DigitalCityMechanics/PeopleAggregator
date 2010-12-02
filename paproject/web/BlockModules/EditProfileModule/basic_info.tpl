@@ -31,20 +31,6 @@
       ?>
     </div>
 
-    <div class="form-block">
-      <label for="user-email"><?= __("Email Address:") ?></label>
-      <?php
-        if (!empty($request_data['last_name'])) {
-      ?>
-      <input class="textbox short" id="user-email" type="text" name="email_address" value="<?php echo $request_data['email_address'];?>" />
-      <?php
-        } else {
-      ?>
-      <input class="textbox short" id="user-email" type="text" name="email_address" value="<?php echo $user_info->email?>" />
-      <?php
-        }
-      ?>
-    </div>
     <?php    
 	    //TODO: sanitize these inputs
         $dynProf->textfield(__("Zip Code:"), "postal_code", "general", NULL, FALSE);
