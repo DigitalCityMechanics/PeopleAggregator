@@ -383,6 +383,7 @@ class PeopleModule extends Module {
     $msg = @$this->msg;
 
     $Pagination = new Pagination;
+    $Pagination->max_links = 10;
     $Pagination->setPaging($this->Paging);
 
     $this->page_first = $Pagination->getFirstPage($this->search_data);
