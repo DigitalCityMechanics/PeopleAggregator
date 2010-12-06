@@ -53,7 +53,9 @@ class ThoughtsListModule extends Module {
 		}
 				
 		$this->_thoughts = $this->get_user_thoughts_data($this->uid);
-		if(isset($this->_thoughts) && !empty($this->_thoughts) && count($this->_thoughts) == 1 && isset($this->_thoughts[0]['default']) && $this->_thoughts[0]['default'] == true){
+		if(!isset($this->_thoughts)
+			|| count($this->_thoughts) == 0
+			|| (isset($this->_thoughts) && !empty($this->_thoughts) && count($this->_thoughts) == 1 && isset($this->_thoughts[0]['default']) && $this->_thoughts[0]['default'] == true)){
 			return 'skip';		
 		}
 	}
