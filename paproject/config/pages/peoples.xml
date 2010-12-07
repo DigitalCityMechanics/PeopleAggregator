@@ -62,10 +62,10 @@
           $module_shared_data['content_info'] = null;
         }
       }
-      $ie9 = '<!--[if lt IE 9]>';
-      $ie9 .= '<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>';
-      $ie9 .= '<![endif]-->';
-      $this->add_header_html($ie9);
+      $ie8 = '<!--[if lt IE 8]>';
+      $ie8 .= '<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>';
+      $ie8 .= '<![endif]-->';
+      $this->add_header_html($ie8);
       uihelper_get_network_style();
       ]]></boot_code>
     <page_template>container_two_column_right.tpl</page_template>
