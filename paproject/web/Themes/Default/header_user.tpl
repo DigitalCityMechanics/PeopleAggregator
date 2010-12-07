@@ -152,7 +152,7 @@
 <?php
 		if(isset($aside) && $aside === true) {
 ?>
-				<a href="<?= PA::$url ?>/post_content.php" class="button">Write a New Thought</a>
+				<a href="<?= PA::$url ?>/post_content.php" class="button">Share what's on your mind</a>
 <?php
 		}
 ?>
