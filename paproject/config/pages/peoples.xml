@@ -76,6 +76,6 @@
     <block_type>Homepage</block_type>
     <page_type>network</page_type>
   </data>
-  <page_name>People Page</page_name>
+  <page_name>Community</page_name>
   <is_configurable>1</is_configurable>
 </page>
