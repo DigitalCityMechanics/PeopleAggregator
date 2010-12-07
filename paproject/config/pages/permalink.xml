@@ -56,6 +56,10 @@
         $module_shared_data['is_group_content'] = $is_group_content = false;
         try {
           $content = Content::load_content((int)$cid, PA::$login_uid);
+
+	      $page_title = $content->title;
+	      $this->page_title = sprintf(__('%s - %s'), __($page_title), __(PA::$network_info->name));
+
           $module_shared_data['content_info'] = $content;
           require_once "api/Content/Content.php";
           $module_shared_data['content'] = $content;

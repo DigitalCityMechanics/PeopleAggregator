@@ -188,8 +188,6 @@ class EditProfileModule extends Module {
 		$this->isError = TRUE;
 		if (empty($request_data['first_name'])) {
 			$this->message = __('Fields marked with * can not be empty, First name can not be empty.');
-		} else if (empty($request_data['email_address'])) {
-			$this->message = __('Fields marked with * can not be empty, Email field is mandatory.');
 		} else if (!empty($request_data['pass']) || !empty($request_data['conpass'])) {
 			$set_new_password = true;
 			$new_password_ok = false;
@@ -363,15 +361,9 @@ class EditProfileModule extends Module {
 				$apiDataArray['person']['name'] = $request_data['first_name'] . ' ' . $request_data['last_name'];
 			}
 
-			// Add email address to api data update array only if it was chagned
-			if($this->user_info->email != $request_data['email_address']){
-				$apiDataArray['person']['email'] = $request_data['email_address'];
-			}
-
 			//If there is no error message then try saving the user information.
 			$this->user_info->first_name = $request_data['first_name'];
 			$this->user_info->last_name = $request_data['last_name'];
-			$this->user_info->email = $request_data['email_address'];
 				
 			try{
 				if (!empty($request_data['pass'])){

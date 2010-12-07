@@ -230,6 +230,7 @@ a.cancel {font-weight: normal;}
 .form-group .related {margin-left: 80px;}
 .form-group .related input.textbox {width: 400px;}
 .validation-error {color: #ae1111;}
+.friendly-alert { color:#000; font-size:1.6em; font-weight:bold; margin-bottom:1em; }
 div.validation-error > ul > li { 
 float: none; 
 margin: 0; 
@@ -540,7 +541,7 @@ a#logo {
 background: url(images/cc_logo_2.png) no-repeat;
 display: block;
 float: left;
-height: 82px;
+height: 100px;
 margin-top: 13px;
 text-indent: -9999px;
 width: 317px;
@@ -1159,6 +1160,11 @@ border-bottom: 1px solid #b1b3B6;
 -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
 box-shadow: 0px 1px 3px rgba(0,0,0,.5);
 }
+img.float {
+  float:left;
+  margin-right:10px;
+  margin-bottom:10px;
+}
 .feature-mast img.featured {
 float:left;
 margin-right:15px;
@@ -1217,50 +1223,78 @@ margin-top: -10px;
 =Styles for Convo Modal Popup
 -----------------------------------------------*/
 
-div.convo-popup {
+div#cboxLoadedContent div.tab-strip {font-size: .75em;}
+div.convo-popup, div#cboxLoadedContent {
 background: #eaeaea url(images/convo_popup_bg.gif) repeat-x top;
 border: 1px solid #ced1d6;
 width: 620px;
 }
-div.convo-popup ul {
+div.convo-popup ul, div#cboxLoadedContent div.tab-strip-options ul {
 float: left;
-margin: 0;
+margin: 0 10px 0 0;
 padding: 0;
 }
-div.convo-popup li {
+div.convo-popup li, div#cboxLoadedContent div.tab-strip-options ul li a {
 background: #dbdbdb url(images/convo_popup_li.gif) repeat-x top;
+/*
 border-bottom: 1px solid #ced1d6;
 border-right: 1px solid #ced1d6;
+*/
 color: #777;
 font-weight: bold;
 list-style: none;
 margin: 0;
 padding: 8px 0 8px 15px;
-width: 120px;
+width: 100px;
 }
+div#cboxLoadedContent div.tab-strip-options ul li a#comment_tab {border-top: none;}
 div.convo-popup li:last-child {border-bottom: none;}
-div.convo-popup li.active, div.convo-popup li:hover {
+div.convo-popup li.active, div.convo-popup li:hover, div#cboxLoadedContent div.tab-strip-options ul li a:hover, div#cboxLoadedContent div.tab-strip-options ul li a.tab-active {
 background: none;
 border-right: none;
 color: #333;
 cursor: pointer;
 }
-div.convo-popup form {
+div.convo-popup form, div#cboxLoadedContent form#contribution_new,  div#cboxLoadedContent form.contribution_edit {
 float: right;
 margin: 7px 2px 0 0;
-width: 474px;
+width: 414px;
 }
-div.convo-popup form textarea {
+div.convo-popup form textarea, div#cboxLoadedContent textarea {
 display: block;
 height: 135px;
 margin-bottom: 8px;
-width: 456px;
+width: 405px;
 }
-div.convo-entry input.textbox, div.convo-entry p.help-text {
-float: left;
-width: 375px;
+div.convo-entry input.textbox,  div#cboxLoadedContent .input-with-options label, div.convo-entry p.help-text {
+/* float: left; */
+width: 310px;
 }
-div.convo-entry a.button {float: right;}
+
+div.convo-entry a.button, div#cboxLoadedContent input#contribution_submit {
+/* float: right; */
+margin-top: 5px;
+}
+div#cboxLoadedContent .input-with-options label {
+background-color: transparent;
+color: #444;
+height: auto;
+padding: 0;
+}
+div#cboxLoadedContent .input-with-options label a {color: #444;}
+
+/* Preview */
+div#cboxLoadedContent li.offset-1 {
+list-style-type: none;
+margin-top: 10px;
+}
+div#cboxLoadedContent div.contribution-preview form.contribution_edit {
+float: none;
+margin-left: 70px;
+width: auto;
+}
+
+/* Moderate Button */
 .moderate {float: right}
 a.button.moderate, input.submit.moderate {background-color: #e74d4d;}
 a.button.moderate:hover, input.submit.moderate:hover {background-color: #d83535;}
@@ -1286,13 +1320,19 @@ clear: both;
 visibility: hidden;
 }
 
+/* Global Warning */
+.global-warning {
+  /*background: url(/images/al-gore.jpg) no repeat left center;*/
+  background: #c00;
+  border-bottom:1px solid #900;
+  text-color:#eff;
+}
+.global-warning a { color:#fff; font-weight:bold; }
+
 /* IE6 */
 * html #wrapper, * html #header, * html .feature, * html div.tab-strip ul, * html div.tab-area, * html #nav, * html #header-wrapper, * html .section, * html .content-container, * html .photobank, * html div.three-col, * html div.three-col-sm, * html .form-block, * html .offset-1, * html .offset-2, * html form, * html .convo-utility, * html ul.social-media, * html div.two-col, * html div.two-col-sm, * html .conversations, * html div.convo-popup, * html .pagination p, * html #header-utility {zoom: 1;}
-
 * html .group {zoom: 1;}
 
 /* IE7 */
 *:first-child+html #wrapper, *:first-child+html #header, *:first-child+html .feature, *:first-child+html div.tab-strip ul, *:first-child+html div.tab-area, *:first-child+html #nav, #header-wrapper, *:first-child+html .section, *:first-child+html .content-container, *:first-child+html .photobank, *:first-child+html div.three-col, *:first-child+html div.three-col-sm, *:first-child+html .form-block, *:first-child+html .offset-1, *:first-child+html .offset-2, *:first-child+html form, *:first-child+html .convo-utility, *:first-child+html ul.social-media, *:first-child+html div.two-col, *:first-child+html div.two-col-sm, *:first-child+html .conversations, *:first-child+html div.convo-popup, *:first-child+html .pagination p, *:first-child+html #header-utility {zoom: 1;}
-
 *:first-child+html .group {zoom: 1;}
-

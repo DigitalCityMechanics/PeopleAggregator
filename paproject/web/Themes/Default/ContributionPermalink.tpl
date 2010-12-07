@@ -1,6 +1,8 @@
 <?php
   $show_comments = false;
+  $delete_link = false;
   $original_content_url = Contribution::get_original_content_url($contents->content_id);
+  $original_content_title = Contribution::get_original_content_title($contents->content_id);
 ?>
  <h1><a href="<?= htmlspecialchars($permalink) ?>"><?php echo $contents->title;?></a></h1>
  <h3 class="meta">
@@ -8,7 +10,9 @@
    <a href="<?php echo $user_link?>"><?php echo $user_name?></a> 
    on <?=date("F d, Y", $contents->created);?>
    <br />
-   <a href="<?php echo $original_content_url; ?>">Link to Original Content</a>
+<?php if(isset($original_content_url) && isset($original_content_title)) { ?>
+  <p>Contributed on <a href="<?php echo $original_content_url; ?>"><?php echo $original_content_title; ?></a></p>
+<?php } ?>
  </h3>
 
  <?php echo $contents->body;?>

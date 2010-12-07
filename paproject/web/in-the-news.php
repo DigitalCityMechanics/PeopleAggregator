@@ -11,6 +11,6 @@
 		}
 	}
 
-	$page = new PageRenderer("setup_module", PAGE_IN_THE_NEWS, "In the News", "container_two_column_right.tpl", "header.tpl", PRI, HOMEPAGE, PA::$network_info);
+	$page = new PageRenderer("setup_module", PAGE_IN_THE_NEWS, "Civic Commons", "container_two_column_right.tpl", "header.tpl", PRI, HOMEPAGE, PA::$network_info);
 	echo $page->render();
 ?>

@@ -20,6 +20,9 @@
        $style = ' style="background: url('.$img_desktop_info['url'].') '.$img_desktop_info['repeat'].'"';
    }
 ?>
+<!--[if IE 6]>
+	<div class="global-warning">You are using a browser which isn't supported.  Try using <a href="http://www.firefox.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a> or <a href="http://www.google.com/chrome">Chrome</a>.</div>
+<![endif]-->
 <div id="header-wrapper"><div id="header"<?php echo $style?>>
 	<a id='logo' href='<?php echo CC_APPLICATION_URL . "/" ?>' title='Civic Commons'>Civic Commons</a>
 	<div id="header-utility">

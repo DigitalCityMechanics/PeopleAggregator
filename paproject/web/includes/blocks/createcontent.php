@@ -106,15 +106,25 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
             $url_parts = parse_url($redirect);
             parse_str($url_parts['query'], $query_args);
 
-			// save a url to the conversation or issue created from CC
-			$cc_url = '';
+			// save extra information about CC Contributions
+			$contribution_id = null;
+			$contribution_type = null;
+			$contribution_title = null;
 			if(isset($query_args['conversation_id'])) {
-				$cc_url = CC_APPLICATION_URL.'/contributions/'.$query_args['conversation_id'];
+				$contribution_type = 'conversation';
+				$contribution_id = $query_args['conversation_id'];
 			}
 			if(isset($query_args['issue_id'])) {
-				$cc_url = CC_APPLICATION_URL.'/issues/'.$query_args['issue_id'];
+				$contribution_type = 'issue';
+				$contribution_id = $query_args['issue_id'];
 			}
-			$res = Dal::query("INSERT INTO {cc_contributions} (content_id, url) VALUES (?, ?)", array(intval($r['cid']), $cc_url));
+			if(isset($query_args['title'])) {
+				$contribution_title = $query_args['title'];
+				unset($query_args['title']);
+			}
+			if(isset($contribution_id) && isset($contribution_type)) {
+				$res = Dal::query("INSERT INTO {cc_contributions} (content_id, contribution_id, type, title) VALUES (?, ?, ?, ?)", array(intval($r['cid']), $contribution_id, $contribution_type, $contribution_title));
+			}
 
             if(!isset($query_args['title'])) {
               $query_args['title'] = $_POST["blog_title"];
@@ -221,15 +231,25 @@ if (isset($_POST['publish']) && $content_type == 'BlogPost') {
             $url_parts = parse_url($redirect);
             parse_str($url_parts['query'], $query_args);
 
-			// save a url to the conversation or issue created from CC
-			$cc_url = '';
+			// save extra information about CC Contributions
+			$contribution_id = null;
+			$contribution_type = null;
+			$contribution_title = null;
 			if(isset($query_args['conversation_id'])) {
-				$cc_url = CC_APPLICATION_URL.'/conversations/'.$query_args['conversation_id'];
+				$contribution_type = 'conversation';
+				$contribution_id = $query_args['conversation_id'];
 			}
 			if(isset($query_args['issue_id'])) {
-				$cc_url = CC_APPLICATION_URL.'/issues/'.$query_args['issue_id'];
+				$contribution_type = 'issue';
+				$contribution_id = $query_args['issue_id'];
 			}
-			$res = Dal::query("INSERT INTO {cc_contributions} (content_id, url) VALUES (?, ?)", array(intval($post_saved['cid']), $cc_url));
+			if(isset($query_args['title'])) {
+				$contribution_title = $query_args['title'];
+				unset($query_args['title']);
+			}
+			if(isset($contribution_id) && isset($contribution_type)) {
+				$res = Dal::query("INSERT INTO {cc_contributions} (content_id, contribution_id, type, title) VALUES (?, ?, ?, ?)", array(intval($post_saved['cid']), $contribution_id, $contribution_type, $contribution_title));
+			}
 
             if(!isset($query_args['title'])) {
               $query_args['title'] = $_POST["blog_title"];

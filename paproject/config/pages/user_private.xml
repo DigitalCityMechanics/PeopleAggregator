@@ -47,7 +47,9 @@
 
 		// setup the header to use the feature_mast and show the user's name
 		$this->header->set('use_feature_mast', true);
-		$this->header->set('title', $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name);
+		$page_title = $module_shared_data['user_info']->first_name.' '.$module_shared_data['user_info']->last_name;
+		$this->header->set('title', $page_title);
+		$this->page_title = sprintf(__('%s - %s'), __($page_title), __(PA::$network_info->name));
 		$this->header->set('aside', true);
 		
 		$avatar = null;

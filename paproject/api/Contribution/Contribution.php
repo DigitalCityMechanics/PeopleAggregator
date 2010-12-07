@@ -32,14 +32,35 @@ class Contribution extends BlogPost {
 		$this->type = self::TYPE_ID;
 	}
 
-	public static function get_original_content_url($content_id) {
-		$res = Dal::query("SELECT url FROM {cc_contributions} WHERE content_id = ?", array($content_id));
+	public static function get_original_content_title($content_id) {
+		$title = null;
+		$res = Dal::query("SELECT title FROM {cc_contributions} WHERE content_id = ?", array($content_id));
 		if ($res->numRows()) {
 			while($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
-				return $row->url;
+				return $row->title;
 			}
 		}
-		return '';
+		return $title;
+	}
+
+	public static function get_original_content_url($content_id) {
+		$url = null;
+		$res = Dal::query("SELECT contribution_id, type FROM {cc_contributions} WHERE content_id = ?", array($content_id));
+		if ($res->numRows()) {
+			while($row = $res->fetchRow(DB_FETCHMODE_OBJECT)) {
+				switch($row->type) {
+					case 'issue':
+						$url = CC_APPLICATION_URL.'/issues/'.$row->contribution_id;
+						break;
+
+					case 'conversation':
+						$url = CC_APPLICATION_URL.'/conversations/'.$row->contribution_id;
+						break;
+				}
+				return $url;
+			}
+		}
+		return $url;
 	}
 
 	public static function table_exists() {
