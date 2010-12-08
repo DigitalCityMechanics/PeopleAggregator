@@ -24,9 +24,10 @@ class PAException extends Exception {
   public $message;
   public function __construct ($exceptionCode, $exceptionMessage) {
     parent::__construct($exceptionMessage, (int)$exceptionCode);
+    
     $this->code = $exceptionCode;
     $this->message = $exceptionMessage;
-    
+
     try{
 	    // Gets the matching HTTP Status code for the exception code
 	    list($code_string, $httpStatusCode) = pa_get_error_name($this->code);
@@ -43,14 +44,17 @@ class PAException extends Exception {
     }
     
     try{
-    	$hoptoad = new Services_Hoptoad("b16b886469e9c1f3dccfdbb11e56123f", 'staging', 'curl');
-    	$hoptoad->exceptionHandler($this);
+    	global $app;
+    	$hoptoad_key = $app->configData['configuration']['api_keys']['value']['hoptoad_key']['value'];
+    	$hoptoad_env = $app->configData['configuration']['api_keys']['value']['hoptoad_env']['value'];
+    	if(isset($hoptoad_key) && !empty($hoptoad_key) && isset($hoptoad_env) && !empty($hoptoad_env)){
+    		$hoptoad = new Services_Hoptoad($hoptoad_key, $hoptoad_env, 'curl');
+    		$hoptoad->exceptionHandler($this);
+    	}
     }
     catch(Exception $e){
 		// ignore exception since posting to Hoptoad is not fatal    	
     }
-    
-    
   }
 }
 ?>

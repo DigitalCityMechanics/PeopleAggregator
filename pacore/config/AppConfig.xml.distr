@@ -678,6 +678,12 @@
         <amazon_s3_bucket category="global" type="string" section="api_keys" readonly="true" description="Amazon AWS S3 Bucket Name">
         	<value></value>
         </amazon_s3_bucket>
+        <hoptoad_key category="global" type="string" section="api_keys" readonly="true" description="Hoptoad API Key">
+        	<value></value>
+        </hoptoad_key>
+        <hoptoad_key category="global" type="string" section="api_keys" readonly="true" description="Hoptoad Environment">
+        	<value></value>
+        </hoptoad_key>
       </value>
     </api_keys>
     <database description="Database settings">
