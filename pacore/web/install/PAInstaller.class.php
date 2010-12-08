@@ -342,10 +342,13 @@ class PAInstaller {
 	  $form->addHtml("<p class='inst_info'>Add API keys to your PeopleAggregator install so that users can invite Facebook contacts into your service.</p>");
 	  $form->addInputField('text', __('Facebook API Key'), array('id' => 'fb_key', 'required' => false));
 	  $form->addInputField('text', __('Facebook API Secret'), array('id' => 'fb_secret', 'required' => false));
-	  $form->addHtml("<p class='inst_info' style='clear:both'>Add API keys for Amazon S3.</p>");
+	  $form->addHtml("<p class='inst_info' style='clear:both'>Amazon S3 settings</p>");
 	  $form->addInputField('text', __('Amazon AWS API Key'), array('id' => 'amazon_key', 'required' => false));
 	  $form->addInputField('text', __('Amazon AWS API Secret'), array('id' => 'amazon_secret', 'required' => false));
 	  $form->addInputField('text', __('Amazon S3 Bucket Name'), array('id' => 'amazon_bucket', 'required' => false));
+	  $form->addHtml("<p class='inst_info' style='clear:both'>Hoptoad settings</p>");
+	  $form->addInputField('text', __('Hoptoad API Key'), array('id' => 'hoptoad_key', 'required' => false));
+	  $form->addInputField('text', __('Hoptoad Environment'), array('id' => 'hoptoad_env', 'required' => false));
 	  $form->addHtml("<p class='inst_info' style='clear:both'>Civic Commons Settings</p>");
 	  $form->addInputField('text', __('Civic Commons Ruby Application URL'), array('id' => 'cc_application_url', 'required' => false));
       $html = $form->getHtml();
@@ -376,7 +379,17 @@ class PAInstaller {
 	   $this->allow_network_spawning = (isset($form_data['network_spawning']) && $form_data['network_spawning'] == 'checked') ? 1 : 0;
 	   $domain = explode(".", $_SERVER['SERVER_NAME']);
 	   $this->subdomain = (isset($form_data['domain_prefix'])) ? $form_data['domain_prefix'] : $domain[0];
-	   $this->keys = array('key'=>$form_data['fb_key'],'secret'=>$form_data['fb_secret'], 'amazon_key'=>$form_data['amazon_key'],'amazon_secret'=>$form_data['amazon_secret'],'amazon_bucket'=>$form_data['amazon_bucket'],'cc_application_url'=>$form_data['cc_application_url'], 'pw_pepper'=>$form_data['pw_pepper']);
+	   $this->keys = array(
+	   						'key'=>$form_data['fb_key'],
+	   						'secret'=>$form_data['fb_secret'],
+	   						'amazon_key'=>$form_data['amazon_key'],
+	   						'amazon_secret'=>$form_data['amazon_secret'],
+	   						'amazon_bucket'=>$form_data['amazon_bucket'],
+	   						'hoptoad_key'=>$form_data['hoptoad_key'],
+	   						'hoptoad_env'=>$form_data['hoptoad_env'],
+	   						'cc_application_url'=>$form_data['cc_application_url'], 
+	   						'pw_pepper'=>$form_data['pw_pepper']
+	   );
 
 	   if (!$this->admin_exists) { 
 		   $error = false;
@@ -497,7 +510,9 @@ class PAInstaller {
        $app->configData['configuration']['api_keys']['value']['facebook_api_secret']['value'] = $this->keys['secret'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_key']['value'] = $this->keys['amazon_key'];
        $app->configData['configuration']['api_keys']['value']['amazon_aws_secret']['value'] = $this->keys['amazon_secret'];
-       $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'] = $this->keys['amazon_bucket'];
+       $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'] = $this->keys['amazon_bucket'];       
+       $app->configData['configuration']['api_keys']['value']['hoptoad_key']['value'] = $this->keys['hoptoad_key'];
+       $app->configData['configuration']['api_keys']['value']['hoptoad_environment']['value'] = $this->keys['hoptoad_env'];
        $app->configData['configuration']['civic_commons_settings']['value']['CC_APPLICATION_URL']['value'] = $this->keys['cc_application_url'];
        $app->configData['configuration']['site_related']['value']['PASSWORD_PEPPER']['value'] = $this->keys['pw_pepper'];
 
