@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>An Exception was Thrown</title>
+  <title>An error occurred</title>
   <style type="text/css">
     body { background:#f9f9f9 url(/Themes/Default/skins/defaults/images/body_bg.gif); color: #666; text-align: center; font-size:67.5%;font-family: helvetica, arial, sans-serif; }
     div.dialog {
@@ -20,10 +20,10 @@
 
 <body>
   <div class="dialog">
-    <h1>An Exception was Thrown</h1>
+    <h1>An error occurred</h1>
 	<p>Code: <b><?= $code_esc ?></b></p>
     <p><?= $msg_esc ?></p>
-    <p><a href="/">Browse the Civic Commons</a></p>
+    <p><a href="/build-the-commons">Report a bug</a></p>
   </div>
 </body>
 </html>
