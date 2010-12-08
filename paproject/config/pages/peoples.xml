@@ -62,6 +62,12 @@
           $module_shared_data['content_info'] = null;
         }
       }
+      $css_path = PA::$url . DIRECTORY_SEPARATOR . PA::$theme_rel . DIRECTORY_SEPARATOR;
+      $css_path = 'http://192.168.1.118/Themes/Default/';
+      $ie7_css = '<!--[if IE 7]>';
+      $ie7_css .= '<link type="text/css" rel="stylesheet" href="'.$css_path.'skins/defaults/ie7.css" />';
+      $ie7_css .= '<![endif]-->';
+      $this->add_header_html($ie7_css);
       uihelper_get_network_style();
       ]]></boot_code>
     <page_template>container_two_column_right.tpl</page_template>
@@ -70,6 +76,6 @@
     <block_type>Homepage</block_type>
     <page_type>network</page_type>
   </data>
-  <page_name>People Page</page_name>
+  <page_name>Community</page_name>
   <is_configurable>1</is_configurable>
 </page>

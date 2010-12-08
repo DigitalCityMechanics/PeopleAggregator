@@ -858,11 +858,10 @@ html[xmlns*=""] body:last-child .module_tagcloud ul li span { margin-top: 0px; }
 	background: url(images/bg_photo.gif) no-repeat 0 0; }
 
 .view_all {
-	border: 1px solid #CCCCCC;
-	margin: 5px 70px 5px 70px;
-	padding: 3px;
-	text-align: center;
-	background-color: #EEEEEE; }
+	font-weight: bold;
+	padding: 3px 0 8px;
+	text-align: left;
+}
 
 .module_browse_groups ul,
 .module_more_info ul {

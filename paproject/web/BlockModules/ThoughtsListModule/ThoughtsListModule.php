@@ -40,7 +40,7 @@ class ThoughtsListModule extends Module {
 	public function initializeModule($request_method, $request_data)  {
 		global $paging;
 
-		$this->title = "My Thoughts";			
+		$this->title = "On My Mind";			
 
 		if(!empty($this->shared_data['user_info'])) {
 			$this->user = $this->shared_data['user_info'];
@@ -53,7 +53,9 @@ class ThoughtsListModule extends Module {
 		}
 				
 		$this->_thoughts = $this->get_user_thoughts_data($this->uid);
-		if(isset($this->_thoughts) && !empty($this->_thoughts) && count($this->_thoughts) == 1 && isset($this->_thoughts[0]['default']) && $this->_thoughts[0]['default'] == true){
+		if(!isset($this->_thoughts)
+			|| count($this->_thoughts) == 0
+			|| (isset($this->_thoughts) && !empty($this->_thoughts) && count($this->_thoughts) == 1 && isset($this->_thoughts[0]['default']) && $this->_thoughts[0]['default'] == true)){
 			return 'skip';		
 		}
 	}
@@ -97,17 +99,19 @@ class ThoughtsListModule extends Module {
 		$thoughts = Content::get_user_content($User_id);
 		if(isset($thoughts) && is_array($thoughts) && count($thoughts) > 0) {
 			foreach($thoughts as $thought) {
-				$thought['show'] = true;
-				$thought['title'] = $thought['title'];
-				$thought['image'] = null;
-				$thought['image_width'] = null;
-				$thought['image_height'] = null;
-				$thought['summary'] = $thought['body'];
-				$thought['url'] = PA::$url.'/content/cid='.$thought['content_id'];
-				$thoughtsToReturn[] = $thought;
+				if($thought['type'] != CONTRIBUTION){
+					$thought['show'] = true;
+					$thought['title'] = $thought['title'];
+					$thought['image'] = null;
+					$thought['image_width'] = null;
+					$thought['image_height'] = null;
+					$thought['summary'] = $thought['body'];
+					$thought['url'] = PA::$url.'/content/cid='.$thought['content_id'];
+					$thoughtsToReturn[] = $thought;
+				}
 			}
 		} else {
-			$thoughtsToReturn = array(array('default'=>true, 'show'=>true, 'title'=>'No thoughts', 'summary'=>'No content published. <a href="/thought_content.php">Click here to add content</a>.'));
+			$thoughtsToReturn = array(array('default'=>true, 'show'=>true, 'title'=>'No "On My Mind"', 'summary'=>'No content published. <a href="/thought_content.php">Click here to let us know what\'s on your mind</a>.'));
 		}
 		return $thoughtsToReturn;
 	}
@@ -136,7 +140,7 @@ class ThoughtsListModule extends Module {
 				$thoughts[] = $thought;
 			}
 		} else {
-			$thoughts = array(array('show'=>true, 'title'=>'No thoughts', 'summary'=>'No content published. <a href="/thought_content.php?ccid='.$org_id.'">Click here to add content</a>.'));
+			$thoughts = array(array('show'=>true, 'title'=>'No "On My Mind"', 'summary'=>'No content published. <a href="/thought_content.php?ccid='.$org_id.'">Click here to let us know what\'s on your mind</a>.'));
 		}
 		return $thoughts;
 	}
