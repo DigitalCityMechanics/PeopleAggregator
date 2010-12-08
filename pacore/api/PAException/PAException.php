@@ -43,8 +43,8 @@ class PAException extends Exception {
     }
     
     try{
-    	/*$hoptoad = new Services_Hoptoad("b16b886469e9c1f3dccfdbb11e56123f", 'staging', 'curl');
-    	$hoptoad->exceptionHandler($this);*/
+    	$hoptoad = new Services_Hoptoad("b16b886469e9c1f3dccfdbb11e56123f", 'staging', 'curl');
+    	$hoptoad->exceptionHandler($this);
     }
     catch(Exception $e){
 		// ignore exception since posting to Hoptoad is not fatal    	
