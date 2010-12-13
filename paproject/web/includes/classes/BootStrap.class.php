@@ -692,11 +692,11 @@ class BootStrap {
           	// (ie. set all session variables just as if dologin.php was called).
 			$referer = "external site";
 			if(isset($_SERVER['HTTP_REFERER'])){
-				$referer = $_SERVER['HTTP_REFERER'];		
+				$referer = $_SERVER['HTTP_REFERER'];
 			}
-			
+
 			$pal = new PA_Login();
-		    $pal->log_in($user->user_id, true, $referer);
+		    $pal->log_in($user->user_id, (isset($_GET['persistent']) && $_GET['persistent'] === 'true'), $referer);
 		    // Set authToken as a session variable so that it can be accessed anywhere
 		    $_SESSION['authToken'] = $authToken;
           }                             
