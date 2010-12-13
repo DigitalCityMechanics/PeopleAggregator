@@ -79,6 +79,7 @@ class PA_Login {
     $logged_user = new User(); // load user
     $logged_user->load((int)$uid);
     $logged_user->set_last_login();
+    PA::$login_user = $logged_user;
 
     register_session(
     $logged_user->login_name,
