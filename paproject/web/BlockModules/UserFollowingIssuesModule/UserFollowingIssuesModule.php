@@ -96,7 +96,7 @@ class UserFollowingIssuesModule extends Module {
 			$empty_message = (isset(PA::$page_user) && isset(PA::$page_user->first_name))
 				? PA::$page_user->first_name.' is just getting started.'
 				: 'This user is just getting started.';
-			$defaultResult = array('title'=>$empty_message, 'url' => '#');
+			$defaultResult = array('title'=>$empty_message, 'url' => CC_APPLICATION_URL . CC_ROUTE_ISSUES);
 			if($responseStatus == 200){
 				$jsonResults = $request->getJSONResponse();
 				if(count($jsonResults) == 0){
