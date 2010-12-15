@@ -60,7 +60,7 @@
 						$aHeight = $login_user->avatar_small_dimensions['height'];
 					}
    					?>
-   					<?php echo uihelper_resize_mk_user_img($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
+   					<?php echo show_amazon_s3_image($login_user->avatar_small, $aWidth, $aHeight, 'alt="User Picture" class="callout"'); ?>
 				</a>
 				<h4><a href="<?= PA::$url . PA_ROUTE_USER_PRIVATE ?>"><?php echo $user_name; ?></a></h4>
 				<div class="login-actions">
@@ -143,7 +143,7 @@
 		<div class="content-container">
 			<div class="main-content">
 				<div class="offset-1 profile-mast">
-					<?php echo uihelper_resize_mk_user_img($avatar, $avatar_dimensions['width'], $avatar_dimensions['height'], 'alt="User Picture" class="callout"'); ?>
+					<?php echo show_amazon_s3_image($avatar, $avatar_dimensions['width'], $avatar_dimensions['height'], 'alt="User Picture" class="callout"'); ?>
 					<h1><?php echo (isset($title) && $title != '') ? $title : '(no title set)'; ?></h1>
 					<p class="convo-meta"><?php echo (isset($metadata) && $metadata != '') ? $metadata : ''; ?></p>
 				</div>

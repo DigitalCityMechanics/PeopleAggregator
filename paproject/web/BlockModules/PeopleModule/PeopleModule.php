@@ -313,9 +313,9 @@ class PeopleModule extends Module {
         		$users['users_data'][$cnt]['big_picture'] = $user_profiles[$cnt]['avatar'];
         		$users['users_data'][$cnt]['big_picture_width'] = $user_profiles[$cnt]['avatar_width'];
         		$users['users_data'][$cnt]['big_picture_height'] = $user_profiles[$cnt]['avatar_height'];
-        	}else{
-        		$big_img = uihelper_resize_img($user_profiles[$cnt]['avatar'], $user_profiles[$cnt]['avatar_width'], $user_profiles[$cnt]['avatar_height'], NULL, "alt=\"".$user_profiles[$cnt]['login_name']."\"");
-        		$users['users_data'][$cnt]['big_picture'] = $big_img['url'];
+        	}else{        		
+        		$amazon_full_url = get_full_amazon_s3_url($user_profiles[$cnt]['avatar']);
+        		$users['users_data'][$cnt]['big_picture'] = $amazon_full_url;
         	}
         }
         $users['users_data'][$cnt] = array_merge($user_profiles[$cnt], $users['users_data'][$cnt]);
@@ -341,6 +341,7 @@ class PeopleModule extends Module {
       $profile_data = User::load_user_profile($user['user_id'], $viewer_uid);
       $profile_data = sanitize_user_data($profile_data);
       $out_data[$i]['display_name'] = $u->display_name;
+      $out_data[$i]['login_name'] = $user['login_name'];
       $out_data[$i]['user_url'] = url_for('user_blog', array('login'=>urlencode($user['user_id'])));
       $out_data[$i]['nickname'] = (strlen($user['login_name']) > $facewall_maxlength) ? substr($user['login_name'], 0, $facewall_trunkwords) . ' ...'
                                                                                        : $user['login_name'];

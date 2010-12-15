@@ -47,7 +47,7 @@
     <div class="form-block">
       <div class="curr_image">
       	<span class="title"><?= __("Current Image:") ?></span>
-        <?php print "<a href=\"". PA::$url . PA_ROUTE_USER_PUBLIC . "/$uid\">".uihelper_resize_mk_user_img($user_info->picture, 75, 80, 'alt="Current Image"')."</a>"; ?>
+        <?php print "<a href=\"". PA::$url . PA_ROUTE_USER_PUBLIC . "/$uid\">".show_amazon_s3_image($user_info->picture, 75, 80, 'alt="Current Image"')."</a>"; ?>
         <span class="remove_picture">
           <?php
             if (!empty($user_info->picture)) {
