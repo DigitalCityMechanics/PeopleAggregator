@@ -100,4 +100,40 @@ function uihelper_resize_img($pic, $max_x, $max_y, $alternate=NULL, $extra_attrs
     return $ret;
 }
 
+
+// TODO: move the amazon functions below to their own class once
+//		 the image rendering classes are rewritten
+
+/***
+ * Shows an image stored in Amazon S3 
+ */
+function show_amazon_s3_image($picture_path, $max_x, $max_y, $extra_attrs="") {
+
+	if(!isset($picture_path) || empty($picture_path)){
+		$defaultImg = PA::$url . '/files/default.png';
+		return ImageResize::display_image_from_url($defaultImg, $max_x, $max_y, $extra_attrs);
+	}
+
+	if (preg_match("|^http://|", $picture_path)) {
+	   return ImageResize::display_image_from_url($picture_path, $max_x, $max_y, $extra_attrs);
+	}else{
+		$full_amazon_path = get_full_amazon_s3_url($picture_path);
+		return ImageResize::display_image_from_url($full_amazon_path, $max_x, $max_y, $extra_attrs);
+	}
+}
+
+/**
+ * Returns the full amazon s3 url given the object path using bucket name from App Config
+ */
+function get_full_amazon_s3_url($path_to_object){
+	global $app;
+	if(isset($path_to_object) && !empty($path_to_object)){
+		$path_to_object = trim($path_to_object, '/');
+	}
+	$amazon_url = "http://s3.amazonaws.com/";
+	$amazon_bucket_name = $app->configData['configuration']['api_keys']['value']['amazon_s3_bucket']['value'];	
+	$full_amazon_url = $amazon_url . $amazon_bucket_name . '/' . $path_to_object;
+	return $full_amazon_url;
+}
+
 ?>
