@@ -313,24 +313,24 @@ class EditProfileModule extends Module {
 									if(!isset($this->user_info->core_id) && !empty($this->user_info->core_id)){
 										$this->user_info->core_id = 0;
 									}
-									$objectPath = $this->buildAmazonS3ObjectURL($amazon_bucket_name, $imageSizeType, $this->user_info->core_id, $file_name);
+									$objectPath = $this->buildAmazonS3ObjectURL($imageSizeType, $this->user_info->core_id, $file_name);
 									if(isset($imageDimensions) && !empty($imageDimensions)){
 										// if this is an original size image, the width and height dont need to be set
 										$thumb->adaptiveResize($imageDimensions['width'], $imageDimensions['height']);
 									}
 									$imageAsString = $thumb->getImageAsString();
-									$amazonURL = "http://s3.amazonaws.com/";
+									$amazonURL = "http://s3.amazonaws.com/" . $amazon_bucket_name;
 									switch($imageSizeType){
 										case "large":
-											$this->user_info->picture =  $amazonURL . $objectPath;
+											$this->user_info->picture = $objectPath;
 											$this->user_info->picture_dimensions = $imageDimensions;
 											break;
 										case "standard":
-											$this->user_info->avatar =  $amazonURL . $objectPath;
+											$this->user_info->avatar = $objectPath;
 											$this->user_info->avatar_dimensions = $imageDimensions;
 											break;
 										case "medium":
-											$this->user_info->avatar_small =  $amazonURL . $objectPath;
+											$this->user_info->avatar_small = $objectPath;
 											$this->user_info->avatar_small_dimensions = $imageDimensions;
 											break;
 										default:
@@ -345,7 +345,7 @@ class EditProfileModule extends Module {
 
 								if(isset($imageAsString) && !empty($imageAsString)){
 									// send object to AmazonS3
-									$s3->putObject($objectPath, $imageAsString, array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
+									$s3->putObject($amazon_bucket_name . $objectPath, $imageAsString, array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
 								}
 							}
 						}
@@ -507,10 +507,10 @@ class EditProfileModule extends Module {
 	 * @param string $file_name
 	 * @return string
 	 */
-	function buildAmazonS3ObjectURL($bucket_name, $image_size_type, $user_id, $file_name){
+	function buildAmazonS3ObjectURL($image_size_type, $user_id, $file_name){
 		// TODO: make this more generic. Instead of hardcoding "avatars" directory,
 		// make a object_type array and constants to determine folder structure from configuration options
-		return $bucket_name . "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
+		return "/avatars/". $user_id . "/" . $image_size_type . "/" . $file_name;
 	}
 	
 	/**
@@ -555,7 +555,8 @@ class EditProfileModule extends Module {
 				try{
 
 					foreach($this->_image_sizes as $imageSizeType => $imageDimensions){
-						$objectPath = $this->buildAmazonS3ObjectURL($amazon_bucket_name, $imageSizeType, $user_id, $file_name);
+						$objectPath = $this->buildAmazonS3ObjectURL($imageSizeType, $user_id, $file_name);
+						$objectPath = $amazon_bucket_name . $objectPath;
 						$s3->removeObject($objectPath);
 					}
 					return true;
