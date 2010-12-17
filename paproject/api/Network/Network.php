@@ -454,7 +454,7 @@ class Network {
 
     // ---- fix by Z.Hron: We don't need to read all data to count rows! Use MySQL function COUNT() in future!
 
-    $sql = "SELECT NU.user_id, U.avatar, U.avatar_width, U.avatar_height, U.avatar_small, U.avatar_small_width, U.avatar_small_height, U.login_name, U.first_name, U.last_name, U.email, U.created, CONCAT_WS(' ', U.first_name, U.last_name) AS display_name";
+    $sql = "SELECT NU.user_id, U.avatar, U.avatar_width, U.avatar_height, U.avatar_small, U.avatar_small_width, U.avatar_small_height, U.login_name, U.first_name, U.last_name, U.email, U.created, U.last_login, U.is_active,CONCAT_WS(' ', U.first_name, U.last_name) AS display_name";
     if ( @$params['cnt']==TRUE ) {
       $sql = "SELECT COUNT(U.login_name) AS rowcounter";
     }
@@ -520,6 +520,8 @@ class Network {
         $users_data[$i]['last_name'] = $row->last_name;
         $users_data[$i]['email'] = $row->email;
         $users_data[$i]['created'] = $row->created;
+        $users_data[$i]['last_login'] = $row->last_login;
+        $users_data[$i]['is_active'] = $row->is_active;
         $i++;
       }
     }
