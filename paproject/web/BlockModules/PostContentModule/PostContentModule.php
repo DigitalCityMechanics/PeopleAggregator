@@ -40,6 +40,8 @@ class PostContentModule extends Module {
     $validBlogTypes = array('BlogPost', 'Contribution', 'Suggestion');
     $this->blog_type = (isset($_GET) && isset($_GET['blog_type']) && in_array($_GET['blog_type'], $validBlogTypes))
 		? $_GET['blog_type'] : 'BlogPost';
+	$this->blog_type = (isset($_POST) && isset($_POST['blog_type']) && in_array($_POST['blog_type'], $validBlogTypes))
+		? $_POST['blog_type'] : $this->blog_type;
   }
   
   function set_id($id) {
@@ -105,6 +107,7 @@ class PostContentModule extends Module {
 	}
 
 	$redirect = urldecode((isset($_GET) && isset($_GET['redirect'])) ? $_GET['redirect'] : '');
+	$redirect = urldecode((isset($_POST) && isset($_POST['redirect'])) ? $_POST['redirect'] : $redirect);
 	$pattern = '/(https?:\/\/)?(((www\.)?([a-zA-Z0-9_\.\-]*)\b\.[a-z]{2,4}(\.[a-z]{2})?)|(localhost))(:[0-9]*)?((\/[a-zA-Z0-9_\-\.]*)+)?(\.[a-z]*)?(\?\S+)?/';
 	$redirect = (preg_match($pattern, $redirect)) ? $redirect : '';
     $inner_html_blog->set('redirect', urlencode($redirect));
