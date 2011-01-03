@@ -7,7 +7,7 @@ define('CC_ROUTE_CONVERSATIONS', 	'/conversations');
 define('CC_ROUTE_CONTRIBUTIONS', 	'/contributions');
 define('CC_ROUTE_THOUGHTS', 		'/thoughts');
 define('CC_ROUTE_FOLLOWING', 		'/subscriptions');
-define('CC_ROUTE_PEOPLE', 			'/people');
+define('CC_ROUTE_COMMUNITY', 		'/community');
 define('CC_ROUTE_ORGANIZATIONS', 	'/organizations');
 define('CC_ROUTE_ISSUES', 			'/issues');
 define('CC_ROUTE_ABOUT', 			'/about');
