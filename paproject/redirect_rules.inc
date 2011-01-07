@@ -65,6 +65,22 @@ define('CC_ROUTE_ABOUT', 			'/about');
  	**/
 	"^/press(.*)$" => "/in-the-news.php?cid=".$app->configData['configuration']['civic_commons_settings']['value']['CC_IN_THE_NEWS_CONTENT_ID']['value'],
 	"^/in-the-news(.*)$" => "/in-the-news.php?cid=".$app->configData['configuration']['civic_commons_settings']['value']['CC_IN_THE_NEWS_CONTENT_ID']['value'],
+  
+    /**
+    *
+    *  /forgotPassword -> externalRedirect.php?url=*
+    *
+    *
+    **/
+    "^/forgotPassword[\/]?(.*)$" => "/externalRedirect.php?url=people/secret/new",
+    
+    /**
+    *
+    *  /login.php -> externalRedirect.php?url=*
+    *
+    *
+    **/
+    "^/login[\/]?(.*)$" => "/externalRedirect.php?url=people/login"
   );
   
 ?>
