@@ -17,7 +17,7 @@
 ?>
 <div class="footer" id="footer"><div id="footer-inner">
 	<ul class='sub-nav'> 
-		<li><a href='<?php echo CC_APPLICATION_URL; ?>/home' title='Blog'>Blog</a></li>
+		<li><a href='<?php echo CC_APPLICATION_URL; ?>/blog' title='Blog'>Blog</a></li>
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/about">About Us</a></li>
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/faq">FAQ</a></li>
 		<li><a href="<?php echo CC_APPLICATION_URL; ?>/principles">Mission &amp; Principles</a></li>
