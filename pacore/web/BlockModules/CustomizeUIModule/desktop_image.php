@@ -28,16 +28,13 @@ include "center_inner_private.tpl";
         <input type="file" class="text long" id="upload_desk_image" name="header_image" value="" />
 
          <div class="field_text">
-           <?php if($settings_type == 'user') { :?>
+           <?php if($settings_type == 'user') { ?>
              <?=__("Image will appear on your Personal Pages")?>
-           <?php elseif($settings_type == 'group') { :?>
+           <?php } elseif($settings_type == 'group') { ?>
              <?=__("Image will appear on your Groups Pages")?>
-           <?php else { :?>
+           <?php } else { ?>
              <?=__("Image will appear on your Networks Pages")?>
-           <?php endif;
-        }
-    }
-}?>
+           <?php } ?>
          </div>
        </div>
                 
