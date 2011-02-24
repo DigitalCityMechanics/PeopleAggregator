@@ -17,20 +17,11 @@ install_tinymce('full');
   }
 ?>
 <fieldset>
+  <input id="blog_type" name="blog_type" type="hidden" value="<?php echo ($blog_type == 'Suggestion') ? 'Suggestion' : 'BlogPost' ; ?>" />
+  <input id="redirect" name="redirect" type="hidden" value="<?=urldecode(stripslashes($redirect))?>" />
   <div class="field" >
     <label for="title"><span class="required"> * </span><b> <?= __("Title") ?>:</b></label>
     <input type="text" name="blog_title" class="text long" id="title" style="width:647px;" value="<?=stripslashes($blog_title)?>"/>
-  </div>
-  <div class="field">
-    <label for="blog_type"><span class="required"> * </span><b> <?= __("Type") ?>:</b></label>
-    <select name="blog_type" id="blog_type">
-		<option<?php echo ($blog_type == 'Suggestion') ? '' : ' selected="selected"'; ?> value="BlogPost">BlogPost</option>
-		<option<?php echo ($blog_type == 'Suggestion') ? ' selected="selected"' : ''; ?> value="Suggestion">Suggestion</option>
-	</select>
-  </div>
-  <div class="field" >
-    <label for="redirect"><b> <?= __("Redirect") ?>:</b></label>
-    <input type="text" name="redirect" class="text long" id="redirect" style="width:647px;" value="<?=urldecode(stripslashes($redirect))?>"/>
   </div>
   <div class="field">
     <textarea name="description" id="description" class="long" cols="89" rows="30"><?php echo htmlspecialchars($body) ?></textarea>

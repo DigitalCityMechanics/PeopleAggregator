@@ -1,8 +1,5 @@
-pacore/web/files/rsz/
-pacore/log/pa.log
 pacore/config/AppConfig.xml
-paproject/web/files/rsz/
-paproject/log/pa.log
+pacore/log/pa.log
 paproject/config/AppConfig.xml
-paproject/web/install/
+paproject/log/pa.log
 *.swp

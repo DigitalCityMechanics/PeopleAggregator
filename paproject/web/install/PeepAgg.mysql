@@ -598,8 +598,7 @@ INSERT INTO `content_types` (`type_id`, `name`, `description`) VALUES
 (7, 'SBMicroContent', 'SBMicroContent'),
 (8, 'Question', 'Question'),
 (12, 'TekVideo', 'TekVideo'),
-(13, 'Suggestion', 'A queued message from users to admins'),
-(14, 'Contribution', 'A contribution created for Civic Commons');
+(13, 'Suggestion', 'A queued message from users to admins');
 
 -- --------------------------------------------------------
 
