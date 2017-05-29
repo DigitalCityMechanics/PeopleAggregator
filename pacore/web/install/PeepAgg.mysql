@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `activity_log` (
 `status` varchar(10) NOT NULL,
 PRIMARY KEY  (`id`),
 KEY `chrono_user_activity` (`subject`,`time`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `activity_log`
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `activity_types` (
 `description` text NOT NULL,
 `points` int(11) NOT NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `activity_types`
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `advertisements` (
 `type` enum('ad','textpad') NOT NULL default 'ad',
 `group_id` int(11) default NULL,
 PRIMARY KEY  (`ad_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `advertisements`
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `audios` (
 `audio_file` varchar(255) NOT NULL default '',
 `audio_perm` int(2) NOT NULL default '0',
 PRIMARY KEY  (`content_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `audios`
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `blog_badges` (
 `is_active` int(11) NOT NULL default '1',
 PRIMARY KEY  (`badge_id`),
 KEY `user_badges` (`is_active`,`user_id`,`badge_tag`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `blog_badges`
@@ -186,7 +186,7 @@ PRIMARY KEY  (`boardmessage_id`),
 KEY `parent_id` (`parent_id`),
 KEY `parent_type` (`parent_type`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `boardmessages`
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `changed` int(11) default '0',
 PRIMARY KEY  (`category_id`),
 KEY `active_position` (`is_active`,`position`)
-) TYPE=MyISAM  AUTO_INCREMENT=57 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `categories`
@@ -291,7 +291,7 @@ INSERT INTO `categories` (`category_id`, `position`, `name`, `description`, `typ
 --  `boardmessage_id` int(11) NOT NULL default '0',
 --  KEY `boardmessage_to_category` (`boardmessage_id`,`category_id`),
 --  KEY `category_to_boardmessage` (`category_id`,`boardmessage_id`)
--- ) TYPE=MyISAM;
+-- ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories_boardmessages`
@@ -316,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `channel_comment` (
 `is_active` tinyint(1) NOT NULL,
 `slug` text NOT NULL,
 PRIMARY KEY  (`comment_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `channel_comment`
@@ -354,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 PRIMARY KEY  (`comment_id`),
 KEY `comments_for_content` (`is_active`,`content_id`,`created`),
 KEY `comments_by_user` (`is_active`,`user_id`,`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `comments`
@@ -375,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `configurable_text` (
 `caption` varchar(255) default NULL,
 `caption_value` varchar(255) default NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `configurable_text`
@@ -405,7 +405,7 @@ CREATE TABLE IF NOT EXISTS `config_variables` (
 `variable` varchar(100) NOT NULL,
 `value` tinytext NOT NULL,
 PRIMARY KEY  (`variable`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `config_variables`
@@ -433,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `contentcollections` (
 `picture` text,
 PRIMARY KEY  (`collection_id`),
 KEY `is_active` (`is_active`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contentcollections`
@@ -454,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `contentcollections_albumtype` (
 `album_type_id` int(2) NOT NULL,
 KEY `album_type_to_contentcollection` (`album_type_id`,`contentcollection_id`),
 KEY `contentcollections_to_album_type` (`contentcollection_id`,`album_type_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contentcollections_albumtype`
@@ -475,7 +475,7 @@ CREATE TABLE IF NOT EXISTS `contentcollection_types` (
 `name` varchar(50) NOT NULL default '',
 `description` text,
 PRIMARY KEY  (`type_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contentcollection_types`
@@ -513,7 +513,7 @@ KEY `homepage_content` (`is_active`,`display_on`,`collection_id`,`created`),
 KEY `homepage_typed_content` (`is_active`,`display_on`,`collection_id`,`type`,`created`),
 KEY `user_content` (`is_active`,`collection_id`,`author_id`,`created`),
 KEY `user_typed_content` (`is_active`,`collection_id`,`author_id`,`type`,`created`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contents`
@@ -534,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `contents_sbmicrocontents` (
 `microcontent_id` int(11) NOT NULL default '0',
 KEY `content_to_microcontent` (`content_id`,`microcontent_id`),
 KEY `microcontent_to_content` (`microcontent_id`,`content_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contents_sbmicrocontents`
@@ -560,7 +560,7 @@ CREATE TABLE IF NOT EXISTS `content_routing_destinations` (
 `blog_type` char(2) NOT NULL default '',
 PRIMARY KEY  (`index_id`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `content_routing_destinations`
@@ -582,7 +582,7 @@ CREATE TABLE IF NOT EXISTS `content_types` (
 `description` text,
 PRIMARY KEY  (`type_id`),
 KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `content_types`
@@ -615,7 +615,7 @@ CREATE TABLE IF NOT EXISTS `announcements` (
 `position` tinyint(1) NOT NULL default '0',
 `status` tinyint(1) NOT NULL default '0',
 `is_active` tinyint(1) NOT NULL default '0'
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `announcements`
@@ -637,7 +637,7 @@ CREATE TABLE IF NOT EXISTS `domains_in_comments` (
 `occurrences` int(11) NOT NULL,
 PRIMARY KEY  (`comment_id`,`domain_id`),
 KEY `domain_id` (`domain_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `domains_in_comments`
@@ -661,7 +661,7 @@ CREATE TABLE IF NOT EXISTS `entities` (
 `entity_name` varchar(255) NOT NULL,
 PRIMARY KEY  (`id`),
 UNIQUE KEY `entity_service` (`entity_service`,`entity_type`,`entity_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `entities`
@@ -683,7 +683,7 @@ CREATE TABLE IF NOT EXISTS `entityattributes` (
 `attribute_value` text NOT NULL,
 `attribute_permission` int(11) default NULL,
 KEY `id` (`id`,`attribute_name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `entityattributes`
@@ -705,7 +705,7 @@ CREATE TABLE IF NOT EXISTS `entityrelationattributes` (
 `attribute_value` text NOT NULL,
 `attribute_permission` int(11) default NULL,
 KEY `id` (`id`,`attribute_name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `entityrelationattributes`
@@ -735,7 +735,7 @@ CREATE TABLE IF NOT EXISTS `entityrelations` (
 PRIMARY KEY  (`id`),
 KEY `object_service` (`object_service`,`object_type`,`object_id`,`relation_type`,`end_time`),
 KEY `subject_service` (`subject_service`,`subject_type`,`subject_id`,`relation_type`,`end_time`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `entityrelations`
@@ -764,7 +764,7 @@ KEY `uid` (`user_id`),
 KEY `start_time` (`start_time`),
 KEY `end_time` (`end_time`),
 KEY `delta` (`start_time`,`end_time`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `events`
@@ -799,7 +799,7 @@ KEY `assoc_target_id` (`assoc_target_id`),
 KEY `start_time` (`start_time`),
 KEY `end_time` (`end_time`),
 KEY `target` (`assoc_target_type`,`assoc_target_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `events_associations`
@@ -824,7 +824,7 @@ CREATE TABLE IF NOT EXISTS `external_feed` (
 `last_build_date` int(11) default NULL,
 PRIMARY KEY  (`feed_id`),
 KEY `is_active` (`is_active`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `external_feed`
@@ -847,7 +847,7 @@ CREATE TABLE IF NOT EXISTS `ext_cache` (
 `data` text NOT NULL,
 `expires` datetime NOT NULL,
 KEY `item` (`user_id`,`cache_key`,`expires`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ext_cache`
@@ -872,7 +872,7 @@ CREATE TABLE IF NOT EXISTS `feed_data` (
 `publish_date` int(11) default NULL,
 PRIMARY KEY  (`feed_data_id`),
 KEY `feed_content` (`feed_id`,`publish_date`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `feed_data`
@@ -905,7 +905,7 @@ CREATE TABLE IF NOT EXISTS `files` (
 PRIMARY KEY  (`file_id`),
 KEY `incomplete` (`incomplete`),
 KEY `cleanup_search` (`link_count`,`last_unlinked`,`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `files`
@@ -935,7 +935,7 @@ CREATE TABLE IF NOT EXISTS `file_links` (
 PRIMARY KEY  (`file_id`,`link_id`),
 KEY `thumbnail_lookup` (`role`,`parent_file_id`,`dim`),
 KEY `user_files` (`user_id`,`role`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `file_links`
@@ -958,7 +958,7 @@ CREATE TABLE IF NOT EXISTS `footer_links` (
 `is_active` tinyint(1) default NULL,
 `extra` text,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `footer_links`
@@ -980,7 +980,7 @@ CREATE TABLE IF NOT EXISTS `forgot_password` (
 `status` tinyint(1) NOT NULL default '0',
 PRIMARY KEY  (`forgot_password_id`),
 KEY `user_status_id` (`user_id`,`status`,`forgot_password_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `forgot_password`
@@ -1009,7 +1009,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 `group_type` varchar(64) NOT NULL default 'regular',
 PRIMARY KEY  (`group_id`),
 KEY `category_id` (`category_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
@@ -1032,7 +1032,7 @@ CREATE TABLE IF NOT EXISTS `groups_users` (
 `created` int(11) default NULL,
 KEY `users_groups` (`user_id`,`group_id`),
 KEY `user_type_index` (`group_id`,`user_id`,`user_type`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups_users`
@@ -1053,7 +1053,7 @@ CREATE TABLE IF NOT EXISTS `images` (
 `image_file` varchar(255) NOT NULL default '',
 `image_perm` int(2) NOT NULL default '0',
 PRIMARY KEY  (`content_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
@@ -1081,7 +1081,7 @@ PRIMARY KEY  (`inv_id`),
 KEY `inv_collection_id` (`inv_collection_id`),
 KEY `inv_status` (`inv_status`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `invitations`
@@ -1110,7 +1110,7 @@ CREATE TABLE IF NOT EXISTS `items` (
 `changed` int(11) NOT NULL,
 `changed_by` int(11) NOT NULL,
 PRIMARY KEY  (`item_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `items`
@@ -1130,7 +1130,7 @@ CREATE TABLE IF NOT EXISTS `items_collection` (
 `item_id` int(11) NOT NULL,
 `collection_id` int(11) NOT NULL,
 `is_default` tinyint(1) NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items_collection`
@@ -1150,7 +1150,7 @@ CREATE TABLE IF NOT EXISTS `items_content` (
 `item_id` int(11) NOT NULL,
 `content_id` int(11) NOT NULL,
 `is_default` tinyint(1) NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items_content`
@@ -1171,7 +1171,7 @@ CREATE TABLE IF NOT EXISTS `items_data` (
 `field_name` text NOT NULL,
 `field_value` text NOT NULL,
 `seq` tinyint(1) NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items_data`
@@ -1192,7 +1192,7 @@ CREATE TABLE IF NOT EXISTS `items_user` (
 `user_id` int(11) NOT NULL,
 `joined` int(11) NOT NULL,
 `is_active` tinyint(1) NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items_user`
@@ -1218,7 +1218,7 @@ CREATE TABLE IF NOT EXISTS `item_messages` (
 `type` tinyint(1) NOT NULL,
 `url` varchar(255) default NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `item_messages`
@@ -1243,7 +1243,7 @@ CREATE TABLE IF NOT EXISTS `linkcategories` (
 `is_active` tinyint(1) default NULL,
 PRIMARY KEY  (`category_id`),
 KEY `user_categories` (`user_id`,`is_active`,`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `linkcategories`
@@ -1269,7 +1269,7 @@ CREATE TABLE IF NOT EXISTS `links` (
 `is_active` tinyint(1) default NULL,
 PRIMARY KEY  (`link_id`),
 KEY `cat_active_created` (`category_id`,`is_active`,`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `links`
@@ -1294,7 +1294,7 @@ CREATE TABLE IF NOT EXISTS `local_files` (
 PRIMARY KEY  (`file_id`),
 KEY `filename` (`filename`),
 KEY `when_changed` (`timestamp`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `local_files`
@@ -1313,7 +1313,7 @@ KEY `when_changed` (`timestamp`)
 CREATE TABLE IF NOT EXISTS `local_file_sync_state` (
 `server_id` varchar(16) NOT NULL,
 `timestamp` datetime NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `local_file_sync_state`
@@ -1338,7 +1338,7 @@ CREATE TABLE IF NOT EXISTS `login_cookies` (
 `ip_addr` varchar(16) NOT NULL,
 PRIMARY KEY  (`user_id`,`series`),
 KEY `expires` (`expires`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `login_cookies`
@@ -1358,7 +1358,7 @@ CREATE TABLE IF NOT EXISTS `mc_db_status` (
 `stmt_key` varchar(255) NOT NULL,
 `network` varchar(50) NOT NULL default '',
 PRIMARY KEY  (`stmt_key`,`network`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `mc_db_status`
@@ -1390,7 +1390,7 @@ CREATE TABLE IF NOT EXISTS `media_videos` (
 `status` int(5) default NULL,
 `video_perm` int(5) default NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `media_videos`
@@ -1412,7 +1412,7 @@ CREATE TABLE IF NOT EXISTS `message_folder` (
 `name` varchar(255) NOT NULL default '',
 PRIMARY KEY  (`fid`),
 KEY `name_to_fid` (`uid`,`name`)
-) TYPE=MyISAM  AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `message_folder`
@@ -1435,7 +1435,7 @@ INSERT INTO `message_folder` (`fid`, `uid`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `Message_seq` (
 `id` int(10) unsigned NOT NULL auto_increment,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Message_seq`
@@ -1458,7 +1458,7 @@ CREATE TABLE IF NOT EXISTS `moderation_queue` (
 `item_id` int(11) NOT NULL default '0',
 `type` varchar(20) NOT NULL default '',
 KEY `collection_id` (`collection_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `moderation_queue`
@@ -1484,7 +1484,7 @@ CREATE TABLE IF NOT EXISTS `moduledata` (
 PRIMARY KEY  (`id`),
 UNIQUE KEY `modulename` (`modulename`),
 KEY `created` (`created`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `moduledata`
@@ -1510,7 +1510,7 @@ CREATE TABLE IF NOT EXISTS `modules_settings` (
 `title` varchar(100) NOT NULL default '',
 KEY `is_active` (`is_active`),
 KEY `module_id` (`module_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `modules_settings`
@@ -1580,7 +1580,7 @@ KEY `network_member_counts` (`is_active`,`type`,`member_count`),
 KEY `network_name_alpha` (`is_active`,`type`,`name`),
 KEY `network_created` (`is_active`,`type`,`created`),
 KEY `network_address` (`address`,`is_active`)
-) TYPE=MyISAM  AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1599,7 +1599,7 @@ CREATE TABLE IF NOT EXISTS `networks_users` (
 KEY `recent_users` (`network_id`,`created`),
 KEY `network_user_type` (`network_id`,`user_type`),
 KEY `network_user_id_type` (`network_id`,`user_id`,`user_type`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `networks_users`
@@ -1627,7 +1627,7 @@ CREATE TABLE IF NOT EXISTS `network_linkcategories` (
 PRIMARY KEY  (`category_id`),
 KEY `user_cat` (`user_id`,`category_name`,`category_id`),
 KEY `user_active` (`user_id`,`is_active`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `network_linkcategories`
@@ -1654,7 +1654,7 @@ CREATE TABLE IF NOT EXISTS `network_links` (
 PRIMARY KEY  (`link_id`),
 KEY `cat_title` (`category_id`,`title`),
 KEY `is_active` (`is_active`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `network_links`
@@ -1679,7 +1679,7 @@ CREATE TABLE IF NOT EXISTS `page_default_settings` (
 `rght` tinytext NOT NULL,
 `is_configurable` binary(1) default '0',
 PRIMARY KEY  (`page_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `page_default_settings`
@@ -1703,7 +1703,7 @@ CREATE TABLE IF NOT EXISTS `page_settings` (
 `middle` tinytext NOT NULL,
 `rght` tinytext NOT NULL,
 KEY `user_page` (`assoc_id`,`page_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `page_settings`
@@ -1727,7 +1727,7 @@ CREATE TABLE IF NOT EXISTS `page_views` (
 `view` tinyint(4) NOT NULL,
 `time_stamp` int(11) NOT NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `page_views`
@@ -1755,7 +1755,7 @@ CREATE TABLE IF NOT EXISTS `pa_forum` (
 `updated_at` datetime default NULL,
 PRIMARY KEY  (`id`),
 KEY `category_id` (`category_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `pa_forum`
@@ -1779,7 +1779,7 @@ CREATE TABLE IF NOT EXISTS `pa_forums_users` (
 `date_join` date NOT NULL,
 KEY `board_id` (`board_id`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pa_forums_users`
@@ -1809,7 +1809,7 @@ CREATE TABLE IF NOT EXISTS `pa_forum_board` (
 PRIMARY KEY  (`id`),
 KEY `owner_id` (`owner_id`),
 KEY `network_id` (`network_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `pa_forum_board`
@@ -1836,7 +1836,7 @@ CREATE TABLE IF NOT EXISTS `pa_forum_category` (
 `updated_at` datetime default NULL,
 PRIMARY KEY  (`id`),
 KEY `board_id` (`board_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `pa_forum_category`
@@ -1868,7 +1868,7 @@ KEY `user_id` (`user_id`),
 KEY `parent_id` (`parent_id`),
 KEY `thread_id` (`thread_id`),
 KEY `created_at` (`created_at`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `pa_forum_post`
@@ -1900,7 +1900,7 @@ CREATE TABLE IF NOT EXISTS `pa_forum_thread` (
 PRIMARY KEY  (`id`),
 KEY `forum_id` (`forum_id`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `pa_forum_thread`
@@ -1926,7 +1926,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
 PRIMARY KEY  (`persona_id`),
 KEY `persona_service_id` (`persona_service_id`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `personas`
@@ -1958,7 +1958,7 @@ PRIMARY KEY  (`persona_property_id`),
 KEY `key_index` (`name`),
 KEY `parent_id` (`parent_id`),
 KEY `persona_id` (`persona_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `persona_properties`
@@ -1985,7 +1985,7 @@ CREATE TABLE IF NOT EXISTS `persona_services` (
 `configuration` text NOT NULL,
 `enabled` tinyint(1) NOT NULL default '0',
 PRIMARY KEY  (`persona_service_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `persona_services`
@@ -2036,7 +2036,7 @@ CREATE TABLE IF NOT EXISTS `persona_service_paths` (
 `enabled` tinyint(1) NOT NULL default '0',
 PRIMARY KEY  (`persona_service_path_id`),
 KEY `persona_service_id` (`persona_service_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `persona_service_paths`
@@ -2100,7 +2100,7 @@ CREATE TABLE IF NOT EXISTS `polls` (
 `changed` int(11) NOT NULL default '0',
 `is_active` int(11) NOT NULL default '0',
 PRIMARY KEY  (`poll_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `polls`
@@ -2123,7 +2123,7 @@ CREATE TABLE IF NOT EXISTS `poll_vote` (
 `vote` longtext,
 `is_active` int(11) NOT NULL default '0',
 PRIMARY KEY  (`vote_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `poll_vote`
@@ -2153,7 +2153,7 @@ PRIMARY KEY  (`message_id`),
 KEY `sender_when` (`sender_id`,`sent_time`),
 KEY `threading` (`message_id`,`in_reply_to`),
 KEY `conversations` (`conversation_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `private_messages`
@@ -2177,7 +2177,7 @@ CREATE TABLE IF NOT EXISTS `rating` (
 `max_rating` mediumint(5) NOT NULL default '0',
 `user_id` int(11) NOT NULL default '0',
 PRIMARY KEY  (`index_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `rating`
@@ -2200,7 +2200,7 @@ CREATE TABLE IF NOT EXISTS `recent_media_track` (
 `created` int(11) default NULL,
 PRIMARY KEY  (`id`),
 KEY `cid` (`cid`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `recent_media_track`
@@ -2229,7 +2229,7 @@ CREATE TABLE IF NOT EXISTS `relations` (
 `status` enum('denied','pending','approved') NOT NULL default 'approved',
 KEY `user_rel` (`user_id`,`relation_id`),
 KEY `network_uid` (`network_uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `relations`
@@ -2250,7 +2250,7 @@ CREATE TABLE IF NOT EXISTS `relation_classifications` (
 `relation_type_id` int(2) NOT NULL default '0',
 KEY `relation_type_id` (`relation_type_id`),
 KEY `relation_type` (`relation_type`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `relation_classifications`
@@ -2280,7 +2280,7 @@ CREATE TABLE IF NOT EXISTS `report_abuse` (
 `body` text,
 `created` int(11) NOT NULL,
 PRIMARY KEY  (`report_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `report_abuse`
@@ -2309,7 +2309,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 PRIMARY KEY  (`review_id`),
 KEY `by_subject` (`is_active`,`subject_type`,`subject_id`),
 KEY `by_freshness` (`is_active`,`subject_type`,`created`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `reviews`
@@ -2334,7 +2334,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 `read_only` tinyint(1) NOT NULL default '0',
 `type` set('user','network','group') NOT NULL default 'network',
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `roles`
@@ -2363,7 +2363,7 @@ CREATE TABLE IF NOT EXISTS `routing_destination_types` (
 `destination_id` int(11) NOT NULL auto_increment,
 `destination_name` varchar(255) NOT NULL default '',
 PRIMARY KEY  (`destination_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `routing_destination_types`
@@ -2389,7 +2389,7 @@ CREATE TABLE IF NOT EXISTS `sbmicrocontent_types` (
 `description` varchar(250) NOT NULL default '',
 `titlefield` varchar(250) default NULL,
 PRIMARY KEY  (`sbtype_id`)
-) TYPE=MyISAM  AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `sbmicrocontent_types`
@@ -2433,7 +2433,7 @@ CREATE TABLE IF NOT EXISTS `site_ranking_parameters` (
 `description` text NOT NULL,
 `point` int(11) NOT NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `site_ranking_parameters`
@@ -2466,7 +2466,7 @@ CREATE TABLE IF NOT EXISTS `spam_domains` (
 PRIMARY KEY  (`id`),
 UNIQUE KEY `domain` (`domain`),
 KEY `blacklisted` (`blacklisted`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `spam_domains`
@@ -2492,7 +2492,7 @@ KEY `by_word` (`term`),
 KEY `by_freq` (`blacklist`,`frequency`,`term`),
 KEY `bad_words` (`blacklist`,`term`),
 KEY `term` (`term`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `spam_terms`
@@ -2514,7 +2514,7 @@ CREATE TABLE IF NOT EXISTS `static_pages` (
 `url` varchar(255) default NULL,
 `page_text` text,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `static_pages`
@@ -2536,7 +2536,7 @@ CREATE TABLE IF NOT EXISTS `supergroup_data` (
 `field_value` text,
 `setting` enum('ecommerce','mailing_list','playlist','showcasing') NOT NULL,
 `seq` int(11) default '0'
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `supergroup_data`
@@ -2561,7 +2561,7 @@ CREATE TABLE IF NOT EXISTS `supergroup_settings` (
 `image` varchar(255) default NULL,
 `flash_script` text,
 PRIMARY KEY  (`group_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `supergroup_settings`
@@ -2582,7 +2582,7 @@ CREATE TABLE IF NOT EXISTS `svn_meta` (
 `repos_root` text NOT NULL,
 `repos_path` text NOT NULL,
 KEY `revision` (`revision`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `svn_meta`
@@ -2607,7 +2607,7 @@ CREATE TABLE IF NOT EXISTS `svn_objects` (
 `held_revision` int(11) default NULL,
 PRIMARY KEY  (`is_active`,`path`,`revision`),
 UNIQUE KEY `revision` (`revision`,`path`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `svn_objects`
@@ -2628,7 +2628,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 `tag_name` varchar(255) NOT NULL default '',
 PRIMARY KEY  (`tag_id`),
 UNIQUE KEY `tag_name` (`tag_name`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `tags`
@@ -2649,7 +2649,7 @@ CREATE TABLE IF NOT EXISTS `tags_contentcollections` (
 `collection_id` int(11) NOT NULL default '0',
 KEY `contentcollection_to_tag` (`collection_id`,`tag_id`),
 KEY `tag_to_contentcollection` (`tag_id`,`collection_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags_contentcollections`
@@ -2670,7 +2670,7 @@ CREATE TABLE IF NOT EXISTS `tags_contents` (
 `content_id` int(11) NOT NULL default '0',
 KEY `tag_to_content` (`tag_id`,`content_id`),
 KEY `content_to_tags` (`content_id`,`tag_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags_contents`
@@ -2689,7 +2689,7 @@ KEY `content_to_tags` (`content_id`,`tag_id`)
 CREATE TABLE IF NOT EXISTS `tags_item` (
 `tag_id` int(11) NOT NULL,
 `item_id` int(11) NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags_item`
@@ -2710,7 +2710,7 @@ CREATE TABLE IF NOT EXISTS `tags_networks` (
 `network_id` int(11) NOT NULL default '0',
 KEY `network_to_tag` (`network_id`,`tag_id`),
 KEY `tag_to_network` (`tag_id`,`network_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags_networks`
@@ -2731,7 +2731,7 @@ CREATE TABLE IF NOT EXISTS `tags_users` (
 `user_id` int(11) NOT NULL default '0',
 KEY `tag_to_user` (`tag_id`,`user_id`),
 KEY `user_to_tag` (`user_id`,`tag_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags_users`
@@ -2753,7 +2753,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 `description` tinytext,
 `task_value` varchar(255) NOT NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `tasks`
@@ -2806,7 +2806,7 @@ CREATE TABLE IF NOT EXISTS `tasks_roles` (
 `task_id` int(11) NOT NULL,
 `role_id` int(11) NOT NULL,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=93 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=93 ;
 
 --
 -- Dumping data for table `tasks_roles`
@@ -2925,7 +2925,7 @@ CREATE TABLE IF NOT EXISTS `testimonials` (
 `created` int(11) NOT NULL,
 `changed` int(11) NOT NULL,
 PRIMARY KEY  (`testimonial_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `testimonials`
@@ -2949,7 +2949,7 @@ CREATE TABLE IF NOT EXISTS `trackback_contents` (
 `excerpt` text,
 PRIMARY KEY  (`index`),
 KEY `trackbacks_for_content` (`content_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `trackback_contents`
@@ -2994,7 +2994,7 @@ UNIQUE KEY `login_name` (`login_name`),
 KEY `user_id` (`user_id`),
 KEY `count_active` (`is_active`),
 KEY `email` (`email`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3013,7 +3013,7 @@ CREATE TABLE IF NOT EXISTS `users_online` (
 UNIQUE KEY `user_id` (`user_id`),
 KEY `login_order` (`timestamp`),
 KEY `timestamp` (`timestamp`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users_online`
@@ -3034,7 +3034,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 `role_id` int(2) NOT NULL default '-1',
 `extra` varchar(8048) NOT NULL default 'a:3:{s:4:"user";b:0;s:7:"network";b:1;s:6:"groups";a:0:{}}',
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users_roles`
@@ -3062,7 +3062,7 @@ CREATE TABLE IF NOT EXISTS `user_contact` (
 `contact_type` varchar(64) NOT NULL,
 PRIMARY KEY  (`id`),
 KEY `user_id` (`user_id`)
-) TYPE=MyISAM AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `user_contact`
@@ -3085,7 +3085,7 @@ CREATE TABLE IF NOT EXISTS `user_email_history` (
 `remote_ip` char(15) default NULL,
 `all_remote_ips` varchar(255) default NULL,
 PRIMARY KEY  (`user_id`,`timestamp`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user_email_history`
@@ -3107,7 +3107,7 @@ CREATE TABLE IF NOT EXISTS `user_feed` (
 `feed_id` int(11) NOT NULL default '0',
 KEY `feed_to_user` (`feed_id`,`user_id`),
 KEY `user_to_feed` (`user_id`,`feed_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 --
@@ -3135,7 +3135,7 @@ CREATE TABLE IF NOT EXISTS `user_message_folder` (
 PRIMARY KEY  (`index_id`),
 KEY `fid` (`fid`),
 KEY `mid` (`mid`)
-) TYPE=MyISAM  AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=3 ;
 
 
 --
@@ -3158,7 +3158,7 @@ CREATE TABLE IF NOT EXISTS `user_popularity` (
 `popularity` int(11) NOT NULL,
 `time` int(11) NOT NULL,
 PRIMARY KEY  (`user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user_popularity`
@@ -3184,7 +3184,7 @@ CREATE TABLE IF NOT EXISTS `user_profile_data` (
 `field_perm` int(2) NOT NULL default '0',
 `seq` int(3) unsigned zerofill default NULL,
 KEY `profile_fields_seq` (`user_id`,`field_type`(32),`field_name`(32),`seq`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 --
@@ -3224,7 +3224,7 @@ INSERT INTO `user_profile_data` (`user_id`, `field_name`, `field_value`, `field_
 CREATE TABLE IF NOT EXISTS `User_seq` (
 `id` int(10) unsigned NOT NULL auto_increment,
 PRIMARY KEY  (`id`)
-) TYPE=MyISAM  AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `User_seq`
@@ -3249,7 +3249,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
 `video_file` varchar(255) NOT NULL default '',
 `video_perm` int(2) NOT NULL default '0',
 PRIMARY KEY  (`content_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `videos`
