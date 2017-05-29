@@ -12,6 +12,9 @@
 ?>
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);  
+     
 require_once "api/ModuleSetting/ModuleSetting.php";
 require_once "api/Message/Message.php";
 require_once "api/Advertisement/Advertisement.php";
