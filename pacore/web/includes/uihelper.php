@@ -66,7 +66,7 @@ function uihelper_user_url($user_or_id) {
   return PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $user_or_id;
 }
 
-function uihelper_upload_gallery($uid, $_POST, $_FILES, $type, $k=0) {
+function uihelper_upload_gallery($uid, $_FILES, $type, $k=0) {
 
   require_once "api/User/User.php";
   require_once "api/Tag/Tag.php";
@@ -660,7 +660,7 @@ function load_info(){
 
 
 // for media gallery post in groups
-function uihelper_upload_gallery_for_group($uid, $_POST, $_FILES, $type, $k=0) {
+function uihelper_upload_gallery_for_group($uid, $_FILES, $type, $k=0) {
 
   require_once "api/User/User.php";
   require_once "api/Tag/Tag.php";
