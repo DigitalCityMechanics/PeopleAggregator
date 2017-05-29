@@ -316,9 +316,18 @@ class Dal {
     return $new_table;
   }
 
-  public static function validate_sql ($sql, $net_name="") {
-    return preg_replace("/\{\s*([a-z_]+)\s*\}/e", 'Dal::translate_table_name("$1", "$net_name")', $sql);
-  }
+  //public static function validate_sql ($sql, $net_name="") {
+  //  return preg_replace("/\{\s*([a-z_]+)\s*\}/e", 'Dal::translate_table_name("$1", "$net_name")', $sql);
+  //}
+  
+    public static function validate_sql($sql, $net_name = "") {
+
+        return preg_replace_callback(
+                '/\{\s*([a-z_]+)\s*\}/', function ($m) use ($net_name) {
+            return Dal::translate_table_name($m[1], $net_name);
+        }, $sql
+        );
+    }
 
   public static function commit() {
     Dal::get_connection()->commit();
