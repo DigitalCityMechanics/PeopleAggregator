@@ -216,9 +216,6 @@
         <PAGE_USER_COMMENT category="constant" type="int" readonly="true" section="pages" page_name="User Comments Page" page_type="user">
           <value>77</value>
         </PAGE_USER_COMMENT>
-        <PAGE_TERMS category="constant" type="int" readonly="true" section="pages" page_name="terms" page_type="">
-          <value>78</value>
-        </PAGE_TERMS>
         <PAGE_NETWORK_MODERATE_CONTENTS category="constant" type="int" readonly="true" section="pages" page_name="network_moderate_content" page_type="network">
           <value>79</value>
         </PAGE_NETWORK_MODERATE_CONTENTS>
@@ -348,7 +345,10 @@
         </PAGE_IN_THE_NEWS>
         <PAGE_IMPRINT category="constant" type="int" readonly="true" section="pages" page_name="imprint" page_type="">
             <value>1000</value>
-        </PAGE_IMPRINT>         
+        </PAGE_IMPRINT>      
+        <PAGE_TERMS category="constant" type="int" readonly="true" section="pages" page_name="terms" page_type="">
+          <value>2000</value>
+        </PAGE_TERMS>           
       </value>
     </pages>
     <system_strings description="Various strings and messages">
