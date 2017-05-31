@@ -34,6 +34,24 @@ class PA {
 
   // Site name
   public static $site_name;
+  // Site owner
+  public static $site_owner;
+  // Site company
+  public static $site_company;
+  // Site company street
+  public static $site_company_street;
+  // Site company postal code
+  public static $site_company_postalcode;
+  // Site company city
+  public static $site_company_city;
+  // Site company country
+  public static $site_company_country;
+  // Site company fon
+  public static $site_company_fon;
+  // Site company fax
+  public static $site_company_fax;
+  // Site company mail
+  public static $site_company_mail;
 
   // Default email sender
   public static $default_sender;
