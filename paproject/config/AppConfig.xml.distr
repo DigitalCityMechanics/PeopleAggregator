@@ -346,6 +346,9 @@
 		<PAGE_IN_THE_NEWS category="constant" type="int" readonly="true" section="pages" page_name="in_the_news" page_type="network">
           <value>741</value>
         </PAGE_IN_THE_NEWS>
+        <PAGE_IMPRINT category="constant" type="int" readonly="true" section="pages" page_name="imprint" page_type="">
+            <value>1000</value>
+        </PAGE_IMPRINT>         
       </value>
     </pages>
     <system_strings description="Various strings and messages">
@@ -791,6 +794,33 @@
         <site_name category="static_var" type="string" readonly="false" section="site_related" description="Site name">
           <value>PeopleAggregator</value>
         </site_name>
+        <site_owner category="static_var" type="string" readonly="false" section="site_related" description="Site owner">
+            <value>Michael Lo</value>
+        </site_owner>
+        <site_company category="static_var" type="string" readonly="false" section="site_related" description="Site company">
+            <value>PA</value>
+        </site_company>
+        <site_company_street category="static_var" type="string" readonly="false" section="site_related" description="Site company street">
+            <value>Your street 01</value>
+        </site_company_street>
+        <site_company_postalcode category="static_var" type="string" readonly="false" section="site_related" description="Site company postal code">
+            <value>00001</value>
+        </site_company_postalcode>
+        <site_company_city category="static_var" type="string" readonly="false" section="site_related" description="Site company city">
+            <value>Hamburg</value>
+        </site_company_city>
+        <site_company_country category="static_var" type="string" readonly="false" section="site_related" description="Site company country">
+            <value>Germany</value>
+        </site_company_country>
+        <site_company_fon category="static_var" type="string" readonly="false" section="site_related" description="Site company fon">
+            <value>+49 (0) 123 44 55 99</value>
+        </site_company_fon>
+        <site_company_fax category="static_var" type="string" readonly="false" section="site_related" description="Site company fax">
+            <value>+49 (0) 123 44 55 99</value>
+        </site_company_fax>
+        <site_company_mail category="static_var" type="string" readonly="false" section="site_related" description="Site company mail">
+            <value>contact@pa.com</value>
+        </site_company_mail>        
         <language category="static_var" type="string" readonly="false" section="site_related" description="Default site language">
           <value>english</value>
         </language>
