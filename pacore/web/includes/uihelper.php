@@ -923,8 +923,12 @@ function get_network_css() {
 
   // TODO intregate with Mothership info
   $result = array();
-
-  $result['network'] = PA::$theme_url . '/network.css';
+  // Bootstrap 3.3.7
+  $result['bootstrap'] = PA::$theme_url . '/bootstrap/css/bootstrap.css';
+  // Font Awesome
+  $result['fontawesome'] = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css';
+  // Ionicons
+  $result['ionicons'] = 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css';
 
   if (!empty(PA::$network_info)) {
     $extra = unserialize(PA::$network_info->extra);

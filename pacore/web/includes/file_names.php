@@ -78,6 +78,7 @@ define('FILE_MANAGE_EMBLEM','manage_emblem.php');
 define('FILE_MANAGE_TAKETOUR','manage_taketour.php');
 define('FILE_CONFIGURE_SPLASH_PAGE','configure_splash_page.php');
 define('FILE_NETWORK_CUSTOMIZE_UI_PAGE','network_customize_ui.php');
+define('FILE_NETWORK_CONFIGURE','network_statistics.php');
 define('FILE_FORUM_HOME', 'forum_home.php');
 define('FILE_CREATE_FORUM', 'create_forum_topic.php');
 define('FILE_UPLOAD_MEDIA', 'upload_media.php');

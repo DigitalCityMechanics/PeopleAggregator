@@ -12,7 +12,7 @@
 ?>
 <?php
 
-error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_NOTICE);
 ini_set('display_errors', 1);  
      
 require_once "api/ModuleSetting/ModuleSetting.php";
@@ -103,7 +103,7 @@ class PageRenderer {
     $this->debugging = isset($_GET['debug']);
 
     $this->page_template = $page_template;
-    $this->top_navigation_template = 'top_navigation_bar.tpl'; //TO DO: Remove this hardcoded text afterwards
+    $this->top_navigation_template = '/site/header_navbar.php';
     $this->header_template = $header_template;
     //settings for current network
     $this->network_info = $network_info_ ? $network_info_ : PA::$network_info; //FIXME: does this have to be a parameter?  can't we just always use the global PA::$network_info?
@@ -184,11 +184,28 @@ class PageRenderer {
     $this->top_navigation_bar = new Template(CURRENT_THEME_FSPATH."/".$this->top_navigation_template);
     $this->top_navigation_bar->set('current_theme_path', PA::$theme_url);
     $this->top_navigation_bar->set('current_theme_rel_path', PA::$theme_rel);
+    $this->top_navigation_bar->set('message_count', $this->message_count['unread_msg']);
     $this->top_navigation_bar->set('navigation_links', $this->navigation_links);
+    // Header
     $this->setHeader($this->header_template);
-    $this->footer = new Template(CURRENT_THEME_FSPATH."/footer.tpl");
+    // Left sitebar
+    $this->left_sitebar = new Template(CURRENT_THEME_FSPATH . "/site/left_sitebar.php");
+    $this->left_sitebar->set('current_theme_path', PA::$theme_url);
+    $this->left_sitebar->set('page_name', $title);
+    $this->left_sitebar->set('message_count', $this->message_count['unread_msg']);
+    $this->left_sitebar->set('navigation_links', $this->navigation_links);
+    // Footer
+    $this->footer = new Template(CURRENT_THEME_FSPATH . "/site/footer.php");
     $this->footer->set('current_theme_path', PA::$theme_url);
     $this->footer->set('page_name', $title);
+    // Footer sitebar
+    $this->footer_sitebar = new Template(CURRENT_THEME_FSPATH . "/site/footer_sitebar.php");
+    $this->footer_sitebar->set('current_theme_path', PA::$theme_url);
+    $this->footer_sitebar->set('page_name', $title);
+    // Footer script
+    $this->footer_script = new Template(CURRENT_THEME_FSPATH . "/site/footer_script.php");
+    $this->footer_script->set('current_theme_path', PA::$theme_url);
+    $this->footer_script->set('page_name', $title);
 
     $page = $this;
     $this->preInitialize($this->setting_data);
@@ -210,7 +227,7 @@ class PageRenderer {
     if(PA::$profiler) PA::$profiler->stopTimer('PageRenderer_init');
   }//end of constructor
 
-  public function setHeader($header_tpl) {
+    public function setHeader($header_tpl) {
     $this->header = new Template(CURRENT_THEME_FSPATH."/".$header_tpl);
     $this->header->set('current_theme_path', PA::$theme_url);
     $this->header->set('current_theme_rel_path', PA::$theme_rel);
@@ -251,7 +268,7 @@ class PageRenderer {
     }
 
     $this->modules_array = array();
-    foreach (array("toprow", "middle", "left", "right") as $module_column) {
+    foreach (array("toprow", "middle", "left", "leftmenu", "right", "footerrow") as $module_column) {
       $column_modules = (!PA::$config->page_type) ? array() : @$this->setting_data[$module_column];
 			if (count($column_modules) > 0) {
 				foreach ($column_modules as $moduleName) {
@@ -334,6 +351,8 @@ class PageRenderer {
           }
           break;
         case 'middle':
+        case 'toprow':
+        case 'footerrow':            
           break;
         }
 
@@ -516,15 +535,20 @@ class PageRenderer {
   function add_module_xy($x_loc, $y_loc, $module) {
     //identify the column of the modules
     switch ($x_loc) {
-      case 1:
-        $x = 'left';
-        break;
-      case 2:
-        $x = 'middle';
-        break;
-      case 3:
-        $x = 'right';
-        break;
+        case 1:
+            $x = 'left';
+            break;
+        case 2:
+            $x = 'middle';
+            break;
+        case 3:
+            $x = 'right';
+            break;
+        case 4:
+            $x = 'toprow';
+        case 5:
+            $x = 'footerrow';
+            break;
       default:
         throw new PAException("", "Invalid horizontal position $x_loc");
     }
@@ -681,10 +705,14 @@ class PageRenderer {
         $extra_head_html .= 'var base_url = "'.addslashes(PA::$url).'";';
         $extra_head_html .= 'var CURRENT_THEME_PATH = "'.addslashes(PA::$theme_url).'";';
         $extra_head_html .= '</script>'."\n";
-        // Load JQuery
+        // Load JQuery 3.1.1
         $extra_head_html .= '<script type="text/javascript" ';
         $extra_head_html .= 'language="javascript" src="'.$combinator_url_js_prefix.$default_path;
-        $extra_head_html .= '/javascript/jquery.min.js'.$cssjs_tag_prefix.$cssjs_tag.'"></script>'."\n";
+        $extra_head_html .= '/plugins/jQuery/jquery-3.1.1.min.js'.$cssjs_tag_prefix.$cssjs_tag.'"></script>'."\n";
+        // Load Bootstrap 3.3.7
+        $extra_head_html .= '<script type="text/javascript" ';
+        $extra_head_html .= 'language="javascript" src="'.$combinator_url_js_prefix.$default_path;
+        $extra_head_html .= '/bootstrap/js/bootstrap.min.js'.$cssjs_tag_prefix.$cssjs_tag.'"></script>'."\n";        
         // Load base_javascript
         $extra_head_html .= '<script type="text/javascript" ';
         $extra_head_html .= 'language="javascript" src="'.$combinator_url_js_prefix.$default_path;
@@ -863,10 +891,13 @@ class PageRenderer {
         $this->page->set('array_'.$module_column.'_modules', $array_modules);
     }
 
-    $this->page->set('top_navigation_bar', $this->top_navigation_bar);
-    $this->page->set('header', $this->header);
-    $this->page->set('footer', $this->footer);
-    $this->page->set('current_theme_path', PA::$theme_url);
+        $this->page->set('top_navigation_bar', $this->top_navigation_bar);
+        $this->page->set('header', $this->header);
+        $this->page->set('left_sitebar', $this->left_sitebar);
+        $this->page->set('footer', $this->footer);
+        $this->page->set('footer_sitebar', $this->footer_sitebar);
+        $this->page->set('footer_script', $this->footer_script);
+        $this->page->set('current_theme_path', PA::$theme_url);
 
     $res = $this->page->fetch();
     if(PA::$profiler) PA::$profiler->stopTimer('PageRenderer_render');

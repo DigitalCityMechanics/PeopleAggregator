@@ -390,6 +390,7 @@
     "^/terms[\/]?(.*)$" => "/dynamic.php?page_id=2000&%s",      
   );
 
+define("PA_ROUTE_SHOPS", "/shops");  
 define("PA_ROUTE_IMPRINT", "/imprint"); 
 define("PA_ROUTE_TERMS", "/terms");
 define("PA_ROUTE_FORUMS", "/forums");

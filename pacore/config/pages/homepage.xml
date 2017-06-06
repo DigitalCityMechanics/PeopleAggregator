@@ -2,6 +2,9 @@
 <page>
   <page_id>5</page_id>
   <data>
+    <toprow>
+        <item>NetworkStatisticsModule</item>
+    </toprow>      
     <left>
       <item>MembersFacewallModule</item>
       <item>EventCalendarSidebarModule</item>
@@ -17,20 +20,22 @@
       <item>QuestionsModule</item>
       <item>NewestGroupsModule</item>
       <item>RecentPostModule</item>
-      <item>NetworkStatisticsModule</item>
       <item>LeaderBoardModule</item>
       <item>PollModule</item>
       <item>TakeATourModule</item>
     </right>
     <javascripts>
+      <item>adminlte.min.js</item>
       <item>common.js</item>
       <item>calendar.js</item>
     </javascripts>
     <page_css>
+      <item>dist/css/AdminLTE.min.css</item>
+      <item>dist/css/skins/skin-blue.min.css</item>
       <item>calendar.css</item>
     </page_css>
     <page_theme>Default</page_theme>
-    <body_attributes><![CDATA[class="no_second_tier" id="pg_homepage"]]></body_attributes>
+    <body_attributes><![CDATA[class="hold-transition skin-blue sidebar-mini no_second_tier" id="pg_homepage"]]></body_attributes>
     <access_permission/>
     <navigation_code/>
     <boot_code><![CDATA[
@@ -101,8 +106,8 @@
       $this->add_header_html($rss_data);
       uihelper_get_network_style();
       ]]></boot_code>
-    <page_template>container_three_column.tpl</page_template>
-    <header_template>header.tpl</header_template>
+    <page_template>container_three_column.php</page_template>
+    <header_template>header.php</header_template>
     <page_mode>public</page_mode>
     <block_type>Homepage</block_type>
     <page_type>network</page_type>
