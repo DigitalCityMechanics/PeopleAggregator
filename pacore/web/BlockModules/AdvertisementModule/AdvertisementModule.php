@@ -55,7 +55,7 @@
       // we never want to reduce the height of an ad, so we set $height very high
       $height = 1000;
 
-      $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_html.tpl';
+      $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_html.php';
       $inner_html_gen = new Template($tmp_file);
       $inner_html_gen->set_object('links', $links);
       $inner_html_gen->set('width', $width);
