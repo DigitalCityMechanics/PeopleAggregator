@@ -117,14 +117,14 @@
         </div>
         <div id="image_preview">
           <div id="loading_preview"></div>
-          <? if (!empty($_POST['user_filename'])) { /* validated in register.php */ ?>
+          <?php if (!empty($_POST['user_filename'])) { /* validated in register.php */ ?>
             <div id="your_photo" class="field_medium" style="height: auto">
               <h4><label><?= __("Your photo") ?>:<span class="required"> &nbsp; </span></label></h4>
               <input type="hidden" name="user_filename" value="<?= htmlspecialchars(@$_POST['user_filename']) ?>" />
             <div><?= uihelper_resize_mk_img($_POST['user_filename'], 200, 200, NULL, 'style="margin-left: 10px"') ?></div>
               <div><b><?= __("To use a different image, click Clear Image and select a new image.") ?></b></div>
             </div>
-          <? } ?>
+          <?php } ?>
         </div>
 <!--
           <div class="field_medium">

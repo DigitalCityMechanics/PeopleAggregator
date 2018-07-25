@@ -67,7 +67,7 @@ $lc_group_noun = strtolower(PA::$group_noun);
               <tr bgcolor=<?=$color?>>
                 <td>Joined Group: <?= PA::date($links[$i]['created'] ,'long') // date("M d, Y",$links[$i]["created"])?></td>
               </tr>
-      <? } ?>
+      <?php } ?>
       <input type="hidden" name="user_id" id="user_id" value="">
       <input type="hidden" name="user_status" id="user_status" value="">
       <input type="hidden" name="group_id" value="<?= $group_id; ?>">

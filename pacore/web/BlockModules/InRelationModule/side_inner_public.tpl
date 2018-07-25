@@ -2,7 +2,7 @@
 ?>
 <div class="module_icon_list">
 <ul  class="members">
-  <? if (!empty($links)) { 
+  <?php if (!empty($links)) { 
        // for ($i=0; $i<count($links); $i++) 
        $i=0;
        foreach ($links as $k=>$link) { 

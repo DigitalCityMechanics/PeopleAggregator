@@ -39,7 +39,7 @@ include('attach_media.tpl.php');
 </fieldset>
 <br clear="all" />
 -->
-<? } ?>
+<?php } ?>
 
 <fieldset id='tags'>
   <legend><a><b><?= __("Tags") ?></b></a></legend>
@@ -47,7 +47,7 @@ include('attach_media.tpl.php');
   <br /><?= __("Separate tags with commas") ?>
 </fieldset>
   <input type="hidden" name="cid" value="<?php echo $cid ?>"/> 
-  <? if (isset($group_id)) { ?>
+  <?php if (isset($group_id)) { ?>
   <input type="hidden" name="gid" value="<?php echo $group_id ?>" />
-  <? } ?>
+  <?php } ?>
   <input type="hidden" name="ccid" value="<?php echo $ccid ?>" />

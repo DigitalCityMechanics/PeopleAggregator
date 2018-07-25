@@ -7,5 +7,5 @@
     <li style="text-align:center"><a href="<?php echo
 PA::$url .'/'.FILE_ANSWERS;?>">View/Submit Answers</a></li>
   </ul>
-<? } ?>
+<?php } ?>
 </div>

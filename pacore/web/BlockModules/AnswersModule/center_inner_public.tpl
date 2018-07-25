@@ -12,7 +12,7 @@
    <? } 
    } else { ?>
     <li><?= __("No answer is posted till now") ?></li>
-   <? } ?>
+   <?php } ?>
   </ul>
 </div> 
 

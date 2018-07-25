@@ -2,7 +2,7 @@
   $alb = (!empty($_GET['album_id'])) ? '&album_id='.$_GET['album_id']:null;
   $current_url = PA::$url . $app->current_route;
 ?>
-<?php if (empty($frnd_list)) { ?><h1><?php echo ucfirst($links['album_name']);?></h1><? } ?>
+<?php if (empty($frnd_list)) { ?><h1><?php echo ucfirst($links['album_name']);?></h1><?php } ?>
 <?php 
   if (!empty($frnd_list)) { ?>
     <div class="search_gallery"> Friend
@@ -19,7 +19,7 @@
         <?php } ?>
       </select>
     </div>
- <? } ?>
+ <?php } ?>
 <?php if (!empty ($my_all_album)) { ?> 
   <div class="search_gallery"><?if (!empty($frnd_list)) { echo __('Album'); } else { echo __('Select Album');} ?>
     <select id="album_name" class="select-txt" onchange="select_album()">

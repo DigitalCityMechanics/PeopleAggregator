@@ -31,7 +31,7 @@
       
 			 <?php 
           }  }
-        else { ?> <li> <?= __("No links under this category") ?> </li><? } ?>
+        else { ?> <li> <?= __("No links under this category") ?> </li><?php } ?>
 
         </ul>
       </li> 
@@ -45,7 +45,7 @@
   else {
     if (!isset($page_uid) || $login_uid == $page_uid) { ?>
       <?= sprintf(__('No links have been added. Click <a href="%s">here</a> to add links.'), PA::$url."/links_management.php") ?>
-    <? } else { ?>
+    <?php } else { ?>
       <?= __("No links have been added") ?>
     <? } 
   } ?>

@@ -18,7 +18,7 @@
 ?>
 <?php if (count($links) > 0) {?>
 <div class='description'><?php echo $description;?></div>
-<? } ?>
+<?php } ?>
 <div id="GroupsDirectoryModule">
 
 <?php if( !empty( $page_links ) ) { ?>
@@ -28,7 +28,7 @@
 <?php } ?>
 
 <ul class="members_list">
-<? if (!empty($links)) { ?>
+<?php if (!empty($links)) { ?>
 <?php
     foreach($links as $link) {
       $user_link = PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $link['user_id'];
@@ -66,7 +66,7 @@
        ?>
        <br />
        <?= __("member since:") ?> <?php echo manage_content_date ($link['created']); ?>
-       <? } ?>
+       <?php } ?>
       </div>
    </a>
   <?php if(($view_type == 'relations') || ($view_type == 'in_relations')) : ?>
@@ -112,7 +112,7 @@
   <? } // End of FOR loop
  } else { // End of if (!empty($links)) ?>
    <li><?= __("No relation exists.") ?></li>
- <? } ?>
+ <?php } ?>
 </ul>
 <?php if( !empty( $page_links ) ) { ?>
   <div class="prev_next">

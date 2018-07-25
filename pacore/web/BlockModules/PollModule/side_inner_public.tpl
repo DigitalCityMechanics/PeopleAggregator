@@ -34,7 +34,7 @@
           <br/>
           <input type="submit" name="submit" value="<?= __("Answer") ?>" /> or <?php echo ($show_results_link != '') ? '<a href="'.$show_results_link.'">View Responses</a>'."\n" : ''; ?>
         </div>
-     <? } else { ?>
+     <?php } else { ?>
 		<?php echo ($show_poll_link != '') ? '<p class="vote_link"><a href="'.$show_poll_link.'">OK, I\'m ready to vote!</a></p>'."\n" : ''; ?>
 	<?php } ?>
     </div>

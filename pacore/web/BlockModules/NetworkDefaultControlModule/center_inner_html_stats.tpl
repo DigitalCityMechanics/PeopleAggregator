@@ -25,7 +25,7 @@ $extra = unserialize($mother_network_info->extra);
           </ul>
          </div>
        </div>
-  <?php }  ?>
+  <?php } ?>
   <?php
     if ( !$is_edit ) { ?>
     <div class="field_big">
@@ -42,7 +42,7 @@ $extra = unserialize($mother_network_info->extra);
    </div> 
     <input type="hidden" name="form_handler" value="NetworkDefaultControlModule" />
     <input type="hidden" name="operation" value="create_network" />
-  <? } ?>
+  <?php } ?>
   <div class="field_big">
     <h4><label for="slogan"><?= __("Network Title/Heading") ?><span class="required"> *</span></label></h4>
     <input type="text"  size="60" name="name" value="<?php echo htmlspecialchars(@$form_data['name']);?>" maxlength="100" class="text longer" />
@@ -169,7 +169,7 @@ $extra = unserialize($mother_network_info->extra);
     <?php if (@$form_data['captcha_required'] == NET_YES) {
     echo 'checked="checked"'; }?> /> <?= __("CAPTCHA is required during registration.") ?>
   </div>
-<? } else { ?>
+<?php } else { ?>
   <div class="field">
     <?php echo (@$extra['reciprocated_relationship'] == NET_YES) ? __("Reciprocated relationships are required.")
                                                                  : __("Reciprocated relationships are not required."); ?>
@@ -182,7 +182,7 @@ $extra = unserialize($mother_network_info->extra);
     <?php echo (@$extra['captcha_required'] == NET_YES) ? __("CAPTCHA is required during registration.")
                                                         : __("CAPTCHA is not required during registration."); ?>
   </div>
- <? } ?>
+ <?php } ?>
      <div class="button_position">
      <input type="hidden" name="action" id="action_1" value="<? echo @$form_data['action'];?>" />
      <input type="hidden" name="nid" value="<? echo PA::$network_info->network_id; ?>" />

@@ -80,14 +80,14 @@ $back_url = '&back_page=' . urlencode($back_page . ((isset($_GET['gid'])) ? '?gi
    <td><img src="<?=$type_image;?>" alt="PA" /></td>
    <td><?php print manage_content_date($links[$i]->changed);?></td>
    </tr>
-   <? } ?>
+   <?php } ?>
    </table>
-   <? } ?>
-  <? if(empty($links)) { ?>
+   <?php } ?>
+  <?php if(empty($links)) { ?>
     <table  cellspacing="0" cellpadding="0" >
       <tr><th><div class="description"> <?= __("No Content Published") ?></div></th></tr>
     </table>
-   <? } ?>
+   <?php } ?>
 
 <input type="hidden" name="delete_type" id="delete_type" value="" />
  </form>

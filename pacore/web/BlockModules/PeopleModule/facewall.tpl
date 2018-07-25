@@ -58,7 +58,7 @@ $query_string = null;
      <?php echo $page_links?>
      <?php if ($page_last) { echo $page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>
   <div style="padding-left: 18px; clear: both; float: left; width:540px">
   <?php foreach($links as $link) {
    include "_buddy.tpl.php";
@@ -71,7 +71,7 @@ $query_string = null;
      <?php echo $page_links?>
      <?php if ($page_last) { echo $page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>
 
   <div class="search_gallery">
   <?php if ($people_count) { ?>

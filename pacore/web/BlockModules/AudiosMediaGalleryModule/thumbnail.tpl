@@ -61,7 +61,7 @@
        <a href="#"><img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="" height="16" width="16" border="0"  onclick="edit_delete_media('<?=$links[$i]['content_id']?>','delete','image_upload1');"></a>
     </p>
        
-    <? } ?>
+    <?php } ?>
   </li>
 <?} // End of for loop?>  
 </ul>
@@ -71,5 +71,5 @@
       <?= __("No Audio") ?>
     </li>
   </ul>  
-<? } ?>
+<?php } ?>
 </div>

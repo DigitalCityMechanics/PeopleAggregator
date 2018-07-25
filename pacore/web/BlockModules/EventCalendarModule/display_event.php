@@ -16,7 +16,7 @@
 <?php if (!empty($ed['banner'])) { ?>
           <?php echo uihelper_resize_mk_img($ed['banner'], 430, 80,
           NULL, 'alt="Current Event Banner"', RESIZE_FIT); ?>
-<? } ?>
+<?php } ?>
       </div>
     <div class="field_event">
     <b><?= __("Starts") ?></b>:
@@ -35,7 +35,7 @@
     <b><?= __("Description") ?>:</b>:<br />
     <? echo _out($ed['event_description']); ?>
     </div>
-<? if ($may_edit) { ?>
+<?php if ($may_edit) { ?>
 <div class="button_position">
 
     <input type="submit" name="edit" value="<?= __("Edit") ?>">
@@ -55,7 +55,7 @@
     <input type="hidden" name="edit_event" value="<?= $ed['event_id'] ?>">
 
 </div>
-<? } ?>
+<?php } ?>
     
     
                     

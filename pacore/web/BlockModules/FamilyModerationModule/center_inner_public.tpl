@@ -62,7 +62,7 @@ $lc_group_noun = __("Family");
       <tr class="<?=$tr_class?>">
          <td><?= __("Joined Family") ?>: <?= PA::date($links[$i]['created'] ,'long') ?></td>
       </tr>
-      <? } ?>
+      <?php } ?>
       <input type="hidden" name="user_id" id="user_id" value="">
       <input type="hidden" name="user_status" id="user_status" value="">
       <input type="hidden" name="family_id" value="<?= $family_id; ?>">

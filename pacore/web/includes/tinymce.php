@@ -31,15 +31,15 @@ tinyMCE.init({
     relative_urls: false,
     remove_script_host: true,
     document_base_url: "<?=PA::$url?>",  
-<? if ($mode == 'full') { ?>
+<?php if ($mode == 'full') { ?>
     theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,formatselect",
     theme_advanced_buttons2 : "outdent,indent,separator,undo,redo,separator,link,unlink,anchor,image,cleanup,help,code,hr,removeformat,visualaid,separator,charmap,flash",
     theme_advanced_buttons3 : ""
-<? } else { ?>
+<?php } else { ?>
     theme_advanced_buttons1 : "formatselect,bold,italic,underline,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,undo,redo,link,unlink,image,code",
     theme_advanced_buttons2 : "",
     theme_advanced_buttons3 : ""
-<? } ?>
+<?php } ?>
 });
 </script>
 <?php

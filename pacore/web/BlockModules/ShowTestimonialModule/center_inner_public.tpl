@@ -43,7 +43,7 @@
                            <li>
                              <a href="<?php echo $button[$j]['link'];?>"><?php echo $button[$j]['caption'];?></a>
                            </li>
-                        <? } ?>
+                        <?php } ?>
                        </ul>
                      </div>  
                     <? }
@@ -56,12 +56,12 @@
                </td>
        </tr>
             
-      <? } ?>
+      <?php } ?>
       </table>
     </div>
     <?  } else { ?>      
            <?= __("No Testimonial Found") ?>
-    <? } ?>
+    <?php } ?>
   <?php if( $page_links ) {?>
    <div class="prev_next">
      <?php if ($page_first) { echo $page_first; }?>

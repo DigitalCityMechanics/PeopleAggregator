@@ -105,7 +105,7 @@
             <b>Created:</b> <?=content_date($links[$i]['created']);?>
             <?php if (!empty($links[$i]['tags'])) { ?>
              <b>Tags:<?=$links[$i]['tags'];?></b>
-            <? } ?>
+            <?php } ?>
 
           </div>
         </li>
@@ -124,13 +124,13 @@
       </a>
    </td>
   </tr>
-  <? } ?>
-  <? } else { ?>
+  <?php } ?>
+  <?php } else { ?>
    <tr>
      <td>
         <?= __("No Photos.") ?>
      </td>
    </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </div>

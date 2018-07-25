@@ -3,10 +3,10 @@
   ?>
   <div class="module_icon_list" id="list_groups">
     <select id="sort_groups" name="sort_groups" size="1" onchange="ajax_call_method_for_sorting ('groups', '', 'ajax_sortnetworks.php', 'sort_groups')">
-          <option value="created" <?php if($selected_option == 'created') { ?> selected="selected" <? } ?>><?= __("Recently Created") ?></option>
-          <option value="changed" <?php if($selected_option == 'changed') { ?> selected="selected" <? } ?>><?= __("Recently Modified") ?></option>
-          <option value="members" <?php if($selected_option == 'members') { ?> selected="selected" <? } ?>><?= __("Largest Network") ?></option>
-          <option value="0" <?php if(!$selected_option) { ?> selected="selected" <? } ?>>--  <?= __("Sort By") ?> --</option>
+          <option value="created" <?php if($selected_option == 'created') { ?> selected="selected" <?php } ?>><?= __("Recently Created") ?></option>
+          <option value="changed" <?php if($selected_option == 'changed') { ?> selected="selected" <?php } ?>><?= __("Recently Modified") ?></option>
+          <option value="members" <?php if($selected_option == 'members') { ?> selected="selected" <?php } ?>><?= __("Largest Network") ?></option>
+          <option value="0" <?php if(!$selected_option) { ?> selected="selected" <?php } ?>>--  <?= __("Sort By") ?> --</option>
     </select>
   <?php
     } else {

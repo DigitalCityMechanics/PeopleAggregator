@@ -1,14 +1,14 @@
 <p><?= __("This is the echo test module.") ?></p>
 
-<? if (!empty($this->test_blob)) { ?>
+<?php if (!empty($this->test_blob)) { ?>
 
 <p>Your stored data: <b><?= htmlspecialchars($this->test_blob) ?></b>.</p>
 
-<? } else { ?>
+<?php } else { ?>
 
 <p>You haven't entered any data here yet.</p>
 
-<? } ?>
+<?php } ?>
 
 <p<?= __(">Update:") ?></p>
 

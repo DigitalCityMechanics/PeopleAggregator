@@ -28,7 +28,7 @@
                $task_exist =Roles:: is_roletask_exist($link->id, $task->id);     
              ?>
              
-           <td><input type="checkbox" name ="<?=$link->id ?>~<?=$task->id?>"  value= "<?=$task->id ?>"  <? if ($task_exist) echo "checked"; ?>/></td>
+           <td><input type="checkbox" name ="<?=$link->id ?>~<?=$task->id?>"  value= "<?=$task->id ?>"  <?php if ($task_exist) echo "checked"; ?>/></td>
            <?}?>
            </tr>
         <?php endif; // TODO: this if() clause should be removed when we implements Anonymous role! ?>   

@@ -196,7 +196,7 @@ name="email_user_name" value="<?= htmlspecialchars(@$request_data['email_user_na
           <?= __("(separated by comma)") ?>
         </div>
       </div>
-    <? } ?>
+    <?php } ?>
 
     <?php
       if (isset($request_data['message'])) {

@@ -11,11 +11,11 @@
 */
 ?>
 <h2>
-    <? if ($is_edit) { ?>
+    <?php if ($is_edit) { ?>
       <?= __("Edit Event") ?> <? echo $ed['event_title']; ?>
-    <? } else { ?>
+    <?php } else { ?>
       <?= __("Create Event") ?>
-    <? } ?>
+    <?php } ?>
     </h2>
     <div class="field_event">
       <h4>
@@ -158,7 +158,7 @@
           <?php echo uihelper_resize_mk_img($ed['banner'], 430, 80,
           NULL, 'alt="Current Event Banner"', RESIZE_FIT); ?>
       </div>
-<? } ?>
+<?php } ?>
       <div class="field">
         <h4><label for="upload_event_bannere">
         <?=__("Upload Event Banner")?></label></h4>
@@ -166,14 +166,14 @@
       </div>
     
     <div class="button_position">
-      <? if ($is_edit) { ?>
+      <?php if ($is_edit) { ?>
       <input type="submit" name="update" value="Update Event" />
       <input type="submit" name="delete" value="Delete Event" onclick="return confirm('<?= __("Are you sure you want to delete this Event?") ?>');"/>
       <input type="button" name="back" value="Cancel" onclick="javascript: history.back();" />
-      <? } else { ?>
+      <?php } else { ?>
       <input type="submit" name="create" value="Create Event" />
       <input type="button" name="back" value="Cancel" onclick="javascript: history.back();" />
-      <? } ?>
+      <?php } ?>
     </div>
     
                     

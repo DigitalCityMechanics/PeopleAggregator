@@ -470,9 +470,9 @@ function image_uploaded() {
     ?>
     </div>
     <div id="eventui">
-    <? if (@$ed['event_id']) { ?>
+    <?php if (@$ed['event_id']) { ?>
     <input type="hidden" name="event_id" value="<?echo $ed['event_id']; ?>" />
-    <? } ?>
+    <?php } ?>
     <?php 
     if ($is_display) {
       include(dirname(__FILE__) . "/display_event.php");

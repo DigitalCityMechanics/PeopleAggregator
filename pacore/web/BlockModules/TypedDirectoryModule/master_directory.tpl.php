@@ -31,4 +31,4 @@ foreach ($mod->availTypes as $type=>$label) {
 	
 	</div>
 </div>
-<? } ?>
+<?php } ?>

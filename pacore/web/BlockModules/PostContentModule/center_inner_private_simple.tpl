@@ -26,9 +26,9 @@ require_once "api/Permissions/PermissionsHandler.class.php";
     <ul>
     <?php if ($is_edit) { ?>
       <li><h3><?= __("edit your post") ?></h3></li>
-    <? } else { ?>
+    <?php } else { ?>
       <li><h3><?= __("create your post") ?></h3></li>
-    <? } ?>
+    <?php } ?>
     </ul>
     <ul id="create_blog_form">
         <li>

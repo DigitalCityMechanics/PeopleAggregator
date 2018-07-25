@@ -126,7 +126,7 @@ echo "</pre>";
 
       <th scope="col"><?= __("via my account inbox") ?> </th>
     </tr>
-    <? if ( sizeof($notification_settings) ) {
+    <?php if ( sizeof($notification_settings) ) {
       $i=0;
       foreach ( $notification_settings as $key => $value ) {
         if(! isset($value['caption'])) {

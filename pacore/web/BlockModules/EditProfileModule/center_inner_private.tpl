@@ -48,45 +48,45 @@
   </li>
 </ul>
 
-<? if ($type == 'basic') { ?>
+<?php if ($type == 'basic') { ?>
     <div id="basic-info">
       <?php require "basic_info.tpl" ?>
     </div>
-<? } ?>
-<? if ($type == 'general') { ?>
+<?php } ?>
+<?php if ($type == 'general') { ?>
     <div id="general-info">
       <?php echo $dynProf->render_section("general"); ?>
     </div>
-<? } ?>
-<? if ($type == 'personal') { ?>
+<?php } ?>
+<?php if ($type == 'personal') { ?>
     <div id="personal-info">
       <?php echo $dynProf->render_section("personal"); ?>
     </div>
-<? } ?>
-<? if ($type == 'professional') { ?>
+<?php } ?>
+<?php if ($type == 'professional') { ?>
     <div id="professional-info">
       <?php echo $dynProf->render_section("professional"); ?>
     </div>
-<? } ?>
-<? if ($type == 'blogs_rss') {
+<?php } ?>
+<?php if ($type == 'blogs_rss') {
     $dynProf->blogrss_setting_status = $blogsetting_status; ?>
     <div id="blogs_rss-info">
       <?php echo $dynProf->render_section("blogs_rss"); ?>
     </div>
-<? } ?>
-<? if ($type == 'notifications') { ?>
+<?php } ?>
+<?php if ($type == 'notifications') { ?>
     <div id="notifications-info">
       <?php echo $dynProf->render_section("notifications"); ?>
     </div>
-<? } ?>
-<? if ($type == 'export') { ?>
+<?php } ?>
+<?php if ($type == 'export') { ?>
     <div id="export-info">
       <?php  require "export.tpl" ?>
     </div>
-<? } ?>
+<?php } ?>
 
-<? if ($type == 'delete_account') { ?>
+<?php if ($type == 'delete_account') { ?>
     <div id="delete_account-info">
       <?php  require "delete_account.tpl" ?>
     </div>
-<? } ?>
+<?php } ?>

@@ -89,7 +89,7 @@
             <b>Created:</b> <?=content_date($links[$i]['created']);?> 
             <b><?php if (!empty($links[$i]['tags'])) { ?> 
             Tags:<?=$links[$i]['tags'];?>
-            <? } ?></b>
+            <?php } ?></b>
            
           </div>
         </li>
@@ -108,13 +108,13 @@
       </a>
    </td>
   </tr>
-  <? } ?>
-  <? } else { ?>
+  <?php } ?>
+  <?php } else { ?>
    <tr>
      <td>
         <?= __("No Videos") ?>
      </td>
    </tr>
-  <? } ?>
+  <?php } ?>
 </table>  
 </div>

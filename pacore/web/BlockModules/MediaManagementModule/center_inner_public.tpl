@@ -65,7 +65,7 @@ if (empty(PA::$config->simple['use_simpleblog'])) {
       <?php echo $link['title'];?></a></li>
     <?php } ?>
 </ul>
-<? } ?>
+<?php } ?>
 <?php if(count($links)) { ?> 
 <table  cellspacing="0" cellpadding="0" >
 
@@ -98,10 +98,10 @@ if (empty(PA::$config->simple['use_simpleblog'])) {
    <td><img src="<?=$type_image;?>" alt="PA" /></td>
    <td><?php print manage_content_date($links[$i]['changed']);?></td>
    </tr>
-   <? } ?>
+   <?php } ?>
    </table>
-   <? } ?>   
-  <? if(empty($links)) { ?>
+   <?php } ?>   
+  <?php if(empty($links)) { ?>
     <div class="description"> <?= __("No Content Published") ?></div>
 
   

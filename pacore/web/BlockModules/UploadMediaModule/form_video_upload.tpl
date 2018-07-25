@@ -52,7 +52,7 @@ $ajax_url = PA::$url.'/ajax/ajax_get_album.php';
      <div class="upload-vids">
       <span><label for="send album">Send to album:</label></span>
 	<b id="album_change"><select name="album_video" class="select-txt">
-	<? if (empty($my_all_album)) {
+	<?php if (empty($my_all_album)) {
 	      $my_all_album[0]['name']= $default_name;
 	    }  ?>
 	<?php for ($k=0; $k<count($my_all_album); $k++) { ?>

@@ -17,7 +17,7 @@
         <li><a href="<?php echo $group_action['hyper_link']?>"><?php echo __($group_action['caption'])?></a></li>
       </ul>
     </div>
-    <? } ?>  
+    <?php } ?>  
   </fieldset>
 </form>  
 </div>

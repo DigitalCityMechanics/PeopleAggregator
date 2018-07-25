@@ -55,7 +55,7 @@
    <div class="field">
      <h5><label for="send album"><?= __("Send to album") ?>:</label></h5>
      <select name="album" class="select-txt">
-     <? if (empty($my_all_album)) {
+     <?php if (empty($my_all_album)) {
              $my_all_album[0]['name']= $default_name;
         }  ?>
         <?php for ($k=0; $k<count($my_all_album); $k++) { ?>

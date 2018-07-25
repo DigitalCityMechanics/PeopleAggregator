@@ -78,7 +78,7 @@ if (isset($_POST['submit']) && ($_POST['profile_type'] == 'professional')) {
               <?= __("Valid file types are .doc and .pdf") ?>.
               <?php if (!empty($v)) {
               ?><span class="required"><?= __("This will replace your current CV") ?> (<a href="<?= htmlspecialchars(Storage::getURL($v)) ?>">click here to download</a>)<span>
-              <? } ?>
+              <?php } ?>
             </div>
       </div>
 

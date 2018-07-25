@@ -48,7 +48,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
       <?= __("No Photos.") ?>
     </li>
   </ul>  
-<? } ?>
+<?php } ?>
 <?php if ($page_links) {?>
    <div class="prev_next">
      <?php if ($page_first) { echo $page_first; }?>

@@ -43,7 +43,7 @@
         <td><?php echo $links[$i]['email'];?></td>
       </tr>
     </table>			 
-    <? } ?>
+    <?php } ?>
     <table width="100%" cellpadding="0" cellspacing="5" border="0">
       <tr>
        
