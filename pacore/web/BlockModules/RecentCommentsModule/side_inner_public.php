@@ -23,7 +23,7 @@
            <span><?= __('Author') . ': '?><a href="<?= PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $author_id ?>"><?= $author ?></a></span>
          </dt>
 
-<?}
+<?php }
   }
   else { ?>
     <dt><?= __('No comments posted yet.'); ?></dt>
