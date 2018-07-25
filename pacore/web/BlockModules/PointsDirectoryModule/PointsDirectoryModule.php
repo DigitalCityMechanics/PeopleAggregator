@@ -31,7 +31,7 @@ class PointsDirectoryModule extends Module {
     $this->sub_title = sprintf(__('%s Points Directory') , PA::$network_info->name);
     $this->edit_perm = false;
     $this->limit = 5;
-    $this->outer_template =  "outer_public_center_module.tpl";
+    $this->outer_template =  "outer_public_center_module.php";
   }
 
   private function check_edit_perm() {

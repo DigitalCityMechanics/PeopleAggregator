@@ -53,7 +53,7 @@ class ForumLatestPostsModule extends Module {
        $this->outer_template = 'outer_public_side_module.php';
        $this->set_inner_template('latest_posts.tpl.php');
     } else {
-       $this->outer_template = 'outer_public_center_module.tpl';
+       $this->outer_template = 'outer_public_center_module.php';
        $this->set_inner_template('latest_posts_middle.tpl.php');
        $this->title = '';
     }

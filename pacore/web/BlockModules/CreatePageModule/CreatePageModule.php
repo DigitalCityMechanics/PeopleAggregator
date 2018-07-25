@@ -119,7 +119,7 @@ class CreatePageModule extends Module {
         }
         $tag_attrs = array('name'=>"form_data[page_id]", 'onchange'=>"javascript: document.location='".PA_ROUTE_CREATE_DYN_PAGE."?action=edit&module=$this->module&id='+this.value");
         $select_tag = xHtml::selectTag($select_options, $tag_attrs, $selected);
-        $this->outer_template = 'outer_public_center_module.tpl';
+        $this->outer_template = 'outer_public_center_module.php';
         //    $this->shared_data['OVO_JE_DODANO'] = "Ovo je dodano unutar modula!";
         $task_obj = Tasks::get_instance();
         $tasks = $task_obj->get_tasks();

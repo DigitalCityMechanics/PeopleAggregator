@@ -44,7 +44,7 @@ class FamilyFacewallModule extends Module {
     switch($this->column) {
     	case 'middle':
     	case "toprow":
-	    	$this->outer_template = 'outer_public_center_module.tpl';
+	    	$this->outer_template = 'outer_public_center_module.php';
 	  	  $this->inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/center_inner.tpl.php';
 	  	  $this->title = NULL;
       break;

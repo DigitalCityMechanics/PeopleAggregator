@@ -101,7 +101,7 @@ class PersonalAnnouncementModule extends Module {
        $this->outer_template = 'outer_public_side_module.php';
   		break;
   		case 'middle':
-       $this->outer_template = 'outer_public_center_module.tpl';
+       $this->outer_template = 'outer_public_center_module.php';
       break;
     }
 

@@ -16,7 +16,7 @@ class StaticPageDisplayModule extends Module {
 
   public $module_type = 'system';
   public $module_placement = 'middle';
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
 
   function __construct() {    
     parent::__construct();

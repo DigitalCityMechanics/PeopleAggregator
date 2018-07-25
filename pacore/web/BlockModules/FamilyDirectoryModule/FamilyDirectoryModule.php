@@ -20,7 +20,7 @@ class FamilyDirectoryModule extends Module {
 
   function __construct() { 
     parent::__construct();
-    $this->outer_template = 'outer_public_center_module.tpl';
+    $this->outer_template = 'outer_public_center_module.php';
 		$this->inner_template = PA::$blockmodule_path .'/'. get_class($this) . "/family_directory.tpl.php";
 	  $this->title = __('Family Directory');
     $this->html_block_id = get_class($this);

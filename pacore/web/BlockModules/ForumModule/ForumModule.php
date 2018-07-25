@@ -49,7 +49,7 @@ class ForumModule extends Module {
     parent::__construct();
     $this->title = __('Forums');
     $this->forums_url = PA::$url . "/forums";
-    $this->outer_template =  "outer_public_forums_center_module.tpl"; //'outer_public_center_module.tpl';
+    $this->outer_template =  "outer_public_forums_center_module.tpl"; //'outer_public_center_module.php';
   }
 
   function initializeModule($request_method, $request_data) {

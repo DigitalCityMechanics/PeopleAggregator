@@ -20,7 +20,7 @@ class GroupInvitationModule extends Module {
   public $module_type = 'group';
   public $module_placement = 'middle';
 
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
   public $user_groups = array();
   public $entered_people = array();
   public $subject;

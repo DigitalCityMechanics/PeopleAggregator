@@ -26,7 +26,7 @@ class ManageRankingPointsModule extends Module {
 
   function initializeModule($request_method, $request_data) {
     global $error_msg;
-    $this->outer_template = 'outer_public_center_module.tpl';
+    $this->outer_template = 'outer_public_center_module.php';
     if(($request_method != 'POST') && ($request_method != 'AJAX')) {
       $this->set_inner_template('default_inner.tpl');                // initial template
       $activities = ActivityType::get_activity_types();
