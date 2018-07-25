@@ -38,12 +38,12 @@
       <?php } ?>
     </div>
 
-     <?  if(!isset($_SESSION['user'])) { ?>
+     <?php if(!isset($_SESSION['user'])) { ?>
       <div class="login_box">
         <b><?= __("Already a member?") ?></b><br />
         <a href="<?= UrlHelper::url_for(PA::$url."/login.php", array(), "https") ?>"><b><?= __("Login now") ?></b></a> <?= __("or") ?> <a href="<?= UrlHelper::url_for(PA::$url."/register.php", array(), "https") ?>"><b><?= __("Register") ?></b></a>
       </div>
-      <? } else {
+      <?php } else {
              $login_user = PA::$login_user;
              $user_name = $login_user->first_name." ".$login_user->last_name;
              $style = ' style="width:185px"';
@@ -69,9 +69,9 @@
        <a href="<?php echo PA::$url . PA_ROUTE_INVITE;?>"><img src="<?php echo PA::$theme_url ?>/images/invite.gif" alt="" height="32" width="185" border="0" /></a>
    <?php } else { ?>
        <a href="<?php echo $level_1["join_network"]["url"];?>"><img src="<?php echo PA::$theme_url ?>/images/networkjoin.gif" alt="" height="32" width="185" border="0"></a>
-   <? }  ?>
+   <?php } ?>
       </div>
-      <? } ?>
+      <?php } ?>
      <div id="header_navbar_back"></div>
     <?php
       if( !empty($left_user_public_links) ) {
