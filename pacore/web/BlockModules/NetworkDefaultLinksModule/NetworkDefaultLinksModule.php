@@ -38,10 +38,10 @@ class NetworkDefaultLinksModule extends Module {
     switch ($this->mode) {
       case PRI:
         $this->outer_template = 'outer_private_side_module.tpl';
-        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
       default:
-        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
 
     }

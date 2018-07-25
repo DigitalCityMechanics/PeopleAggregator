@@ -1,8 +1,5 @@
 <?php
-   
-  // global var $_base_url has been removed - please, use PA::$url static variable
 
- 
 ?>  
 <div class="module_browse_groups">
 <?php 
@@ -33,7 +30,7 @@
       
        <?php 
           }  }
-        else { ?> <li><?= __("No links under this category") ?></li><? } ?>
+        else { ?> <li><?= __("No links under this category") ?></li><?php } ?>
 
         </ul>
       </li> 
