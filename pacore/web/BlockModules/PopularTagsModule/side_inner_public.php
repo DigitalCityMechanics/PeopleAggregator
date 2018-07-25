@@ -17,7 +17,7 @@
   }
   else { ?>
     <li><?= __("Nothing has been tagged yet.") ?></li>
- <? } ?>
+ <?php } ?>
 
 </ul>
 </div>
