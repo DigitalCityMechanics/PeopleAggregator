@@ -49,7 +49,7 @@
       } else {
         $width = AD_WIDTH_LR;
         //$height = AD_HEIGHT_LR;
-        $this->outer_template = 'outer_public_side_module.tpl.php';
+        $this->outer_template = 'outer_public_side_module.php';
       }
 
       // we never want to reduce the height of an ad, so we set $height very high

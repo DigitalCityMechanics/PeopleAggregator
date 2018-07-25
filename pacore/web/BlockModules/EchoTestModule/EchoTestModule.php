@@ -17,7 +17,7 @@ class EchoTestModule extends Module {
 
   public $module_type = 'group|network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   
   function __construct() {
     $this->html_block_id = "EchoTestModule";

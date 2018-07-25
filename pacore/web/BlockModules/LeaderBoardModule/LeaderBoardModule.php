@@ -35,7 +35,7 @@ class LeaderBoardModule extends Module {
       $this->page = 0;
       $this->title =  __('Leader Board');
       $this->page_size = 5;
-      $this->outer_template = 'outer_public_side_module.tpl.php';
+      $this->outer_template = 'outer_public_side_module.php';
       $this->set_inner_template('module_default.tpl.php');
       $this->view_all_url = PA::$url . PA_ROUTE_LEADER_BOARD;
      }

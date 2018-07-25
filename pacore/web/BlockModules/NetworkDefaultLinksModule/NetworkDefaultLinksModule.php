@@ -19,7 +19,7 @@ class NetworkDefaultLinksModule extends Module {
 
   public $module_type = 'network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   
   public  $uid, $links_data_array;
   function __construct() {

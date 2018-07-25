@@ -21,7 +21,7 @@ class MyNetworksModule extends Module {
 
   public $module_type = 'user';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   
   public $uid, $Paging;
   public $page_links, $page_prev, $page_next, $page_count;

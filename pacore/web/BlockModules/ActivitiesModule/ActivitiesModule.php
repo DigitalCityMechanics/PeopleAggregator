@@ -22,7 +22,7 @@ class ActivitiesModule extends Module {
 
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
 
   /**
   * Subject => user_id of the user who is performing the action.

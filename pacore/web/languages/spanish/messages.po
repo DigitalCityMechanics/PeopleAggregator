@@ -7985,7 +7985,7 @@ msgid ""
 "Currently, only site administrator can login."
 msgstr ""
 
-#: ../../web/Themes/Default/outer_public_side_module.tpl.php:13
+#: ../../web/Themes/Default/outer_public_side_module.php:13
 msgid "view all"
 msgstr "ver todo"
 

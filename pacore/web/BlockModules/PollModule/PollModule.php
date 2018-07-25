@@ -23,7 +23,7 @@ class PollModule extends Module {
  
   public $module_type = 'group|network'; //'user|group|network'; 
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   public $per_option;
   
   function __construct() {

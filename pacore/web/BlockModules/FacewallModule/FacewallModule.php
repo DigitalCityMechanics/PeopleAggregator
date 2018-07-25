@@ -17,7 +17,7 @@ class FacewallModule extends Module {
   public $module_placement = 'left|right';
   
   public $sort_by = FALSE;
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   public $sorting_options;
   public $selected_option;
 

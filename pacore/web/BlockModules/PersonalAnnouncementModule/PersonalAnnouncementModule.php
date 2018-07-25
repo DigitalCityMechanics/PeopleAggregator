@@ -15,7 +15,7 @@
 class PersonalAnnouncementModule extends Module {
   public $module_type = 'user';
   public $module_placement = 'left|right|middle';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
 
   function __construct() {
     parent::__construct();
@@ -98,7 +98,7 @@ class PersonalAnnouncementModule extends Module {
   	switch ($this->column) {
   		case 'left':
   		case 'right':
-       $this->outer_template = 'outer_public_side_module.tpl.php';
+       $this->outer_template = 'outer_public_side_module.php';
   		break;
   		case 'middle':
        $this->outer_template = 'outer_public_center_module.tpl';

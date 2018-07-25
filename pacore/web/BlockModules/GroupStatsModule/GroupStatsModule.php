@@ -16,7 +16,7 @@ class GroupStatsModule extends Module {
 
   public $module_type = 'group';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   public $group_details;
 
   public function __construct() {

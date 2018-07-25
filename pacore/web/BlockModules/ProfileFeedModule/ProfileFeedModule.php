@@ -36,7 +36,7 @@ class ProfileFeedModule extends Module {
   /**
   * $outer_template defines the tpl to be user for this module
   */
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
   
   /**
   * $title defines the title to be displayed for the Module

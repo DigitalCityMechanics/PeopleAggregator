@@ -29,7 +29,7 @@ class FamilyFacewallModule extends Module {
   public $title;
   public $view_all_url;
   public $sort_by = FALSE;
-  public $outer_template = 'outer_public_side_module.tpl.php';
+  public $outer_template = 'outer_public_side_module.php';
 
 
   function __construct($sort_by = null, $gid = null) {
@@ -50,7 +50,7 @@ class FamilyFacewallModule extends Module {
       break;
       case 'left':
       case 'right':
-      	$this->outer_template = 'outer_public_side_module.tpl.php';
+      	$this->outer_template = 'outer_public_side_module.php';
 	  	  $this->inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner.tpl.php';
       break;
       default:

@@ -24,7 +24,7 @@ class ForumStatsModule extends Module {
   }
 
   function handleRequest($request_method, $request_data) {
-    $this->outer_template = 'outer_public_side_module.tpl.php';
+    $this->outer_template = 'outer_public_side_module.php';
     if(!isset($this->shared_data['board_statistics'])) {
       return 'skip';
     }

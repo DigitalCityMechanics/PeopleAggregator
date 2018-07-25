@@ -41,7 +41,7 @@ class ForumsListModule extends Module {
       case 'left':
       case 'right':
         $this->boards_info = $this->getBoardsInfo();
-        $this->outer_template = 'outer_public_side_module.tpl.php';
+        $this->outer_template = 'outer_public_side_module.php';
         $this->set_inner_template('module_default.tpl.php');
       break;
       default:
