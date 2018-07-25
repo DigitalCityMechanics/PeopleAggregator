@@ -20,7 +20,7 @@ class RecentCommentsModule extends Module {
 
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
 
   public $cid;
 

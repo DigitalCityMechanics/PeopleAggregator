@@ -18,7 +18,7 @@ class MyLinksModule extends Module {
 
   public $module_type = 'user';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
   
   public  $uid, $links_data_array;
 
@@ -33,7 +33,7 @@ class MyLinksModule extends Module {
     if($this->uid == PA::$login_uid) {
       $this->outer_template = 'outer_private_side_module.tpl';
     } else {
-      $this->outer_template = 'outer_public_side_module.tpl';
+      $this->outer_template = 'outer_public_side_module.tpl.php';
       $links_data_array = $this->get_user_links();
       if(count($links_data_array) == 0) {
         return 'skip';

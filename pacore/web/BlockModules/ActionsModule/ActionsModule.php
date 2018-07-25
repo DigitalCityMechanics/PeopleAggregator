@@ -50,7 +50,7 @@ class ActionsModule extends Module {
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right';
   public  $uid;
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
   function __construct() {
 
   parent::__construct();

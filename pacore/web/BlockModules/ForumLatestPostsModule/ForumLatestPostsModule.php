@@ -25,7 +25,7 @@ class ForumLatestPostsModule extends Module {
 
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right|middle';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
  
   function __construct() { 
     parent::__construct();
@@ -50,7 +50,7 @@ class ForumLatestPostsModule extends Module {
     $posts = $this->shared_data['board_statistics']['last_posts'];
     $threads = @$this->shared_data['board_statistics']['threads'];
     if(($this->column == 'left') || ($this->column == 'right')) {
-       $this->outer_template = 'outer_public_side_module.tpl';
+       $this->outer_template = 'outer_public_side_module.tpl.php';
        $this->set_inner_template('latest_posts.tpl.php');
     } else {
        $this->outer_template = 'outer_public_center_module.tpl';

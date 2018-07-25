@@ -15,7 +15,7 @@ class NetworkStatisticsModule extends Module {
   //selecting outer for the module
   public $module_type = 'network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
  
   function __construct() {
     parent::__construct();

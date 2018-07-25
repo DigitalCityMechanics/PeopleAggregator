@@ -19,7 +19,7 @@ class ExternalFeedModule extends Module {
 
   public $module_type = 'user';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
 
   function __construct() {    
     parent::__construct();

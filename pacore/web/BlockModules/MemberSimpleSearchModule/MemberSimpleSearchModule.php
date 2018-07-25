@@ -19,7 +19,7 @@ class MemberSimpleSearchModule extends Module {
 
   function __construct() { 
     parent::__construct();
-    $this->outer_template = 'outer_public_side_module.tpl';
+    $this->outer_template = 'outer_public_side_module.tpl.php';
 	  $this->inner_template = PA::$blockmodule_path .'/'. get_class($this) . "/member_search_sidebar.tpl.php";
     $this->title = __('Member Search');
     $this->html_block_id = 'MemberSimpleSearchModule';

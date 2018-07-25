@@ -17,7 +17,7 @@ class GroupAccessModule extends Module {
   public $module_placement = 'left|right';
   
   public $group_details;
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.tpl.php';
   public $join_this_group_string;
   public $is_member, $is_admin;
 
