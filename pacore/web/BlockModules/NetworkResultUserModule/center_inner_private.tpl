@@ -151,7 +151,7 @@
 
     <?php }else {?>
     <div class ="required"><?= __("No users") ?></div>
-    <?php }?>
+    <?php } ?>
 
 <?php if( $page_links ) {?>
    <div class="prev_next">

@@ -10,6 +10,6 @@
   }
 ?>
 <div class="wide_content" <?php echo $id;?>>
-  <?php if(!empty($title)) {?><h1><?php echo $title;?> </h1><?}?>
+  <?php if(!empty($title)) {?><h1><?php echo $title;?> </h1><?php } ?>
   <?php echo $inner_HTML;?>
 </div>  

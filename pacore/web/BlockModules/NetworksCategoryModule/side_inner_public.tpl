@@ -13,7 +13,7 @@
         <a href="http://<? echo $newarray[$i]['networks_info'][$j]['address'] .'.' . PA::$domain_suffix . BASE_URL_REL . PA_ROUTE_HOME_PAGE ;?>"><?php echo $network_name;?></a>
       </li>
 
-      <?} } else {?>
+      <?php } } else {?>
         <li><?= __("No networks in this category") ?></li>
       <?  } ?> 
      

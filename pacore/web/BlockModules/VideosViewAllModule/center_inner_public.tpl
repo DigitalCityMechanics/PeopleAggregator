@@ -17,7 +17,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
     <li>
       <a href="<?php echo PA::$url;?>/upload_celebrity_media.php?item_id=<?php echo $item_id;?>&type=video"><?= __("Upload") ?></a>
     </li>
-    <?}?>
+    <?php } ?>
   </ul>
 </div> 
 
@@ -42,11 +42,11 @@ require_once "api/Permissions/PermissionsHandler.class.php";
                 <a href="<?php echo PA::$url . PA_ROUTE_CONTENT . "?action=deleteContent&cid=$image->content_id&back_page=" . urlencode(PA::$url . "/view_all_media.php?celebrity_id=$item_id") ?>">
                 <img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="" height="16" width="16" border="0"  title="Delete" onclick="return confirm_delete('<?= __("Are you sure you want to delete this video") ?>');"/></a>
               </p>
-            <?php }?>
+            <?php } ?>
           </li>
-<?} // End of for loop?>  
+<?php } // End of for loop?>  
 </ul>
-<?} else { ?>
+<?php } else { ?>
   <ul>
     <li>
       No Videos

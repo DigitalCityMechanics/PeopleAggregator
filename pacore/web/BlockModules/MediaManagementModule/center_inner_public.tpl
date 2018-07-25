@@ -105,7 +105,7 @@ if (empty(PA::$config->simple['use_simpleblog'])) {
     <div class="description"> <?= __("No Content Published") ?></div>
 
   
-   <?}?>
+   <?php } ?>
 
 <input type="hidden" name="delete_type" id="delete_type" value="" />
  </form>

@@ -39,7 +39,7 @@
                   <img style="vertical-align:top;" src="<?php echo PA::$url;?>/pie_chart.php?id=<?php echo $poll_id;?>" alt="loser"  />
                 <?php }else {?>
                   <?= __("No votes are posted for this poll") ?>.
-                <?php }?>
+                <?php } ?>
               </span>
              
           </div>

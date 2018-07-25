@@ -138,7 +138,7 @@ $extra = unserialize($mother_network_info->extra);
       Public network can be joined by any member. For private networks member has to seek permission of network owner.
     </div>
   </div>
-  <?php }?>
+  <?php } ?>
   <div class="field">
     <input type="checkbox" name="show_people_with_photo" value="<?php echo NET_YES;?>"
     <?php if (@$form_data['show_people_with_photo'] == NET_YES) {

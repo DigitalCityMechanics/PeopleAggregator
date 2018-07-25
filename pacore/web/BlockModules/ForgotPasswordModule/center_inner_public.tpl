@@ -6,7 +6,7 @@
 
     <div class="field">
       <h5><label for="select file"><span class="required"> * </span> <?= __("E-mail address:") ?></label></h5>
-      <input class="text longer" type="text" name="email" <?if (!empty($email)) {?> value="<?php echo htmlspecialchars($email);?>"<?php }?> />
+      <input class="text longer" type="text" name="email" <?if (!empty($email)) {?> value="<?php echo htmlspecialchars($email);?>"<?php } ?> />
     </div>
    <p> Or enter login name</p> 
     <div class="field">

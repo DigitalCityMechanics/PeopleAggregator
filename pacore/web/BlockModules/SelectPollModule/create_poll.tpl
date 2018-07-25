@@ -13,7 +13,7 @@
   	<option value=""></option>
     <?php for($i=2;$i<=8;$i++) {?>
       <option value="<?=$i?>"><?php echo $i;?></option>
-    <?php }?>
+    <?php } ?>
   </select>
 </div>
 <div id="show_options"></div>

@@ -62,7 +62,7 @@ if ($type !='forum') {
     <div class="description"> <?= __("No Content Published") ?></div>
 
   
-   <?}?>
+   <?php } ?>
 
 <input type="hidden" name="delete_type" id="delete_type" value="" />
  </form>

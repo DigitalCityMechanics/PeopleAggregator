@@ -63,9 +63,9 @@
        
     <?php } ?>
   </li>
-<?} // End of for loop?>  
+<?php } // End of for loop?>  
 </ul>
-<?} else { ?>
+<?php } else { ?>
   <ul>
     <li>
       <?= __("No Audio") ?>

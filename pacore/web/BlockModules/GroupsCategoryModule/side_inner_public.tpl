@@ -16,7 +16,7 @@
         <a href="<?php echo PA::$url . PA_ROUTE_GROUP . "/gid=".$newarray[$i]['group_info'][$j]['group_id'];?>" ><?php echo $group_name;?></a>
       </li>
 
-      <?} } else {?>
+      <?php } } else {?>
         <li><?= __("No groups in this category") ?></li>
       <?  } ?> 
      

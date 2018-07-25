@@ -12,8 +12,8 @@
             <a href="<?php echo $url;?>"><?php echo $name;?></a>
                 <?php if ( $size > $cnt ) { ?>
                   :: 
-                <?}?>
+                <?php } ?>
               <?php	$cnt++;
             }
-      } else {  ?><?= __('Nothing has been tagged yet') ?>. <?}?>				
+      } else {  ?><?= __('Nothing has been tagged yet') ?>. <?php } ?>				
 </div>

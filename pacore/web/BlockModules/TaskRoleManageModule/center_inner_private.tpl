@@ -29,14 +29,14 @@
              ?>
              
            <td><input type="checkbox" name ="<?=$link->id ?>~<?=$task->id?>"  value= "<?=$task->id ?>"  <?php if ($task_exist) echo "checked"; ?>/></td>
-           <?}?>
+           <?php } ?>
            </tr>
         <?php endif; // TODO: this if() clause should be removed when we implements Anonymous role! ?>   
            <?php $count++; }?>
       </table>
       <?php }else {?>
     <div class ="required"><?= __("No roles have been created yet") ?></div>
-    <?php }?>
+    <?php } ?>
 </fieldset>
 <div class="button_position"><input type="submit" class="button-submit" name="save" value="<?= __("Save") ?>"  /></div>
 <?php echo $config_navigation_url; ?>

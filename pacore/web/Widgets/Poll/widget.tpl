@@ -86,7 +86,7 @@ div#poll_button {
               echo '</div>';  
             }
           }?>
-      <?php }?>
+      <?php } ?>
       <input type="hidden" value="<?php echo $topic[0]->poll_id;?>" name="poll_id" />
       <input type="hidden" value="<?php echo PA::$login_uid;?>" name="uid" />
        <?php if($flag == 0 && !empty(PA::$login_uid)) {?>
@@ -94,9 +94,9 @@ div#poll_button {
           <br/>
           <input type="submit" name="submit" value="Vote" />
         </div>
-      <?}elseif (empty(PA::$login_uid)) {?>
+      <?php }elseif (empty(PA::$login_uid)) {?>
         <b style="text-align:center;font-size:12px;width:100%;">Please login to vote</b>
-      <?php }?>    
+      <?php } ?>    
     </div>
   </form>
 </div>

@@ -12,6 +12,6 @@
   <?php } else { ?>
     <li><?php echo "No Featured Network"; if ( $_SESSION['user']['id'] == SUPER_USER_ID ) { ?>
     <a href="<?php echo PA::$url .'/network_feature.php';?>">Click Here</a> to set a feature network<?php } ?> </li>
-  <?php }?>
+  <?php } ?>
   </ul>
 </div>

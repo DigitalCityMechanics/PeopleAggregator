@@ -47,7 +47,7 @@
           }
         ?>
          <?php echo ''//$relation_type; ?><br />
-        <?} ?>
+        <?php } ?>
       member since: <?php echo manage_content_date ($links[$counter]['created']); ?>
     </div>
   </a>
@@ -73,10 +73,10 @@
 <?php } ?>
 
  </li>
- <?} // end of For loop?>
+ <?php } // end of For loop?>
  <?php } else { ?>
 <li> No Relation </li>
- <?}?>
+ <?php } ?>
  </ul>
  <?php if( !empty( $page_links ) ) { ?>
   <div class="prev_next">

@@ -100,7 +100,7 @@
       <div class="button_position">
       <?php if (!empty($form_data['ad_id'])) { ?>
         <input type="hidden" name="ad_id" value="<?php echo $form_data['ad_id']?>" />
-      <?php }?>
+      <?php } ?>
         <input type="hidden" name="created" value="<?php echo @$form_data['created']?>" />
         <input type="submit" name="btn_apply_name" value="<?= __("Save") ?>" class="buttonbar" />
       </div>

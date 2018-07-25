@@ -175,7 +175,7 @@
     <?php } ?>
     <?php if (empty($user_data_personal['ethnicity']) && empty($user_data_personal['religion']) && empty($user_data_personal['political_view']) && empty($user_data_personal['passion']) && empty($user_data_personal['activities']) && empty($user_data_personal['books']) && empty($user_data_personal['movies']) && empty($user_data_personal['music'])) { ?>
       <li><?= __("No details entered yet.") ?></li>
-      <?}?>
+      <?php } ?>
     </ul></li>
   </ul>
   </div>

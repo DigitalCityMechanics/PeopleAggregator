@@ -37,4 +37,4 @@ if ($topic[0]->group_id != 0) {
   <div style="width:100%;text-align:center;margin-top:10px;">
     <b><?= __("No poll was created yet.") ?></b>
   </div>
-<?php }?>
+<?php } ?>

@@ -26,7 +26,7 @@
       <div class="field_big" style="height: 135px">
        <h4>Current image</h4><?= uihelper_resize_mk_img($links[0]['file_name'], 198, 135) ?>
       </div>
-     <?php }?>
+     <?php } ?>
      <div class="field_big">
       <h4><label><?= __("Video URL") ?></label></h4>
       <input name="userfile_url_0" class="text longer" id="file_url" type="text"  value="<?php echo ($has_links) ? $links[0]['url'] : ''; ?>" />

@@ -36,7 +36,7 @@
       <?php } ?>
     </select>
   </div>
-<?}?>
+<?php } ?>
 <?php $display_links = ($show_view == 'thumb') ? 'List View': 'Thumb View';?>
 <?php $href_links = ($show_view == 'thumb') ? '/gallery=list&uid=' . $_GET['uid']: '/gallery=thumb&uid=' . $_GET['uid'];?>
 <div id="buttonbar">
@@ -44,7 +44,7 @@
     <li><a href="<?= $current_url . $href_links;?>"><?php echo $display_links;?></a></li>
     <?php if ((!isset(PA::$page_uid) || (PA::$login_uid == PA::$page_uid)) && empty($_GET['view'])) { ?>
       <li><a href="<?= PA::$url . "/upload_media.php?type=Videos" . $alb . '&uid=' . $_GET['uid']  ?>"><?= __("Upload") ?></a></li>
-    <?}?>
+    <?php } ?>
   </ul>
 </div>
 <form enctype="multipart/form-data" name="image_upload2" id="image_upload2" action="" method="post">

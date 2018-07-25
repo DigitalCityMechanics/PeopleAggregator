@@ -106,7 +106,7 @@
 
     <?php } else {?>
     <div class ="required"><?php echo $message?></div>
-    <?php }?>
+    <?php } ?>
 
 <?php if ($page_links) {?>
    <div class="prev_next">

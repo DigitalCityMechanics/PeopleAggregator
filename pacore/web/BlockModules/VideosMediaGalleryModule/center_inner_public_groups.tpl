@@ -18,7 +18,7 @@
      <?php } ?>
   </select>
 </div>
-<?}?>
+<?php } ?>
 <?php $display_links = ($show_view == 'thumb') ? 'List View': 'Thumb View';?>
 <?php $href_links = ($show_view == 'thumb') ? '&gallery=list&gid=' . $_GET['gid']: '&gallery=thumb&gid=' . $_GET['gid'];?>
 <div id="buttonbar">

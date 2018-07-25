@@ -60,7 +60,7 @@
       <a href="#"><img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="delete" height="16" width="16" border="0"  onclick="edit_delete_media('<?=$links[$i]['content_id']?>','delete','image_upload2');"></a>
     
        
-    <?}?>
+    <?php } ?>
     </td>
     <td>
       <div align="center">

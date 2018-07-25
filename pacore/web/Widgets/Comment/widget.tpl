@@ -1126,7 +1126,7 @@ h3, h4{
      <?php echo @$rating['new']?>
    </div>
  </div>      
- <?php }?>
+ <?php } ?>
  </div>  
  <div class="clear"></div>
  <br>
@@ -1162,7 +1162,7 @@ h3, h4{
              </li> 
           <?php $i++; }}else {?>
             <li>No comment posted yet.</li>
-          <?php }?>    
+          <?php } ?>    
         
    </ul>
   </div>
@@ -1189,7 +1189,7 @@ h3, h4{
   </div>
 <?php } else {?>
 <div class="asc_i mh1" style="font-size: 80%; color: rgb(0, 0, 0);">Please login to comment</div>
-<?php }?>
+<?php } ?>
 </div>
 <div class="clear"></div>
 </div>                         

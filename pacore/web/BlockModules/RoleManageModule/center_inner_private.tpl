@@ -47,7 +47,7 @@
       </table>
       <?php }else {?>
     <div class ="required"><?= __("No roles have been created yet.") ?></div>
-    <?php }?>
+    <?php } ?>
 </fieldset>
 <div class="button_position">
   <input type="button" class="button-submit" name="submit" value="<?= __("Add New Role") ?>"  onclick="roles_edit.showrole();" />

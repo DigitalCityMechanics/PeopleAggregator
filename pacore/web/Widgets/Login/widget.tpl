@@ -38,6 +38,6 @@ div#login_parent h4 {
        <?php } else {?>
         <p>Successfully Login.</p>
         <a href="javascript:l=window.location;window.location='<?php echo PA::$url;?>/logout.php?return='+l">Click here</a> for logoff.
-       <?php }?>
+       <?php } ?>
        </div>
       </div>
