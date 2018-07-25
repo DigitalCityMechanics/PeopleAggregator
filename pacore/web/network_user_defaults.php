@@ -251,7 +251,7 @@ function setup_module($column, $module, $obj) {
   $obj->ack_message = $ack_message;
 }
 
-$page = new PageRenderer("setup_module", PAGE_NETWORK_USER_DEFAULTS, "Network User Defaults", 'container_two_column.tpl','header.tpl',PRI,HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_NETWORK_USER_DEFAULTS, "Network User Defaults", 'container_two_column.tpl','header.php',PRI,HOMEPAGE, PA::$network_info);
 
 
 $msg = ( !empty($msg) ) ? $msg: $error_msg;

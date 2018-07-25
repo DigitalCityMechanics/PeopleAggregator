@@ -89,7 +89,7 @@ function setup_module($column, $module, $obj) {
 }
 
 $page = new PageRenderer("setup_module", PAGE_MANAGE_QUESTIONS, "Manage
-Questions", 'container_two_column.tpl', 'header.tpl',
+Questions", 'container_two_column.tpl', 'header.php',
 PRI, HOMEPAGE, PA::$network_info
 );
 

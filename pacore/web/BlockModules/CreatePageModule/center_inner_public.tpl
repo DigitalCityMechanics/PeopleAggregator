@@ -127,7 +127,7 @@ if(!empty($_GET['to_file'])) {
     <label for="form_data_header_template"><?= __("Header Template") ?>: </label>
     <input type="text" name="form_data[header_template]" class="text long" id="form_data_header_template" style="width:350px;" value="<?=$page->header_template?>"/>
     <div class="field_text">
-       <br /><?= __("Enter Page Header Template (header.tpl, header_group.tpl ...)") ?><br />
+       <br /><?= __("Enter Page Header Template (header.php, header_group.tpl ...)") ?><br />
     </div>
   </div>
   <div class="field_bigger" style="height: 358px; padding:4px">

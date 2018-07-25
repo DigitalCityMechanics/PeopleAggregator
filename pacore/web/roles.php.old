@@ -57,7 +57,7 @@ if (@$_POST['submit'] ) {
 }
 
 
-$page = new PageRenderer("setup_module", PAGE_ROLE_MANAGE, "Manage Roles", 'container_two_column.tpl', 'header.tpl', PRI, HOMEPAGE, $network_info);
+$page = new PageRenderer("setup_module", PAGE_ROLE_MANAGE, "Manage Roles", 'container_two_column.tpl', 'header.php', PRI, HOMEPAGE, $network_info);
 $page->html_body_attributes = 'class="no_second_tier network_config"';
 function setup_module($column, $module, $obj) {
   global $error;

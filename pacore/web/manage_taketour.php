@@ -77,7 +77,7 @@ if (@$_POST['submit']=='Submit') {
 }
 
 //render the page
-$page = new PageRenderer("setup_module", PAGE_MANAGE_TAKETOUR, "Manage Take A Tour", 'container_two_column.tpl','header.tpl',PRI,HOMEPAGE,PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_MANAGE_TAKETOUR, "Manage Take A Tour", 'container_two_column.tpl','header.php',PRI,HOMEPAGE,PA::$network_info);
 
 if (!empty($msg)) {
   $msg_tpl = new Template(CURRENT_THEME_FSPATH."/display_message.tpl");

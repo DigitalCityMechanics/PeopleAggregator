@@ -152,7 +152,7 @@ function setup_module($column, $module, $obj) {
   }
 }
 
-$page = new PageRenderer("setup_module", PAGE_NETWORK_BULLETINS, "Network Bulletins", 'container_two_column.tpl','header.tpl',PRI,HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_NETWORK_BULLETINS, "Network Bulletins", 'container_two_column.tpl','header.php',PRI,HOMEPAGE, PA::$network_info);
 
 if (!empty($error_msg)) {
   $msg_tpl = new Template(CURRENT_THEME_FSPATH."/display_message.tpl");

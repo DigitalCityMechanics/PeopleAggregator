@@ -1160,7 +1160,7 @@ msgid "Header Template"
 msgstr ""
 
 #: ../../web/BlockModules/CreatePageModule/center_inner_public.tpl:130
-msgid "Enter Page Header Template (header.tpl, header_group.tpl ...)"
+msgid "Enter Page Header Template (header.php, header_group.tpl ...)"
 msgstr ""
 
 #: ../../web/BlockModules/CreatePageModule/center_inner_public.tpl:134
@@ -7922,37 +7922,37 @@ msgstr ""
 msgid "&copy; %s Broadband Mechanics, Inc."
 msgstr ""
 
-#: ../../web/Themes/Default/header.tpl:43
+#: ../../web/Themes/Default/header.php:43
 #: ../../web/Themes/Default/header_group.tpl:47
 #: ../../web/Themes/Default/header_user.tpl:49
 msgid "Already a member?"
 msgstr ""
 
-#: ../../web/Themes/Default/header.tpl:44
+#: ../../web/Themes/Default/header.php:44
 #: ../../web/Themes/Default/header_group.tpl:48
 #: ../../web/Themes/Default/header_user.tpl:50
 msgid "Login now"
 msgstr ""
 
-#: ../../web/Themes/Default/header.tpl:44
+#: ../../web/Themes/Default/header.php:44
 #: ../../web/Themes/Default/header_group.tpl:48
 #: ../../web/Themes/Default/header_user.tpl:50
 msgid "or"
 msgstr ""
 
-#: ../../web/Themes/Default/header.tpl:44
+#: ../../web/Themes/Default/header.php:44
 #: ../../web/Themes/Default/header_group.tpl:48
 #: ../../web/Themes/Default/header_user.tpl:50
 msgid "Register"
 msgstr "Enregistrer"
 
-#: ../../web/Themes/Default/header.tpl:58
+#: ../../web/Themes/Default/header.php:58
 #: ../../web/Themes/Default/header_group.tpl:62
 #: ../../web/Themes/Default/header_user.tpl:64
 msgid "shortcuts"
 msgstr ""
 
-#: ../../web/Themes/Default/header.tpl:58
+#: ../../web/Themes/Default/header.php:58
 #: ../../web/Themes/Default/header_group.tpl:62
 #: ../../web/Themes/Default/header_user.tpl:64
 msgid "logoff"

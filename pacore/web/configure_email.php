@@ -212,7 +212,7 @@ function setup_module($column, $module, $obj) {
   }
 }
 
-$page = new PageRenderer("setup_module", PAGE_CONFIGURE_EMAIL, __('Configure Email'), "container_two_column.tpl", "header.tpl", NULL, PRI, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_CONFIGURE_EMAIL, __('Configure Email'), "container_two_column.tpl", "header.php", NULL, PRI, PA::$network_info);
 
 uihelper_error_msg($error_msg);
 uihelper_get_network_style($page);

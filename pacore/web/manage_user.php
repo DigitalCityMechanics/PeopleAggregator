@@ -155,7 +155,7 @@
       break;
     }
   }
-  $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_USERS, "Manage Registered User", 'container_two_column.tpl','header.tpl',PUB, HOMEPAGE, PA::$network_info);
+  $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_USERS, "Manage Registered User", 'container_two_column.tpl','header.php',PUB, HOMEPAGE, PA::$network_info);
 
   if( @$_GET['msg'] ) {
     require_once 'web/languages/english/MessagesHandler.php';

@@ -52,7 +52,7 @@ class PageRenderer {
   // template used to render this page (e.g. "user_pa.tpl")
   public $page_template;
 
-  // template used to render the header (e.g. "header.tpl")
+  // template used to render the header (e.g. "header.php")
   public $header_template;
 
   // setting data loaded with ModuleData::load_setting
@@ -89,8 +89,8 @@ class PageRenderer {
   // optimization to not work on them
   private $css_includes_dont_optimize = array();
 
-  // __construct($cb, $page_type, $title, $page_template="homepage_pa.tpl", $header_template="header.tpl", $default_mode=PRI, $default_block_type=HOMEPAGE, PA::$network_info_ = NULL, $onload = NULL, $setting_data = NULL)
-  function __construct($cb, $page_id, $title, $page_template="homepage_pa.tpl", $header_template="header.tpl", $default_mode=PRI, $default_block_type=HOMEPAGE, $network_info_ = NULL, $onload = NULL, $setting_data = NULL) {
+  // __construct($cb, $page_type, $title, $page_template="homepage_pa.tpl", $header_template="header.php", $default_mode=PRI, $default_block_type=HOMEPAGE, PA::$network_info_ = NULL, $onload = NULL, $setting_data = NULL)
+  function __construct($cb, $page_id, $title, $page_template="homepage_pa.tpl", $header_template="header.php", $default_mode=PRI, $default_block_type=HOMEPAGE, $network_info_ = NULL, $onload = NULL, $setting_data = NULL) {
 
     global $app, $page;
 

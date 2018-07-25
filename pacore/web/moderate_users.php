@@ -75,7 +75,7 @@
       break;
     }
   }
-  $page = new PageRenderer("setup_module", PAGE_NETWORK_MODERATE_USERS, "Moderate Registered Users", 'container_two_column.tpl','header.tpl',PUB, HOMEPAGE, PA::$network_info);
+  $page = new PageRenderer("setup_module", PAGE_NETWORK_MODERATE_USERS, "Moderate Registered Users", 'container_two_column.tpl','header.php',PUB, HOMEPAGE, PA::$network_info);
   
   if (!empty($_GET['msg'])) {
     $message = $_GET['msg'];

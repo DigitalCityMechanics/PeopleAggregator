@@ -71,7 +71,7 @@ header("Location:assign_tasks.php?msg=9015");
 exit;
 }
 
-$page = new PageRenderer("setup_module", PAGE_TASK_MANAGE, "Manage Task Relations", 'container_two_column.tpl', 'header.tpl', PRI, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_TASK_MANAGE, "Manage Task Relations", 'container_two_column.tpl', 'header.php', PRI, HOMEPAGE, PA::$network_info);
 
 $page->html_body_attributes = 'class="no_second_tier network_config"';
 

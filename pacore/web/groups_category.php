@@ -46,7 +46,7 @@ $optional_parameters = "onload=\"$onload\"";
 html_body($optional_parameters);
 
 //header of group page
-$header = new Template(CURRENT_THEME_FSPATH."/header.tpl");
+$header = new Template(CURRENT_THEME_FSPATH."/header.php");
 $header->set('current_theme_path', PA::$theme_url);
 $header->set('current_theme_rel_path', PA::$theme_rel);
 // find navigation link for header

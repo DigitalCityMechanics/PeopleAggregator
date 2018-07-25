@@ -189,7 +189,7 @@ function setup_module($column, $moduleName, $obj) {
     $obj->mode = PUB;
 }
 
-$page = new PageRenderer("setup_module", PAGE_NETWORK_LINKS, "Network links", "container_two_column.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_NETWORK_LINKS, "Network links", "container_two_column.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 
 $page->html_body_attributes ='class="no_second_tier network_config"';
 $message = NULL;

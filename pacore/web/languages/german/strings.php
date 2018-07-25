@@ -667,7 +667,7 @@ $TRANSLATED_STRINGS = array(
 'Header Template'
 => '',
 
-'Enter Page Header Template (header.tpl, header_group.tpl ...)'
+'Enter Page Header Template (header.php, header_group.tpl ...)'
 => '',
 
 'Page boot (pre-execute) PHP code'

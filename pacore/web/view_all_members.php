@@ -24,7 +24,7 @@ include_once("web/includes/page.php");
 require_once "api/Messaging/MessageDispatcher.class.php";
 
 $user = get_user(); // User object for uid specified on query string, or logged in user if no user specified
-$header_tpl = 'header.tpl';
+$header_tpl = 'header.php';
 if (!empty($_GET['uid'])) {
   //user header will be applied
   require_once "web/includes/functions/user_page_functions.php";

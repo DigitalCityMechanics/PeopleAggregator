@@ -57,7 +57,7 @@ if ($_GET['tier_three']) {
 $optional_parameters = "onload=\"$onload\"";
 html_body($optional_parameters);
 
-$header = new Template(CURRENT_THEME_FSPATH."/header.tpl");
+$header = new Template(CURRENT_THEME_FSPATH."/header.php");
 if (PA::$network_info) {
   $header->set_object('network_info', PA::$network_info);
 }

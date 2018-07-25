@@ -77,7 +77,7 @@
       break;
     } //end switch
   } // end function
-  $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_SUGGESTIONS, "Manage Suggestions", 'container_two_column.tpl','header.tpl',PRI, HOMEPAGE,PA::$network_info);
+  $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_SUGGESTIONS, "Manage Suggestions", 'container_two_column.tpl','header.php',PRI, HOMEPAGE,PA::$network_info);
   if (!empty($_GET['msg_id']) && empty($msg)) {
     $msg = MessagesHandler::get_message($_GET['msg_id']);
   }  

@@ -69,7 +69,7 @@
          if (!empty($_GET['search_str'])) $obj->search_str = $_GET['search_str'];
     }
  }
- $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_GROUPS, "Manage Groups", 'container_two_column.tpl','header.tpl',PUB, HOMEPAGE, PA::$network_info);
+ $page = new PageRenderer("setup_module", PAGE_NETWORK_MANAGE_GROUPS, "Manage Groups", 'container_two_column.tpl','header.php',PUB, HOMEPAGE, PA::$network_info);
 
 uihelper_error_msg(@$message);
 $page->html_body_attributes ='class="no_second_tier network_config"';

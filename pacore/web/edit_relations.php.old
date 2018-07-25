@@ -226,7 +226,7 @@ function setup_module($column, $moduleName, $obj) {
     $obj->uid = $uid;
     $obj->mode = PUB;
 }
-$page = new PageRenderer("setup_module", PAGE_EDIT_RELATION, $title, "container_three_column.tpl", "header.tpl", PUB, HOMEPAGE, $network_info);
+$page = new PageRenderer("setup_module", PAGE_EDIT_RELATION, $title, "container_three_column.tpl", "header.php", PUB, HOMEPAGE, $network_info);
 
 if ( $message ) {  
   $msg_tpl = new Template(CURRENT_THEME_FSPATH."/display_message.tpl");

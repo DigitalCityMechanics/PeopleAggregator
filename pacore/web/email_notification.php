@@ -189,7 +189,7 @@ function find_sum($v1,$v2){
   return $r;
 }
 
-$page = new PageRenderer("setup_module", PAGE_EMAIL_NOTIFICATION, "Email Notification", 'container_two_column.tpl','header.tpl',PRI,HOMEPAGE,PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_EMAIL_NOTIFICATION, "Email Notification", 'container_two_column.tpl','header.php',PRI,HOMEPAGE,PA::$network_info);
 // if any message code is set then fetch that message
 if (is_int($error_msg)) {
   $msg_obj = new MessagesHandler();

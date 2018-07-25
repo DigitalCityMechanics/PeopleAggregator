@@ -288,7 +288,7 @@ if (!empty($_FILES[$image_file]['name'])) {
     }
   }
 
-  $page = new PageRenderer("setup_module", PAGE_CONFIGURE_SPLASH_PAGE, __("Configure Splash Page"), 'container_two_column.tpl', 'header.tpl', PRI, HOMEPAGE, PA::$network_info);
+  $page = new PageRenderer("setup_module", PAGE_CONFIGURE_SPLASH_PAGE, __("Configure Splash Page"), 'container_two_column.tpl', 'header.php', PRI, HOMEPAGE, PA::$network_info);
 
   $page->html_body_attributes ='class="no_second_tier network_config"';
   $css_array = get_network_css();

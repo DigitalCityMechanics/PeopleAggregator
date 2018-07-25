@@ -47,7 +47,7 @@ function setup_module($column, $moduleName, $obj) {
     }
     $obj->mode = PUB;
 }
-$page = new PageRenderer("setup_module", PAGE_FORGOT_PASSWORD, "Forgot Password", "container_three_column.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_FORGOT_PASSWORD, "Forgot Password", "container_three_column.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 
 uihelper_error_msg($msg);
 uihelper_get_network_style();
