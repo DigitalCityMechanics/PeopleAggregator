@@ -1,5 +1,7 @@
+db
 pacore/config/AppConfig.xml
 pacore/log/pa.log
 paproject/config/AppConfig.xml
 paproject/log/pa.log
 *.swp
+nbproject/

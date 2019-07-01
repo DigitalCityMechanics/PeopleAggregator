@@ -129,15 +129,15 @@
         </li><br />
 <!-- END -->
         
-        <li><input type="checkbox" <? if ($_POST['exposeCore']) echo 'checked="checked"' ?> name="exposeCore" value="1" /> Basic info</li>
-        <li><input type="checkbox" <? if (isset($_POST['exposeEmail'])) echo 'checked="checked"' ?> name="exposeEmail" value="1" />Email address</li>
+        <li><input type="checkbox" <?php if ($_POST['exposeCore']) echo 'checked="checked"' ?> name="exposeCore" value="1" /> Basic info</li>
+        <li><input type="checkbox" <?php if (isset($_POST['exposeEmail'])) echo 'checked="checked"' ?> name="exposeEmail" value="1" />Email address</li>
 
 <!-- BEGIN: changed by Zoran Hron:
             profile and company types, at this time we don't have company addres details in our database
             and we must use Postal adress! Once time when we will have the company address we must uncomment PHP code below
 -->
         <?php // if ($profileType=='0') : ?>
-          <li><input type="checkbox" <? if (isset($_POST['exposeAddress'])) echo 'checked="checked"' ?> name="exposeAddress" value="1" /> Postal address</li>
+          <li><input type="checkbox" <?php if (isset($_POST['exposeAddress'])) echo 'checked="checked"' ?> name="exposeAddress" value="1" /> Postal address</li>
         <?php // endif; ?>      
         <?php if ($profileType=='1') : ?> <!-- profile type = Professional -->
 <!--
@@ -145,29 +145,29 @@
 -->
         <li><input type="radio" <?php if ($companyType=='0') echo 'checked="checked"' ?> name="exposeCompany" value="0" > Current company info</li>
         <li><input type="radio" <?php if ($companyType=='1') echo 'checked="checked"' ?> name="exposeCompany" value="1" > Prior company info</li>
-          <li><input type="checkbox"  <? if (isset($_POST['exposeSummary'])) echo 'checked="checked"' ?> name="exposeSummary" value="1" /> Professional summary</li>
+          <li><input type="checkbox"  <?php if (isset($_POST['exposeSummary'])) echo 'checked="checked"' ?> name="exposeSummary" value="1" /> Professional summary</li>
         <?php endif; ?>      
 <!-- END -->
-        <li><input type="checkbox" <? if (isset($_POST['exposeEducation'])) echo 'checked="checked"' ?> name="exposeEducation" value="1" />Education and awards</li>
+        <li><input type="checkbox" <?php if (isset($_POST['exposeEducation'])) echo 'checked="checked"' ?> name="exposeEducation" value="1" />Education and awards</li>
 
 <!-- BEGIN changed by Zoran Hron:
           1. show personal interests only if profile type is personal
           2. added checkbox for "exposeInternalFriends" option
 -->
         <?php if ($profileType=='0') : ?>
-          <li><input type="checkbox"  <? if (isset($_POST['exposePersonal'])) echo 'checked="checked"' ?> name="exposePersonal" value="1" /> Personal interests and beliefs</li>
+          <li><input type="checkbox"  <?php if (isset($_POST['exposePersonal'])) echo 'checked="checked"' ?> name="exposePersonal" value="1" /> Personal interests and beliefs</li>
         <?php endif; ?>
-        <li><input type="checkbox"  <? if (isset($_POST['exposeInternalFriends'])) echo 'checked="checked"' ?> name="exposeInternalFriends" value="1" />Friends on this network</li>
+        <li><input type="checkbox"  <?php if (isset($_POST['exposeInternalFriends'])) echo 'checked="checked"' ?> name="exposeInternalFriends" value="1" />Friends on this network</li>
 <!-- END -->
-        <li><input type="checkbox"  <? if (isset($_POST['exposeFlickrFriends'])) echo 'checked="checked"' ?> name="exposeFlickrFriends" value="1" />Contacts from Flickr.com</li>
-        <li>  <input type="checkbox"  <? if (isset($_POST['exposeFacebookFriends'])) echo 'checked="checked"' ?> name="exposeFacebookFriends" value="1" />Facebook.com friends</li>
-        <li>  <input type="checkbox"  <? if (isset($_POST['exposeOtherFriends'])) echo 'checked="checked"' ?> name="exposeOtherFriends" value="1" />Friends from other networks</li>
+        <li><input type="checkbox"  <?php if (isset($_POST['exposeFlickrFriends'])) echo 'checked="checked"' ?> name="exposeFlickrFriends" value="1" />Contacts from Flickr.com</li>
+        <li>  <input type="checkbox"  <?php if (isset($_POST['exposeFacebookFriends'])) echo 'checked="checked"' ?> name="exposeFacebookFriends" value="1" />Facebook.com friends</li>
+        <li>  <input type="checkbox"  <?php if (isset($_POST['exposeOtherFriends'])) echo 'checked="checked"' ?> name="exposeOtherFriends" value="1" />Friends from other networks</li>
         <li><p>Filter your data by the visibility you set on each field</p>
         <p>
           <select name="perms">
-             <option <? if ($perms=='0,1,2') echo 'selected="selected"' ?> value="0,1,2"> <?= __("show everything") ?></option>
-             <option <? if ($perms=='1,2') echo 'selected="selected"' ?> value="1,2"> <?= __("show what your friends see") ?></option> 
-             <option <? if ($perms=='1') echo 'selected="selected"' ?> value="1"> <?= __("show only public info") ?></option>
+             <option <?php if ($perms=='0,1,2') echo 'selected="selected"' ?> value="0,1,2"> <?= __("show everything") ?></option>
+             <option <?php if ($perms=='1,2') echo 'selected="selected"' ?> value="1,2"> <?= __("show what your friends see") ?></option> 
+             <option <?php if ($perms=='1') echo 'selected="selected"' ?> value="1"> <?= __("show only public info") ?></option>
          </select>
          </p></li><br />
         <li><p>

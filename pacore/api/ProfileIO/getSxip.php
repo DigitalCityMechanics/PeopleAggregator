@@ -258,7 +258,7 @@ print "<hr>saving to ".print_r($homesite,true)."<hr>";
     </td>
     <td>
     <? echo $f['value']; ?>
-    <? if($f['oldvalue']) echo "<br>was: ".$f['oldvalue']; ?>
+    <?php if($f['oldvalue']) echo "<br>was: ".$f['oldvalue']; ?>
     </td>
     </tr>
     <?php

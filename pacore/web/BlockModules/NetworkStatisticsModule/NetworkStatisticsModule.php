@@ -15,7 +15,7 @@ class NetworkStatisticsModule extends Module {
   //selecting outer for the module
   public $module_type = 'network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.php';
  
   function __construct() {
     parent::__construct();
@@ -34,10 +34,10 @@ class NetworkStatisticsModule extends Module {
     switch ($this->mode) {
       case PRI:
         $this->outer_template = 'outer_private_side_module.tpl';
-        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
       default:
-        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;  
     }  
     $inner_html_gen = new Template($tmp_file);

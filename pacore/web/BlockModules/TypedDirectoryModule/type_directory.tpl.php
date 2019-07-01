@@ -14,7 +14,7 @@
   <?php 
   foreach ($mod->sortFields as $i=>$field) {
   	?>
-  <li <? if ($mod->sort_by == $field['name']) echo 'class="active"'?> ><a href="<?=PA::$url.PA_ROUTE_TYPED_DIRECTORY.$mod->directoryType?>?sort_by=<?=$field['name']?>"><?= $field['label']?></a></li>
+  <li <?php if ($mod->sort_by == $field['name']) echo 'class="active"'?> ><a href="<?=PA::$url.PA_ROUTE_TYPED_DIRECTORY.$mod->directoryType?>?sort_by=<?=$field['name']?>"><?= $field['label']?></a></li>
   	<?
   } ?>
 </ul>
@@ -24,7 +24,7 @@
      <?php echo $mod->page_links?>
      <?php if ($mod->page_last) { echo $mod->page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>
 <div class="blog">
 	<div style="float:right;">
 		<form action="<?=PA::$url.'/'.FILE_ADDGROUP?>">
@@ -115,7 +115,7 @@ foreach ($mod->profilefields as $i=>$field) {
 
 
 </div>
-<? } ?>
+<?php } ?>
 
   <?php if(!empty($mod->page_links)) { ?>
    <div class="prev_next">
@@ -123,4 +123,4 @@ foreach ($mod->profilefields as $i=>$field) {
      <?php echo $mod->page_links?>
      <?php if ($mod->page_last) { echo $mod->page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>

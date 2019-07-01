@@ -22,11 +22,11 @@
       </b><br />
          <?php if ($network['member_count']!='') { ?>
    						<?php echo $network['member_count'].' members'; ?>
-        <? } ?>
+        <?php } ?>
         </span></a>
       </li>
 		  <?
         }  // End of For loop 
-      } else { ?>	<li><?= __('No network joined yet.'); ?></li> <? } ?>
+      } else { ?>	<li><?= __('No network joined yet.'); ?></li> <?php } ?>
     </ul>
 </div>

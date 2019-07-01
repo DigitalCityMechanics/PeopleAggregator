@@ -19,7 +19,7 @@ class NetworkDefaultLinksModule extends Module {
 
   public $module_type = 'network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.php';
   
   public  $uid, $links_data_array;
   function __construct() {
@@ -38,10 +38,10 @@ class NetworkDefaultLinksModule extends Module {
     switch ($this->mode) {
       case PRI:
         $this->outer_template = 'outer_private_side_module.tpl';
-        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
       default:
-        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
 
     }

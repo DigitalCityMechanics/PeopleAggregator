@@ -202,7 +202,7 @@
       }
     
   }
-  $page = new PageRenderer( "setup_module", PAGE_NEW_USER_BY_ADMIN, "Create New User", 'container_two_column.tpl','header.tpl',PRI, HOMEPAGE,PA::$network_info );
+  $page = new PageRenderer( "setup_module", PAGE_NEW_USER_BY_ADMIN, "Create New User", 'container_two_column.tpl','header.php',PRI, HOMEPAGE,PA::$network_info );
 
   $page->html_body_attributes ='class="no_second_tier network_config"';
 

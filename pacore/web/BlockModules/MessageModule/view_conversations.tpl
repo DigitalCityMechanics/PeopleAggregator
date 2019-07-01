@@ -52,11 +52,11 @@ ul.reply {
       	if ($message_details->sender_id == PA::$login_uid) { ?>
       	To: <?=uihelper_lookupnames($message_details->all_recipients)?>
       	<!-- (From:       	<?=$message_details->sender_name ?>) -->
-      	<? } else { ?>
+      	<?php } else { ?>
       	From: <a href="<? echo PA::$url . PA_ROUTE_USER_PUBLIC . "/" . $message_details->sender_id ?>">
       	<?=$message_details->sender_name ?>
       	</a>
-      	<? } ?>
+      	<?php } ?>
       	</strong></p>
 
       	<p><?php echo PA::date($message_details->sent_time, 'short') // date("d M Y", $message_details->sent_time) ?>,

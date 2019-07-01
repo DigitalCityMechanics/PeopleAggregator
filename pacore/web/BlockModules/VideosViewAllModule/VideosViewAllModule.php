@@ -15,7 +15,7 @@ require_once "web/includes/classes/Pagination.php";
 
 class VideosViewAllModule extends Module {
 
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
   public $links = array();
   public $item_id;
 

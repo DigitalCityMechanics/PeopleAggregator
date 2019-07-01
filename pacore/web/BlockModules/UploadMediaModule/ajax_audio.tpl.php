@@ -42,7 +42,7 @@
 
    <?php if (!empty($_REQUEST['gid'])) { ?>
    <input type="hidden" name="group_id" value="<?=$_REQUEST['gid'];?>" />
-   <? } ?>
+   <?php } ?>
 
    <input type="submit" class="button-submit" name="submit_audio" value="Upload audio" />
    </fieldset>

@@ -67,7 +67,7 @@
       <div class="center">
 			<div class="field_text">
 				<?= __("Add people's login names here, seperated by commas.") ?>
-				<? if (count($add_assoc_user_errors)) { ?><div style="color:red"> <?
+				<?php if (count($add_assoc_user_errors)) { ?><div style="color:red"> <?
 					foreach ($add_assoc_user_errors as $n=>$err) {
 						echo "<br />$err";
 					}
@@ -88,7 +88,7 @@
       <h4><label for="add_group"><?= __("Groups you are a member of") ?></label></h4>
       <div class="center">
 			<div class="field_text">
-				<? if (count($add_assoc_group_errors)) {
+				<?php if (count($add_assoc_group_errors)) {
 					foreach ($add_assoc_group_errors as $n=>$err) {
 						echo "<br />$err";
 					}

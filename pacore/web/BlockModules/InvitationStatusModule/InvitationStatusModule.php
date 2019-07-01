@@ -18,7 +18,7 @@ class InvitationStatusModule extends Module {
   public $module_type = 'group|network';
   public $module_placement = 'middle';
   public $collection_id_array;
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
   public $accepted_invitation;
   public $pending_invitation;
 

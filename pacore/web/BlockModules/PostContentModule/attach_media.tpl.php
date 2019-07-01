@@ -79,7 +79,7 @@ function show_upload(typeStr) {
 			if ($ccid > 0) { 
 			?>,
 			'gid':<?=$ccid?>
-			<? } ?>
+			<?php } ?>
 			},
 			function(data) {
 				var modal_height = (typeStr == 'YouTube') ? 600 : 300;

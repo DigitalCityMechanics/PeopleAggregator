@@ -152,7 +152,7 @@ function setup_module($column, $moduleName, $obj) {
     }
 }
 
-$page = new PageRenderer("setup_module", PAGE_LOGIN, "Login page", "container_three_column.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_LOGIN, "Login page", "container_three_column.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 
 // added by Zoran Hron: JQuery validation & AJAX file upload --
 $page->add_header_html(js_includes('jquery.validate.js'));

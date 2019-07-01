@@ -271,4 +271,4 @@ function _error_msg($msg) {
 <div class="error">
     <?=$msg?>
 </div>
-<? } ?>
+<?php } ?>

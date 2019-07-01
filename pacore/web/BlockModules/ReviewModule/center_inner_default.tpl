@@ -9,9 +9,9 @@
 
 <p>Reviews from people on item type <?= $mod->subject_type ?>, id <?= $mod->subject_id ?>:</p>
 
-<? if (empty($mod->reviews)) { ?>
+<?php if (empty($mod->reviews)) { ?>
   <p>No reviews yet; why not add one?</p>
-<? } else {
+<?php } else {
   foreach ($mod->reviews as $review) { ?>
     <div class="review">
       <div class="review-head">Review by <?= $review->author['login_name'] ?>:</div>

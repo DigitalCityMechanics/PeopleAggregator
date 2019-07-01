@@ -31,7 +31,7 @@ require_once "web/includes/classes/xHtml.class.php";
         }
       ?>
         <option value="<?php echo $list->type;?>" <?php echo $selected;?>><?php echo $list->description;?></option>
-      <?php }?>
+      <?php } ?>
     </select>
     </div>
     <div id="email_data" <?php echo $class;?>>

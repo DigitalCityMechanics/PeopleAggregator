@@ -27,13 +27,13 @@
 			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b><br/>
 			 <?= $links['users_data'][$counter]['family_status'] ?>
         </span>
-  	<? } else { ?>
+  	<?php } else { ?>
   	<span>
           <b><?= link_to($links['users_data'][$counter]['display_name'],
 			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b>,
 			 <?= $links['users_data'][$counter]['family_status'] ?>
         </span>
-  	<? } ?>
+  	<?php } ?>
   </li>
   <?php 
     }

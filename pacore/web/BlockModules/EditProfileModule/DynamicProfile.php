@@ -159,7 +159,7 @@ class DynamicProfile {
         <?=$description?>
         </div>
         <br />
-        <? } ?>
+        <?php } ?>
       </div>
         <br />
   <?
@@ -221,7 +221,7 @@ class DynamicProfile {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
       </div>
       <br />
   <?
@@ -272,7 +272,7 @@ class DynamicProfile {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
         <br />
       </div>
   <?
@@ -314,7 +314,7 @@ class DynamicProfile {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
         <br />
       </div>
   <?

@@ -18,7 +18,7 @@ $lower_rel = strtolower($rel_term);
   </b><br />
   <?= sprintf(__("(%d friends)"), $link['no_of_relations']) ?>
   </span></a></li>
-	<?} } else { ?>
+	<?php } } else { ?>
   <li><span>
   <?= __("No friends made yet."); ?>
   </span></li>

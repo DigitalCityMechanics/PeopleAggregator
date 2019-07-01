@@ -70,7 +70,7 @@
       <a href="<?php echo $link_for_editing;?>"><img src="<?php echo PA::$theme_url;?>/images/16_edit.gif" alt="edit" height="16" width="16" border="0" /></a>
       <a href="#"><img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="delete" height="16" width="16" border="0"  onclick="edit_delete_media('<?=$links[$i]['content_id']?>','delete','image_upload');" /></a>
 
-    <?}?>
+    <?php } ?>
      </td>
     <td>
       <div align="center">
@@ -105,7 +105,7 @@
             <b>Created:</b> <?=content_date($links[$i]['created']);?>
             <?php if (!empty($links[$i]['tags'])) { ?>
              <b>Tags:<?=$links[$i]['tags'];?></b>
-            <? } ?>
+            <?php } ?>
 
           </div>
         </li>
@@ -124,13 +124,13 @@
       </a>
    </td>
   </tr>
-  <? } ?>
-  <? } else { ?>
+  <?php } ?>
+  <?php } else { ?>
    <tr>
      <td>
         <?= __("No Photos.") ?>
      </td>
    </tr>
-  <? } ?>
+  <?php } ?>
 </table>
 </div>

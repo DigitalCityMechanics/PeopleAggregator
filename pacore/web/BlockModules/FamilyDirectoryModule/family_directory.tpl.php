@@ -15,7 +15,7 @@
   <?php 
   foreach ($mod->sortFields as $i=>$field) {
   	?>
-  <li <? if ($mod->sort_by == $field['name']) echo 'class="active"'?> ><a href="<?=PA::$url.PA_ROUTE_FAMILY_DIRECTORY?>?sort_by=<?=$field['name']?>"><?= $field['label']?></a></li>
+  <li <?php if ($mod->sort_by == $field['name']) echo 'class="active"'?> ><a href="<?=PA::$url.PA_ROUTE_FAMILY_DIRECTORY?>?sort_by=<?=$field['name']?>"><?= $field['label']?></a></li>
   	<?
   } ?>
 </ul>
@@ -25,7 +25,7 @@
      <?php echo $mod->page_links?>
      <?php if ($mod->page_last) { echo $mod->page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>
   <?php if (PA::$login_uid) { ?>
 <div class="blog">
 	<div style="float:right;">
@@ -42,7 +42,7 @@
 	</div>
 	<br style="clear:both;" />
 </div>
-  <?php }  ?>
+  <?php } ?>
 
 <?php
 foreach ($mod->typedGroupEntities as $i=>$entity) {
@@ -120,7 +120,7 @@ foreach ($mod->profilefields as $i=>$field) {
 
 
 </div>
-<? } ?>
+<?php } ?>
 
   <?php if(!empty($mod->page_links)) { ?>
    <div class="prev_next">
@@ -128,4 +128,4 @@ foreach ($mod->profilefields as $i=>$field) {
      <?php echo $mod->page_links?>
      <?php if ($mod->page_last) { echo $mod->page_last;}?>
    </div>
-  <?php }  ?>
+  <?php } ?>

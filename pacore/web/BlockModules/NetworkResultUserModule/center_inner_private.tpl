@@ -124,7 +124,7 @@
               <?php if($links[$i]['user_type'] == 'waiting_member') {
                $appr_url=PA::$url .'/manage_user.php?action=approve&uid='.$links[$i]['user_id']; ?>
                <br><font color="red"><a href="<?=$appr_url?>"><?php echo '<font color="red">' .__('Approve').'</font>' ?></a>
-               <? } ?>
+               <?php } ?>
             </td>
             <td><a href="<?php echo $delete_url;?>" onclick="javascript: return delete_confirmation_msg('<?= __("Are you sure you want to delete this user?") ?>');" class='delete'><?= __("Delete") ?></a><br />
               <?php if($links[$i]['user_type'] == 'waiting_member') echo '<font color="red">'.__('pending').'</font>'; ?>
@@ -151,7 +151,7 @@
 
     <?php }else {?>
     <div class ="required"><?= __("No users") ?></div>
-    <?php }?>
+    <?php } ?>
 
 <?php if( $page_links ) {?>
    <div class="prev_next">

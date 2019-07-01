@@ -11,15 +11,20 @@
     <right>
       <item>ForumStatsModule</item>
     </right>
-    <javascripts/>
-    <page_css/>
+    <javascripts>
+      <item>adminlte.min.js</item>
+    </javascripts>
+    <page_css>
+      <item>dist/css/AdminLTE.min.css</item>
+      <item>dist/css/skins/skin-blue.min.css</item>
+    </page_css>
     <page_theme>Default</page_theme>
-    <page_template>container_three_column.tpl</page_template>
-    <header_template>header.tpl</header_template>
+    <page_template>container_three_column.php</page_template>
+    <header_template>header.php</header_template>
     <page_mode>public</page_mode>
     <page_type>network|group|user</page_type>
     <block_type>Homepage</block_type>
-    <body_attributes><![CDATA[class="no_second_tier container_three_column"]]></body_attributes>
+    <body_attributes><![CDATA[class="hold-transition skin-blue sidebar-mini no_second_tier" id="pg_homepage"]]></body_attributes>
     <access_permission></access_permission>
     <navigation_code><![CDATA[
       global $app;                         

@@ -54,15 +54,15 @@
        <a href="#"><img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="" height="16" width="16" border="0"  onclick="edit_delete_media('<?=$links[$i]['content_id']?>','delete','image_upload2');"></a>
     </p>
        
-    <?}?>
+    <?php } ?>
   </li>
-<?} // End of for loop?>  
+<?php } // End of for loop?>  
 </ul>
-<?} else { ?>
+<?php } else { ?>
   <ul>
     <li>
       <?= __("No Video") ?>
     </li>
   </ul>  
-<? } ?>
+<?php } ?>
 </div>

@@ -23,7 +23,7 @@ class TypedGroupModule extends Module {
 
   function __construct() { 
     parent::__construct();
-    $this->outer_template = 'outer_public_center_module.tpl';
+    $this->outer_template = 'outer_public_center_module.php';
 	  $this->inner_template = PA::$blockmodule_path .'/'. get_class($this) . "/typedgroup.tpl.php";
     $this->title = __('Typed Group Settings');
     $this->html_block_id = 'TypedGroupModule';

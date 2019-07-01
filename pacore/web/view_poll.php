@@ -12,6 +12,6 @@
 		}
 	}
 
-	$page = new PageRenderer("setup_module", PAGE_VIEW_POLL, "Poll", "container_two_column_right.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+	$page = new PageRenderer("setup_module", PAGE_VIEW_POLL, "Poll", "container_two_column_right.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 	echo $page->render();
 ?>

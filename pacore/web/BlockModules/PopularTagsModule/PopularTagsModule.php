@@ -36,7 +36,7 @@ class PopularTagsModule extends Module {
 
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.php';
   
   public $links;
 
@@ -63,7 +63,7 @@ class PopularTagsModule extends Module {
     $inner_template = NULL;
     switch ( $this->mode ) {
       default:
-        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $inner_template = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
     }
     
     $obj_inner_template = new Template($inner_template);

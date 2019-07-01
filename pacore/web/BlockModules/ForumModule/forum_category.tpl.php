@@ -37,7 +37,7 @@
       <tr>
         <td></td>
         <td colspan="2" class="spacer">
-          <?php include("forum_header.tpl.php"); ?>
+          <?php include("forum_header.php.php"); ?>
         </td>
         <td></td>
       </tr>

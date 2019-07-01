@@ -20,7 +20,7 @@ class RecentCommentsModule extends Module {
 
   public $module_type = 'user|group|network';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.php';
 
   public $cid;
 
@@ -88,10 +88,10 @@ class RecentCommentsModule extends Module {
     switch ( $this->mode ) {
       case PRI:
         $this->outer_template = 'outer_private_side_module.tpl';
-        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
       default:
-        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.tpl';
+        $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_public.php';
       break;
     }
     $inner_html_gen = new Template($tmp_file);

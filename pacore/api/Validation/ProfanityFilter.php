@@ -40,7 +40,10 @@ class ProfanityFilter {
     }
     return $repl;
   }
-  
+  /*
+   * Deprecated: preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead
+   * 
+   * 
   public static function filterHTML($html) {
      
     // a simple preg_replace will do for now to see it actually works
@@ -55,6 +58,10 @@ class ProfanityFilter {
     $repl_code = "ProfanityFilter::replace('$1')";
     return (preg_replace($profanity, $repl_code, $html));
   }
+  */
+  public static function filterHTML($html) {
+    return ($html);
+  }  
 
 }
 

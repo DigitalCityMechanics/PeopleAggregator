@@ -164,7 +164,7 @@ function setup_module($column, $module, $obj) {
   $obj->error_msg = $msg;
 }
 
-$page = new PageRenderer("setup_module", PAGE_RELATIONSHIP_SETTINGS, "Relationship Settings", 'container_two_column.tpl','header.tpl',PRI,HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_RELATIONSHIP_SETTINGS, "Relationship Settings", 'container_two_column.tpl','header.php',PRI,HOMEPAGE, PA::$network_info);
 if (empty($msg)) {
   $msg = @$succ_msg; // FIXME: where does $succ_msg come from I wonder?
   // if setting has been done successfully.  

@@ -35,7 +35,7 @@ $optional_parameters = "onload=\"$onload\"";
 html_body($optional_parameters);
 
 // header
-$header = new Template(CURRENT_THEME_FSPATH."/header.tpl");
+$header = new Template(CURRENT_THEME_FSPATH."/header.php");
 $header->set('current_theme_path', PA::$theme_path);
 $header->set('error', $_GET['error']);
 

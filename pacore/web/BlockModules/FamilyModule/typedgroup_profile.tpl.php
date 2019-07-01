@@ -101,10 +101,10 @@ foreach ($mod->profilefields as $i=>$field) {
 		<b><?=$mod->relationTypeString?></b>
 		<a href="#" onclick="$('#relationType').toggle(); return false;"><?=__("Update relation")?></a>
 		<br/>
-	<? } else { ?>
+	<?php } else { ?>
 	<b><?= $mod->join_this_group_string;?></b>
-	<? } ?>
-	<div id="relationType" <? if ($mod->is_member) echo 'style="display:none;"'; ?>>
+	<?php } ?>
+	<div id="relationType" <?php if ($mod->is_member) echo 'style="display:none;"'; ?>>
 	<select name="relation"
 		<option value=""><?=__("-- Please select --")?></option>
 		<?php

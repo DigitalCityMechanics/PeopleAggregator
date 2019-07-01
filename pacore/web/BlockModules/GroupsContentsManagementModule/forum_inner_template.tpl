@@ -55,14 +55,14 @@ if ($type !='forum') {
    <td><img src="<?=$type_image;?>" alt="PA" /></td>
    <td><?php print manage_content_date($links[$i]['created']);?></td>
    </tr>
-   <? } ?>
+   <?php } ?>
    </table>
-   <? } ?>   
-  <? if(empty($links)) { ?>
+   <?php } ?>   
+  <?php if(empty($links)) { ?>
     <div class="description"> <?= __("No Content Published") ?></div>
 
   
-   <?}?>
+   <?php } ?>
 
 <input type="hidden" name="delete_type" id="delete_type" value="" />
  </form>

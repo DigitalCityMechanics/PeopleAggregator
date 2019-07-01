@@ -111,7 +111,7 @@ function setup_module($column, $moduleName, $obj) {
      break;
     }
 }
-$page = new PageRenderer("setup_module", PAGE_MEDIA_MANAGEMENT, "Media Management", "media_gallery_pa.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_MEDIA_MANAGEMENT, "Media Management", "media_gallery_pa.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 
 if (!empty($msg1)) {
   $msg_tpl = new Template(CURRENT_THEME_FSPATH."/display_message.tpl");

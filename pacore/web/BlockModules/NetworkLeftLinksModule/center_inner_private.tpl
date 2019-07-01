@@ -48,13 +48,13 @@
 		       <li><a href="<?php echo PA::$url;?>/network_bulletins.php"><?= __('Bulletins') ?></a></li>
 		       <li><a href="<?php echo PA::$url;?>/email_notification.php"><?= __('Email notifications') ?></a></li>
 		     </ul>
-   	<?}?>
+   	<?php } ?>
     	<?php if ($task_perms['manage_settings'] == TRUE) { ?>
    		<h5><a href="<?php echo PA::$url . PA_ROUTE_CONFIG_ROLES ;?>"><?= __('Roles and Tasks') ?></a></h5>
-        <?}?>	
+        <?php } ?>	
 	<?php if ($task_perms['manage_settings'] == TRUE) { ?>
 		  <h5><a href="<?php echo PA::$url .PA_ROUTE_RANKING_POINTS;?>"><?= __('Ranking Points') ?></a></h5>
-  	<?}?>
+  	<?php } ?>
 	</div>
 	<h3><a href="#">Content</a></h3>
 	<div>
@@ -66,21 +66,21 @@
       				<li><a href="<?php echo PA::$url;?>/manage_comments.php"><?= __('Comments') ?></a></li>
       				<li><a href="<?php echo PA::$url;?>/network_manage_suggestions.php"><?= __('Suggestions') ?></a></li>
 				</ul>
-  	<?}?>
+  	<?php } ?>
 	<?php if ($task_perms['manage_ads'] == TRUE) { ?>
 		<h5><a href="<?php echo PA::$url.PA_ROUTE_MANAGE_AD_CENTER;?>"><?= __('Ad Center') ?></a></h5>
   		<h5><a href="<?php echo PA::$url;?>/manage_textpads.php"><?= __('Textpads') ?></a></h5>
-  	<?}?>
+  	<?php } ?>
 	<?php if ($task_perms['manage_links'] == TRUE) { ?>
 		  <h5><a href="<?php echo PA::$url;?>/network_links.php"><?= __('Manage links') ?></a></h5>
-	<?}?>
+	<?php } ?>
    	<?php if ($task_perms['manage_events'] == TRUE) { ?>
       		<h5><a href="<?php echo PA::$url;?>/network_calendar.php"><?= __('Network Events') ?></a></h5>
       		<h5><a href="<?php echo PA::$url;?>/manage_questions.php"><?= __('Manage Questions') ?></a></h5>
-   	<?}?>
+   	<?php } ?>
      	<?php if ($task_perms['user_defaults'] == TRUE) { ?>
   		<h5><a href="<?php echo PA::$url;?>/manage_groups.php"><?= __('Manage Groups') ?></a></h5>
-   	<?}?>
+   	<?php } ?>
   	<?php if ($task_perms['manage_links'] == TRUE) { ?>
        		<h5><a href="<?php echo PA::$url;?>/manage_footer_links.php"><?= __('Manage Footer Links') ?></a></h5>
        		<h5><a href="<?php echo PA::$url;?>/manage_static_pages.php"><?= __('Manage Static Pages') ?></a></h5>
@@ -94,7 +94,7 @@
 	   	<h5><a href="<?php echo PA::$url;?>/manage_domain_name.php"><?= __('Manage Signup Access') ?></a></h5>
 		<h5><a href="<?php echo PA::$url;?>/manage_category.php"><?= __('Manage Category') ?></a></h5>
   		<h5><a href="<?php echo PA::$url . PA_ROUTE_CONFIGURE_SYSTEM;?>"><?= __('System Settings') ?></a></h5>
-  	<?}?>
+  	<?php } ?>
 	<?php if ($task_perms['manage_themes'] == TRUE) { ?>
   		<h5><?= __('Themes') ?></h5>
 		      <li><a href="<?php echo PA::$url . PA_ROUTE_CUSTOMIZE_NETWORK_GUI . "/theme";?>"><?= __('Theme selector') ?></a></li>
@@ -102,7 +102,7 @@
 		      <li><a href="<?php echo PA::$url . PA_ROUTE_CUSTOMIZE_NETWORK_GUI . "/bg_image"?>"><?= __('Background image') ?></a></li>
 		      <li><a href="<?php echo PA::$url . PA_ROUTE_CUSTOMIZE_NETWORK_GUI . "/desktop_image"?>"><?= __('Header image') ?></a></li>
 		      <li><a href="<?php echo PA::$url . PA_ROUTE_CUSTOMIZE_NETWORK_GUI . "/style"?>"><?= __('Customize theme') ?></a></li>
-  	<?}?>	
+  	<?php } ?>	
 	</div>
  	<?php if ($task_perms['meta_networks'] == TRUE) { ?>
 	<h3><a href="#">Meta Network</a></h3>
@@ -124,7 +124,7 @@
        				<li><a href="<?php echo PA::$url.PA_ROUTE_CONFIG_POLL;?>?type=select"><?= __('Select Survey') ?></a></li>
      				</ul>
    				</li>
-   			<?php }?>
+   			<?php } ?>
          		<li><a href="<?php echo PA::$url;?>/configure_splash_page.php?section=register_today"><?= __('Register Today') ?></a></li>
         		</ul>
       			</li>

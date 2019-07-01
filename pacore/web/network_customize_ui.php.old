@@ -103,7 +103,7 @@ if ($type == 'module') {
   }
 
   
-  $page = new PageRenderer("setup_module", PAGE_NETWORK_THEMES, "Network Themes", 'container_three_column.tpl', 'header.tpl', PRI, HOMEPAGE, $network_info,'',$setting_data);
+  $page = new PageRenderer("setup_module", PAGE_NETWORK_THEMES, "Network Themes", 'container_three_column.tpl', 'header.php', PRI, HOMEPAGE, $network_info,'',$setting_data);
 
 
 $msg_string = (!empty($msg)) ? $msg : @$_GET['msg_id'];

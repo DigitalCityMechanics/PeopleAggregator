@@ -112,7 +112,7 @@
       }
       ]]></boot_code>
     <page_template>container_three_column.tpl</page_template>
-    <header_template>header.tpl</header_template>
+    <header_template>header.php</header_template>
     <page_mode>public</page_mode>
     <block_type>Homepage</block_type>
     <page_type>network</page_type>

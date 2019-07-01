@@ -3,7 +3,7 @@
   $current_url = PA::$url . $app->current_route;
  
 ?>
-<?php if (empty($frnd_list)) { ?><h1><?php echo ucfirst($album_data['album_name']);?></h1><? } ?>
+<?php if (empty($frnd_list)) { ?><h1><?php echo ucfirst($album_data['album_name']);?></h1><?php } ?>
 <?php 
   if (!empty($frnd_list)) { ?>
     <div class="search_gallery"> Friend
@@ -20,7 +20,7 @@
         <?php } ?>
       </select>
     </div>
- <? } ?>
+ <?php } ?>
 <?php if (!empty ($my_all_album)) { ?>     
   <div class="search_gallery"><?if (!empty($frnd_list)) { echo __('Album'); } else { echo __('Select Album');} ?>
     <select id="album_name" class="select-txt" onchange="select_album()">
@@ -36,7 +36,7 @@
       <?php } ?>
     </select>
   </div>
-<?}?>
+<?php } ?>
 <?php $display_links = ($show_view == 'thumb') ? 'List View': 'Thumb View';?>
 <?php $href_links = ($show_view == 'thumb') ? '/gallery=list&uid=' . $_GET['uid']: '/gallery=thumb&uid=' . $_GET['uid'];?>
 <div id="buttonbar">
@@ -44,7 +44,7 @@
     <li><a href="<?= $current_url . $href_links;?>"><?php echo $display_links;?></a></li>
     <?php if ((!isset(PA::$page_uid) || (PA::$login_uid == PA::$page_uid)) && empty($_GET['view'])) { ?>
       <li><a href="<?= PA::$url . "/upload_media.php?type=Videos" . $alb . '&uid=' . $_GET['uid']  ?>"><?= __("Upload") ?></a></li>
-    <?}?>
+    <?php } ?>
   </ul>
 </div>
 <form enctype="multipart/form-data" name="image_upload2" id="image_upload2" action="" method="post">

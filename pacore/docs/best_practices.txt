@@ -67,7 +67,7 @@ To convert a page to use PageRenderer:
   render() method
 
 	$page = new PageRenderer("setup_module", PAGE_EDIT_PROFILE, "Edit your 
-	profile - PeopleAggregator", "edit_profile_pa.tpl", "header.tpl", NULL, 
+	profile - PeopleAggregator", "edit_profile_pa.tpl", "header.php", NULL, 
 	$network_info);
 
 	echo $page->render();

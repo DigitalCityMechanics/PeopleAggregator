@@ -83,11 +83,11 @@ echo "<";
   <foaf:family_name><?= esc($user->last_name) ?></foaf:family_name>
   <foaf:nick><?= esc($user->login_name) ?></foaf:nick>
   <foaf:mbox_sha1sum><?= sha1($user->email) ?></foaf:mbox_sha1sum>
-<? if (array_key_exists("blog_url", $user_generaldata)) { ?>
+<?php if (array_key_exists("blog_url", $user_generaldata)) { ?>
   <foaf:weblog rdf:resource="<?= esc($user_generaldata['blog_url']['value']) ?>"/>
-<? } ?>
-<? if ($user->picture) { ?>
+<?php } ?>
+<?php if ($user->picture) { ?>
   <foaf:depiction rdf:resource="<?= esc(Storage::getURL($user->picture)) ?>"/>
-<? } ?>
+<?php } ?>
  </foaf:Person>
 </rdf:RDF>

@@ -371,8 +371,28 @@
     *
     **/
     "^/family[\/]?(.*)$" => "/dynamic.php?page_id=321&%s",
+      
+      
+    /**
+     *
+     *  /imprint/* -> dynamic.php?page_id=1000&*
+     *
+     *
+     * */
+    "^/imprint[\/]?(.*)$" => "/dynamic.php?page_id=1000&%s",  
+      
+    /**
+     *
+     *  /terms/* -> dynamic.php?page_id=2000&*
+     *
+     *
+     * */
+    "^/terms[\/]?(.*)$" => "/dynamic.php?page_id=2000&%s",      
   );
 
+define("PA_ROUTE_SHOPS", "/shops");  
+define("PA_ROUTE_IMPRINT", "/imprint"); 
+define("PA_ROUTE_TERMS", "/terms");
 define("PA_ROUTE_FORUMS", "/forums");
 define("PA_ROUTE_GROUP", "/group");
 define("PA_ROUTE_GROUPS", "/groups");

@@ -16,7 +16,7 @@
 
  define("DEFAULT_PAGE_THEME", 'Default');
  define("DEFAULT_PAGE_TEMPLATE"   , "container_three_column.tpl");
- define("DEFAULT_HEADER_TEMPLATE" , "header.tpl");
+ define("DEFAULT_HEADER_TEMPLATE" , "header.php");
  define("DEFAULT_PAGE_MODE" , 'public');
  define("DEFAULT_BLOCK_TYPE", 'Homepage');
  define("DEFAULT_BODY_ATTR",  "");

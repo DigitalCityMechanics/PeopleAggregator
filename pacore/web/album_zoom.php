@@ -51,7 +51,7 @@ if ($error == TRUE) {
 }
 $content->set('users', $users);
 
-$header = new Template(CURRENT_THEME_FSPATH."/header.tpl");
+$header = new Template(CURRENT_THEME_FSPATH."/header.php");
 $header->set('user_name', $first_name." ".$last_name);
 $content->set('header', $header);
 echo $content->fetch();

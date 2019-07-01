@@ -82,7 +82,7 @@
                     </ul>
                   </div>
                </td>
-           <? } ?>
+           <?php } ?>
            <?php  $button_status = TRUE;
                 if(!empty($users_network)) {
                   if(in_array($network->network_id,$users_network))
@@ -113,12 +113,12 @@
                <?php } ?>
        </tr>
             
-      <? } ?>
+      <?php } ?>
       </table>
     </div>
     <?  } else { ?>      
           <?= __("No networks found") ?>
-    <? } ?>
+    <?php } ?>
   <?php if(!empty($page_links)) {?>
    <div class="prev_next">
      <?php if (!empty($page_first)) { echo $page_first; }?>

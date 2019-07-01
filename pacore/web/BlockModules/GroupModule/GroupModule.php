@@ -16,7 +16,7 @@ class GroupModule extends Module {
 
   public $module_type = 'group';
   public $module_placement = 'left|right';
-  public $outer_template = 'outer_public_side_module.tpl';
+  public $outer_template = 'outer_public_side_module.php';
   public $max_height;
   public $homepage_sortby = FALSE;
   public $sorting_options,$selected_option;

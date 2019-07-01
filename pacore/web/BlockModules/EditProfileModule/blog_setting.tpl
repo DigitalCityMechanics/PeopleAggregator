@@ -10,11 +10,11 @@
   </ul>
   <form name="blog_save_settings" action="<?php echo PA::$url ?>/save_blog_settings.php?mode=blog_rss" method="post" >
   <div>
-    <span><input type="checkbox" name="personal_blog" <? if ($status == BLOG_SETTING_STATUS_ALLDISPLAY || $status == PERSONAL_BLOG_SETTING_STATUS ) echo "checked"  ?> ></span>
+    <span><input type="checkbox" name="personal_blog" <?php if ($status == BLOG_SETTING_STATUS_ALLDISPLAY || $status == PERSONAL_BLOG_SETTING_STATUS ) echo "checked"  ?> ></span>
     <span><?= __("Add a personal blog") ?></span>
   </div>
   <div>
-    <span><input type="checkbox" name="external_blog" <? if ($status == BLOG_SETTING_STATUS_ALLDISPLAY || $status == EXTERNAL_BLOG_SETTING_STATUS ) echo "checked"  ?>></span>
+    <span><input type="checkbox" name="external_blog" <?php if ($status == BLOG_SETTING_STATUS_ALLDISPLAY || $status == EXTERNAL_BLOG_SETTING_STATUS ) echo "checked"  ?>></span>
     <span><?= __("Display my external blog here") ?></span>
   </div>
    <hr />

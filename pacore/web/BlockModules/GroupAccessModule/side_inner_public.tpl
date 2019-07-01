@@ -15,14 +15,14 @@
 <?php 
   }
 ?>
-<? if (!empty($join_this_group_string)) { ?>
+<?php if (!empty($join_this_group_string)) { ?>
   <a href="<?php echo PA::$url.PA_ROUTE_GROUP?>/action=join&amp;gid=<?php echo $group_details->collection_id?>">
    <?php echo $join_this_group_string;?>
   </a>
 <?php 
   }
 ?>
-<? if ($is_admin) { ?>
+<?php if ($is_admin) { ?>
   <a href="<?php echo PA::$url.'/'.FILE_ADDGROUP?>?gid=<?php echo $group_details->collection_id?>">
    <?php echo __('Group Settings')?>    
   </a>

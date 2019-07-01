@@ -58,7 +58,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
     <a href="<?=$download_url?>">
      <b> Download </b>
     </a>
- <? } ?>
+ <?php } ?>
 
   <?php } else if ($links->type == IMAGE) {
      // global var $path_prefix has been removed - please, use PA::$path static variable
@@ -80,7 +80,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
    <div class="post_info">
       <?php if ($links->tags) { ?>
         <?=$links->tags;?>
-      <? } ?>
+      <?php } ?>
       <?=content_date($links->created);?>
         <?php if(isset($is_author_member)) {
                 if(!$is_author_member) echo '<br /><b>'. __('Author of this content is no longer a member of this group'). '</b>';
@@ -113,7 +113,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
            <?= sprintf(__("Return to %s's gallery"), $author_name) ?>
          </a>
        </li>
-       <? } ?>
+       <?php } ?>
       <li>
       <?php if ($links->author_id != PA::$login_uid) {
       	?>
@@ -125,19 +125,19 @@ require_once "api/Permissions/PermissionsHandler.class.php";
       	<?php
       } ?>
      </li>
-     <? } ?>
+     <?php } ?>
      <li><a href="<?php echo $back;?>">Back</a></li>
      <?php if(PermissionsHandler::can_user(PA::$login_uid, $param_array) && ($links->author_id != PA::$login_uid)) {?>
        <li><a href="javascript: return void();" onclick="javascript: showhide_block('report_abuse_div');" > Report Abuse </a></li>
-     <? } ?>
+     <?php } ?>
      <?php if(!empty(PA::$login_uid)) { ?>
      <li><a href="javascript:" onclick="showhide_block('display_comment');" >Comment</a></li>
-     <? } ?>
+     <?php } ?>
     </ul>
   </div>
-  <? } else { // when User is not autherzied ?>
+  <?php } else { // when User is not autherzied ?>
     <div class="description">You are not authorized to view this Media </div>
-  <? } ?>
+  <?php } ?>
 <form name='abuse_form' action="" method='post' >
     <div id='report_abuse_div' style="display:none">
       <fieldset class="center_box">
@@ -183,11 +183,11 @@ Posted by: <a href="<?php echo $current_url;?>"><?php echo ucfirst($comment_auth
   $pram_array['content_owner'] = $links->author_id;
   $pram_array['comment_owner'] = $comments[$i]['user_id'];
 ?>
-<?php if(PermissionsHandler::can_user(PA::$login_uid, $pram_array)) { ?> <a href="<?php echo PA::$url;?>/deletecomment.php?comment_id=<?php echo $comments[$i]['comment_id']?>">delete</a><? } ?>
+<?php if(PermissionsHandler::can_user(PA::$login_uid, $pram_array)) { ?> <a href="<?php echo PA::$url;?>/deletecomment.php?comment_id=<?php echo $comments[$i]['comment_id']?>">delete</a><?php } ?>
  </p>
 </li>
 <hr />
-<? } ?>
+<?php } ?>
 </ul>
 </div>
 
@@ -198,4 +198,4 @@ Posted by: <a href="<?php echo $current_url;?>"><?php echo ucfirst($comment_auth
     <?php if ($page_last) { echo $page_last;}?>
   </div>
 <?php } ?>
-<? } ?>
+<?php } ?>

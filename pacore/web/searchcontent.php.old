@@ -28,7 +28,7 @@ function setup_module($column, $module, $obj) {
     }
 }
 
-$page = new PageRenderer("setup_module", PAGE_SEARCH, "Search Content", "groups.tpl",'header.tpl',PRI,HOMEPAGE,$network_info);
+$page = new PageRenderer("setup_module", PAGE_SEARCH, "Search Content", "groups.tpl",'header.php',PRI,HOMEPAGE,$network_info);
 
 echo $page->render();
 

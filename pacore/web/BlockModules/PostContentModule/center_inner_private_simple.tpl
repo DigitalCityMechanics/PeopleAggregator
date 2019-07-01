@@ -26,9 +26,9 @@ require_once "api/Permissions/PermissionsHandler.class.php";
     <ul>
     <?php if ($is_edit) { ?>
       <li><h3><?= __("edit your post") ?></h3></li>
-    <? } else { ?>
+    <?php } else { ?>
       <li><h3><?= __("create your post") ?></h3></li>
-    <? } ?>
+    <?php } ?>
     </ul>
     <ul id="create_blog_form">
         <li>
@@ -109,7 +109,7 @@ require_once "api/Permissions/PermissionsHandler.class.php";
                             <option value="<?php echo $user_groups[$counter]['gid'];?>" <?php echo $selected?>><?php echo  chop_string(stripslashes($user_groups[$counter]['name']), NAME_LENGTH);?>
                             </option>
                           <?php } ?>  
-                            <?php }?>     
+                            <?php } ?>     
                             <?php $var_groups = substr($var_groups, 0, -1);?>               
                         </select>
                         <input type="hidden" value="<?php echo $var_groups;?>" name="Allgroups"/>

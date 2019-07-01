@@ -54,7 +54,7 @@
     ?>
     <?  } else { ?>      
           <br/>Enter a keyword
-    <? } ?>
+    <?php } ?>
   <?php if( $page_links ) {?>
    <div class="prev_next">
      <?php if ($page_first) { echo $page_first; }?>

@@ -35,7 +35,7 @@ function setup_module($column, $moduleName, $obj) {
       
 }
 
-$page = new PageRenderer("setup_module", PAGE_VIEWPOLL, "viewpoll", "container_three_column.tpl", "header.tpl", PRI, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_VIEWPOLL, "viewpoll", "container_three_column.tpl", "header.php", PRI, HOMEPAGE, PA::$network_info);
 $page->add_header_html($parameter);
 $page->html_body_attributes = 'class="no_second_tier" id="pg_homepage"';
 $css_array = get_network_css();

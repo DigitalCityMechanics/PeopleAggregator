@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<?php } ?>
-<? } else { ?>
+<?php } else { ?>
 	<ul class="members">
   <?php
     for ($counter = 0; $counter < count($links['users_data']); $counter++) {
@@ -41,7 +41,7 @@
 			 "user_blog", array("login" => urlencode($links['users_data'][$counter]['login_name']))) ?></b>,
 			 <?= $links['users_data'][$counter]['family_status'] ?>
         </span>
-  	<? } ?>
+  	<?php } ?>
   </li>
 </ul>
 <?php } ?>          

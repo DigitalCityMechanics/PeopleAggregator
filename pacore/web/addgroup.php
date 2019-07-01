@@ -23,7 +23,7 @@ require_once 'web/includes/functions/mailing.php';
 default_exception();
 $parameter = js_includes("all");
 
-$header = 'header.tpl';//default network header while creating groups. While group editing header_group.tpl will be used.
+$header = 'header.php';//default network header while creating groups. While group editing header_group.tpl will be used.
 $edit = FALSE;
 $title = __("Create Group");
 if (!empty($_REQUEST['gid'])) {

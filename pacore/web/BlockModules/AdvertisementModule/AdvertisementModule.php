@@ -18,7 +18,7 @@
 
     public $module_type = 'user|group|network';
     public $module_placement = 'left|right|middle';
-    public $outer_template = 'outer_public_center_module.tpl';
+    public $outer_template = 'outer_public_center_module.php';
 
     function __construct() {
       parent::__construct();
@@ -49,13 +49,13 @@
       } else {
         $width = AD_WIDTH_LR;
         //$height = AD_HEIGHT_LR;
-        $this->outer_template = 'outer_public_side_module.tpl';
+        $this->outer_template = 'outer_public_side_module.php';
       }
 
       // we never want to reduce the height of an ad, so we set $height very high
       $height = 1000;
 
-      $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_html.tpl';
+      $tmp_file = PA::$blockmodule_path .'/'. get_class($this) . '/side_inner_html.php';
       $inner_html_gen = new Template($tmp_file);
       $inner_html_gen->set_object('links', $links);
       $inner_html_gen->set('width', $width);

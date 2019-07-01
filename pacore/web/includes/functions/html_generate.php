@@ -66,12 +66,12 @@ This function prints html header with a link to style.css of a theme
 function html_header($title='', $optional_arguements='', $style_css='') {
   global $use_theme;
 
-  echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:fb=\"http://www.facebook.com/2008/fbml\">\n";
+  echo "<!DOCTYPE html>\n";
   echo "  <head>\n";
-  echo "    <title>\n";
-  echo "      $title \n";
-  echo "    </title>\n";
+  echo "    <meta charset=\"utf-8\">\n";  
+  echo "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";  
+  echo "    <title>$title</title>\n";
+  echo "    <meta content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\" name=\"viewport\">\n";  
   if ($style_css) {
   echo $style_css;
   }
@@ -88,10 +88,6 @@ function html_header($title='', $optional_arguements='', $style_css='') {
 }
 
 function html_body($optional_parameters='') {
-  // global var $_base_url has been removed - please, use PA::$url static variable
-
-  //$bgcolor="#ccccca";
-  //$bgcolor="#333333";
   echo "<body $optional_parameters>\n";
   echo "\n";
 }

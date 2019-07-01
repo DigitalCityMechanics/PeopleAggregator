@@ -11,7 +11,7 @@
     <td class="email_notification_box"><?= __("via my registered email") ?> </td>
     <td class="email_notification_box"><?= __("via my account inbox") ?> </td>
   </tr>
-  <? if ( sizeof($form_data['extra']['notify_owner']) ) { 
+  <?php if ( sizeof($form_data['extra']['notify_owner']) ) { 
     $i=0;
     foreach ( $form_data['extra']['notify_owner'] as $key => $value ) :
       $class = (( $i++%2 ) == 0) ? ' class="color"': NULL;
@@ -38,7 +38,7 @@
     <td class="email_notification_box"><?= __("via their account inbox") ?> </td>
     <td class="email_notification_box"><?= __("User settable") ?> </td>
   </tr>
-  <? if ( !empty($form_data['extra']['notify_members']) ) {
+  <?php if ( !empty($form_data['extra']['notify_members']) ) {
     $i=0;
     foreach ( $form_data['extra']['notify_members'] as $key => $value ) :
       $class = (( $i++%2 ) == 0) ? ' class="color"': NULL;

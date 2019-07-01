@@ -32,7 +32,7 @@
            <td><?=$category[$i]->parent_name?></td>
            <td><a href="<?= PA::$url?>/manage_category.php?open=1&a=edit&cat_id=<?=$category[$i]->category_id?>"><?= __("Edit") ?></a> / <a href="<?= PA::$url?>/manage_category.php?type=<?=$type?>&a=delete&cat_id=<?=$category[$i]->category_id?>" onclick="return confirm_delete('<?= __("Are you sure you want to delete this category?") ?>')"><?= __("Delete") ?></a></td>
          </tr>
-       <?php }?>        
+       <?php } ?>        
        </table>
       </center>          
     </div>

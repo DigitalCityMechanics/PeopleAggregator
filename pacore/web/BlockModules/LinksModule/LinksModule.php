@@ -24,7 +24,7 @@ class LinksModule extends Module {
   public $uid;
   public $targets;
   public $show_external_blogs;
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
   
   function __construct() {
     parent::__construct();

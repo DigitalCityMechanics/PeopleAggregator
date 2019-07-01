@@ -7,7 +7,7 @@
      <?php echo $page_links?>
      <?php if ($page_last) { echo $page_last;}?>
    </div>
-  <?php }?>
+  <?php } ?>
   
   <?php  $cnt = count($links);
   if (  $cnt > 0) { ?>
@@ -49,7 +49,7 @@
                </td>
        </tr>
             
-      <? } ?>
+      <?php } ?>
       </table>
     </div>
     <?  } ?>      

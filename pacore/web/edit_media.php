@@ -273,7 +273,7 @@ function setup_module($column, $moduleName, $obj) {
     }
 }
 
-$page = new PageRenderer("setup_module", PAGE_EDIT_MEDIA, "Edit Media", "container_three_column.tpl", "header.tpl", PUB, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_EDIT_MEDIA, "Edit Media", "container_three_column.tpl", "header.php", PUB, HOMEPAGE, PA::$network_info);
 
 if (!empty($error)) {
   $msg_tpl = new Template(CURRENT_THEME_FSPATH."/display_message.tpl");

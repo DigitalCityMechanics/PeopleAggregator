@@ -189,7 +189,7 @@ function setup_module($column, $moduleName, $obj) {
 // fetching the data from the Constants.php and Rendering the data of the page 
 // at present we are setting the value of setting data 
 $page = new PageRenderer("setup_module", PAGE_GROUP_MEDIA_POST, "Group Media
-Gallery", "container_one_column_media_gallery.tpl", "header.tpl", PUB, NULL,
+Gallery", "container_one_column_media_gallery.tpl", "header.php", PUB, NULL,
 PA::$network_info, NULL, $setting_data);
 
 uihelper_error_msg($error_msg);

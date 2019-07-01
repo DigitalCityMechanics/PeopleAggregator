@@ -96,7 +96,7 @@ class DynamicFormFields {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
       </div>
 		<br style="clear:both" />
   <?
@@ -123,7 +123,7 @@ class DynamicFormFields {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
       </div>
 		<br style="clear:both" />
   <?
@@ -163,7 +163,7 @@ class DynamicFormFields {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
       </div>
   <?
   }
@@ -206,7 +206,7 @@ class DynamicFormFields {
         <div class="field_text">
         <?=$description?>
         </div>
-        <? } ?>
+        <?php } ?>
       </div>
 <br style="clear:both" />
   <?

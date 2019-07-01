@@ -4,7 +4,7 @@
   $size = sizeof($tags_id_name);  
 ?>
 <div class="module_browse_tag">
-   <? if ( $size ) {
+   <?php if ( $size ) {
         $cnt = 1;             
         foreach ( $tags_id_name as $tag ) {
           $url = PA::$url .'/'.FILE_TAG_SEARCH.'?name_string=content_tag&keyword='.$tag['id'];
@@ -12,8 +12,8 @@
             <a href="<?php echo $url;?>"><?php echo $name;?></a>
                 <?php if ( $size > $cnt ) { ?>
                   :: 
-                <?}?>
+                <?php } ?>
               <?php	$cnt++;
             }
-      } else {  ?><?= __('Nothing has been tagged yet') ?>. <?}?>				
+      } else {  ?><?= __('Nothing has been tagged yet') ?>. <?php } ?>				
 </div>

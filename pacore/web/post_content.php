@@ -433,7 +433,7 @@ function setup_module($column, $moduleName, $obj) {
 }
 
 
-$page = new PageRenderer("setup_module", PAGE_POSTCONTENT, "Create content", "container_one_column_postcontent.tpl", "header.tpl", PRI, HOMEPAGE, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_POSTCONTENT, "Create content", "container_one_column_postcontent.tpl", "header.php", PRI, HOMEPAGE, PA::$network_info);
 
 // load JQuery forms Plugin
 $page->add_header_html(js_includes('forms.js'));

@@ -256,23 +256,23 @@ EOF;
 
  <li>
   <p>Fix the issues listed above, then try installing the update again.</p>
-  <? if (!@$errors['localmod']) { ?><p>HIGHLY RECOMMENDED - as the only issues above are to do with file access permissions.  Please fix the permissions, and try again.</p><? } ?>
+  <?php if (!@$errors['localmod']) { ?><p>HIGHLY RECOMMENDED - as the only issues above are to do with file access permissions.  Please fix the permissions, and try again.</p><?php } ?>
   <? show_op("test-apply", "Click here to try installing the update again"); ?>
  </li>
 
- <? if (@$errors['localmod']) { ?>
+ <?php if (@$errors['localmod']) { ?>
  <li>
   <p>[NOT IMPLEMENTED YET] Migrate to using Subversion for updates.</p>
   <p>HIGHLY RECOMMENDED if you plan to maintain local changes.</p>
   <? show_op("svn-migrate", "Click here to create .svn folders in your PeopleAggregator install so you can use 'svn update'", TRUE); ?>
  </li>
- <? } ?>
+ <?php } ?>
 
  <li>
   <p>Overwrite your local changes.  This will probably result in a working system, but will destroy any changes you have made to your system, so make sure you know what you are doing!</p>
   <p>(Files with local modifications will be renamed, e.g. changedfile.php will become changedfile.php.local)</p>
-  <? if (!@$errors['localmod']) { ?><p>NOT RECOMMENDED - as the only issues above are to do with file access permissions.  Instead, please fix the permissions, and try again.</p><? } ?>
-  <? if (@$errors['perms']) { ?><p style="font-weight: bold">CURRENTLY NOT POSSIBLE due to the access permissions errors mentioned above.  Please fix them, then try again.</p><? } ?>
+  <?php if (!@$errors['localmod']) { ?><p>NOT RECOMMENDED - as the only issues above are to do with file access permissions.  Instead, please fix the permissions, and try again.</p><?php } ?>
+  <?php if (@$errors['perms']) { ?><p style="font-weight: bold">CURRENTLY NOT POSSIBLE due to the access permissions errors mentioned above.  Please fix them, then try again.</p><?php } ?>
   <? show_op("force-apply", "Click here to install the update, overwriting your local changes.", @$errors['perms'] ? TRUE : FALSE); ?>
  </li>
 
@@ -280,7 +280,7 @@ EOF;
   <p>Install only the parts of the update that do not conflict with anything on your system.</p>
   <p>(Files with local modifications will not be touched, and new local files will block installation of new files or directories of the same name).</p>
   <p>This won't destroy anything you have changed, but could quite possibly result in a broken installation, so it is not recommended unless your changes are relatively minor.</p>
-  <? if (!@$errors['localmod']) { ?><p>NOT RECOMMENDED - as the only issues above are to do with file access permissions.  Instead, please fix the permissions, and try again.</p><? } ?>
+  <?php if (!@$errors['localmod']) { ?><p>NOT RECOMMENDED - as the only issues above are to do with file access permissions.  Instead, please fix the permissions, and try again.</p><?php } ?>
   <? show_op("soft-apply", "Click here to install the update without overwriting/deleting anything with local changes."); ?>
  </li>
 

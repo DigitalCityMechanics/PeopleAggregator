@@ -64,7 +64,7 @@
       uihelper_set_user_heading($this, true, PA::$login_uid);
       ]]></boot_code>
     <page_template>container_one_column.tpl</page_template>
-    <header_template>header.tpl</header_template>
+    <header_template>header.php</header_template>
     <page_mode>private</page_mode>
     <block_type>Homepage</block_type>
     <page_type>user</page_type>

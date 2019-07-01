@@ -60,7 +60,7 @@
       <a href="#"><img src="<?php echo PA::$theme_url;?>/images/16_delete.gif" alt="delete" height="16" width="16" border="0"  onclick="edit_delete_media('<?=$links[$i]['content_id']?>','delete','image_upload2');"></a>
     
        
-    <?}?>
+    <?php } ?>
     </td>
     <td>
       <div align="center">
@@ -89,7 +89,7 @@
             <b>Created:</b> <?=content_date($links[$i]['created']);?> 
             <b><?php if (!empty($links[$i]['tags'])) { ?> 
             Tags:<?=$links[$i]['tags'];?>
-            <? } ?></b>
+            <?php } ?></b>
            
           </div>
         </li>
@@ -108,13 +108,13 @@
       </a>
    </td>
   </tr>
-  <? } ?>
-  <? } else { ?>
+  <?php } ?>
+  <?php } else { ?>
    <tr>
      <td>
         <?= __("No Videos") ?>
      </td>
    </tr>
-  <? } ?>
+  <?php } ?>
 </table>  
 </div>

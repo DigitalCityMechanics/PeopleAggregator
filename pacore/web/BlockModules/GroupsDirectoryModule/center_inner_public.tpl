@@ -36,7 +36,7 @@
       </select>
      <?php if (!empty($_GET['uid'])) {?>
       <input type='hidden' name="uid" value="<?= $_GET['uid']?>">  
-    <? } ?>
+    <?php } ?>
     <input type = "image" style="position:relative; top:6px" src="<?echo PA::$theme_url;?>/images/go-btn.gif" />
 
     </div>
@@ -100,12 +100,12 @@
                </td>
        </tr>
             
-      <? } ?>
+      <?php } ?>
       </table>
     </div>
     <?  } else { ?>      
            <?= __("No groups found.") ?>
-    <? } ?>
+    <?php } ?>
   <?php if( $page_links ) {?>
    <div class="prev_next">
      <?php if ($page_first) { echo $page_first; }?>

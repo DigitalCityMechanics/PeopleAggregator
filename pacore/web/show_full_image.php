@@ -49,7 +49,7 @@ $optional_parameters = "onload=\"$onload\"";
 html_body($optional_parameters);
 
 // header
-$header = new Template(CURRENT_THEME_FSPATH."/header.tpl");
+$header = new Template(CURRENT_THEME_FSPATH."/header.php");
 $header->set('current_theme_path', PA::$theme_url);
 if (PA::$network_info) {
   $header->set_object('network_info', PA::$network_info);

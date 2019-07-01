@@ -53,18 +53,18 @@
    <td><img src="<?=$type_image;?>" alt="PA" /></td>
    <td><?php print manage_content_date($links[$i]['changed']);?></td>
    </tr>
-   <? } ?>
+   <?php } ?>
    </table>
-   <? } ?>  
+   <?php } ?>  
 
   
-  <? if(empty($links)) { ?>
+  <?php if(empty($links)) { ?>
     <ul>
       <li>
         <?= __("No Content Published.") ?>
       </li>
     </ul> 
-  <? } ?>
+  <?php } ?>
   
   <ul>
     <li> <input type="submit" id="delete_content_lower" name="submit" value="<?= __("Delete") ?>"/></li>

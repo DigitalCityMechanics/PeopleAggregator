@@ -195,7 +195,7 @@ function setup_module($column, $moduleName, $obj) {
                       
 // fetching the data from the Constants.php and Rendering the data of the page 
 // at present we are setting the value of setting data 
-$page = new PageRenderer("setup_module", PAGE_MEDIA_GALLERY_UPLOAD, sprintf(__("%s - Media Gallery - %s"), $login_user->get_name(), PA::$network_info->name), "container_one_column_media_gallery.tpl", "header.tpl", PUB, NULL, PA::$network_info, null, $setting_data);
+$page = new PageRenderer("setup_module", PAGE_MEDIA_GALLERY_UPLOAD, sprintf(__("%s - Media Gallery - %s"), $login_user->get_name(), PA::$network_info->name), "container_one_column_media_gallery.tpl", "header.php", PUB, NULL, PA::$network_info, null, $setting_data);
 
 /* This function shows the Error message */
 uihelper_error_msg($error_msg);

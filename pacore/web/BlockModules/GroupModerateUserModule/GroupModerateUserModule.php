@@ -21,7 +21,7 @@ class GroupModerateUserModule extends Module {
 
   public $module_type = 'group';
   public $module_placement = 'middle';
-  public $outer_template = 'outer_public_center_module.tpl';
+  public $outer_template = 'outer_public_center_module.php';
   public $max_height;
   public $uid, $members_data, $Paging, $links;
   public $page_links, $page_prev, $page_next, $page_count;

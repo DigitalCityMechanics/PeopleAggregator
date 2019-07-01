@@ -66,7 +66,7 @@ function uihelper_user_url($user_or_id) {
   return PA::$url . PA_ROUTE_USER_PUBLIC . '/' . $user_or_id;
 }
 
-function uihelper_upload_gallery($uid, $_POST, $_FILES, $type, $k=0) {
+function uihelper_upload_gallery($uid, $type, $k=0) {
 
   require_once "api/User/User.php";
   require_once "api/Tag/Tag.php";
@@ -660,7 +660,7 @@ function load_info(){
 
 
 // for media gallery post in groups
-function uihelper_upload_gallery_for_group($uid, $_POST, $_FILES, $type, $k=0) {
+function uihelper_upload_gallery_for_group($uid, $type, $k=0) {
 
   require_once "api/User/User.php";
   require_once "api/Tag/Tag.php";
@@ -923,8 +923,12 @@ function get_network_css() {
 
   // TODO intregate with Mothership info
   $result = array();
-
-  $result['network'] = PA::$theme_url . '/network.css';
+  // Bootstrap 3.3.7
+  $result['bootstrap'] = PA::$theme_url . '/bootstrap/css/bootstrap.css';
+  // Font Awesome
+  $result['fontawesome'] = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css';
+  // Ionicons
+  $result['ionicons'] = 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css';
 
   if (!empty(PA::$network_info)) {
     $extra = unserialize(PA::$network_info->extra);

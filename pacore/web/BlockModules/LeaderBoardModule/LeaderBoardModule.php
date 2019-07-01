@@ -29,13 +29,13 @@ class LeaderBoardModule extends Module {
       $this->page_size = 10;
       $this->page = (!empty($request_data['page'])) ? $request_data['page'] : 0;
       $this->title = PA::$network_info->name . ' ' . __('Leader Board');
-      $this->outer_template = 'outer_public_center_module.tpl';
+      $this->outer_template = 'outer_public_center_module.php';
       $this->set_inner_template('module_middle.tpl.php');
      } else {
       $this->page = 0;
       $this->title =  __('Leader Board');
       $this->page_size = 5;
-      $this->outer_template = 'outer_public_side_module.tpl';
+      $this->outer_template = 'outer_public_side_module.php';
       $this->set_inner_template('module_default.tpl.php');
       $this->view_all_url = PA::$url . PA_ROUTE_LEADER_BOARD;
      }

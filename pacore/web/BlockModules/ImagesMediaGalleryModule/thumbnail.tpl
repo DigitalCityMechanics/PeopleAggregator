@@ -42,13 +42,13 @@
     ?>
      <a href="<?=$image_hyperlink?>"><?=$img_tag?></a>
 
-  <?} // End of for loop?>  
+  <?php } // End of for loop?>  
 </div>
-<?} else { ?>
+<?php } else { ?>
   <ul>
     <li>
       <?= __("No Photos.") ?>
     </li>
   </ul>  
-<? } ?>
+<?php } ?>
 </div>

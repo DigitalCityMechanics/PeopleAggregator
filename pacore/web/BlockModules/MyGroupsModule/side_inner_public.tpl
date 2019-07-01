@@ -21,7 +21,7 @@ if (is_array($links) && sizeof($links) > 0) {?>
    <?php } // End of For ?>
   </ul>
 </div>
-<? } else { //End of If condition ?>
+<?php } else { //End of If condition ?>
 <div class="module_browse_groups">
   <ul>
     <?if ($mode == 'private' || !empty($user_name)) { ?>
@@ -32,4 +32,4 @@ if (is_array($links) && sizeof($links) > 0) {?>
     <?php } ?>
   </ul>
 </div>
-<? } ?>
+<?php } ?>

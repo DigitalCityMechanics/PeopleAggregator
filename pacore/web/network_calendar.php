@@ -45,7 +45,7 @@ function setup_module($column, $module, $obj) {
   $obj->mode = PUB;
 }
 
-$page = new PageRenderer("setup_module", PAGE_NETWORK_CALENDAR, __("Network Events"), "container_one_column.tpl", "header.tpl", PRI, NULL, PA::$network_info);
+$page = new PageRenderer("setup_module", PAGE_NETWORK_CALENDAR, __("Network Events"), "container_one_column.tpl", "header.php", PRI, NULL, PA::$network_info);
 
 $page->html_body_attributes ='class="no_second_tier network_config"';
 $css_path = PA::$theme_url . '/calendar.css';
